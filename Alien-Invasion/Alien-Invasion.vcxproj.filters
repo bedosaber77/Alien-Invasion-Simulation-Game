@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DS Files">
+      <UniqueIdentifier>{07a3f1e1-0c7f-46c2-9095-7ca60ad3a922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="DS Files\Stack">
+      <UniqueIdentifier>{367ef9dc-dc58-4672-b634-2f02f54a4592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DS Files\Queue">
+      <UniqueIdentifier>{0f1c3b91-074b-4334-9225-f2080a8a0df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DS Files\Priortiy Queue">
+      <UniqueIdentifier>{68236fff-d070-414e-b88a-76b315e98796}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\DS Files\Stack\StackADT.h">
+      <Filter>DS Files\Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS Files\Stack\ArrayStack.h">
+      <Filter>DS Files\Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS Files\Queue\QueueADT.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS Files\Queue\LinkedQueue.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS Files\Queue\DequeNode.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS Files\Queue\Deque.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS Files\Queue\Node.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS Files\Priority Queue\priQueue.h">
+      <Filter>DS Files\Priortiy Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS Files\Priority Queue\priNode.h">
+      <Filter>DS Files\Priortiy Queue</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

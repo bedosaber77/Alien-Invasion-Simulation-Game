@@ -136,9 +136,13 @@
     <ClInclude Include="..\DS Files\Queue\QueueADT.h" />
     <ClInclude Include="..\DS Files\Stack\ArrayStack.h" />
     <ClInclude Include="..\DS Files\Stack\StackADT.h" />
+    <ClInclude Include="EarthSolider.h" />
+    <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="EarthSolider.cpp" />
+    <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

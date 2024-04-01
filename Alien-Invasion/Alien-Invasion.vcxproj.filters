@@ -25,6 +25,9 @@
     <Filter Include="DS Files\Priortiy Queue">
       <UniqueIdentifier>{68236fff-d070-414e-b88a-76b315e98796}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Unit Classes">
+      <UniqueIdentifier>{3d96804d-bcac-4750-8a41-8613fa355d14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DS Files\Stack\StackADT.h">
@@ -54,10 +57,22 @@
     <ClInclude Include="..\DS Files\Priority Queue\priNode.h">
       <Filter>DS Files\Priortiy Queue</Filter>
     </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="EarthSolider.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Unit Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="EarthSolider.cpp">
+      <Filter>Unit Classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

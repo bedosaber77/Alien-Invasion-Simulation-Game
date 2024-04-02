@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Army\AlienArmy.h" />
+    <ClInclude Include="..\Army\EarthArmy.h" />
     <ClInclude Include="..\DS Files\Priority Queue\priNode.h" />
     <ClInclude Include="..\DS Files\Priority Queue\priQueue.h" />
     <ClInclude Include="..\DS Files\Queue\Deque.h" />
@@ -136,19 +138,25 @@
     <ClInclude Include="..\DS Files\Queue\QueueADT.h" />
     <ClInclude Include="..\DS Files\Stack\ArrayStack.h" />
     <ClInclude Include="..\DS Files\Stack\StackADT.h" />
-    <ClInclude Include="AlienArmy.h" />
-    <ClInclude Include="AlienSolider.h" />
-    <ClInclude Include="EarthArmy.h" />
-    <ClInclude Include="EarthSolider.h" />
-    <ClInclude Include="Unit.h" />
+    <ClInclude Include="..\Units\AlienSolider.h" />
+    <ClInclude Include="..\Units\EarthSolider.h" />
+    <ClInclude Include="..\Units\EarthTank.h" />
+    <ClInclude Include="..\Units\Monster.h" />
+    <ClInclude Include="..\Units\Unit.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Army\AlienArmy.cpp" />
+    <ClCompile Include="..\Army\EarthArmy.cpp" />
     <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="AlienArmy.cpp" />
-    <ClCompile Include="AlienSolider.cpp" />
-    <ClCompile Include="EarthArmy.cpp" />
-    <ClCompile Include="EarthSolider.cpp" />
-    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="..\Units\AlienSolider.cpp" />
+    <ClCompile Include="..\Units\EarthSolider.cpp" />
+    <ClCompile Include="..\Units\EarthTank.cpp" />
+    <ClCompile Include="..\Units\Monster.cpp" />
+    <ClCompile Include="..\Units\Unit.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Alien-Invasion.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

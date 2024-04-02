@@ -1,7 +1,7 @@
 #pragma once
 #include "..\DS Files\Queue\LinkedQueue.h"
-#include "..\Alien-Invasion\EarthSolider.h"
-#include "..\Alien-Invasion\Unit.h"
+#include "..\Units\EarthSolider.h"
+#include "..\Units\Unit.h"
 
 class EarthArmy
 {

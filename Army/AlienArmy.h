@@ -1,7 +1,7 @@
 #pragma once
 #include "..\DS Files\Queue\LinkedQueue.h"
-#include "..\Alien-Invasion\AlienSolider.h"
-#include "..\Alien-Invasion\Unit.h"
+#include "..\Units\AlienSolider.h"
+#include "..\Units\Unit.h"
 
 class AlienArmy
 {

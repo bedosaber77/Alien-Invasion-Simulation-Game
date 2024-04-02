@@ -28,6 +28,9 @@
     <Filter Include="Unit Classes">
       <UniqueIdentifier>{3d96804d-bcac-4750-8a41-8613fa355d14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lists Classes">
+      <UniqueIdentifier>{b48d93be-5561-46f7-9f8f-8f6f0743e8f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DS Files\Stack\StackADT.h">
@@ -63,6 +66,15 @@
     <ClInclude Include="EarthSolider.h">
       <Filter>Unit Classes</Filter>
     </ClInclude>
+    <ClInclude Include="AlienSolider.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienArmy.h">
+      <Filter>Lists Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="EarthArmy.h">
+      <Filter>Lists Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -73,6 +85,15 @@
     </ClCompile>
     <ClCompile Include="EarthSolider.cpp">
       <Filter>Unit Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienSolider.cpp">
+      <Filter>Unit Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="EarthArmy.cpp">
+      <Filter>Lists Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienArmy.cpp">
+      <Filter>Lists Classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -136,11 +136,17 @@
     <ClInclude Include="..\DS Files\Queue\QueueADT.h" />
     <ClInclude Include="..\DS Files\Stack\ArrayStack.h" />
     <ClInclude Include="..\DS Files\Stack\StackADT.h" />
+    <ClInclude Include="AlienArmy.h" />
+    <ClInclude Include="AlienSolider.h" />
+    <ClInclude Include="EarthArmy.h" />
     <ClInclude Include="EarthSolider.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="AlienArmy.cpp" />
+    <ClCompile Include="AlienSolider.cpp" />
+    <ClCompile Include="EarthArmy.cpp" />
     <ClCompile Include="EarthSolider.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>

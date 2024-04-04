@@ -7,10 +7,20 @@ AlienArmy::AlienArmy()
 {
 }
 
-void AlienArmy::AddAlienSolider(Unit* AlienUnit)
+void AlienArmy::AddUnit(Unit* newUnit, int UnitNo)
 {
-	AlienSoliders.enqueue(AlienUnit);
+	if (UnitNo == 1)
+		AlienSoliders.enqueue(newUnit);
+	else if (UnitNo == 2)
+	{	//AlienDrones.enqueue(newUnit);
+	}
+	else
+	{
+		// Monsters Count to be revisited
+	}
 }
+
+
 
 void AlienArmy::DeleteUnit()
 {

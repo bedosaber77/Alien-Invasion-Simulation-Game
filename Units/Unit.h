@@ -22,10 +22,13 @@ public:
 	void setHealth(int h);
 	int getHealth();
 	int getPower();
+	int getID();
 	void setType(char T);//to be revisit
 	void setAleinID();
 	void setEarthID();
 	//More Functions Needed
+
+	friend std::ostream& operator<<(std::ostream& os, const Unit* obj);
 
 	~Unit();
 

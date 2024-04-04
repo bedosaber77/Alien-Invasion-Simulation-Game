@@ -60,40 +60,60 @@
     <ClInclude Include="..\DS Files\Priority Queue\priNode.h">
       <Filter>DS Files\Priortiy Queue</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h">
+    <ClInclude Include="..\Army\AlienArmy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Army\EarthArmy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Units\AlienSolider.h">
       <Filter>Unit Classes</Filter>
     </ClInclude>
-    <ClInclude Include="EarthSolider.h">
+    <ClInclude Include="..\Units\EarthSolider.h">
       <Filter>Unit Classes</Filter>
     </ClInclude>
-    <ClInclude Include="AlienSolider.h">
+    <ClInclude Include="..\Units\EarthTank.h">
       <Filter>Unit Classes</Filter>
     </ClInclude>
-    <ClInclude Include="AlienArmy.h">
-      <Filter>Lists Classes</Filter>
+    <ClInclude Include="..\Units\Monster.h">
+      <Filter>Unit Classes</Filter>
     </ClInclude>
-    <ClInclude Include="EarthArmy.h">
-      <Filter>Lists Classes</Filter>
+    <ClInclude Include="..\Units\Unit.h">
+      <Filter>Unit Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp">
+    <ClCompile Include="..\Army\AlienArmy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Army\EarthArmy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Units\AlienSolider.cpp">
       <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="EarthSolider.cpp">
+    <ClCompile Include="..\Units\EarthSolider.cpp">
       <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="AlienSolider.cpp">
+    <ClCompile Include="..\Units\EarthTank.cpp">
       <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="EarthArmy.cpp">
-      <Filter>Lists Classes</Filter>
+    <ClCompile Include="..\Units\Monster.cpp">
+      <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="AlienArmy.cpp">
-      <Filter>Lists Classes</Filter>
+    <ClCompile Include="..\Units\Unit.cpp">
+      <Filter>Unit Classes</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Alien-Invasion.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

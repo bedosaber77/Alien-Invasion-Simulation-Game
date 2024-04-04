@@ -8,8 +8,9 @@ template <typename T>
 class priQueue
 {
     priNode<T>* head;
+    int count;
 public:
-    priQueue() : head(nullptr) {}
+    priQueue() : head(nullptr),count(0) {}
 
     ~priQueue() {
         T tmp;
@@ -59,4 +60,12 @@ public:
     bool isEmpty() const {
         return head == nullptr;
     }
+    
+   /*void print() const {
+        priNode<T>* ptr = head;     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        while (ptr) {
+            cout << ptr->getItem();
+            ptr = ptr->getNext();
+        }
+    }*/
 };

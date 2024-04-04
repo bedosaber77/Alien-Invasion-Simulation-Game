@@ -4,9 +4,16 @@ EarthArmy::EarthArmy()
 {
 }
 
-void EarthArmy::AddEarthSolider(Unit* EarthUnit)
+void EarthArmy::AddUnit(Unit* newUnit,int UnitNo)
 {
-	EarthSoliders.enqueue(EarthUnit);
+	if (UnitNo == 1)
+		EarthSoliders.enqueue(newUnit);
+	else if (UnitNo == 2)
+		EarthTanks.push(newUnit);
+	else
+	{
+		//EG
+	}
 }
 
 void EarthArmy::DeleteUnit()

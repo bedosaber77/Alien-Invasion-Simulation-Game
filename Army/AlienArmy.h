@@ -1,13 +1,13 @@
 #pragma once
 #include "..\DS Files\Queue\LinkedQueue.h"
-//#include "..\DS Files\Queue\Deque.h"
+#include "..\DS Files\Queue\Deque.h"
 #include "..\Units\Unit.h"
 
 class AlienArmy
 {
 private:
 	LinkedQueue <Unit*> AlienSoliders;
-	//Deque<Unit*>AlienDrones;
+	Deque<Unit*>AlienDrones;
 	Unit* Monsters[1000];
 public:
 	AlienArmy();

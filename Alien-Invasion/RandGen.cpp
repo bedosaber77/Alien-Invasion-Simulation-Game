@@ -54,8 +54,6 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 			
 		}
 
-
-
 		//Parameters for Unit Constructor(Alien)
 		while (N--)
 		{

@@ -1,3 +1,4 @@
+#pragma once
 #include "DequeNode.h"
 #include "QueueADT.h"
 #include "iostream"
@@ -107,7 +108,7 @@ bool Deque<T>::dequeue(T& frntEntry)
 }
 
 template<typename T>
-inline bool Deque<T>::dequeueBack(T& backEntry)
+ inline bool Deque<T>::dequeueBack(T& backEntry)
 {
 	if (isEmpty())
 		return false;
@@ -149,7 +150,7 @@ bool Deque<T>::peek(T& frntEntry) const
 
 }
 template<typename T>
-inline bool Deque<T>::peekBack(T& BackEntry) const
+ inline bool Deque<T>::peekBack(T& BackEntry) const
 {
 	if (isEmpty())
 		return false;

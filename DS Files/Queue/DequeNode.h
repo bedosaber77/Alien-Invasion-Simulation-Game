@@ -1,3 +1,4 @@
+#pragma once
 template <typename T>
 class DequeNode
 {
@@ -76,6 +77,7 @@ DequeNode<T>* DequeNode<T>::getNext() const
 {
 	return next;
 }
+
 template<typename T>
 inline DequeNode<T>* DequeNode<T>::getPrevious() const
 {

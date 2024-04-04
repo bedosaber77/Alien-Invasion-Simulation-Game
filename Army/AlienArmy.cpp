@@ -12,7 +12,8 @@ void AlienArmy::AddUnit(Unit* newUnit, int UnitNo)
 	if (UnitNo == 1)
 		AlienSoliders.enqueue(newUnit);
 	else if (UnitNo == 2)
-		AlienDrones.enqueue(newUnit);
+	{	//AlienDrones.enqueue(newUnit);
+	}
 	else
 	{
 		// Monsters Count to be revisited

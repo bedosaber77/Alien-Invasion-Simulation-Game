@@ -3,6 +3,7 @@
 #include"../Units/EarthTank.h"
 #include"../Units/Monster.h"
 #include"../Units/AlienDrone.h"
+#include"..\Units\AlienSolider.h"
 #include<time.h>
 
 RandGen::RandGen()

@@ -10,6 +10,7 @@ class Deque :public QueueADT<T>
 private:
 	DequeNode<T>* backPtr;
 	DequeNode<T>* frontPtr;
+	int count;
 public:
 	Deque();
 	bool isEmpty() const;
@@ -18,6 +19,8 @@ public:
 	bool dequeueBack(T& backEntry);
 	bool peek(T& frntEntry)  const;
 	bool peekBack(T& BackEntry)  const;
+	int getCount() const;
+	void print();
 	~Deque();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +36,7 @@ Deque<T>::Deque()
 {
 	backPtr = nullptr;
 	frontPtr = nullptr;
-
+	count = 0;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -73,6 +76,7 @@ bool Deque<T>::enqueue(const T& newEntry)
 	} // The queue was not empty
 
 	backPtr = newNodePtr; // New node is the last node now
+	count++;
 	return true;
 } // end enqueue
 
@@ -103,7 +107,7 @@ bool Deque<T>::dequeue(T& frntEntry)
 
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	count--;
 	return true;
 }
 
@@ -123,7 +127,7 @@ template<typename T>
 
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	count--;
 	return true;
 }
 
@@ -157,6 +161,21 @@ template<typename T>
 
 	BackEntry = backPtr->getItem();
 	return true;
+}
+template<typename T>
+inline int Deque<T>::getCount() const
+{
+	return this->count;
+}
+template<typename T>
+inline void Deque<T>::print()
+{
+	DequeNode<T>* ptr = frontPtr;
+	while (ptr)
+	{
+		cout << ptr->getItem() << ' ';
+		ptr = ptr->getNext();
+	}
 }
 ///////////////////////////////////////////////////////////////////////////////////
 

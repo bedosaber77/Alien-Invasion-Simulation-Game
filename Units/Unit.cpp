@@ -23,6 +23,11 @@ int Unit::getPower()
 	return this->Power;
 }
 
+int Unit::getID()
+{
+	return ID;
+}
+
 void Unit::setAleinID()
 {
 	ID = AlienID;
@@ -41,3 +46,9 @@ Unit::~Unit()
 
 int Unit::EarthID = 1;
 int Unit::AlienID = 2000;
+
+std::ostream& operator<<(std::ostream& os, const Unit* obj)
+{
+	os << obj->ID;
+	return os;
+}

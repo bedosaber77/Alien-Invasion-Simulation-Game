@@ -18,7 +18,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 	if (A <= Prob)
 	{
 		//Parameters for Unit Constructor(Earth)
-		while (N--)
+		for (int i = 0; i < N; i++)
 		{
 			int B = (rand() % 100) + 1;
 
@@ -29,7 +29,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 			int eCapacity = rand() % (EarthParameters.upper_capacity - EarthParameters.lower_capacity + 1)
 				+ EarthParameters.lower_capacity;
 
-			// Generation of eUnits
+			// Generation of Earth Units
 
 			Unit* newUnit;
 			//pEarthArmy = new EarthArmy();	//will be removed
@@ -56,7 +56,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 
 
 		//Parameters for Unit Constructor(Alien)
-		while (N--)
+		for(int i = 0; i < N; i++)
 		{
 			int B = (rand() % 100) + 1;
 
@@ -88,7 +88,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 		}
 	}
 	else {
-		GenerateUnits( N,  Prob,  EarthParameters,  AlienParameters,  ts);
+		GenerateUnits( N,  Prob,  EarthParameters,  AlienParameters,  ts); //should be removed? -tasneem
 	}
 }
 

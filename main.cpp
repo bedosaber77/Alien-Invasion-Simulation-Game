@@ -5,5 +5,5 @@ int main() {
 	//Deque<int> d;
 	//LinkedQueue<int> j;
 	Game game;
-	game.StartGame();
+	//game.StartGame();
 };

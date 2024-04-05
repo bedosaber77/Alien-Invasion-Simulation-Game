@@ -4,16 +4,15 @@
 #include"../Units/Monster.h"
 #include"../Units/AlienDrone.h"
 #include"..\Units\AlienSolider.h"
-#include<time.h>
 
 RandGen::RandGen()
 {
+	srand(time(0));
 	pEarthArmy = new EarthArmy;
 }
 
 void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs AlienParameters,int ts)
 {
-	srand(time(0));
 	int A = (rand() % 100) + 1;
 	//Main 2 Loops 
 	if (A <= Prob)
@@ -37,12 +36,12 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 			if (B <= EarthParameters.ESpercent)		//generate ES
 			{
 				newUnit = new EarthSolider(eHealth, ePower, eCapacity, ts); //لامؤاخذاه يا مدحت يا اخويا 
-				pEarthArmy->AddUnit(newUnit, 1);	//replace with Type name
+				pEarthArmy->AddUnit(newUnit);	//replace with Type name
 			}
 			else if (B <= EarthParameters.ESpercent + EarthParameters.ETpercent)	//generate ET
 			{
 				newUnit = new EarthTank(eHealth, ePower, eCapacity, ts);
-				pEarthArmy->AddUnit(newUnit, 2);
+				pEarthArmy->AddUnit(newUnit);
 				
 
 			}

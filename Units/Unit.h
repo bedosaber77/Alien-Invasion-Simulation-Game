@@ -2,13 +2,19 @@
 #include<iostream>
 #include<string>
 using namespace std;
+
+enum UnitType {
+	earthSoliders, earthTank, earthGunnery,
+	alienSolider, alienMonster, alienDrone
+};
+
 class Unit
 {
 protected:
 	int ID; // making ID Static Needed To be Revisit??
 	static int AlienID;
 	static int EarthID;
-	char Type; //still thinking >> ?
+	UnitType Type; //still thinking >> ?
 	int Health;
 	int Power;
 	int Attack_Capacity;
@@ -23,11 +29,12 @@ public:
 	int getHealth();
 	int getPower();
 	int getID();
-	void setType(char T);//to be revisit
+	UnitType getType();		//to be revisit
 	void setAleinID();
 	void setEarthID();
 	//More Functions Needed
-
+	void decrementHealth(int damage);
+	void incrementHealth(int);		//to be revisited
 	friend std::ostream& operator<<(std::ostream& os, const Unit* obj);
 
 	~Unit();

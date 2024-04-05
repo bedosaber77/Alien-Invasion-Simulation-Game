@@ -84,6 +84,18 @@
     <ClInclude Include="..\Units\Unit.h">
       <Filter>Unit Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Units\AlienDrone.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -108,6 +120,15 @@
       <Filter>Unit Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Units\Unit.cpp">
+      <Filter>Unit Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Units\AlienDrone.cpp">
       <Filter>Unit Classes</Filter>
     </ClCompile>
   </ItemGroup>

@@ -9,11 +9,12 @@ class EarthArmy
 {
 private:
 	LinkedQueue <Unit*> EarthSoliders;
-	ArrayStack<Unit*>EarthTanks;
+	ArrayStack  <Unit*> EarthTanks;
 public:
 	EarthArmy();
-	void AddUnit(Unit* newUnit, int UnitNo);
-	void DeleteUnit();
+	void AddUnit(Unit* newUnit);
+	Unit* removeUnit(UnitType type);
+	void Attack();
 	void Print();
 	~EarthArmy();
 

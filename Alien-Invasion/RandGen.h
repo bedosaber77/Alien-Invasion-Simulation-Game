@@ -2,6 +2,9 @@
 #include"Parameters.h"
 #include"../Army/AlienArmy.h"
 #include"../Army/EarthArmy.h"
+#include <cstdlib>
+#include <time.h>
+
 class RandGen
 {
 	EarthArmy* pEarthArmy;

@@ -1,6 +1,7 @@
 ﻿#include "Game.h"
 #include<iostream>
 using namespace std;
+
 Game::Game()
 {
     pAlienArmy = new AlienArmy;

@@ -19,7 +19,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 	if (A <= Prob)
 	{
 		//Parameters for Unit Constructor(Earth)
-		while (N--)
+		for (int i = 0; i < N; i++)
 		{
 			int B = (rand() % 100) + 1;
 
@@ -55,7 +55,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 
 
 		//Parameters for Unit Constructor(Alien)
-		while (N--)
+		for(int i = 0; i < N; i++)
 		{
 			int B = (rand() % 100) + 1;
 

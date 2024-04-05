@@ -1,5 +1,6 @@
 #include "EarthArmy.h"
 #include "../Units/Unit.h"
+#include "../Units/EarthGunnery.h"
 
 EarthArmy::EarthArmy()
 {
@@ -13,20 +14,23 @@ void EarthArmy::AddUnit(Unit* newUnit)
 		EarthTanks.push(newUnit);
 	else
 	{
-		//EG
+		EarthGunnery* earthgunnery = dynamic_cast<EarthGunnery*>(newUnit);
+		int priorty = earthgunnery->getCombination();
+		EarthGunnerys.enqueue(newUnit, priorty);
 	}
 }
 
 Unit* EarthArmy::removeUnit(UnitType type)
 {
 	Unit* unit=nullptr;
+	int priorty;
 	switch (type)
 	{
 	case earthSoliders:EarthSoliders.dequeue(unit);
 		break;
 	case earthTank:EarthTanks.pop(unit);
 		break;
-	case earthGunnery://to be added 
+	case earthGunnery:EarthGunnerys.dequeue(unit, priorty);
 		break;
 	case alienSolider:
 		break;

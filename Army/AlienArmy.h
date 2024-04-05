@@ -1,3 +1,4 @@
+#pragma once
 #include "..\DS Files\Queue\LinkedQueue.h"
 #include "..\DS Files\Queue\Deque.h"
 #include "..\Units\Unit.h"

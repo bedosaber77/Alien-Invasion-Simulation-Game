@@ -30,7 +30,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 			int eCapacity = rand() % (EarthParameters.upper_capacity - EarthParameters.lower_capacity + 1)
 				+ EarthParameters.lower_capacity;
 
-			// Generation of eUnits
+			// Generation of Earth Units
 
 			Unit* newUnit;
 			//pEarthArmy = new EarthArmy();	//will be removed

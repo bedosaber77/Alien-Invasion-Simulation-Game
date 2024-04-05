@@ -17,7 +17,7 @@ class Game
 	EarthArmy* pEarthArmy;
 
 	//pointer to RandomGen class
-	RandGen* pRand;
+	RandGen* pRand;  
 
 	int TimeStep=1;
 

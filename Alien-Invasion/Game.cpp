@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include<iostream>
 using namespace std;
 Game::Game()
@@ -74,8 +74,8 @@ void Game::MainLoop()
 
 		// First Generate Units each time step
 		//pRand->GenerateUnits(N, Prob, EarthParameters, AlienParameters, TimeStep);
-		
-		
+
+
 		//should be in print function
 		/*
 		//Press any key to move to the next timestep
@@ -84,21 +84,21 @@ void Game::MainLoop()
 		print();
 		*/
 		//Attack each time step
-    //}
 	//}
-		
+	//}
+	
 }
 
 void Game::AddtoKilledList(Unit* army)
 {
 	KilledList.enqueue(army);
 }
-		
+
 void Game::AddtoTempList(Unit* army)
 {
 	TempList.enqueue(army);
 }
-		
+
 void Game::ClearKilledList()
 {
 	Unit* KilledUnit;
@@ -107,8 +107,8 @@ void Game::ClearKilledList()
 		KilledList.dequeue(KilledUnit);
 		delete KilledUnit;
 	}
-		
-	}
+
+}
 
 
 void Game::Print()

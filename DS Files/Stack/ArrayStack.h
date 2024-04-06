@@ -57,7 +57,11 @@ public:
 		return true;
 	}  // end peek
 	int getCount() const {
-		return top;
+		return top+1;
+	}
+	void print() const {
+		for (int i = 0; i < top; i++)
+			cout << items[i];
 	}
 }; // end ArrayStack
 

@@ -7,12 +7,14 @@ class AlienArmy
 {
 private:
 	LinkedQueue <Unit*> AlienSoliders;
-	Deque<Unit*>AlienDrones;
+	Deque <Unit*> AlienDrones;
 	Unit* Monsters[1000];
+	int countMonsters;
 public:
 	AlienArmy();
-	void AddUnit(Unit* newUnit, int UnitNo);
-	void DeleteUnit();
+	void AddUnit(Unit* newUnit);
+	Unit* removeUnit(UnitType type,bool FromBack=false);
+	void Attack();
 	void Print();
 	~AlienArmy();
 

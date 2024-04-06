@@ -4,22 +4,21 @@
 #include"../Units/Monster.h"
 #include"../Units/AlienDrone.h"
 #include"..\Units\AlienSolider.h"
-#include<time.h>
 
 RandGen::RandGen()
 {
+	srand(time(0));
 	pEarthArmy = new EarthArmy;
 }
 
 void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs AlienParameters,int ts)
 {
-	srand(time(0));
 	int A = (rand() % 100) + 1;
 	//Main 2 Loops 
 	if (A <= Prob)
 	{
 		//Parameters for Unit Constructor(Earth)
-		while (N--)
+		for (int i = 0; i < N; i++)
 		{
 			int B = (rand() % 100) + 1;
 
@@ -30,19 +29,19 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 			int eCapacity = rand() % (EarthParameters.upper_capacity - EarthParameters.lower_capacity + 1)
 				+ EarthParameters.lower_capacity;
 
-			// Generation of eUnits
+			// Generation of Earth Units
 
 			Unit* newUnit;
 			//pEarthArmy = new EarthArmy();	//will be removed
 			if (B <= EarthParameters.ESpercent)		//generate ES
 			{
 				newUnit = new EarthSolider(eHealth, ePower, eCapacity, ts); //لامؤاخذاه يا مدحت يا اخويا 
-				pEarthArmy->AddUnit(newUnit, 1);	//replace with Type name
+				pEarthArmy->AddUnit(newUnit);	//replace with Type name
 			}
 			else if (B <= EarthParameters.ESpercent + EarthParameters.ETpercent)	//generate ET
 			{
 				newUnit = new EarthTank(eHealth, ePower, eCapacity, ts);
-				pEarthArmy->AddUnit(newUnit, 2);
+				pEarthArmy->AddUnit(newUnit);
 				
 
 			}
@@ -55,7 +54,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 		}
 
 		//Parameters for Unit Constructor(Alien)
-		while (N--)
+		for(int i = 0; i < N; i++)
 		{
 			int B = (rand() % 100) + 1;
 
@@ -87,7 +86,7 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 		}
 	}
 	else {
-		GenerateUnits( N,  Prob,  EarthParameters,  AlienParameters,  ts);
+		GenerateUnits( N,  Prob,  EarthParameters,  AlienParameters,  ts); //should be removed? -tasneem
 	}
 }
 

@@ -140,6 +140,7 @@
     <ClInclude Include="..\DS Files\Stack\StackADT.h" />
     <ClInclude Include="..\Units\AlienDrone.h" />
     <ClInclude Include="..\Units\AlienSolider.h" />
+    <ClInclude Include="..\Units\EarthGunnery.h" />
     <ClInclude Include="..\Units\EarthSolider.h" />
     <ClInclude Include="..\Units\EarthTank.h" />
     <ClInclude Include="..\Units\Monster.h" />
@@ -155,6 +156,7 @@
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\Units\AlienDrone.cpp" />
     <ClCompile Include="..\Units\AlienSolider.cpp" />
+    <ClCompile Include="..\Units\EarthGunnery.cpp" />
     <ClCompile Include="..\Units\EarthSolider.cpp" />
     <ClCompile Include="..\Units\EarthTank.cpp" />
     <ClCompile Include="..\Units\Monster.cpp" />

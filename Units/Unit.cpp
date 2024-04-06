@@ -28,6 +28,11 @@ int Unit::getID()
 	return ID;
 }
 
+UnitType Unit::getType()
+{
+	return this->Type;
+}
+
 void Unit::setAleinID()
 {
 	ID = AlienID;
@@ -38,6 +43,16 @@ void Unit::setEarthID()
 {
 	ID = EarthID;
 	EarthID++;
+}
+
+void Unit::decrementHealth(int damage)
+{
+	this->Health -= damage;
+}
+
+void Unit::incrementHealth(int)
+{
+	//to be made
 }
 
 Unit::~Unit()

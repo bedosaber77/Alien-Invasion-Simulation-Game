@@ -4,14 +4,33 @@
 #include"../Army/EarthArmy.h"
 #include <cstdlib>
 #include <time.h>
-
+#include<string>
+using namespace std;
+enum ArmyType
+{ Earth,Alien};
 class RandGen
 {
-	EarthArmy* pEarthArmy;
-	AlienArmy* pAlienArmy;
+	int N, Prob;
+	Inputs EarthParameters,AlienParameters;
+	ArmyType Army_Type;
 public:
 	RandGen();
-	void GenerateUnits(int N,int Prob,Inputs EarthParameters, Inputs AlienParameters,int ts);
+
+	//setters for Input File
+	void SetN(int);
+	void SetProb(int);
+	void SetEarthParameters(Inputs);
+	void SetAlienParameters(Inputs);
+
+
+	//getters for Input file
+	int GetN();
+	int GetProb();
+
+	// Unit Generation Function
+	Unit* GenerateUnits( int ts, ArmyType Army_Type);
+
+
 	~RandGen();
 
 };

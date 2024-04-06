@@ -19,7 +19,7 @@ void Game::StartGame()
 		<< "Please enter your File Parameters path" << endl;
 	string Filename;
 	cin >> Filename;
-	LoadParameters("LoadParameters.txt");
+	LoadParameters( Filename+".txt");
 }
 
 void Game::LoadParameters(string Filename)
@@ -35,11 +35,10 @@ void Game::LoadParameters(string Filename)
 		Infile >> N;
 		pRand->SetN(N);
 
-		//int ESpercent, ETpercent, EGpercent;// 3 variables?
+		
 		Infile >> EarthParameters.ESpercent >> EarthParameters.ETpercent >> EarthParameters.EGpercent;
 
 
-		//int ASpercent, AMpercent, ADpercent;// 3 variables?
 		Infile >> AlienParameters.ASpercent >> AlienParameters.AMpercent >> AlienParameters.ADpercent;
 
 

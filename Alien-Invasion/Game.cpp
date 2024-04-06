@@ -36,6 +36,7 @@ void Game::LoadParameters(string Filename)
 
 		int N;	//Number of units for each army
 		Infile >> N;
+		pRand->SetN(N);
 
 		//int ESpercent, ETpercent, EGpercent;// 3 variables?
 		Infile >> EarthParameters.ESpercent >> EarthParameters.ETpercent >> EarthParameters.EGpercent;
@@ -49,6 +50,8 @@ void Game::LoadParameters(string Filename)
 		Infile >> Prob;
 
 
+		pRand->SetProb(Prob);
+
 		// here we need to think about another better way(structs)
 		Infile >> EarthParameters.lower_power >> EarthParameters.upper_power >>
 			EarthParameters.lower_health >> EarthParameters.upper_health >>
@@ -57,6 +60,11 @@ void Game::LoadParameters(string Filename)
 		Infile >> AlienParameters.lower_power >> AlienParameters.upper_power >>
 			AlienParameters.lower_health >> AlienParameters.upper_health >>
 			AlienParameters.lower_capacity >> AlienParameters.upper_capacity;
+
+
+
+		pRand->SetEarthParameters(EarthParameters);
+		pRand->SetAlienParameters(AlienParameters);
 
 		pRand->GenerateUnits( N,  Prob,  EarthParameters,  AlienParameters,TimeStep); //REVISITING + each timestep
 		Infile.close();

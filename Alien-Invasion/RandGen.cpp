@@ -86,8 +86,28 @@ void RandGen::GenerateUnits(int N, int Prob, Inputs EarthParameters, Inputs Alie
 		}
 	}
 	else {
-		GenerateUnits( N,  Prob,  EarthParameters,  AlienParameters,  ts); //should be removed? -tasneem
+		GenerateUnits( N,  Prob,  EarthParameters,  AlienParameters,  ts); //should be removed? -tasneem// ==sure -Amira
 	}
+}
+
+void RandGen::SetN(int n)
+{
+	N = n;
+}
+
+void RandGen::SetProb(int Probability)
+{
+	Prob = Probability;
+}
+
+void RandGen::SetEarthParameters(Inputs Eparameters)
+{
+	EarthParameters = Eparameters;
+}
+
+void RandGen::SetAlienParameters(Inputs Aparameters)
+{
+	AlienParameters = Aparameters;
 }
 
 

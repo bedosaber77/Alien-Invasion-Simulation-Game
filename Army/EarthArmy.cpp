@@ -26,18 +26,25 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	int priorty;
 	switch (type)
 	{
-	case earthSoliders:EarthSoliders.dequeue(unit);
+	case earthSoliders: {
+		if (EarthSoliders.getCount() == 0)
+			return nullptr;
+		EarthSoliders.dequeue(unit);
+	}
 		break;
-	case earthTank:EarthTanks.pop(unit);
+	case earthTank: { 
+		if (EarthTanks.getCount() == 0)
+			return nullptr;
+		EarthTanks.pop(unit); 
+		}
 		break;
-	case earthGunnery:EarthGunnerys.dequeue(unit, priorty);
+	case earthGunnery: { 
+		if (EarthGunnerys.getCount() == 0)
+			return nullptr;
+		EarthGunnerys.dequeue(unit, priorty);
+		}
 		break;
-	case alienSolider:
-		break;
-	case alienMonster:
-		break;
-	case alienDrone:
-		break;
+	
 	default:
 		break;
 	}

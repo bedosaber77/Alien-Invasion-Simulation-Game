@@ -13,7 +13,7 @@ private:
 public:
 	AlienArmy();
 	void AddUnit(Unit* newUnit);
-	Unit* removeUnit(UnitType type);
+	Unit* removeUnit(UnitType type,bool FromBack=false);
 	void Attack();
 	void Print();
 	~AlienArmy();

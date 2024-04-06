@@ -4,6 +4,7 @@ using namespace std;
 
 Game::Game()
 {
+	srand(time(0));
     pAlienArmy = new AlienArmy;
     pEarthArmy = new EarthArmy;
 	pRand = new RandGen;
@@ -13,16 +14,12 @@ Game::Game()
 
 void Game::StartGame()
 {
-	//AlienArmy* pAlienArmy = new AlienArmy;
-	//EarthArmy* pEarthArmy = new EarthArmy;
-
 
 	cout << "	ALIEN INVASION ! " << endl
 		<< "Please enter your File Parameters path" << endl;
 	string Filename;
 	cin >> Filename;
 	LoadParameters("LoadParameters.txt");
-	//MainLoop();
 }
 
 void Game::LoadParameters(string Filename)
@@ -30,9 +27,9 @@ void Game::LoadParameters(string Filename)
 	ifstream Infile(Filename);
 	if (Infile.is_open())
 	{
-	
 		Inputs EarthParameters;
 		Inputs AlienParameters;
+	
 
 		int N;	//Number of units for each army
 		Infile >> N;
@@ -51,24 +48,40 @@ void Game::LoadParameters(string Filename)
 
 
 		pRand->SetProb(Prob);
-
+		
 		// here we need to think about another better way(structs)
-		Infile >> EarthParameters.lower_power >> EarthParameters.upper_power >>
-			EarthParameters.lower_health >> EarthParameters.upper_health >>
-			EarthParameters.lower_capacity >> EarthParameters.upper_capacity;
-
-		Infile >> AlienParameters.lower_power >> AlienParameters.upper_power >>
-			AlienParameters.lower_health >> AlienParameters.upper_health >>
-			AlienParameters.lower_capacity >> AlienParameters.upper_capacity;
 
 
+		// Earth Ranges
+		Infile >> EarthParameters.lower_power;
+		Infile.ignore(1);
+		Infile >> EarthParameters.upper_power >>
+			EarthParameters.lower_health;
+		Infile.ignore(1) >> EarthParameters.upper_health >>
+			EarthParameters.lower_capacity;
+		Infile.ignore(1) >> EarthParameters.upper_capacity;
 
+
+
+		//Alien Ranges
+
+		Infile >> AlienParameters.lower_power;
+		Infile.ignore(1);
+		Infile >> AlienParameters.upper_power >>
+			AlienParameters.lower_health;
+		Infile.ignore(1) >> AlienParameters.upper_health >>
+			AlienParameters.lower_capacity;
+		Infile.ignore(1) >>  AlienParameters.upper_capacity;
+
+
+
+		//set
 		pRand->SetEarthParameters(EarthParameters);
 		pRand->SetAlienParameters(AlienParameters);
 
-		pRand->GenerateUnits( N,  Prob,  EarthParameters,  AlienParameters,TimeStep); //REVISITING + each timestep
 		Infile.close();
 	}
+	MainLoop();
 }
 
 
@@ -82,8 +95,7 @@ void Game::MainLoop()
 		TimeStep++;
 
 		// First Generate Units each time step
-		//pRand->GenerateUnits(N, Prob, EarthParameters, AlienParameters, TimeStep);
-
+		//pRand->GenerateUnits(TimeStep);
 
 		//should be in print function
 		/*
@@ -95,6 +107,28 @@ void Game::MainLoop()
 		//Attack each time step
 	//}
 	//}
+	while (TimeStep != 50) //will stop when it completes 50 time steps for now (phase 1)
+	{
+		Unit* newUnit = nullptr;
+		int A = (rand() % 100) + 1;
+		if (A <= pRand->GetProb())// Generating Army condition
+		{	
+		for (int i = 0; i < pRand->GetN(); i++)
+	    {
+				newUnit = pRand->GenerateUnits(TimeStep, Earth);
+				pEarthArmy->AddUnit(newUnit);
+		}
+
+		// Generating Alien Army
+
+		for (int i = 0; i < pRand->GetN(); i++)
+		{
+			newUnit = pRand->GenerateUnits(TimeStep, Alien);
+			pAlienArmy->AddUnit(newUnit);
+		}
+	    }
+		TimeStep++;
+	}
 	
 }
 

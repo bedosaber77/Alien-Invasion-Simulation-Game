@@ -126,6 +126,7 @@ void Game::MainLoop()
 			pAlienArmy->AddUnit(newUnit);
 		}
 	    }
+		Print();
 		TimeStep++;
 	}
 	
@@ -161,9 +162,15 @@ void Game::Print()
 	cout << endl;
 	cout << "============== Alien Army Alive Units ==============" << endl;
 	pAlienArmy->Print();
+	cout << endl;
 	cout << "============== Killed/Destructed Units ==============" << endl;
 	cout << KilledList.getCount();
 	KilledList.print();
+	cout << endl;
+	char a;
+	cout << "Enter any Key To Continue\n";
+	cin >> a;
+	cin.ignore();
 }
 
 Game::~Game()

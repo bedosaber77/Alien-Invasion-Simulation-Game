@@ -76,7 +76,9 @@ void AlienArmy::Print()
 	cout << countMonsters << " AM [";
 	for (int i = 0; i < countMonsters; i++)
 	{
-		cout<< Monsters[i]->getID() << ', ';
+		cout<< Monsters[i]->getID();
+		if (i + 1 < countMonsters)
+			cout << ", ";
 	}
 	cout << "]\n";
 	cout << AlienDrones.getCount() << " AD [";

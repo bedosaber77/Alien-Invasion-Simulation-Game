@@ -60,8 +60,12 @@ public:
 		return top+1;
 	}
 	void print() const {
-		for (int i = 0; i < top; i++)
-			cout << items[i]<<", ";
+		for (int i = 0; i < top + 1; i++)
+		{
+			cout << items[i];
+			if (i + 1 < top + 1)
+				cout << ", ";
+		}
 	}
 }; // end ArrayStack
 

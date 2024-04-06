@@ -26,6 +26,7 @@ public:
             
             newNode->setNext(head);
             head = newNode;
+            count++;
             return;
         }
        
@@ -35,7 +36,7 @@ public:
         }
         newNode->setNext( current->getNext());
         current->setNext( newNode);    
-        count++;
+        (this->count)++;
     }
 
     bool dequeue(T& topEntry, int& pri) {
@@ -46,8 +47,8 @@ public:
         priNode<T>* temp = head;
         head = head->getNext();
         delete temp;
+        (this->count)--;
         return true;
-        count--;
     }
 
     bool peek(T& topEntry, int& pri) {
@@ -67,7 +68,9 @@ public:
         priNode<T>* ptr = head;
         int pri;
         while (ptr) {
-            cout << ptr->getItem(pri)<<", ";
+            cout << ptr->getItem(pri);
+            if (ptr->getNext())
+                cout << ", ";
             ptr = ptr->getNext();
         }
     }

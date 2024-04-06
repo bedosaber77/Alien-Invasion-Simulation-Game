@@ -11,6 +11,7 @@ private:
 	LinkedQueue <Unit*> EarthSoliders;
 	ArrayStack  <Unit*> EarthTanks;
 	priQueue <Unit*> EarthGunnerys;
+	static int ID;
 public:
 	EarthArmy();
 	void AddUnit(Unit* newUnit);

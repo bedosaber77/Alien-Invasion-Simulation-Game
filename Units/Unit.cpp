@@ -6,6 +6,7 @@ Unit::Unit(int H, int P, int AC, int tj)
 	Power = P;
 	Attack_Capacity = AC;
 	Tj = tj;
+	ID = 0;
 }
 
 void Unit::setHealth(int h)
@@ -23,27 +24,22 @@ int Unit::getPower()
 	return this->Power;
 }
 
-int Unit::getID()
+int Unit::getID() const
 {
 	return ID;
 }
 
-UnitType Unit::getType()
+UnitType Unit::getType() 
 {
 	return this->Type;
 }
 
-void Unit::setAleinID()
+void Unit::setID(int id)
 {
-	ID = AlienID;
-	AlienID++;
+	this->ID = id;
 }
 
-void Unit::setEarthID()
-{
-	ID = EarthID;
-	EarthID++;
-}
+
 
 void Unit::decrementHealth(int damage)
 {
@@ -59,8 +55,6 @@ Unit::~Unit()
 {
 }
 
-int Unit::EarthID = 1;
-int Unit::AlienID = 2000;
 
 std::ostream& operator<<(std::ostream& os, const Unit* obj)
 {

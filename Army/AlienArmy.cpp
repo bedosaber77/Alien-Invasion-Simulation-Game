@@ -9,10 +9,18 @@ AlienArmy::AlienArmy()
 {
 	srand(time(0));
 	countMonsters = 0;
+	//for (int i = 0; i < 1000; i++)
+		//Monsters[i] = nullptr;
+
 }
 
 void AlienArmy::AddUnit(Unit* newUnit)
 {
+	if (newUnit->getID() == 0)
+	{
+		newUnit->setID(ID);
+		ID++;
+	}
 	if (newUnit->getType() == alienSolider)
 		AlienSoliders.enqueue(newUnit);
 	else if (newUnit->getType() == alienDrone)
@@ -30,7 +38,7 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 	switch (type)
 	{
 	case alienSolider: { 
-		if (AlienSoliders.getCount() == 0)
+		if (AlienSoliders.isEmpty())
 			return nullptr;
 		AlienSoliders.dequeue(unit);
 		}
@@ -45,7 +53,7 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 		}
 		break;
 	case alienDrone: {
-		if (AlienDrones.getCount() == 0)
+		if (AlienDrones.isEmpty())
 			return nullptr;
 		if (fromBack)
 			AlienDrones.dequeueBack(unit);
@@ -63,8 +71,22 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 
 void AlienArmy::Print()
 {
+	cout << AlienSoliders.getCount() << " AS [";
+	AlienSoliders.print();
+	cout << "]\n";
+	cout << countMonsters << " AM [";
+	for (int i = 0; i < countMonsters; i++)
+	{
+		cout<< Monsters[i]->getID() << ', ';
+	}
+	cout << "]\n";
+	cout << AlienDrones.getCount() << " AD [";
+	AlienDrones.print();
+	cout << "]";
 }
 
 AlienArmy::~AlienArmy()
 {
 }
+
+int AlienArmy::ID = 2000;

@@ -12,8 +12,6 @@ class Unit
 {
 protected:
 	int ID; // making ID Static Needed To be Revisit??
-	static int AlienID;
-	static int EarthID;
 	UnitType Type; //still thinking >> ?
 	int Health;
 	int Power;
@@ -28,10 +26,9 @@ public:
 	void setHealth(int h);
 	int getHealth();
 	int getPower();
-	int getID();
+	int getID() const;
 	UnitType getType();		//to be revisit
-	void setAleinID();
-	void setEarthID();
+	void setID(int id);
 	//More Functions Needed
 	void decrementHealth(int damage);
 	void incrementHealth(int);		//to be revisited

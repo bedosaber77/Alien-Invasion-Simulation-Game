@@ -2,7 +2,6 @@
 
 EarthGunnery::EarthGunnery(int H, int P, int AC, int tj) :Unit(H, P, AC, tj)
 {
-	this->setEarthID();
 	Type = earthGunnery;
 	//power_health     //not sure 
 }

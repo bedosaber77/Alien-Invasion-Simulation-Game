@@ -115,12 +115,12 @@ void Game::ClearKilledList()
 void Game::Print()
 {
 	cout << "Current Timestep " << TimeStep << endl;
-	cout << "=========== Earth Army Alive Units ===========" << endl;
+	cout << "============== Earth Army Alive Units ==============" << endl;
 	pEarthArmy->Print();
 	cout << endl;
-	cout << "=========== Alien Army Alive Units ===========" << endl;
+	cout << "============== Alien Army Alive Units ==============" << endl;
 	pAlienArmy->Print();
-	cout << "=========== Killed/Destructed Units ==========" << endl;
+	cout << "============== Killed/Destructed Units ==============" << endl;
 	cout << KilledList.getCount();
 	KilledList.print();
 }

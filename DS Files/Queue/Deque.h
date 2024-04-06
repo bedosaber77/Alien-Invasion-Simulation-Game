@@ -100,6 +100,7 @@ bool Deque<T>::dequeue(T& frntEntry)
 	DequeNode<T>* nodeToDeletePtr = frontPtr;
 	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();
+	if(frontPtr)
 	frontPtr->setPrevious(nullptr);
 	// Queue is not empty; remove front
 	if (nodeToDeletePtr == backPtr)	 // Special case: last node in the queue

@@ -65,8 +65,9 @@ public:
     
    void print() const {
         priNode<T>* ptr = head;
+        int pri;
         while (ptr) {
-            cout << ptr->getItem();
+            cout << ptr->getItem(pri)<<", ";
             ptr = ptr->getNext();
         }
     }

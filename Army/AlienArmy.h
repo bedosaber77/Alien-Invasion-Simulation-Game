@@ -10,6 +10,7 @@ private:
 	Deque <Unit*> AlienDrones;
 	Unit* Monsters[1000];
 	int countMonsters;
+	static int ID;
 public:
 	AlienArmy();
 	void AddUnit(Unit* newUnit);

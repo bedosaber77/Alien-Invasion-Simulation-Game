@@ -86,7 +86,6 @@ void Game::LoadParameters(string Filename)
 
 void Game::MainLoop()
 {
-	
 		while (TimeStep != 50) //will stop when it completes 50 time steps for now (phase 1)
 		{
 			Unit* newUnit = nullptr;
@@ -148,7 +147,8 @@ void Game::MainLoop()
 
 				for (int i = 0; i < 5; i++)
 				{
-					AStemplist.dequeue(newUnit);
+					if (!(AStemplist.dequeue(newUnit))) //To Check on The List if It is empty
+						newUnit = nullptr;
 					if (newUnit)
 						pAlienArmy->AddUnit(newUnit);
 				}
@@ -177,7 +177,7 @@ void Game::MainLoop()
 			Print();
 			TimeStep++;
 		}
-	}
+}
 	
 
 

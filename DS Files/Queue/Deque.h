@@ -121,6 +121,7 @@ template<typename T>
 	DequeNode<T>* nodeToDeletePtr = backPtr;
 	backEntry = backPtr->getItem();
 	backPtr = backPtr->getPrevious();
+	if(backPtr)
 	backPtr->setNext(nullptr);
 	// Queue is not empty; remove front
 	if (nodeToDeletePtr == frontPtr)	 // Special case: last node in the queue

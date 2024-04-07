@@ -43,6 +43,7 @@ public:
 	bool CheckGameOver(); // to be revisited
 	*/
 
+	void PrintKilledList();
 	void Print();                // output file 
 	~Game();
 };

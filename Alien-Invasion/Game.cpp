@@ -86,51 +86,100 @@ void Game::LoadParameters(string Filename)
 
 void Game::MainLoop()
 {
-	 //while (TimeStep != 50 || !CheckWin() || !CheckGameOver())
-	/*
-	while (TimeStep != 50) //will stop when it completes 50 time steps for now (phase 1)
-	{
-
-		TimeStep++;
-
-		// First Generate Units each time step
-		//pRand->GenerateUnits(TimeStep);
-
-		//should be in print function
-		/*
-		//Press any key to move to the next timestep
-		cout << "Press any key to move to the next timestep" << endl;
-		system("pause");
-		print();
-		*/
-		//Attack each time step
-	//}
-	//}
-	while (TimeStep != 50) //will stop when it completes 50 time steps for now (phase 1)
-	{
-		Unit* newUnit = nullptr;
-		int A = (rand() % 100) + 1;
-		if (A <= pRand->GetProb())// Generating Army condition
-		{	
-		for (int i = 0; i < pRand->GetN(); i++)
-	    {
-				newUnit = pRand->GenerateUnits(TimeStep, Earth);
-				pEarthArmy->AddUnit(newUnit);
-		}
-
-		// Generating Alien Army
-
-		for (int i = 0; i < pRand->GetN(); i++)
+	
+		while (TimeStep != 50) //will stop when it completes 50 time steps for now (phase 1)
 		{
-			newUnit = pRand->GenerateUnits(TimeStep, Alien);
-			pAlienArmy->AddUnit(newUnit);
+			Unit* newUnit = nullptr;
+			int A = (rand() % 100) + 1;
+			if (A <= pRand->GetProb())// Generating Army condition
+			{
+				for (int i = 0; i < pRand->GetN(); i++)
+				{
+					newUnit = pRand->GenerateUnits(TimeStep, Earth);
+					pEarthArmy->AddUnit(newUnit);
+				}
+
+				// Generating Alien Army
+
+				for (int i = 0; i < pRand->GetN(); i++)
+				{
+					newUnit = pRand->GenerateUnits(TimeStep, Alien);
+					pAlienArmy->AddUnit(newUnit);
+				}
+			}
+
+			Print();
+
+			int X = (rand() % 100) + 1;
+			cout << "X = " << X << endl;
+			if (X < 10)
+			{
+				newUnit = pEarthArmy->removeUnit(earthSoliders);
+				if (newUnit)
+					pEarthArmy->AddUnit(newUnit);
+			}
+			else if (X < 20)
+			{
+				newUnit = pEarthArmy->removeUnit(earthTank);
+				if (newUnit)
+					KilledList.enqueue(newUnit);
+			}
+			else if (X < 30)
+			{
+				newUnit = pEarthArmy->removeUnit(earthGunnery);
+				if (newUnit)
+				{
+					newUnit->decrementHealth(newUnit->getHealth() / 2);
+					pEarthArmy->AddUnit(newUnit);
+				}
+			}
+			else if (X < 40)
+			{
+				LinkedQueue <Unit*> AStemplist;
+				for (int i = 0; i < 5; i++)
+				{
+					newUnit = pAlienArmy->removeUnit(alienSolider);
+					if (newUnit)
+					{
+						newUnit->decrementHealth(newUnit->getHealth() / 3);
+						AStemplist.enqueue(newUnit);
+					}
+				}
+
+				for (int i = 0; i < 5; i++)
+				{
+					AStemplist.dequeue(newUnit);
+					if (newUnit)
+						pAlienArmy->AddUnit(newUnit);
+				}
+
+			}
+			else if (X < 50)
+			{
+				for (int i = 0; i < 5; i++)
+				{
+					newUnit = pAlienArmy->removeUnit(alienMonster);
+					if (newUnit)
+						pAlienArmy->AddUnit(newUnit);
+				}
+			}
+			else if (X < 60)
+			{
+				for (int i = 0; i < 6; i++)
+				{
+					newUnit = pAlienArmy->removeUnit(alienDrone, i % 2);
+
+					if (newUnit)
+						KilledList.enqueue(newUnit);
+				}
+			}
+
+			Print();
+			TimeStep++;
 		}
-	    }
-		Print();
-		TimeStep++;
 	}
 	
-}
+
 
 void Game::AddtoKilledList(Unit* army)
 {
@@ -154,6 +203,13 @@ void Game::ClearKilledList()
 }
 
 
+void Game::PrintKilledList()
+{
+	cout << KilledList.getCount() << " units [";
+	KilledList.print();
+	cout << " ] \n";
+}
+
 void Game::Print()
 {
 	cout << "Current Timestep " << TimeStep << endl;
@@ -164,14 +220,11 @@ void Game::Print()
 	pAlienArmy->Print();
 	cout << endl;
 	cout << "============== Killed/Destructed Units ==============" << endl;
-	cout << KilledList.getCount();
-	KilledList.print();
-	cout << endl;
-	char a;
-	cout << "Enter any Key To Continue\n";
-	cin >> a;
-	cin.ignore();
+	PrintKilledList();
+
+	system("pause");
 }
+
 
 Game::~Game()
 {

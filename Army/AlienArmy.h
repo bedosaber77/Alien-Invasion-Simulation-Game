@@ -13,7 +13,7 @@ private:
 	static int ID;
 public:
 	AlienArmy();
-	void AddUnit(Unit* newUnit);
+	void AddUnit(Unit* newUnit,bool IntoFront=false); //Look at Question 24 in Q&A File
 	Unit* removeUnit(UnitType type,bool FromBack=false);
 	void Attack();
 	void Print();

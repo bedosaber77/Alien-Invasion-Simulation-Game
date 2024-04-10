@@ -103,7 +103,7 @@ void Game::MainLoop()
 				for (int i = 0; i < pRand->GetN(); i++)
 				{
 					newUnit = pRand->GenerateUnits(TimeStep, Alien);
-					pAlienArmy->AddUnit(newUnit);
+					pAlienArmy->AddUnit(newUnit,i%2);
 				}
 			}
 

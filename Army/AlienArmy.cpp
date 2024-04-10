@@ -13,7 +13,7 @@ AlienArmy::AlienArmy()
 
 }
 
-void AlienArmy::AddUnit(Unit* newUnit)
+void AlienArmy::AddUnit(Unit* newUnit,bool IntoFront)
 {
 	if (newUnit->getID() == 0)
 	{
@@ -23,7 +23,12 @@ void AlienArmy::AddUnit(Unit* newUnit)
 	if (newUnit->getType() == alienSolider)
 		AlienSoliders.enqueue(newUnit);
 	else if (newUnit->getType() == alienDrone)
+	{
+		if(IntoFront)
+			AlienDrones.enqueueFront(newUnit);
+		else
 		AlienDrones.enqueue(newUnit);
+	}
 	else
 	{
 		Monsters[countMonsters] = newUnit;

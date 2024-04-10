@@ -46,7 +46,7 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	case earthGunnery: { 
 		if (EarthGunnerys.isEmpty())
 			return nullptr;
-		EarthGunnerys.dequeue(unit, priorty);
+		EarthGunnerys.dequeue(unit, priorty); //A: visit
 		}
 		break;
 	

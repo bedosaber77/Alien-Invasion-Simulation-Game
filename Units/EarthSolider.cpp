@@ -6,17 +6,17 @@ using namespace std;
 EarthSolider::EarthSolider(int H, int P, int AC, int tj, Game* Gameptr):Unit(H,P,AC,tj, Gameptr)
 {
 	Type = earthSoliders;
-
 }
 
 void EarthSolider::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
+	LinkedQueue<Unit*> EnemiesList;
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		unit2 = pGame->GetAlienArmyPtr()->removeUnit(alienSolider);
-		if (unit2)
+		pGame->GetAlienArmyPtr()->GetEnemiesList(alienSolider, this->Attack_Capacity);
+		if (EnemiesList.dequeue(unit2))
 		{
 
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)

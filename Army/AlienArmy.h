@@ -19,6 +19,7 @@ public:
 
 	//Getters for Lists needed by Attack function
 	
+	LinkedQueue <Unit*> GetEnemiesList(UnitType type,int Capacity);	//to be revisited
 
 	void Print();
 	~AlienArmy();

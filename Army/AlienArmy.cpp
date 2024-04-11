@@ -78,6 +78,24 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 
 
 
+LinkedQueue<Unit*> AlienArmy::GetEnemiesList(UnitType type, int Capacity)
+{
+	LinkedQueue<Unit*>EnemiesList;
+	Unit* unit2=nullptr;
+	for (int i = 0; i < Capacity; i++)
+	{
+		unit2 = removeUnit(type, i % 2);
+
+		if (unit2)
+		{
+			EnemiesList.enqueue(unit2);
+		}
+
+
+	}
+	return EnemiesList;
+}
+
 void AlienArmy::Print()
 {
 	cout << AlienSoliders.getCount() << " AS [";

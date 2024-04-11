@@ -5,7 +5,7 @@ AlienDrone::AlienDrone(int H, int P, int AC, int tj, Game* Gameptr):Unit(H,P,AC,
 	Type = alienDrone;
 }
 
-void AlienDrone::Attack(Unit* unit)
+void AlienDrone::Attack(Unit* unit2)
 {
 
 }

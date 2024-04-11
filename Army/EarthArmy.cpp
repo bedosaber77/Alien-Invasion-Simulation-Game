@@ -56,6 +56,16 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	return unit;
 }
 
+void EarthArmy::Attack()
+{
+	Unit* unit2;
+	//ES Attacks 
+	if (EarthSoliders.peek(unit2))
+	{
+		unit2->Attack();
+	}
+}
+
 void EarthArmy::Print()
 {
 	cout << EarthSoliders.getCount()<<" ES  [";

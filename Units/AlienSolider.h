@@ -3,7 +3,7 @@
 class AlienSolider :public Unit
 {
 public:
-	AlienSolider(int H, int P, int AC, int tj);
+	AlienSolider(int H, int P, int AC, int tj, Game* Gameptr);
 	virtual void Attack(Unit* unit2);
 	~AlienSolider();
 };

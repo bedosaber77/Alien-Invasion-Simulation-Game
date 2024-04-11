@@ -16,6 +16,10 @@ public:
 	void AddUnit(Unit* newUnit,bool IntoFront=false); //Look at Question 24 in Q&A File
 	Unit* removeUnit(UnitType type,bool FromBack=false);
 	void Attack();
+
+	//Getters for Lists needed by Attack function
+	
+
 	void Print();
 	~AlienArmy();
 

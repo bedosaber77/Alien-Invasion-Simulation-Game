@@ -1,6 +1,6 @@
 #include "EarthGunnery.h"
 
-EarthGunnery::EarthGunnery(int H, int P, int AC, int tj) :Unit(H, P, AC, tj)
+EarthGunnery::EarthGunnery(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = earthGunnery;
 	//power_health     //not sure 

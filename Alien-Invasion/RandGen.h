@@ -6,6 +6,7 @@
 #include <time.h>
 #include<string>
 using namespace std;
+class Game;
 enum ArmyType
 { Earth,Alien};
 class RandGen
@@ -13,8 +14,9 @@ class RandGen
 	int N, Prob;
 	Inputs EarthParameters,AlienParameters;
 	ArmyType Army_Type;
+	Game* pGame;
 public:
-	RandGen();
+	RandGen(Game*);
 
 	//setters for Input File
 	void SetN(int);

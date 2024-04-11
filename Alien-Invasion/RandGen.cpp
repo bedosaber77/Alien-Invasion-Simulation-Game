@@ -5,11 +5,11 @@
 #include"../Units/AlienDrone.h"
 #include"../Units/EarthGunnery.h"
 #include"..\Units\AlienSolider.h"
-
-RandGen::RandGen()
+#include"Game.h"
+RandGen::RandGen(Game* GamePtr)
 {
 	srand(time(0));
-	
+	pGame = GamePtr;
 }
 
 Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
@@ -36,17 +36,17 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 
 			if (B <= EarthParameters.ESpercent)		//generate ES
 			{
-				newUnit = new EarthSolider(eHealth, ePower, eCapacity, ts);
+				newUnit = new EarthSolider(eHealth, ePower, eCapacity, ts, pGame);
 			}
 			else if (B <= EarthParameters.ESpercent + EarthParameters.ETpercent)	//generate ET
 			{
-				newUnit = new EarthTank(eHealth, ePower, eCapacity, ts);
+				newUnit = new EarthTank(eHealth, ePower, eCapacity, ts, pGame);
 
 
 			}
 			else       //generate EG
 			{
-				newUnit = new EarthGunnery(eHealth, ePower, eCapacity, ts);
+				newUnit = new EarthGunnery(eHealth, ePower, eCapacity, ts, pGame);
 
 			}
 		}
@@ -67,15 +67,15 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 
 		if (B <= AlienParameters.ASpercent)		//generate AS
 		{
-			newUnit = new AlienSolider(aHealth, aPower, aCapacity, ts);
+			newUnit = new AlienSolider(aHealth, aPower, aCapacity, ts, pGame);
 		}
 		else if (B <= AlienParameters.ASpercent + AlienParameters.AMpercent)	//generate AM
 		{
-			newUnit = new Monster(aHealth, aPower, aCapacity, ts);
+			newUnit = new Monster(aHealth, aPower, aCapacity, ts, pGame);
 		}
 		else       //generate AD
 		{
-			newUnit = new AlienDrone(aHealth, aPower, aCapacity, ts);
+			newUnit = new AlienDrone(aHealth, aPower, aCapacity, ts,pGame);
 
 		}
 		}

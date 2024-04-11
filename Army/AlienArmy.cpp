@@ -72,6 +72,11 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 }
 
 
+///Getters For Lists
+
+
+
+
 
 void AlienArmy::Print()
 {

@@ -1,8 +1,9 @@
 #pragma once
 #include<iostream>
 #include<string>
+//#include"../Alien-Invasion/Game.h"
 using namespace std;
-
+class Game;				//forward declaration
 enum UnitType {
 	earthSoliders, earthTank, earthGunnery,
 	alienSolider, alienMonster, alienDrone
@@ -20,10 +21,16 @@ protected:
 	int Tj;		//Join Time
 	int Ta;		// First Attacked Time
 	int Td;		//Destruction Delay
+	//Added For Phase 2
+	bool GotShot;	// checks if first attack happened or not
+	Game* pGame;
 public:
-	Unit(int H,int P,int AC,int tj);
-	virtual void Attack(Unit* unit2) = 0;
+	Unit(int H,int P,int AC,int tj,Game* Gameptr);
+	virtual void Attack(Unit* unit2=nullptr) = 0;
 	void setHealth(int h);
+	void setTd(int td);
+	void setTa(int ta);
+
 	int getHealth();
 	int getPower();
 	int getID() const;

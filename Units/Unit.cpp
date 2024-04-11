@@ -1,17 +1,34 @@
 #include "Unit.h"
 
-Unit::Unit(int H, int P, int AC, int tj)
+Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 {
 	Health = H;
 	Power = P;
 	Attack_Capacity = AC;
 	Tj = tj;
 	ID = 0;
+	//Added For Phase 2	
+	GotShot = false;
+	pGame = Gameptr;
 }
 
 void Unit::setHealth(int h)
 {
 	this->Health = h;
+}
+
+void Unit::setTd(int td)
+{
+	Td = td;
+}
+
+void Unit::setTa(int ta)
+{
+	if (!GotShot)
+	{
+		Ta = ta;
+		GotShot = true;
+	}
 }
 
 int Unit::getHealth()
@@ -23,7 +40,6 @@ int Unit::getPower()
 {
 	return this->Power;
 }
-
 int Unit::getID() const
 {
 	return ID;

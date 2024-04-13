@@ -5,14 +5,11 @@ using namespace std;
 
 EarthSolider::EarthSolider(int H, int P, int AC, int tj):Unit(H,P,AC,tj)
 {
-	Type = earthSoliders;
-
+	Type = earthSoldier;
 }
 
 void EarthSolider::Attack(Unit* unit2)
-{
-
-}
+{}
 
 EarthSolider::~EarthSolider()
 {

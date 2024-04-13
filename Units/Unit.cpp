@@ -14,22 +14,22 @@ void Unit::setHealth(int h)
 	this->Health = h;
 }
 
-int Unit::getHealth()
+int Unit::getHealth() const
 {
 	return this->Health;
 }
 
-int Unit::getPower()
+int Unit::getPower() const
 {
 	return this->Power;
 }
 
 int Unit::getID() const
 {
-	return ID;
+	return this->ID;
 }
 
-UnitType Unit::getType() 
+UnitType Unit::getType() const
 {
 	return this->Type;
 }

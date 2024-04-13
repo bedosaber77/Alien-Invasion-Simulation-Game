@@ -8,46 +8,57 @@ EarthArmy::EarthArmy()
 
 void EarthArmy::AddUnit(Unit* newUnit)
 {
-	if (newUnit->getID()==0)
+	//Check if the unit is a new unit or it has returned from the war to set its ID correctly
+	if (newUnit->getID() == 0)
 	{
 		newUnit->setID(ID);
 		ID++;
 	}
-	if (newUnit->getType() == earthSoliders)
-		EarthSoliders.enqueue(newUnit);
+
+	//Add each unit to its list according to its type 
+	if (newUnit->getType() == earthSoldier)
+		EarthSoldiers.enqueue(newUnit);
 	else if (newUnit->getType() == earthTank)
 		EarthTanks.push(newUnit);
 	else
 	{
 		EarthGunnery* earthgunnery = dynamic_cast<EarthGunnery*>(newUnit);
 		int priorty = earthgunnery->getCombination();
-		EarthGunnerys.enqueue(newUnit, priorty);
+		EarthGunneries.enqueue(newUnit, priorty);
 	}
 }
 
+/*
+ To remove a unit from its list 
+  1- If the List is empty return nullptr
+  2- else remove a unit and return it
+*/
 Unit* EarthArmy::removeUnit(UnitType type)
 {
 	Unit* unit=nullptr;
 	int priorty;
 	switch (type)
 	{
-	case earthSoliders: {
-		if (EarthSoliders.isEmpty())
+	case earthSoldier: 
+	{
+		if (EarthSoldiers.isEmpty())
 			return nullptr;
-		EarthSoliders.dequeue(unit);
+		EarthSoldiers.dequeue(unit);
 	}
 		break;
-	case earthTank: { 
-		if (EarthTanks.isEmpty())
+	case earthTank: 
+	{ 
+	    if (EarthTanks.isEmpty())
 			return nullptr;
 		EarthTanks.pop(unit); 
-		}
+	}
 		break;
-	case earthGunnery: { 
-		if (EarthGunnerys.isEmpty())
+	case earthGunnery: 
+	{ 
+		if (EarthGunneries.isEmpty())
 			return nullptr;
-		EarthGunnerys.dequeue(unit, priorty); //A: visit
-		}
+		EarthGunneries.dequeue(unit, priorty); 
+	}
 		break;
 	
 	default:
@@ -56,21 +67,47 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	return unit;
 }
 
+void EarthArmy::Attack()
+{
+}
+
 void EarthArmy::Print()
 {
-	cout << EarthSoliders.getCount()<<" ES  [";
-	EarthSoliders.print();
+	cout << EarthSoldiers.getCount()<<" ES  [";
+	EarthSoldiers.print();
 	cout << "]\n";
 	cout<<EarthTanks.getCount()<< " ET  [";
 	EarthTanks.print();
 	cout << "]\n";
-	cout << EarthGunnerys.getCount() << " EG  [";
-	EarthGunnerys.print();
+	cout << EarthGunneries.getCount() << " EG  [";
+	EarthGunneries.print();
 	cout << "]";
 }
 
 EarthArmy::~EarthArmy()
 {
+	Unit* DeletedUnit;
+	while (!EarthSoldiers.isEmpty())
+	{
+		EarthSoldiers.dequeue(DeletedUnit);
+		delete DeletedUnit;
+		DeletedUnit = nullptr;
+	}
+
+	while (!EarthTanks.isEmpty())
+	{
+		EarthTanks.pop(DeletedUnit);
+		delete DeletedUnit;
+		DeletedUnit = nullptr;
+	}
+
+	while (!EarthGunneries.isEmpty())
+	{
+		int pri;
+		EarthGunneries.dequeue(DeletedUnit, pri);
+		delete DeletedUnit;
+		DeletedUnit = nullptr;
+	}	
 }
 
 int EarthArmy::ID = 1;

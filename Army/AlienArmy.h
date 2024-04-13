@@ -6,15 +6,18 @@
 class AlienArmy
 {
 private:
-	LinkedQueue <Unit*> AlienSoliders;
+	LinkedQueue <Unit*> AlienSoldiers;
 	Deque <Unit*> AlienDrones;
-	Unit* Monsters[1000];
+	Unit* AlienMonsters[1000];
 	int countMonsters;
 	static int ID;
 public:
 	AlienArmy();
-	void AddUnit(Unit* newUnit,bool IntoFront=false); //Look at Question 24 in Q&A File
+
+	//Adding and Removing unit from its list functions
+	void AddUnit(Unit* newUnit,bool IntoFront=false);
 	Unit* removeUnit(UnitType type,bool FromBack=false);
+
 	void Attack();
 	void Print();
 	~AlienArmy();

@@ -86,7 +86,7 @@ void Game::LoadParameters(string Filename)
 
 void Game::MainLoop()
 {
-		while (TimeStep != 50) //will stop when it completes 50 time steps for now (phase 1)
+		while (TimeStep <= 50) //will stop when it completes 50 time steps for now (phase 1)
 		{
 			Unit* newUnit = nullptr;
 			int A = (rand() % 100) + 1;
@@ -107,13 +107,13 @@ void Game::MainLoop()
 				}
 			}
 
-			Print();
+		//	Print();
 
 			int X = (rand() % 100) + 1;
 			cout << "X = " << X << endl;
 			if (X < 10)
 			{
-				newUnit = pEarthArmy->removeUnit(earthSoliders);
+				newUnit = pEarthArmy->removeUnit(earthSoldier);
 				if (newUnit)
 					pEarthArmy->AddUnit(newUnit);
 			}
@@ -137,7 +137,7 @@ void Game::MainLoop()
 				LinkedQueue <Unit*> AStemplist;
 				for (int i = 0; i < 5; i++)
 				{
-					newUnit = pAlienArmy->removeUnit(alienSolider);
+					newUnit = pAlienArmy->removeUnit(alienSoldier);
 					if (newUnit)
 					{
 						newUnit->decrementHealth(newUnit->getHealth() / 3);
@@ -186,10 +186,6 @@ void Game::AddtoKilledList(Unit* army)
 	KilledList.enqueue(army);
 }
 
-void Game::AddtoTempList(Unit* army)
-{
-	TempList.enqueue(army);
-}
 
 void Game::ClearKilledList()
 {
@@ -198,8 +194,8 @@ void Game::ClearKilledList()
 	{
 		KilledList.dequeue(KilledUnit);
 		delete KilledUnit;
+		KilledUnit = nullptr;
 	}
-
 }
 
 
@@ -214,7 +210,7 @@ void Game::Print()
 {
 	cout << "Current Timestep " << TimeStep << endl;
 	cout << "============== Earth Army Alive Units ==============" << endl;
-	pEarthArmy->Print();
+    pEarthArmy->Print();
 	cout << endl;
 	cout << "============== Alien Army Alive Units ==============" << endl;
 	pAlienArmy->Print();
@@ -229,4 +225,7 @@ void Game::Print()
 Game::~Game()
 {
 	ClearKilledList();
+	delete pEarthArmy;
+	delete pAlienArmy;
+	delete pRand;
 }

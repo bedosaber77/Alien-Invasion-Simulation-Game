@@ -6,6 +6,5 @@ public:
 	EarthSolider(int H, int P, int AC, int tj);
 	virtual void Attack(Unit* unit2);
 	~EarthSolider();
-
 };
 

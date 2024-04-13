@@ -31,7 +31,7 @@ class Game
 public:
 	Game();
 	void StartGame();
-	void LoadParameters(string);
+	bool LoadParameters(string);
 	void MainLoop();	// Increment time step until game ends
 	void AddtoKilledList(Unit* army);
 	void AddtoTempList(Unit* army);

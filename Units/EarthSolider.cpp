@@ -12,10 +12,10 @@ void EarthSolider::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
+	pGame->GetAlienArmyPtr()->GetEnemiesList(alienSolider, this->Attack_Capacity, EnemiesList); //Discuss 
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		pGame->GetAlienArmyPtr()->GetEnemiesList(alienSolider, this->Attack_Capacity, EnemiesList);
 		if (EnemiesList.dequeue(unit2))
 		{
 

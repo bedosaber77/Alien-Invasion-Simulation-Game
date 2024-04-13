@@ -78,7 +78,7 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 
 
 
-LinkedQueue<Unit*> AlienArmy::GetEnemiesList(UnitType type, int Capacity, LinkedQueue<Unit*>& EnemiesList)
+void AlienArmy::GetEnemiesList(UnitType type, int Capacity, LinkedQueue<Unit*>& EnemiesList)
 {
 	//LinkedQueue<Unit*>EnemiesList;
 	Unit* unit2=nullptr;
@@ -91,9 +91,8 @@ LinkedQueue<Unit*> AlienArmy::GetEnemiesList(UnitType type, int Capacity, Linked
 			EnemiesList.enqueue(unit2);
 		}
 
-
 	}
-	return EnemiesList;
+	return ;
 }
 
 void AlienArmy::Print()

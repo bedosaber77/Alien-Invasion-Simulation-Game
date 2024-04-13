@@ -58,7 +58,7 @@ Unit* EarthArmy::removeUnit(UnitType type)
 
 void EarthArmy::Attack()
 {
-	Unit* unit2;
+	Unit* unit2=nullptr;
 	//ES Attacks 
 	if (EarthSoliders.peek(unit2))
 	{

@@ -10,7 +10,7 @@ void AlienDrone::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
-	pGame->GetEnemiesList(Earth,earthTank, this->Attack_Capacity, EnemiesList); //Discuss 
+	pGame->GetEnemiesList(Earth,earthTank, this->Attack_Capacity/2, EnemiesList); //Discuss 
 	for (int i = 0; i < this->Attack_Capacity / 2; i++)
 	{
 		

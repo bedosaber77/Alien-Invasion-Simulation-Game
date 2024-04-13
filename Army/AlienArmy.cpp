@@ -73,7 +73,23 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 
 void AlienArmy::Attack()
 {
-	//AD attacks in pairs 
+	Unit* unit2 = nullptr;
+	//AD Attack in pairs
+	if (AlienDrones.getCount() > 1)
+	{
+		AlienDrones.peek(unit2);
+		if (unit2)
+		{
+			unit2->Attack();
+		}
+
+		AlienDrones.peekBack(unit2);
+		if (unit2)
+		{
+			unit2->Attack();
+		}
+
+	}
 }
 
 

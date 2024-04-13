@@ -27,10 +27,12 @@ class Game
 public:
 	Game();
 	void StartGame();
-	void LoadParameters(string);
+
+	bool LoadParameters(string);
 	void MainLoop();	               // Increment time step until game ends
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
 	void ClearKilledList();            // deallocate all units in the killed list
+
 
 	//printing functions for the output file 
 	void PrintKilledList();

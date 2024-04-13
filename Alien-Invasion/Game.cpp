@@ -14,15 +14,20 @@ Game::Game()
 
 void Game::StartGame()
 {
-
+	bool ValidName = false;
 	cout << "	ALIEN INVASION ! " << endl
 		<< "Please enter your File Parameters path" << endl;
 	string Filename;
-	cin >> Filename;
-	LoadParameters( Filename+".txt");
+	while (!ValidName)
+	{
+		cin >> Filename;
+		ValidName = LoadParameters(Filename + ".txt");
+	}
+	MainLoop();
+
 }
 
-void Game::LoadParameters(string Filename)
+bool Game::LoadParameters(string Filename)
 {
 	ifstream Infile(Filename);
 	if (Infile.is_open())
@@ -79,8 +84,14 @@ void Game::LoadParameters(string Filename)
 		pRand->SetAlienParameters(AlienParameters);
 
 		Infile.close();
+		return true;
 	}
-	MainLoop();
+	else
+	{
+		cout << "ERROR, Please enter a valid file name. " << endl;
+		return false;
+		
+	}
 }
 
 

@@ -177,6 +177,7 @@ void Game::MainLoop()
 		//	Print();
 		//	TimeStep++;
 			pEarthArmy->Attack();
+			pAlienArmy->Attack();
 			Print();
 			TimeStep++;
 		}
@@ -208,6 +209,56 @@ void Game::ClearKilledList()
 AlienArmy* Game::GetAlienArmyPtr()
 {
 	return pAlienArmy;
+}
+
+EarthArmy* Game::GetEarthArmyPtr()
+{
+	return pEarthArmy;
+}
+
+RandGen* Game::GetRandGenPtr()
+{
+	return pRand;
+}
+
+void Game::GetEnemiesList(ArmyType Army_Type, UnitType Unit_Type, int Capacity, LinkedQueue<Unit*>& EnemiesList)
+{
+	Unit* unit2 = nullptr;
+	switch (Army_Type)
+	{
+	case Earth:
+	{
+		for (int i = 0; i < Capacity; i++)
+		{
+			unit2 = pEarthArmy->removeUnit(Unit_Type);
+
+			if (unit2)
+			{
+				EnemiesList.enqueue(unit2);
+			}
+
+		}
+	}
+		break;
+	case Alien:
+	{
+		for (int i = 0; i < Capacity; i++)
+		{
+			unit2 = pAlienArmy->removeUnit(Unit_Type, i % 2);
+
+			if (unit2)
+			{
+				EnemiesList.enqueue(unit2);
+			}
+
+		}
+	}
+		break;
+	default:
+		break;
+	}
+	return;
+
 }
 
 int Game::GetCurrentTime()

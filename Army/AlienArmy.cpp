@@ -71,6 +71,11 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 	return unit;
 }
 
+void AlienArmy::Attack()
+{
+	//AD attacks in pairs 
+}
+
 
 ///Getters For Lists
 
@@ -78,22 +83,7 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 
 
 
-void AlienArmy::GetEnemiesList(UnitType type, int Capacity, LinkedQueue<Unit*>& EnemiesList)
-{
-	//LinkedQueue<Unit*>EnemiesList;
-	Unit* unit2=nullptr;
-	for (int i = 0; i < Capacity; i++)
-	{
-		unit2 = removeUnit(type, i % 2);
 
-		if (unit2)
-		{
-			EnemiesList.enqueue(unit2);
-		}
-
-	}
-	return ;
-}
 
 void AlienArmy::Print()
 {

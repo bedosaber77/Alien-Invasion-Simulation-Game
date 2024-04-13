@@ -40,7 +40,10 @@ public:
 
 
 	AlienArmy* GetAlienArmyPtr();
+	EarthArmy* GetEarthArmyPtr();
+	RandGen* GetRandGenPtr();
 
+	void GetEnemiesList(ArmyType Army_Type,UnitType Unit_Type, int Capacity, LinkedQueue<Unit*>& EnemiesList);	//to be revisited
 
 	// Get Current Time              (To be discussed ,what do you think about consistency?)
 

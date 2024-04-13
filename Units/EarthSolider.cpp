@@ -26,7 +26,7 @@ void EarthSolider::Attack(Unit* unit2)
 				sqrt(unit2->getHealth());	//Damage Formula
 
 
-			unit2->setHealth(unit2->getHealth() - Damage);
+			unit2->decrementHealth(Damage);
 
 
 			if (unit2 && unit2->getHealth() > 0)	//not needed ,but for more safety now
@@ -35,10 +35,15 @@ void EarthSolider::Attack(Unit* unit2)
 			}
 			else if(unit2 && unit2->getHealth() <= 0) //not needed ,but for more safety now
 			{
+				unit2->setTd(pGame->GetCurrentTime()); // Destruction Time
+
 				pGame->AddtoKilledList(unit2);
 			}
 		}
 	}
+
+
+
 	while (TempList.dequeue(unit2))
 	{
 		pGame->GetAlienArmyPtr()->AddUnit(unit2);		//return to original list

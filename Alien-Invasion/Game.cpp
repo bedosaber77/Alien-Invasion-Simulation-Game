@@ -186,7 +186,6 @@ void Game::MainLoop()
 
 void Game::AddtoKilledList(Unit* army)
 {
-	army->setTd(TimeStep); //Destruction Time
 	KilledList.enqueue(army);
 }
 

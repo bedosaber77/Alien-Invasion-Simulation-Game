@@ -58,6 +58,6 @@ Unit::~Unit()
 
 std::ostream& operator<<(std::ostream& os, const Unit* obj)
 {
-	os << obj->ID;
+	os << obj->getID();
 	return os;
 }

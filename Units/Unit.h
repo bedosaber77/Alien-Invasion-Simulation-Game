@@ -1,7 +1,6 @@
 #pragma once
 #include<iostream>
 #include<string>
-using namespace std;
 
 enum UnitType {
 	earthSoldier, earthTank, earthGunnery,
@@ -36,8 +35,8 @@ public:
 	//Functions to Increment/Decrement health
 	void decrementHealth(int damage);
 	void incrementHealth(int);		//to be revisited
-	friend std::ostream& operator<<(std::ostream& os, const Unit* obj);
 	~Unit();
 
 };
 
+std::ostream& operator<<(std::ostream& os, const Unit* obj);

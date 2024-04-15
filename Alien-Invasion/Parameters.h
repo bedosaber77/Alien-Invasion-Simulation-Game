@@ -2,11 +2,11 @@
 struct Inputs
 {
 
-	int lower_power, upper_power,
-		lower_health, upper_health,
-		lower_capacity, upper_capacity;
+	int lower_power=0, upper_power=0,
+		lower_health=0, upper_health=0,
+		lower_capacity=0, upper_capacity=0;
 
-	int ESpercent, ETpercent, EGpercent;
+	int ESpercent=0, ETpercent=0, EGpercent=0;
 
-	int ASpercent, AMpercent, ADpercent;
+	int ASpercent=0, AMpercent=0, ADpercent=0;
 };

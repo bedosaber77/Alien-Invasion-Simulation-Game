@@ -20,6 +20,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 	
 		int B = (rand() % 100) + 1;
 		//Parameters for Unit Constructor(Earth)
+
 		switch (Army_Type)
 		{
 		case Earth:
@@ -51,6 +52,9 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 			}
 		}
 			break;
+
+			//Parameters for Unit Constructor(Alien)
+
 		case Alien:
 		
 
@@ -63,7 +67,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 			+ AlienParameters.lower_capacity;
 
 
-		// Generation of aUnits
+		// Generation of Alien Units
 
 		if (B <= AlienParameters.ASpercent)		//generate AS
 		{
@@ -109,12 +113,12 @@ void RandGen::SetAlienParameters(Inputs Aparameters)
 	AlienParameters = Aparameters;
 }
 
-int RandGen::GetN()
+int RandGen::GetN() const
 {
 	return N;
 }
 
-int RandGen::GetProb()
+int RandGen::GetProb() const
 {
 	return Prob;
 }

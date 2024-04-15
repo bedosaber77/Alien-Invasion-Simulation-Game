@@ -29,7 +29,7 @@ int Unit::getID() const
 	return this->ID;
 }
 
-UnitType Unit::getType() const
+ UnitType Unit::getType() const
 {
 	return this->Type;
 }

@@ -21,7 +21,7 @@ public:
 	bool peek(T& frntEntry)  const;
 	bool peekBack(T& BackEntry)  const;
 	int getCount() const;
-	void print();
+	void print() const;
 	~Deque();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -190,7 +190,7 @@ inline int Deque<T>::getCount() const
 	return this->count;
 }
 template<typename T>
-inline void Deque<T>::print()
+inline void Deque<T>::print() const
 {
 	DequeNode<T>* ptr = frontPtr;
 	while (ptr)

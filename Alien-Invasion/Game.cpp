@@ -32,54 +32,53 @@ bool Game::LoadParameters(string Filename)
 	ifstream Infile(Filename);
 	if (Infile.is_open())
 	{
-		Inputs EarthParameters;
-		Inputs AlienParameters;
-	
+		Inputs EarthParameters; // instance of struct for Earth Units
+		Inputs AlienParameters;  // instance of struct for Army Units
 
-		int N;	//Number of units for each army
+	
+		//Number of units for each army
+		int N;	
 		Infile >> N;
 		pRand->SetN(N);
 
 		
 		Infile >> EarthParameters.ESpercent >> EarthParameters.ETpercent >> EarthParameters.EGpercent;
-
-
 		Infile >> AlienParameters.ASpercent >> AlienParameters.AMpercent >> AlienParameters.ADpercent;
 
-
+		// Probability
 		int Prob;
 		Infile >> Prob;
-
-
 		pRand->SetProb(Prob);
 		
-		// here we need to think about another better way(structs)
 
 
 		// Earth Ranges
 		Infile >> EarthParameters.lower_power;
-		Infile.ignore(1);
-		Infile >> EarthParameters.upper_power >>
-			EarthParameters.lower_health;
-		Infile.ignore(1) >> EarthParameters.upper_health >>
-			EarthParameters.lower_capacity;
+		Infile.ignore(1) >> EarthParameters.upper_power;
+
+
+        Infile >>EarthParameters.lower_health;
+		Infile.ignore(1) >> EarthParameters.upper_health;
+
+		Infile >>EarthParameters.lower_capacity;
 		Infile.ignore(1) >> EarthParameters.upper_capacity;
 
 
 
 		//Alien Ranges
-
 		Infile >> AlienParameters.lower_power;
-		Infile.ignore(1);
-		Infile >> AlienParameters.upper_power >>
-			AlienParameters.lower_health;
-		Infile.ignore(1) >> AlienParameters.upper_health >>
-			AlienParameters.lower_capacity;
-		Infile.ignore(1) >>  AlienParameters.upper_capacity;
+		Infile.ignore(1) >> AlienParameters.upper_power;
+
+
+		Infile >> AlienParameters.lower_health;
+		Infile.ignore(1) >> AlienParameters.upper_health;
+
+		Infile >> AlienParameters.lower_capacity;
+		Infile.ignore(1) >> AlienParameters.upper_capacity;
 
 
 
-		//set
+		//set values for ranges and percentage
 		pRand->SetEarthParameters(EarthParameters);
 		pRand->SetAlienParameters(AlienParameters);
 
@@ -103,9 +102,10 @@ void Game::MainLoop()
 			int A = (rand() % 100) + 1;
 			if (A <= pRand->GetProb())// Generating Army condition
 			{
+				// Generating Earth Army
 				for (int i = 0; i < pRand->GetN(); i++)
 				{
-					newUnit = pRand->GenerateUnits(TimeStep, Earth);
+					newUnit = pRand->GenerateUnits(TimeStep,Earth);
 					pEarthArmy->AddUnit(newUnit);
 				}
 
@@ -210,14 +210,14 @@ void Game::ClearKilledList()
 }
 
 
-void Game::PrintKilledList()
+void Game::PrintKilledList()const
 {
 	cout << KilledList.getCount() << " units [";
 	KilledList.print();
 	cout << " ] \n";
 }
 
-void Game::Print()
+void Game::Print() const
 {
 	cout << "Current Timestep " << TimeStep << endl;
 	cout << "============== Earth Army Alive Units ==============" << endl;

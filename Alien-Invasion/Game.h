@@ -35,8 +35,8 @@ public:
 
 
 	//printing functions for the output file 
-	void PrintKilledList();
-	void Print();                    
+	void PrintKilledList() const;
+	void Print() const;                    
 	~Game();
 };
 

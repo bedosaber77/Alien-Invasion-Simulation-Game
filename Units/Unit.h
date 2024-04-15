@@ -11,6 +11,7 @@ class Unit
 {
 protected:
 	//Unit Main Parameters
+	
 	int ID; 
 	UnitType Type; 
 	int Health;
@@ -21,6 +22,7 @@ protected:
 	int Ta;		//First Attacked Time
 	int Td;		//Destruction Delay
 public:
+	
 	Unit(int H,int P,int AC,int tj);
 	virtual void Attack(Unit* unit2) = 0;
 

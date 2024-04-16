@@ -118,7 +118,7 @@ void Game::MainLoop()
 				}
 			}
 
-		//	Print();
+			Print();
 
 		//	int X = (rand() % 100) + 1;
 		//	cout << "X = " << X << endl;

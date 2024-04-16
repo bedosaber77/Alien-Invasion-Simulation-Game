@@ -16,10 +16,10 @@ int main() {
 	//d.dequeue(x);*/
 	//d.print();
 	/*Deque<Unit*> d;
-	Unit* newunit = new EarthSolider(15, 15, 15, 15);
+	Unit* newunit = new Earthsoldier(15, 15, 15, 15);
 	d.enqueue(newunit);
 	d.print();*/
 	//LinkedQueue<int> j;
 	Game game;
 	
-};
+}

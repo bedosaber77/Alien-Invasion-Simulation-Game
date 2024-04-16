@@ -1,13 +1,13 @@
 #pragma once
 #include<iostream>
 #include<string>
+
 //#include"../Alien-Invasion/Game.h"
 using namespace std;
+
+#include "..\Alien-Invasion\DEFS.h"
 class Game;				//forward declaration
-enum UnitType {
-	earthSoldier, earthTank, earthGunnery,
-	alienSoldier, alienMonster, alienDrone
-};
+
 
 class Unit
 {

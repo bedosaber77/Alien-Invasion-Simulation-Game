@@ -1,9 +1,10 @@
 #pragma once
 #include "..\DS Files\Queue\LinkedQueue.h"
-#include "..\Units\EarthSolider.h"
+#include "..\Units\Earthsoldier.h"
 #include "..\Units\Unit.h"
 #include"../DS Files/Stack/ArrayStack.h"
 #include "../DS Files/Priority Queue/priQueue.h"
+#include "..\Alien-Invasion\DEFS.h"
 
 class EarthArmy
 {

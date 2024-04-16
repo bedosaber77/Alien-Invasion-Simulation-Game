@@ -1,15 +1,18 @@
-#include "AlienSolider.h"
+#include<iostream>
+#include<string>
+using namespace std;
+#include "Earthsoldier.h"
 #include"../Alien-Invasion/Game.h"
-AlienSolider::AlienSolider(int H, int P, int AC, int tj, Game* Gameptr):Unit(H, P, AC, tj, Gameptr)
+Earthsoldier::Earthsoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
-	Type = alienSoldier;
+	Type = earthSoldier;
 }
 
-void AlienSolider::Attack(Unit* unit2)
+void Earthsoldier::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
-	pGame->GetEnemiesList(Earth, earthSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
+	pGame->GetEnemiesList(Alien, alienSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
@@ -43,10 +46,10 @@ void AlienSolider::Attack(Unit* unit2)
 
 	while (TempList.dequeue(unit2))
 	{
-		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
+		pGame->GetAlienArmyPtr()->AddUnit(unit2);		//return to original list
 	}
 }
 
-AlienSolider::~AlienSolider()
+Earthsoldier::~Earthsoldier()
 {
 }

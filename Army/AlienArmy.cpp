@@ -1,5 +1,5 @@
 #include "AlienArmy.h"
-#include "..\Units\AlienSolider.h"
+#include "..\Units\Aliensoldier.h"
 #include "..\Units\Unit.h"
 #include <time.h>
 #include <cstdlib>

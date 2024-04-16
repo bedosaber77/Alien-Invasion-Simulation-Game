@@ -1,18 +1,16 @@
-#include<iostream>
-#include<string>
-using namespace std;
-#include "EarthSolider.h"
+#include "Aliensoldier.h"
 #include"../Alien-Invasion/Game.h"
-EarthSolider::EarthSolider(int H, int P, int AC, int tj, Game* Gameptr):Unit(H,P,AC,tj, Gameptr)
+
+Aliensoldier::Aliensoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
-	Type = earthSoldier;
+	Type = alienSoldier;
 }
 
-void EarthSolider::Attack(Unit* unit2)
+void Aliensoldier:: Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
-	pGame->GetEnemiesList(Alien,alienSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
+	pGame->GetEnemiesList(Earth, earthSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
@@ -33,7 +31,7 @@ void EarthSolider::Attack(Unit* unit2)
 			{
 				TempList.enqueue(unit2);
 			}
-			else if(unit2 && unit2->getHealth() <= 0) //not needed ,but for more safety now
+			else if (unit2 && unit2->getHealth() <= 0) //not needed ,but for more safety now
 			{
 				unit2->setTd(pGame->GetCurrentTime()); // Destruction Time
 
@@ -46,11 +44,10 @@ void EarthSolider::Attack(Unit* unit2)
 
 	while (TempList.dequeue(unit2))
 	{
-		pGame->GetAlienArmyPtr()->AddUnit(unit2);		//return to original list
+		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
-
 }
 
-EarthSolider::~EarthSolider()
+Aliensoldier::~Aliensoldier()
 {
 }

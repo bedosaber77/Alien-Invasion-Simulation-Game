@@ -1,14 +1,12 @@
 #pragma once
-#include"Parameters.h"
 #include"../Army/AlienArmy.h"
 #include"../Army/EarthArmy.h"
 #include <cstdlib>
 #include <time.h>
 #include<string>
-using namespace std;
+#include "..\Alien-Invasion\DEFS.h"
+using namespace std; 
 class Game;
-enum ArmyType
-{ Earth,Alien};
 class RandGen
 {
 	

@@ -1,7 +1,7 @@
 ﻿#include "RandGen.h"
 #include"../Units/Unit.h"
 #include"../Units/EarthTank.h"
-#include"../Units/Monster.h"
+#include"../Units/AlienMonster.h"
 #include"../Units/AlienDrone.h"
 #include"../Units/EarthGunnery.h"
 #include"..\Units\Aliensoldier.h"
@@ -75,7 +75,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 		}
 		else if (B <= AlienParameters.ASpercent + AlienParameters.AMpercent)	//generate AM
 		{
-			newUnit = new Monster(aHealth, aPower, aCapacity, ts);
+			newUnit = new AlienMonster(aHealth, aPower, aCapacity, ts);
 		}
 		else       //generate AD
 		{

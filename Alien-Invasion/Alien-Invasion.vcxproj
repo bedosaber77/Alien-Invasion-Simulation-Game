@@ -143,7 +143,7 @@
     <ClInclude Include="..\Units\EarthGunnery.h" />
     <ClInclude Include="..\Units\EarthSoldier.h" />
     <ClInclude Include="..\Units\EarthTank.h" />
-    <ClInclude Include="..\Units\Monster.h" />
+    <ClInclude Include="..\Units\AlienMonster.h" />
     <ClInclude Include="..\Units\Unit.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="DEFS.h" />
@@ -159,7 +159,7 @@
     <ClCompile Include="..\Units\EarthGunnery.cpp" />
     <ClCompile Include="..\Units\EarthSoldier.cpp" />
     <ClCompile Include="..\Units\EarthTank.cpp" />
-    <ClCompile Include="..\Units\Monster.cpp" />
+    <ClCompile Include="..\Units\AlienMonster.cpp" />
     <ClCompile Include="..\Units\Unit.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="RandGen.cpp" />

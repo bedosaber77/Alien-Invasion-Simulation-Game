@@ -2,14 +2,14 @@
 #include"../Alien-Invasion/Game.h"
 AlienSolider::AlienSolider(int H, int P, int AC, int tj, Game* Gameptr):Unit(H, P, AC, tj, Gameptr)
 {
-	Type = alienSolider;
+	Type = alienSoldier;
 }
 
 void AlienSolider::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
-	pGame->GetEnemiesList(Earth, earthSoliders, this->Attack_Capacity, EnemiesList); //Discuss 
+	pGame->GetEnemiesList(Earth, earthSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{

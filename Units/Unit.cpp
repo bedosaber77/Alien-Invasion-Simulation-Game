@@ -31,21 +31,21 @@ void Unit::setTa(int ta)
 	}
 }
 
-int Unit::getHealth()
+int Unit::getHealth() const
 {
 	return this->Health;
 }
 
-int Unit::getPower()
+int Unit::getPower() const
 {
 	return this->Power;
 }
 int Unit::getID() const
 {
-	return ID;
+	return this->ID;
 }
 
-UnitType Unit::getType() 
+ UnitType Unit::getType() const
 {
 	return this->Type;
 }
@@ -74,6 +74,6 @@ Unit::~Unit()
 
 std::ostream& operator<<(std::ostream& os, const Unit* obj)
 {
-	os << obj->ID;
+	os << obj->getID();
 	return os;
 }

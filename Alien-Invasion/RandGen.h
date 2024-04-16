@@ -11,6 +11,7 @@ enum ArmyType
 { Earth,Alien};
 class RandGen
 {
+	
 	int N, Prob;
 	Inputs EarthParameters,AlienParameters;
 	ArmyType Army_Type;
@@ -26,8 +27,8 @@ public:
 
 
 	//getters for Input file
-	int GetN();
-	int GetProb();
+	int GetN() const;
+	int GetProb() const;
 
 	// Unit Generation Function
 	Unit* GenerateUnits( int ts, ArmyType Army_Type);

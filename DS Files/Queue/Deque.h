@@ -1,9 +1,8 @@
 #pragma once
 #include "DequeNode.h"
 #include "QueueADT.h"
-#include "iostream"
+#include <iostream>
 using namespace std;
-
 template <typename T>
 class Deque :public QueueADT<T>
 {
@@ -22,7 +21,7 @@ public:
 	bool peek(T& frntEntry)  const;
 	bool peekBack(T& BackEntry)  const;
 	int getCount() const;
-	void print();
+	void print() const;
 	~Deque();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -191,7 +190,7 @@ inline int Deque<T>::getCount() const
 	return this->count;
 }
 template<typename T>
-inline void Deque<T>::print()
+inline void Deque<T>::print() const
 {
 	DequeNode<T>* ptr = frontPtr;
 	while (ptr)

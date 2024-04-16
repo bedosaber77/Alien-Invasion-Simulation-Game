@@ -5,14 +5,14 @@ using namespace std;
 #include"../Alien-Invasion/Game.h"
 EarthSolider::EarthSolider(int H, int P, int AC, int tj, Game* Gameptr):Unit(H,P,AC,tj, Gameptr)
 {
-	Type = earthSoliders;
+	Type = earthSoldier;
 }
 
 void EarthSolider::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
-	pGame->GetEnemiesList(Alien,alienSolider, this->Attack_Capacity, EnemiesList); //Discuss 
+	pGame->GetEnemiesList(Alien,alienSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{

@@ -5,21 +5,23 @@
 using namespace std;
 class Game;				//forward declaration
 enum UnitType {
-	earthSoliders, earthTank, earthGunnery,
-	alienSolider, alienMonster, alienDrone
+	earthSoldier, earthTank, earthGunnery,
+	alienSoldier, alienMonster, alienDrone
 };
 
 class Unit
 {
 protected:
-	int ID; // making ID Static Needed To be Revisit??
-	UnitType Type; //still thinking >> ?
+	//Unit Main Parameters
+	
+	int ID; 
+	UnitType Type; 
 	int Health;
 	int Power;
 	int Attack_Capacity;
 	//Time & Duration Parameters//
 	int Tj;		//Join Time
-	int Ta;		// First Attacked Time
+	int Ta;		//First Attacked Time
 	int Td;		//Destruction Delay
 	//Added For Phase 2
 	bool GotShot;	// checks if first attack happened or not
@@ -31,17 +33,17 @@ public:
 	void setTd(int td);
 	void setTa(int ta);
 
-	int getHealth();
-	int getPower();
+	int getHealth() const;
+	int getPower() const;
 	int getID() const;
-	UnitType getType();		//to be revisit
+	UnitType getType() const;		
 	void setID(int id);
-	//More Functions Needed
+
+	//Functions to Increment/Decrement health
 	void decrementHealth(int damage);
 	void incrementHealth(int);		//to be revisited
-	friend std::ostream& operator<<(std::ostream& os, const Unit* obj);
-
 	~Unit();
 
 };
 
+std::ostream& operator<<(std::ostream& os, const Unit* obj);

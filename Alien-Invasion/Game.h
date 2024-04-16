@@ -18,23 +18,19 @@ class Game
 	//pointer to RandomGen class
 	RandGen* pRand;  
 
-	int TimeStep=1;
-
-	//bool isOver; // boolean for ending the game
-
-	//killed and temp lists
+	//killed list
 	LinkedQueue <Unit*> KilledList;
-	LinkedQueue <Unit*> TempList;
 
+	int TimeStep=1;
 
 public:
 	Game();
 	void StartGame();
-	void LoadParameters(string);
-	void MainLoop();	// Increment time step until game ends
-	void AddtoKilledList(Unit* army);
-	void AddtoTempList(Unit* army);
-	void ClearKilledList();       // deallocate all units in the killed list
+
+	bool LoadParameters(string);
+	void MainLoop();	               // Increment time step until game ends
+	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
+	void ClearKilledList();            // deallocate all units in the killed list
 
 	// We need to get RandGen and Armies Pointers    (As mentioned in Q&A File)
 
@@ -56,8 +52,9 @@ public:
 	bool CheckGameOver(); // to be revisited
 	*/
 
-	void PrintKilledList();
-	void Print();                // output file 
+	//printing functions for the output file 
+	void PrintKilledList() const;
+	void Print() const;                    
 	~Game();
 };
 

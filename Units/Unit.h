@@ -1,11 +1,7 @@
 #pragma once
 #include<iostream>
 #include<string>
-
-enum UnitType {
-	earthSoldier, earthTank, earthGunnery,
-	alienSoldier, alienMonster, alienDrone
-};
+#include "..\Alien-Invasion\DEFS.h"
 
 class Unit
 {

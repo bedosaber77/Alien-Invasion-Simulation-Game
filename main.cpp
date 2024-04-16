@@ -22,4 +22,4 @@ int main() {
 	//LinkedQueue<int> j;
 	Game game;
 	
-};
+}

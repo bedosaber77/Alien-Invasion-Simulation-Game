@@ -10,3 +10,13 @@ struct Inputs
 
 	int ASpercent=0, AMpercent=0, ADpercent=0;
 };
+
+enum UnitType {
+	earthSoldier, earthTank, earthGunnery,
+	alienSoldier, alienMonster, alienDrone
+};
+
+enum ArmyType
+{
+	Earth, Alien
+};

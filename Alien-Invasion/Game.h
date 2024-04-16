@@ -6,7 +6,7 @@
 #include"../Army/AlienArmy.h"
 #include"../Army/EarthArmy.h"
 #include"RandGen.h"
-#include"Parameters.h"
+#include"DEFS.h"
 
 using namespace std;
 class Game

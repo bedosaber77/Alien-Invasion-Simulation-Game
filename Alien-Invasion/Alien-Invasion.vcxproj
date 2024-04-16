@@ -146,7 +146,7 @@
     <ClInclude Include="..\Units\Monster.h" />
     <ClInclude Include="..\Units\Unit.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Parameters.h" />
+    <ClInclude Include="DEFS.h" />
     <ClInclude Include="RandGen.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

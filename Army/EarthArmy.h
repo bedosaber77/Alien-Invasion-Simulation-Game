@@ -4,6 +4,7 @@
 #include "..\Units\Unit.h"
 #include"../DS Files/Stack/ArrayStack.h"
 #include "../DS Files/Priority Queue/priQueue.h"
+#include "..\Alien-Invasion\DEFS.h"
 
 class EarthArmy
 {

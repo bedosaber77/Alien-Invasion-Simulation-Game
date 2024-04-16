@@ -139,9 +139,9 @@
     <ClInclude Include="..\DS Files\Stack\ArrayStack.h" />
     <ClInclude Include="..\DS Files\Stack\StackADT.h" />
     <ClInclude Include="..\Units\AlienDrone.h" />
-    <ClInclude Include="..\Units\AlienSolider.h" />
+    <ClInclude Include="..\Units\AlienSoldier.h" />
     <ClInclude Include="..\Units\EarthGunnery.h" />
-    <ClInclude Include="..\Units\EarthSolider.h" />
+    <ClInclude Include="..\Units\EarthSoldier.h" />
     <ClInclude Include="..\Units\EarthTank.h" />
     <ClInclude Include="..\Units\Monster.h" />
     <ClInclude Include="..\Units\Unit.h" />
@@ -155,9 +155,9 @@
     <ClCompile Include="..\Army\EarthArmy.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\Units\AlienDrone.cpp" />
-    <ClCompile Include="..\Units\AlienSolider.cpp" />
+    <ClCompile Include="..\Units\AlienSoldier.cpp" />
     <ClCompile Include="..\Units\EarthGunnery.cpp" />
-    <ClCompile Include="..\Units\EarthSolider.cpp" />
+    <ClCompile Include="..\Units\EarthSoldier.cpp" />
     <ClCompile Include="..\Units\EarthTank.cpp" />
     <ClCompile Include="..\Units\Monster.cpp" />
     <ClCompile Include="..\Units\Unit.cpp" />

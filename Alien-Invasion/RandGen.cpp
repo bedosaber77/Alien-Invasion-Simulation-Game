@@ -4,7 +4,7 @@
 #include"../Units/Monster.h"
 #include"../Units/AlienDrone.h"
 #include"../Units/EarthGunnery.h"
-#include"..\Units\AlienSolider.h"
+#include"..\Units\Aliensoldier.h"
 
 RandGen::RandGen()
 {
@@ -37,7 +37,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 
 			if (B <= EarthParameters.ESpercent)		//generate ES
 			{
-				newUnit = new EarthSolider(eHealth, ePower, eCapacity, ts);
+				newUnit = new Earthsoldier(eHealth, ePower, eCapacity, ts);
 			}
 			else if (B <= EarthParameters.ESpercent + EarthParameters.ETpercent)	//generate ET
 			{
@@ -71,7 +71,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 
 		if (B <= AlienParameters.ASpercent)		//generate AS
 		{
-			newUnit = new AlienSolider(aHealth, aPower, aCapacity, ts);
+			newUnit = new Aliensoldier(aHealth, aPower, aCapacity, ts);
 		}
 		else if (B <= AlienParameters.ASpercent + AlienParameters.AMpercent)	//generate AM
 		{

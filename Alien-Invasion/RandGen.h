@@ -4,7 +4,8 @@
 #include <cstdlib>
 #include <time.h>
 #include<string>
-#include "..\Alien-Invasion\DEFS.h"
+//#include "..\Alien-Invasion\DEFS.h"
+#include"DEFS.h"
 using namespace std;
 
 class RandGen

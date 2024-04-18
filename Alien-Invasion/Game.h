@@ -2,10 +2,9 @@
 #include<fstream>
 #include<string>
 #include"../DS Files/Queue/LinkedQueue.h"
-#include"RandGen.h"
+#include "RandGen.h"
 #include"../Army/AlienArmy.h"
 #include"../Army/EarthArmy.h"
-#include"RandGen.h"
 #include"DEFS.h"
 
 using namespace std;
@@ -17,12 +16,12 @@ class Game
 	EarthArmy* pEarthArmy;
 
 	//pointer to RandomGen class
-	RandGen* pRand;  
+	RandGen* pRand;
 
 	//killed list
 	LinkedQueue <Unit*> KilledList;
 
-	int TimeStep=1;
+	int TimeStep = 1;
 
 public:
 	Game();
@@ -36,7 +35,7 @@ public:
 
 	//printing functions for the output file 
 	void PrintKilledList() const;
-	void Print() const;                    
+	void Print() const;
 	~Game();
 };
 

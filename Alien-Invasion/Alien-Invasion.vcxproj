@@ -145,8 +145,8 @@
     <ClInclude Include="..\Units\EarthTank.h" />
     <ClInclude Include="..\Units\AlienMonster.h" />
     <ClInclude Include="..\Units\Unit.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="RandGen.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

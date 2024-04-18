@@ -3,12 +3,12 @@
 using namespace std;
 #include "Earthsoldier.h"
 #include"../Alien-Invasion/Game.h"
-Earthsoldier::Earthsoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
+EarthSoldier::EarthSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = earthSoldier;
 }
 
-void Earthsoldier::Attack(Unit* unit2)
+void EarthSoldier::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
@@ -50,6 +50,6 @@ void Earthsoldier::Attack(Unit* unit2)
 	}
 }
 
-Earthsoldier::~Earthsoldier()
+EarthSoldier::~EarthSoldier()
 {
 }

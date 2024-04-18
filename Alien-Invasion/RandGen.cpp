@@ -37,7 +37,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 
 			if (B <= EarthParameters.ESpercent)		//generate ES
 			{
-				newUnit = new Earthsoldier(eHealth, ePower, eCapacity, ts, pGame);
+				newUnit = new EarthSoldier(eHealth, ePower, eCapacity, ts,pGame);
 			}
 			else if (B <= EarthParameters.ESpercent + EarthParameters.ETpercent)	//generate ET
 			{
@@ -71,7 +71,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 
 		if (B <= AlienParameters.ASpercent)		//generate AS
 		{
-			newUnit = new Aliensoldier(aHealth, aPower, aCapacity, ts, pGame);
+			newUnit = new AlienSoldier(aHealth, aPower, aCapacity, ts,pGame);
 		}
 		else if (B <= AlienParameters.ASpercent + AlienParameters.AMpercent)	//generate AM
 		{

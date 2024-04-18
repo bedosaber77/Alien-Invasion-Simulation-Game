@@ -1,12 +1,12 @@
 #include "Aliensoldier.h"
 #include"../Alien-Invasion/Game.h"
 
-Aliensoldier::Aliensoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
+AlienSoldier::AlienSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = alienSoldier;
 }
 
-void Aliensoldier:: Attack(Unit* unit2)
+void AlienSoldier:: Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
@@ -48,6 +48,6 @@ void Aliensoldier:: Attack(Unit* unit2)
 	}
 }
 
-Aliensoldier::~Aliensoldier()
+AlienSoldier::~AlienSoldier()
 {
 }

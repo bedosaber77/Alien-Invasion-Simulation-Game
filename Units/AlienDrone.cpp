@@ -39,7 +39,7 @@ void AlienDrone::Attack(Unit* unit2)
 			}
 		}
 	}
-	pGame->GetEnemiesList(Alien, earthGunnery, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList); //Discuss 
+	pGame->GetEnemiesList(Earth, earthGunnery, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList); //Discuss 
 
 
 	for (int i = 0; i < this->Attack_Capacity - (this->Attack_Capacity / 2); i++)

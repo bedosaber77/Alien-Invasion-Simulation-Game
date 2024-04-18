@@ -5,7 +5,6 @@
 #include"../Units/AlienDrone.h"
 #include"../Units/EarthGunnery.h"
 #include"..\Units\Aliensoldier.h"
-#include"Game.h"
 RandGen::RandGen(Game* GamePtr)
 {
 	srand(time(0));

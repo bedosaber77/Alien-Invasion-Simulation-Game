@@ -1,16 +1,16 @@
 #include<iostream>
 #include<string>
 using namespace std;
-#include "Earthsoldier.h"
+#include "EarthSoldier.h"
 
-Earthsoldier::Earthsoldier(int H, int P, int AC, int tj):Unit(H,P,AC,tj)
+EarthSoldier::EarthSoldier(int H, int P, int AC, int tj):Unit(H,P,AC,tj)
 {
 	Type = earthSoldier;
 }
 
-void Earthsoldier::Attack(Unit* unit2)
+void EarthSoldier::Attack(Unit* unit2)
 {}
 
-Earthsoldier::~Earthsoldier()
+EarthSoldier::~EarthSoldier()
 {
 }

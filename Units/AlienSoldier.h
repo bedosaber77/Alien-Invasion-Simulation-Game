@@ -1,10 +1,10 @@
 #pragma once
 #include "Unit.h"
-class Aliensoldier :public Unit
+class AlienSoldier :public Unit
 {
 public:
-	Aliensoldier(int H, int P, int AC, int tj);
+	AlienSoldier(int H, int P, int AC, int tj);
 	virtual void Attack(Unit* unit2);
-	~Aliensoldier();
+	~AlienSoldier();
 };
 

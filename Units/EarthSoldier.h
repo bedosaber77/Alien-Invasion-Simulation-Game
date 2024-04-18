@@ -1,12 +1,12 @@
 #pragma once
 #include "Unit.h"
-class Earthsoldier : public Unit
+class EarthSoldier : public Unit
 {
 public:
-	Earthsoldier
+	EarthSoldier
 	
 	(int H, int P, int AC, int tj);
 	virtual void Attack(Unit* unit2);
-	~Earthsoldier();
+	~EarthSoldier();
 };
 

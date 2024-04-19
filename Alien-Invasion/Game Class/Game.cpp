@@ -203,9 +203,7 @@ void Game::TestCode()
 
 		for (int i = 0; i < 5; i++)
 		{
-			if (!(AStemplist.dequeue(newUnit))) //To Check on The List if It is empty
-				newUnit = nullptr;
-			if (newUnit)
+			if (AStemplist.dequeue(newUnit))
 				pAlienArmy->AddUnit(newUnit);
 		}
 

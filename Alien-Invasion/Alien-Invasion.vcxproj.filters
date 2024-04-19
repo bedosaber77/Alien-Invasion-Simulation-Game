@@ -31,110 +31,125 @@
     <Filter Include="Lists Classes">
       <UniqueIdentifier>{b48d93be-5561-46f7-9f8f-8f6f0743e8f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Class">
+      <UniqueIdentifier>{cd1d5ad6-34b7-41a5-a636-05c77a5c38a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RandGen Class">
+      <UniqueIdentifier>{bea6090f-91d9-42a6-8a57-7a575fdc1428}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\DS Files\Stack\StackADT.h">
-      <Filter>DS Files\Stack</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS Files\Stack\ArrayStack.h">
-      <Filter>DS Files\Stack</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS Files\Queue\QueueADT.h">
-      <Filter>DS Files\Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS Files\Queue\LinkedQueue.h">
-      <Filter>DS Files\Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS Files\Queue\DequeNode.h">
-      <Filter>DS Files\Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS Files\Queue\Deque.h">
-      <Filter>DS Files\Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS Files\Queue\Node.h">
-      <Filter>DS Files\Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS Files\Priority Queue\priQueue.h">
-      <Filter>DS Files\Priortiy Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS Files\Priority Queue\priNode.h">
-      <Filter>DS Files\Priortiy Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Army\AlienArmy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Army\EarthArmy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Units\EarthTank.h">
-      <Filter>Unit Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Units\Unit.h">
-      <Filter>Unit Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="RandGen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Units\EarthGunnery.h">
-      <Filter>Unit Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Units\AlienDrone.h">
-      <Filter>Unit Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game Class\Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Units\AlienSoldier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Units\EarthSoldier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Units\AlienMonster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DEFS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Units\Unit.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Army\AlienArmy.h">
+      <Filter>Lists Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Army\EarthArmy.h">
+      <Filter>Lists Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Units\EarthTank.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Units\EarthSoldier.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Units\EarthGunnery.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Units\AlienDrone.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Units\AlienMonster.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Units\AlienSoldier.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Priority Queue\priQueue.h">
+      <Filter>DS Files\Priortiy Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Priority Queue\priNode.h">
+      <Filter>DS Files\Priortiy Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Queue\Deque.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Queue\DequeNode.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Stack\ArrayStack.h">
+      <Filter>DS Files\Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Priority Queue\Node.h">
+      <Filter>DS Files\Priortiy Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Priority Queue\QueueADT.h">
+      <Filter>DS Files\Priortiy Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Queue\LinkedQueue.h">
+      <Filter>DS Files\Priortiy Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Priority Queue\LinkedQueue.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Queue\Node.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Queue\QueueADT.h">
+      <Filter>DS Files\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Stack\StackADT.h">
+      <Filter>DS Files\Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Class\Game.h">
+      <Filter>Game Class</Filter>
+    </ClInclude>
+    <ClInclude Include="RandGen Class\RandGen.h">
+      <Filter>RandGen Class</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Army\AlienArmy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Army\EarthArmy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Units\EarthTank.cpp">
+    <ClCompile Include="Units\AlienDrone.cpp">
       <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Units\Unit.cpp">
+    <ClCompile Include="Units\AlienMonster.cpp">
       <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="RandGen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Units\EarthGunnery.cpp">
+    <ClCompile Include="Units\AlienSoldier.cpp">
       <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Units\AlienDrone.cpp">
+    <ClCompile Include="Units\EarthGunnery.cpp">
       <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Units\AlienSoldier.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Units\EarthSoldier.cpp">
+      <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Units\EarthSoldier.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Units\EarthTank.cpp">
+      <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Units\AlienMonster.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Units\Unit.cpp">
+      <Filter>Unit Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game Class\Game.cpp">
+    <ClCompile Include="Army\AlienArmy.cpp">
+      <Filter>Lists Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Army\EarthArmy.cpp">
+      <Filter>Lists Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Class\Game.cpp">
+      <Filter>Game Class</Filter>
+    </ClCompile>
+    <ClCompile Include="RandGen Class\RandGen.cpp">
+      <Filter>RandGen Class</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -142,5 +157,9 @@
     <ResourceCompile Include="Alien-Invasion.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LoadParameters.txt" />
+    <Text Include="TestCases.txt" />
   </ItemGroup>
 </Project>

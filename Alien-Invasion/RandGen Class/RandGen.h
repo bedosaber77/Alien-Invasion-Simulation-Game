@@ -5,12 +5,11 @@
 #include <time.h>
 #include<string>
 //#include "..\Alien-Invasion\DEFS.h"
-#include"DEFS.h"
+#include"../DEFS.h"
 using namespace std;
 
 class RandGen
 {
-	
 	int N, Prob;
 	Inputs EarthParameters,AlienParameters;
 	ArmyType Army_Type;

@@ -2,7 +2,7 @@
 #include "..\DS Files\Queue\LinkedQueue.h"
 #include "..\DS Files\Queue\Deque.h"
 #include "..\Units\Unit.h"
-#include "..\Alien-Invasion\DEFS.h"
+#include "..\DEFS.h"
 
 class AlienArmy
 {

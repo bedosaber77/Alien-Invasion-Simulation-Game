@@ -2,10 +2,10 @@
 #include<fstream>
 #include<string>
 #include"../DS Files/Queue/LinkedQueue.h"
-#include "RandGen.h"
+#include "../RandGen Class/RandGen.h"
 #include"../Army/AlienArmy.h"
 #include"../Army/EarthArmy.h"
-#include"DEFS.h"
+#include"../DEFS.h"
 
 using namespace std;
 class Game

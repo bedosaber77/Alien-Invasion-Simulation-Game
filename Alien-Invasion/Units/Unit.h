@@ -1,7 +1,7 @@
 #pragma once
 #include<iostream>
 #include<string>
-#include "..\Alien-Invasion\DEFS.h"
+#include "..\DEFS.h"
 
 class Unit
 {

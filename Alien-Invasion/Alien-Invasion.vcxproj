@@ -127,45 +127,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Army\AlienArmy.h" />
-    <ClInclude Include="..\Army\EarthArmy.h" />
-    <ClInclude Include="..\DS Files\Priority Queue\priNode.h" />
-    <ClInclude Include="..\DS Files\Priority Queue\priQueue.h" />
-    <ClInclude Include="..\DS Files\Queue\Deque.h" />
-    <ClInclude Include="..\DS Files\Queue\DequeNode.h" />
-    <ClInclude Include="..\DS Files\Queue\LinkedQueue.h" />
-    <ClInclude Include="..\DS Files\Queue\Node.h" />
-    <ClInclude Include="..\DS Files\Queue\QueueADT.h" />
-    <ClInclude Include="..\DS Files\Stack\ArrayStack.h" />
-    <ClInclude Include="..\DS Files\Stack\StackADT.h" />
-    <ClInclude Include="..\Units\AlienDrone.h" />
-    <ClInclude Include="..\Units\AlienSoldier.h" />
-    <ClInclude Include="..\Units\EarthGunnery.h" />
-    <ClInclude Include="..\Units\EarthSoldier.h" />
-    <ClInclude Include="..\Units\EarthTank.h" />
-    <ClInclude Include="..\Units\AlienMonster.h" />
-    <ClInclude Include="..\Units\Unit.h" />
+    <ClInclude Include="Army\AlienArmy.h" />
+    <ClInclude Include="Army\EarthArmy.h" />
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="RandGen.h" />
+    <ClInclude Include="DS Files\Priority Queue\LinkedQueue.h" />
+    <ClInclude Include="DS Files\Priority Queue\Node.h" />
+    <ClInclude Include="DS Files\Priority Queue\priNode.h" />
+    <ClInclude Include="DS Files\Priority Queue\priQueue.h" />
+    <ClInclude Include="DS Files\Priority Queue\QueueADT.h" />
+    <ClInclude Include="DS Files\Queue\Deque.h" />
+    <ClInclude Include="DS Files\Queue\DequeNode.h" />
+    <ClInclude Include="DS Files\Queue\LinkedQueue.h" />
+    <ClInclude Include="DS Files\Queue\Node.h" />
+    <ClInclude Include="DS Files\Queue\QueueADT.h" />
+    <ClInclude Include="DS Files\Stack\ArrayStack.h" />
+    <ClInclude Include="DS Files\Stack\StackADT.h" />
+    <ClInclude Include="Game Class\Game.h" />
+    <ClInclude Include="RandGen Class\RandGen.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Units\AlienDrone.h" />
+    <ClInclude Include="Units\AlienMonster.h" />
+    <ClInclude Include="Units\AlienSoldier.h" />
+    <ClInclude Include="Units\EarthGunnery.h" />
+    <ClInclude Include="Units\EarthSoldier.h" />
+    <ClInclude Include="Units\EarthTank.h" />
+    <ClInclude Include="Units\Unit.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Army\AlienArmy.cpp" />
-    <ClCompile Include="..\Army\EarthArmy.cpp" />
-    <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="..\Units\AlienDrone.cpp" />
-    <ClCompile Include="..\Units\AlienSoldier.cpp" />
-    <ClCompile Include="..\Units\EarthGunnery.cpp" />
-    <ClCompile Include="..\Units\EarthSoldier.cpp" />
-    <ClCompile Include="..\Units\EarthTank.cpp" />
-    <ClCompile Include="..\Units\AlienMonster.cpp" />
-    <ClCompile Include="..\Units\Unit.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="RandGen.cpp" />
+    <ClCompile Include="Army\AlienArmy.cpp" />
+    <ClCompile Include="Army\EarthArmy.cpp" />
+    <ClCompile Include="Game Class\Game.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="RandGen Class\RandGen.cpp" />
+    <ClCompile Include="Units\AlienDrone.cpp" />
+    <ClCompile Include="Units\AlienMonster.cpp" />
+    <ClCompile Include="Units\AlienSoldier.cpp" />
+    <ClCompile Include="Units\EarthGunnery.cpp" />
+    <ClCompile Include="Units\EarthSoldier.cpp" />
+    <ClCompile Include="Units\EarthTank.cpp" />
+    <ClCompile Include="Units\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Alien-Invasion.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LoadParameters.txt" />
+    <Text Include="TestCases.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

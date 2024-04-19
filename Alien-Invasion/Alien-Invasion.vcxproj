@@ -129,12 +129,10 @@
   <ItemGroup>
     <ClInclude Include="Army\AlienArmy.h" />
     <ClInclude Include="Army\EarthArmy.h" />
+    <ClInclude Include="DS Files\ArrayADT.h" />
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="DS Files\Priority Queue\LinkedQueue.h" />
-    <ClInclude Include="DS Files\Priority Queue\Node.h" />
     <ClInclude Include="DS Files\Priority Queue\priNode.h" />
     <ClInclude Include="DS Files\Priority Queue\priQueue.h" />
-    <ClInclude Include="DS Files\Priority Queue\QueueADT.h" />
     <ClInclude Include="DS Files\Queue\Deque.h" />
     <ClInclude Include="DS Files\Queue\DequeNode.h" />
     <ClInclude Include="DS Files\Queue\LinkedQueue.h" />

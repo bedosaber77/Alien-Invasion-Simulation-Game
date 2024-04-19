@@ -87,18 +87,6 @@
     <ClInclude Include="DS Files\Stack\ArrayStack.h">
       <Filter>DS Files\Stack</Filter>
     </ClInclude>
-    <ClInclude Include="DS Files\Priority Queue\Node.h">
-      <Filter>DS Files\Priortiy Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="DS Files\Priority Queue\QueueADT.h">
-      <Filter>DS Files\Priortiy Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="DS Files\Queue\LinkedQueue.h">
-      <Filter>DS Files\Priortiy Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="DS Files\Priority Queue\LinkedQueue.h">
-      <Filter>DS Files\Queue</Filter>
-    </ClInclude>
     <ClInclude Include="DS Files\Queue\Node.h">
       <Filter>DS Files\Queue</Filter>
     </ClInclude>
@@ -113,6 +101,12 @@
     </ClInclude>
     <ClInclude Include="RandGen Class\RandGen.h">
       <Filter>RandGen Class</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\ArrayADT.h">
+      <Filter>DS Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DS Files\Queue\LinkedQueue.h">
+      <Filter>DS Files\Queue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

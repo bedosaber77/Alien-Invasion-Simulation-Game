@@ -141,7 +141,7 @@ inline int ArrayADT<T>::getCount() const
 template<typename T>
 inline ArrayADT<T>::~ArrayADT()
 {
-	count = 0;
+	
 }
 
 

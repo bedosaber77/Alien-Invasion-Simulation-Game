@@ -117,7 +117,7 @@ void Game::MainLoop()
 			}
 		}
 
-		Print();
+		//Print();
 		TestCode();
 		Print();
 		TimeStep++;

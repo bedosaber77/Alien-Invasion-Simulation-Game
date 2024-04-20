@@ -152,8 +152,4 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="LoadParameters.txt" />
-    <Text Include="TestCases.txt" />
-  </ItemGroup>
 </Project>

@@ -117,7 +117,6 @@ void Game::MainLoop()
 			}
 		}
 
-		//	Print();
 		TestCode();
 		Print();
 		TimeStep++;
@@ -206,6 +205,7 @@ void Game::TestCode()
 			if (AStemplist.dequeue(newUnit))
 				pAlienArmy->AddUnit(newUnit);
 		}
+
 
 	}
 	else if (X < 50)

@@ -169,8 +169,7 @@
     <ResourceCompile Include="Alien-Invasion.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="LoadParameters.txt" />
-    <Text Include="TestCases.txt" />
+    <Text Include="TestCase.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

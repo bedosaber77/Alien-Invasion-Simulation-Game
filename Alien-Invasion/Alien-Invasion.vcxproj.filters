@@ -153,7 +153,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="LoadParameters.txt" />
-    <Text Include="TestCases.txt" />
+    <Text Include="TestCase.txt" />
   </ItemGroup>
 </Project>

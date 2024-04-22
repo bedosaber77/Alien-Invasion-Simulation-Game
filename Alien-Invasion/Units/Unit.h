@@ -1,13 +1,9 @@
 #pragma once
 #include<iostream>
 #include<string>
-
-//#include"../Alien-Invasion/Game.h"
 using namespace std;
-
-#include "..\Alien-Invasion\DEFS.h"
+#include "..\DEFS.h"
 class Game;				//forward declaration
-
 
 class Unit
 {
@@ -28,10 +24,11 @@ protected:
 	Game* pGame;
 public:
 	Unit(int H,int P,int AC,int tj,Game* Gameptr);
-	virtual void Attack(Unit* unit2=nullptr) = 0;
+	virtual void Attack(Unit* unit2 = nullptr) = 0;
 	void setHealth(int h);
 	void setTd(int td);
 	void setTa(int ta);
+	void setTj(int tj);
 
 	int getHealth() const;
 	int getPower() const;

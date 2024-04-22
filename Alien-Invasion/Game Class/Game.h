@@ -2,10 +2,10 @@
 #include<fstream>
 #include<string>
 #include"../DS Files/Queue/LinkedQueue.h"
-#include "RandGen.h"
+#include "../RandGen Class/RandGen.h"
 #include"../Army/AlienArmy.h"
 #include"../Army/EarthArmy.h"
-#include"DEFS.h"
+#include"../DEFS.h"
 
 using namespace std;
 class Game
@@ -55,6 +55,8 @@ public:
 	//printing functions for the output file 
 	void PrintKilledList() const;
 	void Print() const;
+
+	void TestCode();
 	~Game();
 };
 

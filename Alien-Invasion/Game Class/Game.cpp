@@ -93,14 +93,13 @@ bool Game::LoadParameters(string Filename)
 	}
 }
 
-
 void Game::MainLoop()
 {
 	while (TimeStep <= 50) //will stop when it completes 50 time steps for now (phase 1)
 	{
 		Unit* newUnit = nullptr;
 		int A = (rand() % 100) + 1;
-		if (A <= pRand->GetProb())// Generating Army condition
+		if (A <= pRand->GetProb())   //Generating Army condition
 		{
 			// Generating Earth Army
 			for (int i = 0; i < pRand->GetN(); i++)
@@ -120,75 +119,10 @@ void Game::MainLoop()
 
 			Print();
 
-		//	int X = (rand() % 100) + 1;
-		//	cout << "X = " << X << endl;
-		//	if (X < 10)
-		//	{
-		//		newUnit = pEarthArmy->removeUnit(earthSoliders);
-		//		if (newUnit)
-		//			pEarthArmy->AddUnit(newUnit);
-		//	}
-		//	else if (X < 20)
-		//	{
-		//		newUnit = pEarthArmy->removeUnit(earthTank);
-		//		if (newUnit)
-		//			KilledList.enqueue(newUnit);
-		//	}
-		//	else if (X < 30)
-		//	{
-		//		newUnit = pEarthArmy->removeUnit(earthGunnery);
-		//		if (newUnit)
-		//		{
-		//			newUnit->decrementHealth(newUnit->getHealth() / 2);
-		//			pEarthArmy->AddUnit(newUnit);
-		//		}
-		//	}
-		//	else if (X < 40)
-		//	{
-		//		LinkedQueue <Unit*> AStemplist;
-		//		for (int i = 0; i < 5; i++)
-		//		{
-		//			newUnit = pAlienArmy->removeUnit(alienSolider);
-		//			if (newUnit)
-		//			{
-		//				newUnit->decrementHealth(newUnit->getHealth() / 3);
-		//				AStemplist.enqueue(newUnit);
-		//			}
-		//		}
-
-		//		for (int i = 0; i < 5; i++)
-		//		{
-		//			if (!(AStemplist.dequeue(newUnit))) //To Check on The List if It is empty
-		//				newUnit = nullptr;
-		//			if (newUnit)
-		//				pAlienArmy->AddUnit(newUnit);
-		//		}
-
-		//	}
-		//	else if (X < 50)
-		//	{
-		//		for (int i = 0; i < 5; i++)
-		//		{
-		//			newUnit = pAlienArmy->removeUnit(alienMonster);
-		//			if (newUnit)
-		//				pAlienArmy->AddUnit(newUnit);
-		//		}
-		//	}
-		//	else if (X < 60)
-		//	{
-		//		for (int i = 0; i < 6; i++)
-		//		{
-		//			newUnit = pAlienArmy->removeUnit(alienDrone, i % 2);
-
-		//			if (newUnit)
-		//				KilledList.enqueue(newUnit);
-		//		}
-		//	}
-
-		//	Print();
-		//	TimeStep++;
 			pEarthArmy->Attack();
+			Print();
 			pAlienArmy->Attack();
+
 			Print();
 			TimeStep++;
 		}
@@ -296,7 +230,6 @@ void Game::Print() const
 
 	system("pause");
 }
-
 
 Game::~Game()
 {

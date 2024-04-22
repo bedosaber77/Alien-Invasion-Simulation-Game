@@ -31,6 +31,11 @@ void Unit::setTa(int ta)
 	}
 }
 
+void Unit::setTj(int tj)
+{
+	Tj = tj;
+}
+
 int Unit::getHealth() const
 {
 	return this->Health;

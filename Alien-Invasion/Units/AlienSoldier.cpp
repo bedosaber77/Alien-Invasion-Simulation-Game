@@ -1,5 +1,5 @@
 #include "Aliensoldier.h"
-#include"../Alien-Invasion/Game.h"
+#include"../Game class/Game.h"
 
 AlienSoldier::AlienSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {

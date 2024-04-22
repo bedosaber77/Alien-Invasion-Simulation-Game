@@ -2,7 +2,7 @@
 #include<string>
 using namespace std;
 #include "Earthsoldier.h"
-#include"../Alien-Invasion/Game.h"
+#include"../Game Class/Game.h"
 EarthSoldier::EarthSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = earthSoldier;

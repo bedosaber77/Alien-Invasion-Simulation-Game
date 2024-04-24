@@ -120,7 +120,7 @@ void Game::MainLoop()
 			Print();
 
 			pEarthArmy->Attack();
-			Print();
+		//	Print();
 			pAlienArmy->Attack();
 
 			Print();

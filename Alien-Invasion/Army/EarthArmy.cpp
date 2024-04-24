@@ -77,11 +77,9 @@ void EarthArmy::Attack()
 	}
 
 	int pri;
-	if (!EarthGunneries.isEmpty());
+	if (EarthGunneries.peek(unit2, pri))
 	{
-		EarthGunneries.dequeue(unit2, pri);
 		unit2->Attack();
-		EarthGunneries.enqueue(unit2, pri);
 	}
 }
 

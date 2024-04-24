@@ -170,15 +170,22 @@ void Game::GetEnemiesList(ArmyType Army_Type, UnitType Unit_Type, int Capacity, 
 	{
 	case Earth:
 	{
-		for (int i = 0; i < Capacity; i++)
+		switch (Unit_Type)
 		{
-			unit2 = pEarthArmy->removeUnit(Unit_Type);
-
-			if (unit2)
+		case earthSoldier:
+		{
+			for (int i = 0; i < Capacity; i++)
 			{
-				EnemiesList.enqueue(unit2);
-			}
+				unit2 = pEarthArmy->removeUnit(Unit_Type);
 
+				if (unit2)
+				{
+					EnemiesList.enqueue(unit2);
+				}
+
+			}
+		}
+		    break;
 		}
 	}
 		break;

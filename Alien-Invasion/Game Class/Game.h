@@ -55,6 +55,7 @@ public:
 	//printing functions for the output file 
 	void PrintKilledList() const;
 	void Print() const;
+	//void PrintFight(LinkedQueue <Unit*> EnemiesList) const;
 
 	void TestCode();
 	~Game();

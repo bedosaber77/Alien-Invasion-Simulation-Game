@@ -1,4 +1,5 @@
 #include "Unit.h"
+#include"../Game Class/Game.h"
 
 Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 {
@@ -71,6 +72,7 @@ void Unit::incrementHealth(int)
 {
 	//to be made
 }
+
 
 Unit::~Unit()
 {

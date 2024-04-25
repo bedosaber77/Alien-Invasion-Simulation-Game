@@ -25,6 +25,7 @@ public:
 	
 
 	void Print();
+	void PrintFight(Unit* shooter);
 	~AlienArmy();
 
 };

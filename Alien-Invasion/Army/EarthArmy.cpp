@@ -74,12 +74,14 @@ void EarthArmy::Attack()
 	if (EarthSoldiers.peek(unit2))
 	{
 		unit2->Attack();
+		//unit2->PrintFight();
 	}
 
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
 	{
 		unit2->Attack();
+		//unit2->PrintFight();
 	}
 }
 
@@ -95,6 +97,7 @@ void EarthArmy::Print()
 	EarthGunneries.print();
 	cout << "]";
 }
+
 
 EarthArmy::~EarthArmy()
 {

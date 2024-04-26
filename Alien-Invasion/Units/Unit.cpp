@@ -10,6 +10,8 @@ Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 	//Added For Phase 2	
 	GotShot = false;
 	pGame = Gameptr;
+	
+	InitalHealth = H;
 }
 
 void Unit::setHealth(int h)

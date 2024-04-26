@@ -22,6 +22,7 @@ protected:
 	//Added For Phase 2
 	bool GotShot;	// checks if first attack happened or not
 	Game* pGame;
+	int InitalHealth; // Added For Healunit
 public:
 	Unit(int H,int P,int AC,int tj,Game* Gameptr);
 	virtual void Attack(Unit* unit2 = nullptr) = 0;

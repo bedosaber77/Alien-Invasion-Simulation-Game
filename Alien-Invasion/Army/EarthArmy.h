@@ -15,6 +15,12 @@ private:
 	ArrayStack  <Unit*> EarthTanks;
 	priQueue <Unit*> EarthGunneries;
 	static int ID;
+
+	//HL
+	ArrayStack <Unit*> HL;
+
+
+
 public:
 	EarthArmy();
 

@@ -20,11 +20,15 @@ void EarthArmy::AddUnit(Unit* newUnit)
 		EarthSoldiers.enqueue(newUnit);
 	else if (newUnit->getType() == earthTank)
 		EarthTanks.push(newUnit);
-	else
+	else if(newUnit->getType() == earthGunnery)
 	{
 		EarthGunnery* earthgunnery = dynamic_cast<EarthGunnery*>(newUnit);
 		int priorty = earthgunnery->getCombination();
 		EarthGunneries.enqueue(newUnit, priorty);
+	}
+	else 
+	{
+		HL.push(newUnit);
 	}
 }
 

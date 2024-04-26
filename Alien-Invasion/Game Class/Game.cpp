@@ -117,13 +117,14 @@ void Game::MainLoop()
 			}
 		}
 
-			Print();
-
+		    Print();
+			cout << "============== Units fighting at current step ==============" << endl;
 			pEarthArmy->Attack();
-		//	Print();
 			pAlienArmy->Attack();
-
-			Print();
+			cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
+	        PrintKilledList();
+			cout << endl;
+	        system("pause");
 			TimeStep++;
 		}
 }
@@ -170,22 +171,14 @@ void Game::GetEnemiesList(ArmyType Army_Type, UnitType Unit_Type, int Capacity, 
 	{
 	case Earth:
 	{
-		switch (Unit_Type)
+		for (int i = 0; i < Capacity; i++)
 		{
-		case earthSoldier:
-		{
-			for (int i = 0; i < Capacity; i++)
+			unit2 = pEarthArmy->removeUnit(Unit_Type);
+
+			if (unit2)
 			{
-				unit2 = pEarthArmy->removeUnit(Unit_Type);
-
-				if (unit2)
-				{
-					EnemiesList.enqueue(unit2);
-				}
-
+				EnemiesList.enqueue(unit2);
 			}
-		}
-		    break;
 		}
 	}
 		break;
@@ -199,7 +192,6 @@ void Game::GetEnemiesList(ArmyType Army_Type, UnitType Unit_Type, int Capacity, 
 			{
 				EnemiesList.enqueue(unit2);
 			}
-
 		}
 	}
 		break;
@@ -216,26 +208,23 @@ int Game::GetCurrentTime()
 }
 
 
-void Game::PrintKilledList()const
+void Game::PrintKilledList() const
 {
 	cout << KilledList.getCount() << " units [";
 	KilledList.print();
-	cout << " ] \n";
+	cout << " ] \n\033[0m";
 }
 
 void Game::Print() const
 {
 	cout << "Current Timestep " << TimeStep << endl;
-	cout << "============== Earth Army Alive Units ==============" << endl;
+	cout << "\033[1;36m============== Earth Army Alive Units ==============" << endl;
 	pEarthArmy->Print();
 	cout << endl;
-	cout << "============== Alien Army Alive Units ==============" << endl;
+	cout << "\n\033[1;32m============== Alien Army Alive Units ==============" << endl;
 	pAlienArmy->Print();
 	cout << endl;
-	cout << "============== Killed/Destructed Units ==============" << endl;
-	PrintKilledList();
-
-	system("pause");
+	cout << "\n\033[0m";
 }
 
 Game::~Game()

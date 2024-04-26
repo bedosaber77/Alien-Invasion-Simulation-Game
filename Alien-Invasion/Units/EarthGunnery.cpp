@@ -13,9 +13,11 @@ void EarthGunnery::Attack(Unit* unit2)
 
 	//Assume Attack Capacity is even for now
 	pGame->GetEnemiesList(Alien, alienMonster, this->Attack_Capacity / 2, EnemiesList);
+	pGame->GetEnemiesList(Alien, alienDrone, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList);
+	PrintFight(EnemiesList);
 
 
-	for (int i = 0; i < this->Attack_Capacity / 2; i++)
+	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
 		if (EnemiesList.dequeue(unit2))
 		{
@@ -40,37 +42,6 @@ void EarthGunnery::Attack(Unit* unit2)
 
 				pGame->AddtoKilledList(unit2);
 			}
-		}
-	}
-	pGame->GetEnemiesList(Alien, alienDrone, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList); //Discuss 
-
-
-	for (int i = 0; i < this->Attack_Capacity - (this->Attack_Capacity / 2); i++)
-	{
-		if (EnemiesList.dequeue(unit2))
-		{
-
-			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
-
-
-			int Damage = (this->getHealth() * this->getPower() / 100) /
-				sqrt(unit2->getHealth());	//Damage Formula
-
-
-			unit2->decrementHealth(Damage);
-
-
-			if (unit2->getHealth() > 0)
-			{
-				TempList.enqueue(unit2);
-			}
-			else
-			{
-				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
-
-				pGame->AddtoKilledList(unit2);
-			}
-
 		}
 	}
 
@@ -87,6 +58,13 @@ void EarthGunnery::Attack(Unit* unit2)
 			pGame->GetAlienArmyPtr()->AddUnit(unit2);
 		}
 	}
+}
+
+void EarthGunnery::PrintFight(LinkedQueue<Unit*> EnemiesList)
+{
+	cout << "EG " << this->getID() << " shots [";
+	EnemiesList.print();
+	cout << "]" << endl;
 }
 
 

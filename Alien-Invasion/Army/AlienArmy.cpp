@@ -85,6 +85,7 @@ void AlienArmy::Attack()
 	if (AlienSoldiers.peek(unit2))
 	{
 		unit2->Attack();
+		//unit2->PrintFight();
 	}
 
 
@@ -101,12 +102,14 @@ void AlienArmy::Attack()
 		if (unit2)
 		{
 			unit2->Attack();
+			//unit2->PrintFight();
 		}
 
 		AlienDrones.peekBack(unit2);
 		if (unit2)
 		{
 			unit2->Attack();
+			//unit2->PrintFight();
 		}
 
 	}
@@ -114,13 +117,6 @@ void AlienArmy::Attack()
 
 
 ///Getters For Lists
-
-
-
-
-
-
-
 void AlienArmy::Print()
 {
 	cout << AlienSoldiers.getCount() << " AS [";
@@ -133,6 +129,7 @@ void AlienArmy::Print()
 	AlienDrones.print();
 	cout << "]";
 }
+
 
 AlienArmy::~AlienArmy()
 {

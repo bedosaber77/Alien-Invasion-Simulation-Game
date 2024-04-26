@@ -30,6 +30,7 @@ public:
 
 	void Attack();
 	void Print();
+	void PrintFight(Unit* shooter);
 	~EarthArmy();
 
 };

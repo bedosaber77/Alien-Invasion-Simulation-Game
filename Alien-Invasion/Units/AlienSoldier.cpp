@@ -11,6 +11,7 @@ void AlienSoldier:: Attack(Unit* unit2)
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
 	pGame->GetEnemiesList(Earth, earthSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
+	PrintFight(EnemiesList);
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
@@ -46,6 +47,13 @@ void AlienSoldier:: Attack(Unit* unit2)
 	{
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
+}
+
+void AlienSoldier::PrintFight(LinkedQueue<Unit*> EnemiesList)
+{
+	cout << "AS " << this->getID() << " shots [";
+	EnemiesList.print();
+	cout << "]" << endl;
 }
 
 AlienSoldier::~AlienSoldier()

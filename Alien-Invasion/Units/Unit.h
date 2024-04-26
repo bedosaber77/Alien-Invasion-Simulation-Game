@@ -3,6 +3,7 @@
 #include<string>
 using namespace std;
 #include "..\DEFS.h"
+#include "..\DS Files\Queue\LinkedQueue.h"
 class Game;				//forward declaration
 
 class Unit
@@ -40,6 +41,9 @@ public:
 	//Functions to Increment/Decrement health
 	void decrementHealth(int damage);
 	void incrementHealth(int);		//to be revisited
+
+	//Print current fight function
+	virtual void PrintFight(LinkedQueue<Unit*> EnemiesList)= 0;
 	~Unit();
 
 };

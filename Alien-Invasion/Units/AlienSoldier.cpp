@@ -28,13 +28,15 @@ void AlienSoldier:: Attack(Unit* unit2)
 			unit2->decrementHealth(Damage);
 
 
-			if (unit2 && unit2->getHealth() > 0)	//not needed ,but for more safety now
+			if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())
 			{
 				TempList.enqueue(unit2);
 			}
-			else if (unit2 && unit2->getHealth() <= 0) //not needed ,but for more safety now
+			else if (unit2->getHealth() > 0 && (unit2->getType() == earthSoldier || unit2->getType() == earthTank))
+				pGame->AddtoUML(unit2);
+			else
 			{
-				unit2->setTd(pGame->GetCurrentTime()); // Destruction Time
+				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
 
 				pGame->AddtoKilledList(unit2);
 			}

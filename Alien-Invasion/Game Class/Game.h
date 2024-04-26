@@ -20,6 +20,10 @@ class Game
 
 	//killed list
 	LinkedQueue <Unit*> KilledList;
+	
+	//UML
+	priQueue <Unit*> UMLsolider;
+	LinkedQueue <Unit*> UMLtanks;
 
 	int TimeStep = 1;
 
@@ -32,6 +36,8 @@ public:
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
 	void ClearKilledList();            // deallocate all units in the killed list
 
+	void AddtoUML(Unit* unit);
+	Unit* getUnitToHeal();
 	// We need to get RandGen and Armies Pointers    (As mentioned in Q&A File)
 
 

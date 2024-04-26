@@ -70,14 +70,50 @@ void Unit::decrementHealth(int damage)
 	this->Health -= damage;
 }
 
-void Unit::incrementHealth(int)
+void Unit::incrementHealth(int HealthImp)
 {
 	//to be made
+	this->Health += HealthImp;
 }
 
 
 Unit::~Unit()
 {
+}
+
+int Unit::getIntialHealth() const
+{
+	return InitalHealth;
+}
+
+void Unit::PrintFight(LinkedQueue<Unit*> EnemiesList)
+{
+}
+
+void Unit::setTH(int th)
+{
+	TH = th;
+	AddedToUML = true;
+}
+
+int Unit::getTH() const
+{
+	return TH;
+}
+
+void Unit::ExitUML()
+{
+	AddedToUML = false;
+}
+
+bool Unit::checkUML() const
+{
+	return AddedToUML;
+}
+
+int Unit::getESPriorty() const
+{
+	return (InitalHealth - Health);
 }
 
 

@@ -80,6 +80,10 @@ void EarthArmy::Attack()
 		unit2->Attack();
 		//unit2->PrintFight();
 	}
+	
+	//tank
+
+
 
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
@@ -87,6 +91,12 @@ void EarthArmy::Attack()
 		unit2->Attack();
 		//unit2->PrintFight();
 	}
+
+	if (HL.peek(unit2))
+	{
+		unit2->Attack();
+	}
+
 }
 
 void EarthArmy::Print()

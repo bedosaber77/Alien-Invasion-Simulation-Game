@@ -13,6 +13,7 @@ Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 	pGame = Gameptr;
 	
 	InitalHealth = H;
+	Healed = false;
 }
 
 void Unit::setHealth(int h)
@@ -94,6 +95,7 @@ void Unit::setTH(int th)
 {
 	TH = th;
 	AddedToUML = true;
+	Healed = true;
 }
 
 int Unit::getTH() const
@@ -106,8 +108,9 @@ void Unit::ExitUML()
 	AddedToUML = false;
 }
 
-bool Unit::checkUML() const
+bool Unit::checkUML(bool&Healed) const
 {
+	Healed = this->Healed;
 	return AddedToUML;
 }
 

@@ -4,6 +4,7 @@
 
 EarthArmy::EarthArmy()
 {
+	HealedUnits = 0;
 }
 
 void EarthArmy::AddUnit(Unit* newUnit)
@@ -112,6 +113,11 @@ void EarthArmy::Print()
 	cout << "]";
 }
 
+
+void EarthArmy::incHealedUnits()
+{
+	HealedUnits++;
+}
 
 EarthArmy::~EarthArmy()
 {

@@ -155,8 +155,15 @@ void Game::AddtoUML(Unit* unit)
 		UMLsolider.enqueue(unit, unit->getESPriorty());
 	else
 		UMLtanks.enqueue(unit);
-	if(!unit->checkUML())
+
+	bool Healedbefore;
+	if (!unit->checkUML(Healedbefore))
+	{
+		if (!Healedbefore)
+			pEarthArmy->incHealedUnits();
+		
 		unit->setTH(TimeStep);
+	}
 }
 
 Unit* Game::getUnitToHeal()

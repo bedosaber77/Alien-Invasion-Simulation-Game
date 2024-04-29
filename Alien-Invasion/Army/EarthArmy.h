@@ -18,7 +18,7 @@ private:
 
 	//HL
 	ArrayStack <Unit*> HL;
-
+	int HealedUnits;
 
 
 public:
@@ -31,6 +31,8 @@ public:
 	void Attack();
 	void Print();
 	void PrintFight(Unit* shooter);
+
+	void incHealedUnits();
 	~EarthArmy();
 
 };

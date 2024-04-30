@@ -149,6 +149,34 @@ void Game::ClearKilledList()
 
 }
 
+void Game::AddtoUML(Unit* unit)
+{
+	if (unit->getType() == earthSoldier)
+		UMLsolider.enqueue(unit, unit->getESPriorty());
+	else
+		UMLtanks.enqueue(unit);
+
+	bool Healedbefore;
+	if (!unit->checkUML(Healedbefore))
+	{
+		if (!Healedbefore)
+			pEarthArmy->incHealedUnits();
+		
+		unit->setTH(TimeStep);
+	}
+}
+
+Unit* Game::getUnitToHeal()
+{
+	Unit* unit=nullptr;
+	int pri;
+	if (!UMLsolider.isEmpty())
+		UMLsolider.dequeue(unit, pri);
+	else if (!UMLtanks.isEmpty())
+		UMLtanks.dequeue(unit);
+	return unit;
+}
+
 AlienArmy* Game::GetAlienArmyPtr()
 {
 	return pAlienArmy;

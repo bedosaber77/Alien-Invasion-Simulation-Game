@@ -13,7 +13,7 @@ struct Inputs
 
 enum UnitType {
 	earthSoldier, earthTank, earthGunnery,
-	alienSoldier, alienMonster, alienDrone
+	alienSoldier, alienMonster, alienDrone, healUnit
 };
 
 enum ArmyType

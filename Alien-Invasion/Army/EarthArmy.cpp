@@ -4,6 +4,7 @@
 
 EarthArmy::EarthArmy()
 {
+	HealedUnits = 0;
 }
 
 void EarthArmy::AddUnit(Unit* newUnit)
@@ -20,11 +21,15 @@ void EarthArmy::AddUnit(Unit* newUnit)
 		EarthSoldiers.enqueue(newUnit);
 	else if (newUnit->getType() == earthTank)
 		EarthTanks.push(newUnit);
-	else
+	else if(newUnit->getType() == earthGunnery)
 	{
 		EarthGunnery* earthgunnery = dynamic_cast<EarthGunnery*>(newUnit);
 		int priorty = earthgunnery->getCombination();
 		EarthGunneries.enqueue(newUnit, priorty);
+	}
+	else 
+	{
+		HL.push(newUnit);
 	}
 }
 
@@ -76,6 +81,10 @@ void EarthArmy::Attack()
 		unit2->Attack();
 		//unit2->PrintFight();
 	}
+	
+	//tank
+
+
 
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
@@ -83,6 +92,12 @@ void EarthArmy::Attack()
 		unit2->Attack();
 		//unit2->PrintFight();
 	}
+
+	if (HL.peek(unit2))
+	{
+		unit2->Attack();
+	}
+
 }
 
 void EarthArmy::Print()
@@ -98,6 +113,11 @@ void EarthArmy::Print()
 	cout << "]";
 }
 
+
+void EarthArmy::incHealedUnits()
+{
+	HealedUnits++;
+}
 
 EarthArmy::~EarthArmy()
 {

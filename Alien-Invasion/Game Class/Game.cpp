@@ -9,6 +9,8 @@ Game::Game()
     pEarthArmy = new EarthArmy;
 	pRand = new RandGen(this);
 
+	EScount = EGcount = ETcount = AScount = ADcount = AMcount = 0;
+
 	ESDead = ETDead = EGDead = 0;
 	ASDead = ADDead = AMDead = 0;
 
@@ -153,7 +155,7 @@ void Game::GameStatistics()
 		//Total number of each unit
 		
 		//int EScount, EGcount, ETcount, AScount, ADcount, AMcount;
-		pRand->GetUnitsNo(EScount, EGcount, ETcount, AScount, ADcount, AMcount);
+		//pRand->GetUnitsNo(EScount, EGcount, ETcount, AScount, ADcount, AMcount);
 		
 		//////////////////////////Earth Army/////////////////////////////////
 
@@ -204,6 +206,47 @@ ArmyType Game::GameWinner()
 		return Alien;
 }
 
+void Game::UpdateCounts(ArmyType armyType, Unit* unit)
+{
+	switch (armyType)
+	{
+	case Earth:
+	{
+		switch (unit->getType())
+		{
+		case earthSoldier:
+			EScount++;
+		  break;
+		case earthGunnery:
+			EGcount++;
+		  break;
+		case earthTank:
+			ETcount++;
+			break;
+		}	
+	}
+	break;
+	case Alien:
+	{
+		switch (unit->getType())
+		{
+		case alienSoldier:
+			AScount++;
+		  break;
+		case alienMonster:
+			AMcount++;
+		  break;
+		case alienDrone:
+			ADcount++;
+		  break;
+		}
+	}
+	break;
+	default:
+		break;
+	}
+}
+
 void Game::MainLoop()
 {
 	while (TimeStep <= 40) //will stop when it completes 50 time steps for now (phase 1)
@@ -217,6 +260,7 @@ void Game::MainLoop()
 			{
 				newUnit = pRand->GenerateUnits(TimeStep, Earth);
 				pEarthArmy->AddUnit(newUnit);
+				UpdateCounts(Earth, newUnit);
 			}
 
 			// Generating Alien Army
@@ -225,6 +269,7 @@ void Game::MainLoop()
 			{
 				newUnit = pRand->GenerateUnits(TimeStep, Alien);
 				pAlienArmy->AddUnit(newUnit, i % 2);
+				UpdateCounts(Alien, newUnit);
 			}
 		}
 

@@ -40,6 +40,7 @@ public:
 	void AddtoOutFile(Unit* killedUnit);
 	void GameStatistics();
 	ArmyType GameWinner();
+	void UpdateCounts(ArmyType armyType, Unit* unit);  //Update units count
 
 	void MainLoop();	               // Increment time step until game ends
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list

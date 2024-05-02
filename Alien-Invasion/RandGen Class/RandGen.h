@@ -15,14 +15,6 @@ class RandGen
 	ArmyType Army_Type;
 	Game* pGame;
 
-	//Units Counters
-	int EScount;
-	int EGcount;
-	int ETcount;
-	int AScount;
-	int ADcount;
-	int AMcount;
-
 public:
 	RandGen(Game*);
 
@@ -40,9 +32,6 @@ public:
 	// Unit Generation Function
 	Unit* GenerateUnits( int ts, ArmyType Army_Type);
 
-
-	//returns all count numbers by reference
-	void GetUnitsNo(int& ES, int& EG, int& ET, int& AS, int& AD, int& AM);
 
 	~RandGen();
 

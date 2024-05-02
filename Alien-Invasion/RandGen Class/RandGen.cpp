@@ -10,13 +10,6 @@ RandGen::RandGen(Game* GamePtr)
 	srand(time(0));
 	pGame = GamePtr;
 
-	//initializing counter variables
-	EScount = 0;
-	EGcount = 0;
-	ETcount = 0;
-	AScount = 0;
-	ADcount = 0;
-	AMcount = 0;
 }
 
 Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
@@ -45,17 +38,15 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 			if (B <= EarthParameters.ESpercent)		//generate ES
 			{
 				newUnit = new EarthSoldier(eHealth, ePower, eCapacity, ts,pGame);
-				EScount++;
 			}
 			else if (B <= EarthParameters.ESpercent + EarthParameters.ETpercent)	//generate ET
 			{
 				newUnit = new EarthTank(eHealth, ePower, eCapacity, ts, pGame);
-				ETcount++;
+			
 			}
 			else       //generate EG
 			{
 				newUnit = new EarthGunnery(eHealth, ePower, eCapacity, ts, pGame);
-				EGcount++;
 
 			}
 		}
@@ -80,17 +71,14 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 		if (B <= AlienParameters.ASpercent)		//generate AS
 		{
 			newUnit = new AlienSoldier(aHealth, aPower, aCapacity, ts,pGame);
-			AScount++;
 		}
 		else if (B <= AlienParameters.ASpercent + AlienParameters.AMpercent)	//generate AM
 		{
 			newUnit = new AlienMonster(aHealth, aPower, aCapacity, ts, pGame);
-			AMcount++;
 		}
 		else       //generate AD
 		{
 			newUnit = new AlienDrone(aHealth, aPower, aCapacity, ts,pGame);
-			ADcount++;
 
 		}
 		}
@@ -134,16 +122,6 @@ int RandGen::GetProb() const
 	return Prob;
 }
 
-
-void RandGen::GetUnitsNo(int& ES, int& EG, int& ET, int& AS, int& AD, int& AM)
-{
-	ES = EScount;
-	EG = EGcount;
-	ET = ETcount;
-	AS = AScount;
-	AD = ADcount;
-	AM = AMcount;
-}
 
 RandGen::~RandGen()
 {

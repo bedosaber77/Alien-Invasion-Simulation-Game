@@ -115,6 +115,11 @@ void AlienArmy::Attack()
 	}
 }
 
+int AlienArmy::getCount()
+{
+	return AlienSoldiers.getCount() + AlienMonsters.getCount() + AlienDrones.getCount();
+}
+
 
 ///Getters For Lists
 void AlienArmy::Print()

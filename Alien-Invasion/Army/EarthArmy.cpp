@@ -67,6 +67,11 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	return unit;
 }
 
+int EarthArmy::getCount()
+{
+	return EarthSoldiers.getCount() + EarthGunneries.getCount() + EarthTanks.getCount();
+}
+
 void EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;
@@ -74,14 +79,12 @@ void EarthArmy::Attack()
 	if (EarthSoldiers.peek(unit2))
 	{
 		unit2->Attack();
-		//unit2->PrintFight();
 	}
 
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
 	{
 		unit2->Attack();
-		//unit2->PrintFight();
 	}
 }
 

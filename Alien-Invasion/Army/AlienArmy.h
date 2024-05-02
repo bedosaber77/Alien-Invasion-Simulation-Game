@@ -21,7 +21,8 @@ public:
 
 	void Attack();
 
-	//Getters for Lists needed by Attack function
+    //Getters for the output file
+	int getCount();
 	
 
 	void Print();

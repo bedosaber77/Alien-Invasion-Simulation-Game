@@ -22,9 +22,11 @@ public:
 	void AddUnit(Unit* newUnit);
 	Unit* removeUnit(UnitType type);
 
+	//getters for the output file
+	int getCount();
+
 	void Attack();
 	void Print();
-	void PrintFight(Unit* shooter);
 	~EarthArmy();
 
 };

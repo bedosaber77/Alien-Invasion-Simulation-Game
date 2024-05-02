@@ -9,6 +9,11 @@ Game::Game()
     pEarthArmy = new EarthArmy;
 	pRand = new RandGen(this);
 
+	ESDead = ETDead = EGDead = 0;
+	ASDead = ADDead = AMDead = 0;
+
+	Dfearth = Ddearth = Dbearth = 0;
+	Dfalien = Ddalien = Dbalien = 0;
 	StartGame();
 }
 
@@ -26,6 +31,7 @@ void Game::StartGame()
 	//Initialize output file
 	SetOutFile();
 	MainLoop();
+	GameStatistics();
 }
 
 bool Game::LoadParameters(string Filename)
@@ -102,7 +108,8 @@ void Game::SetOutFile()
 	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb" << endl;
 }
 
-void Game::OutputFile(Unit* killedUnit)
+//Function that adds killed unit to the output file
+void Game::AddtoOutFile(Unit* killedUnit)
 {
 	//string outFile;
 	ofstream OutputFile;
@@ -113,7 +120,22 @@ void Game::OutputFile(Unit* killedUnit)
 		OutputFile << killedUnit->getTd() << "\t\t\t";   //Join Time
 		OutputFile << killedUnit->getID() << "\t\t\t";   //Unit's ID
 		OutputFile << killedUnit->getTj() << "\t\t\t";  //Destruction Time
-			 
+		
+		//Update DfTotal, DdTotal and DbTotal for earth army
+		if (killedUnit->getType() == earthSoldier || killedUnit->getType() == earthGunnery || killedUnit->getType() == earthTank)
+		{
+			Dfearth += killedUnit->getTa() - killedUnit->getTj();
+			Ddearth += killedUnit->getTd() - killedUnit->getTa();
+			Dbearth += killedUnit->getTd() - killedUnit->getTj();
+		}
+		else if (killedUnit->getType() == alienSoldier || killedUnit->getType() == alienMonster || killedUnit->getType() == alienDrone)
+		{
+			Dfalien += killedUnit->getTa() - killedUnit->getTj();
+			Ddalien += killedUnit->getTd() - killedUnit->getTa();
+			Dbalien += killedUnit->getTd() - killedUnit->getTj();
+		}
+
+		//Print Df, Dd, Db of each unit
 		OutputFile << killedUnit->getTa() - killedUnit->getTj()  << "\t\t\t";     //First Attack Delay
 		OutputFile << killedUnit->getTd() - killedUnit->getTa() << "\t\t\t";      //Destruction Delay
 		OutputFile << killedUnit->getTd() - killedUnit->getTj() << "\t\t\t";      //Battle Time
@@ -126,16 +148,65 @@ void Game::GameStatistics()
 	ofstream OutputFile;
 	OutputFile.open("outFile.txt", ios::app);
 
+	if (OutputFile.is_open())
+	{
+		//Total number of each unit
+		
+		//int EScount, EGcount, ETcount, AScount, ADcount, AMcount;
+		pRand->GetUnitsNo(EScount, EGcount, ETcount, AScount, ADcount, AMcount);
+		
+		//////////////////////////Earth Army/////////////////////////////////
+
+		OutputFile << endl << "For Earth army: " << endl;
+		OutputFile << "Total number of each unit: " << endl;
+		OutputFile << "ES: " << EScount << "\t\t ET: " << ETcount << "\t\t EG: " << EGcount << endl;
+
+		//percentage of destructed units relative to their total
+		OutputFile << "Percentage of destructed units relative to their total " << endl;
+		OutputFile << "ES: " << ESDead / double(EScount) * 100 << "%";
+		OutputFile << "\t\t ET: " << ETDead / double(ETcount) * 100 << "%"; 
+		OutputFile << "\t\t EG: " << EGDead / double(EGcount) * 100 << "%" << endl;
+
+		// Percentage of destructed units relative to total units
+		OutputFile << "Percentage of destructed units relative to total units: ";
+		OutputFile << double(ESDead + EGDead + ETDead) / (EScount + ETcount + EGcount) * 100 << "%" << endl;
+
+		//Average of Df
+		OutputFile << "Average of Df: ";
+		OutputFile << double(Dfearth) / (ESDead + EGDead + ETDead) << endl;
+
+		//Average of Dd
+		OutputFile << "Average of Dd: ";
+		OutputFile << double(Ddearth) / (ESDead + EGDead + ETDead) << endl;
+
+		//Average of Db
+		OutputFile << "Average of Db: ";
+		OutputFile << double(Dbearth) / (ESDead + EGDead + ETDead) << endl;
+
+		//Df/Db%
+		OutputFile << "Df/Db: ";
+		OutputFile << double(Dfearth) / Dbearth * 100 << "%" << endl;
+
+		//Dd%Db
+		OutputFile << "Dd/Db: ";
+		OutputFile << double(Ddearth) / Dbearth * 100 << "%" << endl;
+
+	}
+	OutputFile.close();
 }
 
-void Game::FinalResult()
+ArmyType Game::GameWinner()
 {
-	
+	if (pAlienArmy->getCount() == 0 && pEarthArmy->getCount() != 0)
+		return Earth;
+
+	if (pEarthArmy->getCount() == 0 && pAlienArmy->getCount() != 0)
+		return Alien;
 }
 
 void Game::MainLoop()
 {
-	while (TimeStep <= 50) //will stop when it completes 50 time steps for now (phase 1)
+	while (TimeStep <= 40) //will stop when it completes 50 time steps for now (phase 1)
 	{
 		Unit* newUnit = nullptr;
 		int A = (rand() % 100) + 1;
@@ -170,10 +241,31 @@ void Game::MainLoop()
 }
 	
 
-
 void Game::AddtoKilledList(Unit* army)
 {
 	KilledList.enqueue(army);
+	AddtoOutFile(army);
+	switch (army->getType())
+	{
+	case earthSoldier:
+		ESDead++;
+		break;
+	case earthGunnery:
+		EGDead++;
+		break;
+	case earthTank:
+		ETDead++;
+		break;
+	case alienSoldier:
+		ASDead++;
+		break;
+	case alienMonster:
+		AMDead++;
+		break;
+	case alienDrone:
+		ADDead++;
+		break;
+	}
 }
 
 void Game::ClearKilledList()
@@ -184,7 +276,6 @@ void Game::ClearKilledList()
 		KilledList.dequeue(KilledUnit);
 		delete KilledUnit;
 	}
-
 }
 
 AlienArmy* Game::GetAlienArmyPtr()
@@ -244,7 +335,6 @@ int Game::GetCurrentTime()
 {
 	return TimeStep;
 }
-
 
 void Game::PrintKilledList() const
 {

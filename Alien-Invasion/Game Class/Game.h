@@ -23,6 +23,12 @@ class Game
 
 	int TimeStep = 1;
 
+	//units counters
+	int EScount, EGcount, ETcount, AScount, ADcount, AMcount;
+	int ESDead, EGDead, ETDead, ASDead, ADDead, AMDead;
+	int Dfearth, Ddearth, Dbearth;
+	int Dfalien, Ddalien, Dbalien;
+
 public:
 	Game();
 	void StartGame();
@@ -31,9 +37,9 @@ public:
 
 	//Output File Needed functions
 	void SetOutFile();
-	void OutputFile(Unit* killedUnit);
+	void AddtoOutFile(Unit* killedUnit);
 	void GameStatistics();
-	void FinalResult();
+	ArmyType GameWinner();
 
 	void MainLoop();	               // Increment time step until game ends
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list

@@ -12,7 +12,7 @@ void AlienDrone::Attack(Unit* unit2)
 	LinkedQueue<Unit*> EnemiesList;
 	pGame->GetEnemiesList(Earth, earthTank, this->Attack_Capacity/2, EnemiesList); //Discuss 
 	pGame->GetEnemiesList(Earth, earthGunnery, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList);
-	PrintFight(EnemiesList);
+
 
 	for (int i = 0; i < this->Attack_Capacity / 2; i++)
 	{
@@ -38,10 +38,11 @@ void AlienDrone::Attack(Unit* unit2)
 				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
 
 				pGame->AddtoKilledList(unit2);
+				pGame->OutputFile(unit2);
 			}
 		}
 	}
-//pGame->GetEnemiesList(Earth, earthGunnery, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList); //Discuss 
+ 
 
 	for (int i = 0; i < this->Attack_Capacity - (this->Attack_Capacity / 2); i++)
 	{
@@ -67,9 +68,12 @@ void AlienDrone::Attack(Unit* unit2)
 				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
 
 				pGame->AddtoKilledList(unit2);
+				pGame->OutputFile(unit2);
 			}
 		}
 	}
+	pGame->PrintFight(this, this->getType(), TempList);
+	//PrintFight(TempList);
 	while (TempList.dequeue(unit2))
 	{
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list

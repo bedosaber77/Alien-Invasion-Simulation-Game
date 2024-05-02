@@ -23,8 +23,9 @@ void Game::StartGame()
 		cin >> Filename;
 		ValidName = LoadParameters(Filename + ".txt");
 	}
+	//Initialize output file
+	SetOutFile();
 	MainLoop();
-
 }
 
 bool Game::LoadParameters(string Filename)
@@ -93,6 +94,45 @@ bool Game::LoadParameters(string Filename)
 	}
 }
 
+void Game::SetOutFile()
+{
+	//Initialize output file
+	ofstream OutputFile;
+	OutputFile.open("outFile.txt", ios::out);
+	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb" << endl;
+}
+
+void Game::OutputFile(Unit* killedUnit)
+{
+	//string outFile;
+	ofstream OutputFile;
+	OutputFile.open("outFile.txt", ios::app);
+	if (OutputFile.is_open())
+	{
+		OutputFile << endl;
+		OutputFile << killedUnit->getTd() << "\t\t\t";   //Join Time
+		OutputFile << killedUnit->getID() << "\t\t\t";   //Unit's ID
+		OutputFile << killedUnit->getTj() << "\t\t\t";  //Destruction Time
+			 
+		OutputFile << killedUnit->getTa() - killedUnit->getTj()  << "\t\t\t";     //First Attack Delay
+		OutputFile << killedUnit->getTd() - killedUnit->getTa() << "\t\t\t";      //Destruction Delay
+		OutputFile << killedUnit->getTd() - killedUnit->getTj() << "\t\t\t";      //Battle Time
+	}
+	OutputFile.close();
+}
+
+void Game::GameStatistics()
+{
+	ofstream OutputFile;
+	OutputFile.open("outFile.txt", ios::app);
+
+}
+
+void Game::FinalResult()
+{
+	
+}
+
 void Game::MainLoop()
 {
 	while (TimeStep <= 50) //will stop when it completes 50 time steps for now (phase 1)
@@ -117,7 +157,7 @@ void Game::MainLoop()
 			}
 		}
 
-		    Print();
+		    PrintAliveUnits();
 			cout << "============== Units fighting at current step ==============" << endl;
 			pEarthArmy->Attack();
 			pAlienArmy->Attack();
@@ -135,8 +175,6 @@ void Game::AddtoKilledList(Unit* army)
 {
 	KilledList.enqueue(army);
 }
-
-
 
 void Game::ClearKilledList()
 {
@@ -215,7 +253,36 @@ void Game::PrintKilledList() const
 	cout << " ] \n\033[0m";
 }
 
-void Game::Print() const
+void Game::PrintFight(Unit* shooter, UnitType shooterType,LinkedQueue<Unit*> fightingUnits)
+{
+	string type;
+	switch (shooterType)
+	{
+	case earthSoldier:
+		type = "ES";
+	   break;
+	case earthGunnery:
+		type = "EG";
+		break;
+	case earthTank:
+		type = "ET";
+		break;
+	case alienSoldier:
+		type = "AS";
+		break;
+	case alienMonster:
+		type = "AM";
+		break;
+	case alienDrone:
+		type = "AD";
+		break;
+	}
+	cout << type << " " << shooter->getID() << " shots [";
+	fightingUnits.print();
+	cout << "]" << endl;
+}
+
+void Game::PrintAliveUnits() const
 {
 	cout << "Current Timestep " << TimeStep << endl;
 	cout << "\033[1;36m============== Earth Army Alive Units ==============" << endl;

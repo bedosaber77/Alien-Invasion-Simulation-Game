@@ -160,6 +160,8 @@ void Game::GameStatistics()
 		//////////////////////////Earth Army/////////////////////////////////
 
 		OutputFile << endl << "For Earth army: " << endl;
+
+		//Total number of each unit
 		OutputFile << "Total number of each unit: " << endl;
 		OutputFile << "ES: " << EScount << "\t\t ET: " << ETcount << "\t\t EG: " << EGcount << endl;
 
@@ -192,6 +194,41 @@ void Game::GameStatistics()
 		//Dd%Db
 		OutputFile << "Dd/Db: ";
 		OutputFile << double(Ddearth) / Dbearth * 100 << "%" << endl;
+
+		//////////////////////////Alien Army/////////////////////////////////
+		OutputFile << endl << "For Alien army: " << endl;
+		OutputFile << "Total number of each unit: " << endl;
+		OutputFile << "AS: " << AScount << "\t\t AM: " << AMcount << "\t\t AD: " << ADcount << endl;
+
+		//percentage of destructed units relative to their total
+		OutputFile << "Percentage of destructed units relative to their total " << endl;
+		OutputFile << "AS: " << ASDead / double(AScount) * 100 << "%";
+		OutputFile << "\t\t AM: " << AMDead / double(AMcount) * 100 << "%";
+		OutputFile << "\t\t AD: " << ADDead / double(ADcount) * 100 << "%" << endl;
+
+		// Percentage of destructed units relative to total units
+		OutputFile << "Percentage of destructed units relative to total units: ";
+		OutputFile << double(ASDead + AMDead + ADDead) / (AScount + AMcount + ADcount) * 100 << "%" << endl;
+
+		//Average of Df
+		OutputFile << "Average of Df: ";
+		OutputFile << double(Dfalien) / (ASDead + AMDead + ADDead) << endl;
+
+		//Average of Dd
+		OutputFile << "Average of Dd: ";
+		OutputFile << double(Ddalien) / (ASDead + AMDead + ADDead) << endl;
+
+		//Average of Db
+		OutputFile << "Average of Db: ";
+		OutputFile << double(Dbalien) / (ASDead + AMDead + ADDead) << endl;
+
+		//Df/Db%
+		OutputFile << "Df/Db: ";
+		OutputFile << double(Dfalien) / Dbalien * 100 << "%" << endl;
+
+		//Dd%Db
+		OutputFile << "Dd/Db: ";
+		OutputFile << double(Ddalien) / Dbalien * 100 << "%" << endl;
 
 	}
 	OutputFile.close();

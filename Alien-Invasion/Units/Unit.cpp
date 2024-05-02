@@ -61,6 +61,20 @@ void Unit::setID(int id)
 	this->ID = id;
 }
 
+int Unit::getTj() const
+{
+	return Tj;
+}
+
+int Unit::getTa() const
+{
+	return Ta;
+}
+
+int Unit::getTd() const
+{
+	return Td;
+}
 
 
 void Unit::decrementHealth(int damage)

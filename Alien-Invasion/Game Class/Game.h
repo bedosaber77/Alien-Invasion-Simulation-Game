@@ -28,6 +28,13 @@ public:
 	void StartGame();
 
 	bool LoadParameters(string);
+
+	//Output File Needed functions
+	void SetOutFile();
+	void OutputFile(Unit* killedUnit);
+	void GameStatistics();
+	void FinalResult();
+
 	void MainLoop();	               // Increment time step until game ends
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
 	void ClearKilledList();            // deallocate all units in the killed list
@@ -42,9 +49,9 @@ public:
 	void GetEnemiesList(ArmyType Army_Type,UnitType Unit_Type, int Capacity, LinkedQueue<Unit*>& EnemiesList);	//to be revisited
 
 	// Get Current Time              (To be discussed ,what do you think about consistency?)
-
-
 	int GetCurrentTime();
+
+	
 
 	/*
 	* Maybe phase 2 functions
@@ -54,10 +61,9 @@ public:
 
 	//printing functions for the output file 
 	void PrintKilledList() const;
-	void Print() const;
-	//void PrintFight(LinkedQueue <Unit*> EnemiesList) const;
+	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<Unit*> fightingUnits);
+	void PrintAliveUnits() const;
 
-	void TestCode();
 	~Game();
 };
 

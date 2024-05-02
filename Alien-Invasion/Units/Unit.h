@@ -19,7 +19,8 @@ protected:
 	//Time & Duration Parameters//
 	int Tj;		//Join Time
 	int Ta;		//First Attacked Time
-	int Td;		//Destruction Delay
+	int Td;		//Destruction Time
+
 	//Added For Phase 2
 	bool GotShot;	// checks if first attack happened or not
 	Game* pGame;
@@ -36,6 +37,12 @@ public:
 	int getID() const;
 	UnitType getType() const;		
 	void setID(int id);
+
+	//Time and Delay getters
+	int getTj() const;
+	int getTa() const;
+	int getTd() const;
+	
 
 	//Functions to Increment/Decrement health
 	void decrementHealth(int damage);

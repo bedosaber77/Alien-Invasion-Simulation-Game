@@ -9,17 +9,18 @@ EarthGunnery::EarthGunnery(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 void EarthGunnery::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
-	LinkedQueue<Unit*> EnemiesList;
+	//LinkedQueue<Unit*> EnemiesList;
 
-	//Assume Attack Capacity is even for now
-	pGame->GetEnemiesList(Alien, alienMonster, this->Attack_Capacity / 2, EnemiesList);
-	pGame->GetEnemiesList(Alien, alienDrone, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList);
-	PrintFight(EnemiesList);
+	////Assume Attack Capacity is even for now
+	//pGame->GetEnemiesList(Alien, alienMonster, this->Attack_Capacity / 2, EnemiesList);
+	//pGame->GetEnemiesList(Alien, alienDrone, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList);
+	//PrintFight(EnemiesList);
 
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		if (EnemiesList.dequeue(unit2))
+		unit2 = pGame->GetAlienArmyPtr()->removeUnit(alienMonster);
+		if (unit2)
 		{
 
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)

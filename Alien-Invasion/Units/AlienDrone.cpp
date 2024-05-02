@@ -9,14 +9,15 @@ AlienDrone::AlienDrone(int H, int P, int AC, int tj, Game* Gameptr):Unit(H,P,AC,
 void AlienDrone::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
-	LinkedQueue<Unit*> EnemiesList;
-	pGame->GetEnemiesList(Earth, earthTank, this->Attack_Capacity/2, EnemiesList); //Discuss 
-	pGame->GetEnemiesList(Earth, earthGunnery, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList);
-	PrintFight(EnemiesList);
+	//LinkedQueue<Unit*> EnemiesList;
+	//pGame->GetEnemiesList(Earth, earthTank, this->Attack_Capacity/2, EnemiesList); //Discuss 
+	//pGame->GetEnemiesList(Earth, earthGunnery, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList);
+	//PrintFight(EnemiesList);
 
 	for (int i = 0; i < this->Attack_Capacity / 2; i++)
 	{
-		if (EnemiesList.dequeue(unit2))
+		unit2 = pGame->GetEnemiesUnit(Earth,earthTank);
+		if (unit2)
 		{
 
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
@@ -47,7 +48,8 @@ void AlienDrone::Attack(Unit* unit2)
 
 	for (int i = 0; i < this->Attack_Capacity - (this->Attack_Capacity / 2); i++)
 	{
-		if (EnemiesList.dequeue(unit2))
+		unit2 = pGame->GetEnemiesUnit(Earth, earthGunnery);
+		if (unit2)
 		{
 
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)

@@ -11,13 +11,15 @@ EarthSoldier::EarthSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 void EarthSoldier::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
-	LinkedQueue<Unit*> EnemiesList;
-	pGame->GetEnemiesList(Alien, alienSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
-	PrintFight(EnemiesList);
+	//LinkedQueue<Unit*> EnemiesList;
+	
+	//pGame->GetEnemiesList(Alien, alienSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
+	//PrintFight(EnemiesList);
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		if (EnemiesList.dequeue(unit2))
+		unit2 = pGame->GetEnemiesUnit(Alien, alienSoldier);
+		if (unit2)
 		{
 
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)

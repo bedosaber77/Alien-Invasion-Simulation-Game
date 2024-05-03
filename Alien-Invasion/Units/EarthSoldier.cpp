@@ -11,7 +11,7 @@ EarthSoldier::EarthSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 void EarthSoldier::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
-	//LinkedQueue<Unit*> EnemiesList;
+	LinkedQueue<int> EnemiesList;
 	
 	//pGame->GetEnemiesList(Alien, alienSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
 	//PrintFight(EnemiesList);
@@ -21,7 +21,7 @@ void EarthSoldier::Attack(Unit* unit2)
 		unit2 = pGame->GetEnemiesUnit(Alien, alienSoldier);
 		if (unit2)
 		{
-
+			EnemiesList.enqueue(unit2->getID());
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 
@@ -46,6 +46,7 @@ void EarthSoldier::Attack(Unit* unit2)
 			}
 		}
 	}
+	PrintFight(EnemiesList);
 
 	while (TempList.dequeue(unit2))
 	{
@@ -53,7 +54,7 @@ void EarthSoldier::Attack(Unit* unit2)
 	}
 }
 
-void EarthSoldier::PrintFight(LinkedQueue<Unit*> EnemiesList)
+void EarthSoldier::PrintFight(LinkedQueue<int> EnemiesList)
 {
 	cout << "ES " << this->getID() << " shots [";
 	EnemiesList.print();

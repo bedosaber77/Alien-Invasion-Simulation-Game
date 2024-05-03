@@ -54,7 +54,7 @@ public:
 	void ExitUML();
 	
 	//Print current fight function
-	virtual void PrintFight(LinkedQueue<Unit*> EnemiesList)= 0;
+	virtual void PrintFight(LinkedQueue<int> EnemiesList)= 0;
 	~Unit();
 
 };

@@ -87,7 +87,7 @@ int Unit::getIntialHealth() const
 	return InitalHealth;
 }
 
-void Unit::PrintFight(LinkedQueue<Unit*> EnemiesList)
+void  Unit::PrintFight(LinkedQueue<int> EnemiesList)
 {
 }
 

@@ -63,7 +63,7 @@ void EarthGunnery::Attack(Unit* unit2)
 	}
 }
 
-void EarthGunnery::PrintFight(LinkedQueue<Unit*> EnemiesList)
+void EarthGunnery::PrintFight(LinkedQueue<int> EnemiesList)
 {
 	cout << "EG " << this->getID() << " shots [";
 	EnemiesList.print();

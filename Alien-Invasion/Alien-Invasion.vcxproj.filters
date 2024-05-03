@@ -108,6 +108,9 @@
     <ClInclude Include="DS Files\Queue\LinkedQueue.h">
       <Filter>DS Files\Queue</Filter>
     </ClInclude>
+    <ClInclude Include="Units\HealUnit.h">
+      <Filter>Unit Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Units\AlienDrone.cpp">
@@ -145,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Units\HealUnit.cpp">
+      <Filter>Unit Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

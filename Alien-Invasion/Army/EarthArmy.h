@@ -15,6 +15,12 @@ private:
 	ArrayStack  <Unit*> EarthTanks;
 	priQueue <Unit*> EarthGunneries;
 	static int ID;
+
+	//HL
+	ArrayStack <Unit*> HL;
+	int HealedUnits;
+
+
 public:
 	EarthArmy();
 
@@ -27,6 +33,9 @@ public:
 
 	void Attack();
 	void Print();
+	void PrintFight(Unit* shooter);
+
+	void incHealedUnits();
 	~EarthArmy();
 
 };

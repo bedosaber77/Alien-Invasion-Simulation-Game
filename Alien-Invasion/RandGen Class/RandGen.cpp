@@ -5,6 +5,7 @@
 #include"../Units/AlienDrone.h"
 #include"../Units/EarthGunnery.h"
 #include"..\Units\Aliensoldier.h"
+#include"../Units/HealUnit.h"
 RandGen::RandGen(Game* GamePtr)
 {
 	srand(time(0));
@@ -44,10 +45,14 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 				newUnit = new EarthTank(eHealth, ePower, eCapacity, ts, pGame);
 			
 			}
-			else       //generate EG
+			else if(B <= EarthParameters.ESpercent + EarthParameters.ETpercent+EarthParameters.EGpercent)      //generate EG
 			{
 				newUnit = new EarthGunnery(eHealth, ePower, eCapacity, ts, pGame);
 
+			}
+			else
+			{
+				newUnit = new HealUnit(eHealth, ePower, eCapacity, ts, pGame);
 			}
 		}
 			break;
@@ -55,8 +60,6 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 			//Parameters for Unit Constructor(Alien)
 
 		case Alien:
-		
-
 		{
 		int aPower = rand() % (AlienParameters.upper_power - AlienParameters.lower_power + 1)
 			+ AlienParameters.lower_power;

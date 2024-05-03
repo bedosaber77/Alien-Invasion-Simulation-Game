@@ -11,6 +11,9 @@ Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 	//Added For Phase 2	
 	GotShot = false;
 	pGame = Gameptr;
+	
+	InitalHealth = H;
+	Healed = false;
 }
 
 void Unit::setHealth(int h)
@@ -82,14 +85,52 @@ void Unit::decrementHealth(int damage)
 	this->Health -= damage;
 }
 
-void Unit::incrementHealth(int)
+void Unit::incrementHealth(int HealthImp)
 {
 	//to be made
+	this->Health += HealthImp;
 }
 
 
 Unit::~Unit()
 {
+}
+
+int Unit::getIntialHealth() const
+{
+	return InitalHealth;
+}
+
+void  Unit::PrintFight(LinkedQueue<int> EnemiesList)
+{
+}
+
+void Unit::setTH(int th)
+{
+	TH = th;
+	AddedToUML = true;
+	Healed = true;
+}
+
+int Unit::getTH() const
+{
+	return TH;
+}
+
+void Unit::ExitUML()
+{
+	AddedToUML = false;
+}
+
+bool Unit::checkUML(bool&Healed) const
+{
+	Healed = this->Healed;
+	return AddedToUML;
+}
+
+int Unit::getESPriorty() const
+{
+	return (InitalHealth - Health);
 }
 
 

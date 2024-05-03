@@ -10,7 +10,7 @@ void AlienMonster::Attack(Unit* unit2)
 {
 }
 
-void AlienMonster::PrintFight(LinkedQueue<Unit*> EnemiesList) 
+void AlienMonster::PrintFight(LinkedQueue<int> EnemiesList)
 {
 }
 

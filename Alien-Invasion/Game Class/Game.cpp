@@ -51,7 +51,12 @@ bool Game::LoadParameters(string Filename)
 		pRand->SetN(N);
 
 
-		Infile >> EarthParameters.ESpercent >> EarthParameters.ETpercent >> EarthParameters.EGpercent;
+		Infile >> EarthParameters.ESpercent >> EarthParameters.ETpercent >> EarthParameters.EGpercent>>EarthParameters.HUpercent;
+
+		if (EarthParameters.HUpercent > 5)
+		{
+			EarthParameters.HUpercent = 5;	//maximum it can be
+		}
 		Infile >> AlienParameters.ASpercent >> AlienParameters.AMpercent >> AlienParameters.ADpercent;
 
 		// Probability
@@ -299,9 +304,10 @@ void Game::MainLoop()
 				pEarthArmy->AddUnit(newUnit);
 				UpdateCounts(Earth, newUnit);
 			}
-
+		}
 			// Generating Alien Army
-
+		A = (rand() % 100) + 1;
+			if (A <= pRand->GetProb()){
 			for (int i = 0; i < pRand->GetN(); i++)
 			{
 				newUnit = pRand->GenerateUnits(TimeStep, Alien);
@@ -309,15 +315,22 @@ void Game::MainLoop()
 				UpdateCounts(Alien, newUnit);
 			}
 		}
-
-		    PrintAliveUnits();
-			cout << "============== Units fighting at current step ==============" << endl;
+		//	cout << "============== Units fighting at current step ==============" << endl;
+			PrintAliveUnits();
+			//cout << "============== Units fighting at current step ==============" << endl;
+			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
+			PrintKilledList();
+			//cout << "============== Units fighting at current step ==============" << endl;
 			pEarthArmy->Attack();
 			pAlienArmy->Attack();
+			cout << "============== Units after attack round ==============" << endl;
+			PrintAliveUnits();
 			cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
-	        PrintKilledList();
+			PrintKilledList();
+			cout << "\u001b[35m============== UML ==============" << endl;
+			PrintUMLList();
 			cout << endl;
-	        system("pause");
+			system("pause");
 			TimeStep++;
 		}
 }
@@ -358,6 +371,35 @@ void Game::ClearKilledList()
 		KilledList.dequeue(KilledUnit);
 		delete KilledUnit;
 	}
+
+}
+
+void Game::AddtoUML(Unit* unit)
+{
+	if (unit->getType() == earthSoldier)
+		UMLsolider.enqueue(unit, unit->getESPriorty());
+	else
+		UMLtanks.enqueue(unit);
+
+	bool Healedbefore;
+	if (!unit->checkUML(Healedbefore))
+	{
+		if (!Healedbefore)
+			pEarthArmy->incHealedUnits();
+		
+		unit->setTH(TimeStep);
+	}
+}
+
+Unit* Game::getUnitToHeal()
+{
+	Unit* unit=nullptr;
+	int pri;
+	if (!UMLsolider.isEmpty())
+		UMLsolider.dequeue(unit, pri);
+	else if (!UMLtanks.isEmpty())
+		UMLtanks.dequeue(unit);
+	return unit;
 }
 
 AlienArmy* Game::GetAlienArmyPtr()
@@ -375,41 +417,24 @@ RandGen* Game::GetRandGenPtr()
 	return pRand;
 }
 
-void Game::GetEnemiesList(ArmyType Army_Type, UnitType Unit_Type, int Capacity, LinkedQueue<Unit*>& EnemiesList)
+Unit* Game::GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type,bool BackDrone)
 {
 	Unit* unit2 = nullptr;
 	switch (Army_Type)
 	{
 	case Earth:
 	{
-		for (int i = 0; i < Capacity; i++)
-		{
-			unit2 = pEarthArmy->removeUnit(Unit_Type);
-
-			if (unit2)
-			{
-				EnemiesList.enqueue(unit2);
-			}
-		}
+		unit2 = pEarthArmy->removeUnit(Unit_Type);
 	}
-		break;
+	break;
 	case Alien:
-	{
-		for (int i = 0; i < Capacity; i++)
-		{
-			unit2 = pAlienArmy->removeUnit(Unit_Type, i % 2);
+		unit2 = pAlienArmy->removeUnit(Unit_Type, BackDrone );
 
-			if (unit2)
-			{
-				EnemiesList.enqueue(unit2);
-			}
-		}
-	}
 		break;
 	default:
 		break;
 	}
-	return;
+	return unit2;
 
 }
 
@@ -422,6 +447,16 @@ void Game::PrintKilledList() const
 {
 	cout << KilledList.getCount() << " units [";
 	KilledList.print();
+	cout << " ] \n\033[0m";
+}
+
+void Game::PrintUMLList() const
+{
+	cout << UMLsolider.getCount() << " UMLsolider [";
+	UMLsolider.print();
+	cout << " ] \n\u001b[35m";
+	cout << UMLtanks.getCount() << " UMLtanks [";
+	UMLtanks.print();
 	cout << " ] \n\033[0m";
 }
 

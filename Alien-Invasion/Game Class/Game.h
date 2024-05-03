@@ -20,6 +20,10 @@ class Game
 
 	//killed list
 	LinkedQueue <Unit*> KilledList;
+	
+	//UML
+	priQueue <Unit*> UMLsolider;
+	LinkedQueue <Unit*> UMLtanks;
 
 	int TimeStep = 1;
 
@@ -46,6 +50,8 @@ public:
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
 	void ClearKilledList();            // deallocate all units in the killed list
 
+	void AddtoUML(Unit* unit);
+	Unit* getUnitToHeal();
 	// We need to get RandGen and Armies Pointers    (As mentioned in Q&A File)
 
 
@@ -53,7 +59,7 @@ public:
 	EarthArmy* GetEarthArmyPtr();
 	RandGen* GetRandGenPtr();
 
-	void GetEnemiesList(ArmyType Army_Type,UnitType Unit_Type, int Capacity, LinkedQueue<Unit*>& EnemiesList);	//to be revisited
+	Unit* GetEnemiesUnit(ArmyType Army_Type,UnitType Unit_Type,bool BackDrone=0);	//to be revisited
 
 	// Get Current Time              (To be discussed ,what do you think about consistency?)
 	int GetCurrentTime();
@@ -70,6 +76,8 @@ public:
 	void PrintKilledList() const;
 	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<Unit*> fightingUnits);
 	void PrintAliveUnits() const;
+	void PrintUMLList() const;
+	//void PrintFight(LinkedQueue <Unit*> EnemiesList) const;
 
 	~Game();
 };

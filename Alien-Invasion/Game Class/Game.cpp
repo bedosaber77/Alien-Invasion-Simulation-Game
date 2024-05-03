@@ -42,7 +42,12 @@ bool Game::LoadParameters(string Filename)
 		pRand->SetN(N);
 
 
-		Infile >> EarthParameters.ESpercent >> EarthParameters.ETpercent >> EarthParameters.EGpercent;
+		Infile >> EarthParameters.ESpercent >> EarthParameters.ETpercent >> EarthParameters.EGpercent>>EarthParameters.HUpercent;
+
+		if (EarthParameters.HUpercent > 5)
+		{
+			EarthParameters.HUpercent = 5;	//maximum it can be
+		}
 		Infile >> AlienParameters.ASpercent >> AlienParameters.AMpercent >> AlienParameters.ADpercent;
 
 		// Probability
@@ -129,6 +134,8 @@ void Game::MainLoop()
 			Print();	
 			cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
 	        PrintKilledList();
+			cout << "\u001b[35m============== UML ==============" << endl;
+			PrintUMLList();
 			cout << endl;
 	        system("pause");
 			TimeStep++;
@@ -229,6 +236,16 @@ void Game::PrintKilledList() const
 {
 	cout << KilledList.getCount() << " units [";
 	KilledList.print();
+	cout << " ] \n\033[0m";
+}
+
+void Game::PrintUMLList() const
+{
+	cout << UMLsolider.getCount() << " UMLsolider [";
+	UMLsolider.print();
+	cout << " ] \n\u001b[35m";
+	cout << UMLtanks.getCount() << " UMLtanks [";
+	UMLtanks.print();
 	cout << " ] \n\033[0m";
 }
 

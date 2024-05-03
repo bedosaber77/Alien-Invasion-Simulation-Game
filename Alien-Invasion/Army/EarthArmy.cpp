@@ -110,6 +110,9 @@ void EarthArmy::Print()
 	cout << "]\n";
 	cout << EarthGunneries.getCount() << " EG  [";
 	EarthGunneries.print();
+	cout << "]\n";
+	cout << HL.getCount() << " HU  [";
+	HL.print();
 	cout << "]";
 }
 

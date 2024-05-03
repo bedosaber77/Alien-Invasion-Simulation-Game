@@ -391,6 +391,11 @@ void Game::AddtoUML(Unit* unit)
 	}
 }
 
+bool Game::UMLisEmpty()
+{
+	return UMLsolider.isEmpty() && UMLtanks.isEmpty();
+}
+
 Unit* Game::getUnitToHeal()
 {
 	Unit* unit=nullptr;

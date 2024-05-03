@@ -51,6 +51,7 @@ public:
 	void ClearKilledList();            // deallocate all units in the killed list
 
 	void AddtoUML(Unit* unit);
+	bool UMLisEmpty();
 	Unit* getUnitToHeal();
 	// We need to get RandGen and Armies Pointers    (As mentioned in Q&A File)
 

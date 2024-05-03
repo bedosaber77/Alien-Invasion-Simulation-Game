@@ -65,7 +65,12 @@ Unit* EarthArmy::removeUnit(UnitType type)
 		EarthGunneries.dequeue(unit, priorty); 
 	}
 		break;
-	
+	case healUnit:
+	{
+		if (HL.isEmpty())
+			return nullptr;
+		HL.pop(unit);
+	}
 	default:
 		break;
 	}

@@ -9,18 +9,21 @@ HealUnit::HealUnit(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, 
 
 void HealUnit::Attack(Unit* unit2)
 {
+	if (pGame->UMLisEmpty())
+		return;
 	LinkedQueue<Unit*> TempList;
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
 		unit2 = pGame->getUnitToHeal();
-		if (unit2) {
+		if (unit2) 
+		{
 			if (pGame->GetCurrentTime() - unit2->getTH() == 10)
 			{
 				pGame->AddtoKilledList(unit2);
 			}
 			else
 			{
-				int incHeal = this->Power * (this->Health / 100) / sqrt(unit2->getHealth());
+				int incHeal = this->Power * (this->Health / 100.0) / sqrt(unit2->getHealth());
 				unit2->incrementHealth(incHeal);
 				if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())
 				{
@@ -38,7 +41,8 @@ void HealUnit::Attack(Unit* unit2)
 		TempList.dequeue(unit);
 		pGame->AddtoUML(unit);
 	}
-	//pGame->GetEarthArmyPtr()->removeUnit(healUnit);	to be discussed
+	pGame->GetEarthArmyPtr()->removeUnit(healUnit);
+	this->setTd(pGame->GetCurrentTime());
 	pGame->AddtoKilledList(this);
 }
 

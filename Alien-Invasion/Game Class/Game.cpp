@@ -116,11 +116,16 @@ void Game::MainLoop()
 				pAlienArmy->AddUnit(newUnit, i % 2);
 			}
 		}
-
+		    cout << "============== Units fighting at current step ==============" << endl; 
 		    Print();
-			cout << "============== Units fighting at current step ==============" << endl;
+			//cout << "============== Units fighting at current step ==============" << endl;
+			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
+
+			PrintKilledList();
 			pEarthArmy->Attack();
 			pAlienArmy->Attack();
+			cout << "============== Units after attack round ==============" << endl;
+			Print();	
 			cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
 	        PrintKilledList();
 			cout << endl;

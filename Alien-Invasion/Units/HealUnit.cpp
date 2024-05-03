@@ -38,6 +38,7 @@ void HealUnit::Attack(Unit* unit2)
 		TempList.dequeue(unit);
 		pGame->AddtoUML(unit);
 	}
+	//pGame->GetEarthArmyPtr()->removeUnit(healUnit);	to be discussed
 	pGame->AddtoKilledList(this);
 }
 

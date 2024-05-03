@@ -107,9 +107,10 @@ void Game::MainLoop()
 				newUnit = pRand->GenerateUnits(TimeStep, Earth);
 				pEarthArmy->AddUnit(newUnit);
 			}
-
+		}
 			// Generating Alien Army
-
+		A = (rand() % 100) + 1;
+			if (A <= pRand->GetProb()){
 			for (int i = 0; i < pRand->GetN(); i++)
 			{
 				newUnit = pRand->GenerateUnits(TimeStep, Alien);

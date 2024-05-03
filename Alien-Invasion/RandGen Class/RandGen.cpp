@@ -55,8 +55,6 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 			//Parameters for Unit Constructor(Alien)
 
 		case Alien:
-		
-
 		{
 		int aPower = rand() % (AlienParameters.upper_power - AlienParameters.lower_power + 1)
 			+ AlienParameters.lower_power;

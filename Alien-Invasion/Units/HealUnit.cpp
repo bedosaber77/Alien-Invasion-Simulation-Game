@@ -41,6 +41,10 @@ void HealUnit::Attack(Unit* unit2)
 	pGame->AddtoKilledList(this);
 }
 
+void HealUnit::PrintFight(LinkedQueue<int> EnemiesList)
+{
+}
+
 HealUnit::~HealUnit()
 {
 }

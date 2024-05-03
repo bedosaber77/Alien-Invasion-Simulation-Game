@@ -60,6 +60,7 @@ public:
 
 	//printing functions for the output file 
 	void PrintKilledList() const;
+	void PrintUMLList() const;
 	void Print() const;
 	//void PrintFight(LinkedQueue <Unit*> EnemiesList) const;
 

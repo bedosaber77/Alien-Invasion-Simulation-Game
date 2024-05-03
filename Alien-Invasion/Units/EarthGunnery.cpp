@@ -9,7 +9,7 @@ EarthGunnery::EarthGunnery(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 void EarthGunnery::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
-	//LinkedQueue<Unit*> EnemiesList;
+	LinkedQueue<int> EnemiesList;
 
 	////Assume Attack Capacity is even for now
 	//pGame->GetEnemiesList(Alien, alienMonster, this->Attack_Capacity / 2, EnemiesList);
@@ -17,11 +17,12 @@ void EarthGunnery::Attack(Unit* unit2)
 	//PrintFight(EnemiesList);
 
 
-	for (int i = 0; i < this->Attack_Capacity; i++)
+	for (int i = 0; i < this->Attack_Capacity / 2; i++)
 	{
-		unit2 = pGame->GetAlienArmyPtr()->removeUnit(alienMonster);
+		unit2 = pGame->GetEnemiesUnit(Alien, alienMonster);
 		if (unit2)
 		{
+			EnemiesList.enqueue(unit2->getID());
 
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
@@ -47,7 +48,38 @@ void EarthGunnery::Attack(Unit* unit2)
 			}
 		}
 	}
+	for (int i = 0; i < this->Attack_Capacity - (this->Attack_Capacity / 2); i++)
+	{
+		unit2 = pGame->GetEnemiesUnit(Alien, alienDrone,i%2);
+		if (unit2)
+		{
+			EnemiesList.enqueue(unit2->getID());
 
+			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
+
+
+			int Damage = (this->getHealth() * this->getPower() / 100) /
+				sqrt(unit2->getHealth());	//Damage Formula
+
+
+			unit2->decrementHealth(Damage);
+
+
+			if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())
+			{
+				TempList.enqueue(unit2);
+			}
+			else if (unit2->getHealth() > 0 && (unit2->getType() == earthSoldier || unit2->getType() == earthTank))
+				pGame->AddtoUML(unit2);
+			else
+			{
+				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
+
+				pGame->AddtoKilledList(unit2);
+			}
+		}
+	}
+	PrintFight(EnemiesList);
 	int i = 1;
 	while (TempList.dequeue(unit2))
 	{

@@ -208,7 +208,7 @@ Unit* Game::GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type,bool BackDrone
 	}
 	break;
 	case Alien:
-		unit2 = pAlienArmy->removeUnit(Unit_Type, BackDrone % 2);
+		unit2 = pAlienArmy->removeUnit(Unit_Type, BackDrone );
 
 		break;
 	default:

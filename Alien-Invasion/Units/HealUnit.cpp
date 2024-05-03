@@ -42,6 +42,7 @@ void HealUnit::Attack(Unit* unit2)
 		pGame->AddtoUML(unit);
 	}
 	pGame->GetEarthArmyPtr()->removeUnit(healUnit);
+	this->setTd(pGame->GetCurrentTime());
 	pGame->AddtoKilledList(this);
 }
 

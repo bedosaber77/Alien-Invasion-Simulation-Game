@@ -9,15 +9,16 @@ AlienSoldier::AlienSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 void AlienSoldier:: Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
-	LinkedQueue<Unit*> EnemiesList;
-	pGame->GetEnemiesList(Earth, earthSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
-	PrintFight(EnemiesList);
+	LinkedQueue<int> EnemiesList;
+	//pGame->GetEnemiesList(Earth, earthSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
+	//PrintFight(EnemiesList);
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		if (EnemiesList.dequeue(unit2))
+		unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+		if (unit2)
 		{
-
+			EnemiesList.enqueue(unit2->getID());
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 
@@ -43,7 +44,7 @@ void AlienSoldier:: Attack(Unit* unit2)
 		}
 	}
 
-
+	PrintFight(EnemiesList);
 
 	while (TempList.dequeue(unit2))
 	{
@@ -51,7 +52,7 @@ void AlienSoldier:: Attack(Unit* unit2)
 	}
 }
 
-void AlienSoldier::PrintFight(LinkedQueue<Unit*> EnemiesList)
+void AlienSoldier::PrintFight(LinkedQueue<int> EnemiesList)
 {
 	cout << "AS " << this->getID() << " shots [";
 	EnemiesList.print();

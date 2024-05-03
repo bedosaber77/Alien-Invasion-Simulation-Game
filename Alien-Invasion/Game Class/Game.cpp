@@ -107,20 +107,26 @@ void Game::MainLoop()
 				newUnit = pRand->GenerateUnits(TimeStep, Earth);
 				pEarthArmy->AddUnit(newUnit);
 			}
-
+		}
 			// Generating Alien Army
-
+		A = (rand() % 100) + 1;
+			if (A <= pRand->GetProb()){
 			for (int i = 0; i < pRand->GetN(); i++)
 			{
 				newUnit = pRand->GenerateUnits(TimeStep, Alien);
 				pAlienArmy->AddUnit(newUnit, i % 2);
 			}
 		}
-
+		    cout << "============== Units fighting at current step ==============" << endl; 
 		    Print();
-			cout << "============== Units fighting at current step ==============" << endl;
+			//cout << "============== Units fighting at current step ==============" << endl;
+			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
+
+			PrintKilledList();
 			pEarthArmy->Attack();
 			pAlienArmy->Attack();
+			cout << "============== Units after attack round ==============" << endl;
+			Print();	
 			cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
 	        PrintKilledList();
 			cout << endl;
@@ -192,41 +198,24 @@ RandGen* Game::GetRandGenPtr()
 	return pRand;
 }
 
-void Game::GetEnemiesList(ArmyType Army_Type, UnitType Unit_Type, int Capacity, LinkedQueue<Unit*>& EnemiesList)
+Unit* Game::GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type,bool BackDrone)
 {
 	Unit* unit2 = nullptr;
 	switch (Army_Type)
 	{
 	case Earth:
 	{
-		for (int i = 0; i < Capacity; i++)
-		{
-			unit2 = pEarthArmy->removeUnit(Unit_Type);
-
-			if (unit2)
-			{
-				EnemiesList.enqueue(unit2);
-			}
-		}
+		unit2 = pEarthArmy->removeUnit(Unit_Type);
 	}
-		break;
+	break;
 	case Alien:
-	{
-		for (int i = 0; i < Capacity; i++)
-		{
-			unit2 = pAlienArmy->removeUnit(Unit_Type, i % 2);
+		unit2 = pAlienArmy->removeUnit(Unit_Type, BackDrone );
 
-			if (unit2)
-			{
-				EnemiesList.enqueue(unit2);
-			}
-		}
-	}
 		break;
 	default:
 		break;
 	}
-	return;
+	return unit2;
 
 }
 

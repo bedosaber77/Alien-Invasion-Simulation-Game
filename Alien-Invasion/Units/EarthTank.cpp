@@ -10,7 +10,7 @@ void EarthTank::Attack(Unit* unit2)
 {
 }
 
-void EarthTank::PrintFight(LinkedQueue<Unit*> EnemiesList) 
+void EarthTank::PrintFight(LinkedQueue<int> EnemiesList) 
 {
 }
 

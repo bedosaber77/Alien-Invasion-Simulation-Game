@@ -43,12 +43,10 @@ void HealUnit::Attack(Unit* unit2)
 	}
 	pGame->GetEarthArmyPtr()->removeUnit(healUnit);
 	this->setTd(pGame->GetCurrentTime());
+	this->setTa(pGame->GetCurrentTime());
 	pGame->AddtoKilledList(this);
 }
 
-void HealUnit::PrintFight(LinkedQueue<int> EnemiesList)
-{
-}
 
 HealUnit::~HealUnit()
 {

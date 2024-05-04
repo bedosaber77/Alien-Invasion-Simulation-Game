@@ -27,7 +27,7 @@ protected:
 	Game* pGame;
 	int InitalHealth; // Added For Healunit
 	int TH;
-	bool Healed;
+	bool IsHealed;
 public:
 	Unit(int H,int P,int AC,int tj,Game* Gameptr);
 	virtual void Attack(Unit* unit2 = nullptr) = 0;
@@ -61,7 +61,6 @@ public:
 	void ExitUML();
 	
 	//Print current fight function
-	virtual void PrintFight(LinkedQueue<int> EnemiesList)= 0;
 	~Unit();
 
 };

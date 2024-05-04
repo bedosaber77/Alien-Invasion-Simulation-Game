@@ -75,7 +75,7 @@ public:
 
 	//printing functions for the output file 
 	void PrintKilledList() const;
-	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<Unit*> fightingUnits);
+	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<int> fightingUnits);
 	void PrintAliveUnits() const;
 	void PrintUMLList() const;
 	//void PrintFight(LinkedQueue <Unit*> EnemiesList) const;

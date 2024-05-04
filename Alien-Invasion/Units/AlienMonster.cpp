@@ -8,10 +8,7 @@ AlienMonster::AlienMonster(int H, int P, int AC, int tj,  Game* Gameptr) :Unit(H
 }
 void AlienMonster::Attack(Unit* unit2)
 {
-}
 
-void AlienMonster::PrintFight(LinkedQueue<int> EnemiesList)
-{
 }
 
 AlienMonster::~AlienMonster()

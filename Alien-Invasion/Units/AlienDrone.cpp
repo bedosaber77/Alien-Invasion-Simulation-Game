@@ -10,10 +10,6 @@ void AlienDrone::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
-	//pGame->GetEnemiesList(Earth, earthTank, this->Attack_Capacity/2, EnemiesList); //Discuss 
-	//pGame->GetEnemiesList(Earth, earthGunnery, this->Attack_Capacity - (this->Attack_Capacity / 2), EnemiesList);
-	//PrintFight(EnemiesList);
-
 
 	for (int i = 0; i < this->Attack_Capacity / 2; i++)
 	{
@@ -71,28 +67,21 @@ void AlienDrone::Attack(Unit* unit2)
 			}
 			else
 			{
-				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
+				//unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
 
 				pGame->AddtoKilledList(unit2);
 			
 			}
 		}
 	}
-	//pGame->PrintFight(this, this->getType(), TempList);
-	//PrintFight(TempList);
-	PrintFight(EnemiesList);
+	pGame->PrintFight(this, this->getType(), EnemiesList);
+
 	while (TempList.dequeue(unit2))
 	{
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
 }
 
-void AlienDrone::PrintFight(LinkedQueue<int> EnemiesList)
-{
-	cout << "AD " << this->getID() << " shots [";
-	EnemiesList.print();
-	cout << "]" << endl;
-}
 
 AlienDrone::~AlienDrone()
 {

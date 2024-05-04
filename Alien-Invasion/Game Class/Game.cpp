@@ -144,6 +144,7 @@ void Game::AddtoOutFile(Unit* killedUnit)
 
 		//Print Df, Dd, Db of each unit
 		OutputFile << killedUnit->getTa() - killedUnit->getTj()  << "\t\t\t";     //First Attack Delay
+
 		OutputFile << killedUnit->getTd() - killedUnit->getTa() << "\t\t\t";      //Destruction Delay
 		OutputFile << killedUnit->getTd() - killedUnit->getTj() << "\t\t\t";      //Battle Time
 	}
@@ -315,7 +316,7 @@ void Game::MainLoop()
 				UpdateCounts(Alien, newUnit);
 			}
 		}
-		//	cout << "============== Units fighting at current step ==============" << endl;
+		    //cout << "============== Units fighting at current step ==============" << endl;
 			PrintAliveUnits();
 			//cout << "============== Units fighting at current step ==============" << endl;
 			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
@@ -338,6 +339,7 @@ void Game::MainLoop()
 
 void Game::AddtoKilledList(Unit* army)
 {
+	army->setTd(TimeStep);
 	KilledList.enqueue(army);
 	AddtoOutFile(army);
 	switch (army->getType())
@@ -385,7 +387,10 @@ void Game::AddtoUML(Unit* unit)
 	if (!unit->checkUML(Healedbefore))
 	{
 		if (!Healedbefore)
+		{
+			//HealedUnits++;
 			pEarthArmy->incHealedUnits();
+		}
 		
 		unit->setTH(TimeStep);
 	}
@@ -465,7 +470,7 @@ void Game::PrintUMLList() const
 	cout << " ] \n\033[0m";
 }
 
-void Game::PrintFight(Unit* shooter, UnitType shooterType,LinkedQueue<Unit*> fightingUnits)
+void Game::PrintFight(Unit* shooter, UnitType shooterType,LinkedQueue<int> fightingUnits)
 {
 	string type;
 	switch (shooterType)

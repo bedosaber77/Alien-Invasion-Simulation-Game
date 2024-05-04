@@ -12,9 +12,6 @@ void EarthSoldier::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
-	
-	//pGame->GetEnemiesList(Alien, alienSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
-	//PrintFight(EnemiesList);
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
@@ -40,28 +37,21 @@ void EarthSoldier::Attack(Unit* unit2)
 				pGame->AddtoUML(unit2);
 			else
 			{
-				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
+				//unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
 
 				pGame->AddtoKilledList(unit2);
 			}
 		}
 	}
-	PrintFight(EnemiesList);
 
-	pGame->PrintFight(this, this->getType(), TempList);
-	//PrintFight(TempList);
+	pGame->PrintFight(this, this->getType(), EnemiesList);
+
 	while (TempList.dequeue(unit2))
 	{
 		pGame->GetAlienArmyPtr()->AddUnit(unit2);		//return to original list
 	}
 }
 
-void EarthSoldier::PrintFight(LinkedQueue<int> EnemiesList)
-{
-	cout << "ES " << this->getID() << " shots [";
-	EnemiesList.print();
-	cout << "]" << endl;
-}
 
 EarthSoldier::~EarthSoldier()
 {

@@ -32,7 +32,7 @@ void AlienSoldier:: Attack(Unit* unit2)
 			{
 				TempList.enqueue(unit2);
 			}
-			else if (unit2->getHealth() > 0 && (unit2->getType() == earthSoldier || unit2->getType() == earthTank))
+			else if (unit2->getHealth() > 0)
 				pGame->AddtoUML(unit2);
 			else
 			{

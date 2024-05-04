@@ -28,12 +28,10 @@ void EarthGunnery::Attack(Unit* unit2)
 			unit2->decrementHealth(Damage);
 
 
-			if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())
+			if (unit2->getHealth() > 0)
 			{
 				TempList.enqueue(unit2);
 			}
-			else if (unit2->getHealth() > 0 && (unit2->getType() == earthSoldier || unit2->getType() == earthTank))
-				pGame->AddtoUML(unit2);
 			else
 			{
 				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time

@@ -4,6 +4,7 @@ class EarthTank : public Unit
 {
 private:
 	//LinkedQueue<Unit*> EnemiesList;
+	bool AttackBoth;
 public:
 	EarthTank(int H, int P, int AC, int tj, Game* Gameptr);
 	virtual void Attack(Unit* unit2);

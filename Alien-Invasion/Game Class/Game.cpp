@@ -16,6 +16,8 @@ Game::Game()
 
 	Dfearth = Ddearth = Dbearth = 0;
 	Dfalien = Ddalien = Dbalien = 0;
+
+	HealedUnits = 0;
 	StartGame();
 }
 
@@ -242,11 +244,7 @@ void Game::GameStatistics()
 
 ArmyType Game::GameWinner()
 {
-	if (pAlienArmy->getCount() == 0 && pEarthArmy->getCount() != 0)
-		return Earth;
-
-	if (pEarthArmy->getCount() == 0 && pAlienArmy->getCount() != 0)
-		return Alien;
+	return Alien;
 }
 
 void Game::UpdateCounts(ArmyType armyType, Unit* unit)
@@ -388,8 +386,7 @@ void Game::AddtoUML(Unit* unit)
 	{
 		if (!Healedbefore)
 		{
-			//HealedUnits++;
-			pEarthArmy->incHealedUnits();
+			HealedUnits++;
 		}
 		
 		unit->setTH(TimeStep);
@@ -461,6 +458,7 @@ void Game::PrintKilledList() const
 }
 
 void Game::PrintUMLList() const
+
 {
 	cout << UMLsolider.getCount() << " UMLsolider [";
 	UMLsolider.print();

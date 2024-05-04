@@ -85,14 +85,18 @@ void AlienArmy::Attack()
 	if (AlienSoldiers.peek(unit2))
 	{
 		unit2->Attack();
-		//unit2->PrintFight();
 	}
 
 
 	//AM Attack
-
-
-
+	if (AlienMonsters.getCount()) 
+	{
+		int randidx = rand() % AlienMonsters.getCount();
+		if (AlienMonsters.getItem(unit2, randidx))
+		{
+			unit2->Attack();
+		}
+	}
 
 
 	//AD Attack in pairs
@@ -102,26 +106,22 @@ void AlienArmy::Attack()
 		if (unit2)
 		{
 			unit2->Attack();
-			//unit2->PrintFight();
 		}
 
 		AlienDrones.peekBack(unit2);
 		if (unit2)
 		{
 			unit2->Attack();
-			//unit2->PrintFight();
 		}
 
 	}
 }
 
-int AlienArmy::getCount()
+int AlienArmy::GetAScount()
 {
-	return AlienSoldiers.getCount() + AlienMonsters.getCount() + AlienDrones.getCount();
+	return AlienSoldiers.getCount();
 }
 
-
-///Getters For Lists
 void AlienArmy::Print()
 {
 	cout << AlienSoldiers.getCount() << " AS [";

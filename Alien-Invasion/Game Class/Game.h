@@ -33,6 +33,8 @@ class Game
 	int Dfearth, Ddearth, Dbearth;
 	int Dfalien, Ddalien, Dbalien;
 
+	int HealedUnits;
+
 public:
 	Game();
 	void StartGame();

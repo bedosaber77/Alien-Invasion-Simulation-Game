@@ -77,9 +77,9 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	return unit;
 }
 
-int EarthArmy::getCount()
+int EarthArmy::GetEScount()
 {
-	return EarthSoldiers.getCount() + EarthGunneries.getCount() + EarthTanks.getCount();
+	return EarthSoldiers.getCount();
 }
 
 void EarthArmy::Attack()
@@ -93,8 +93,12 @@ void EarthArmy::Attack()
 	
 	//tank
 
+	if(EarthTanks.peek(unit2))
+	{
+		unit2->Attack();
+	}
 
-
+	//EG
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
 	{
@@ -124,11 +128,6 @@ void EarthArmy::Print()
 	cout << "]";
 }
 
-
-void EarthArmy::incHealedUnits()
-{
-	HealedUnits++;
-}
 
 EarthArmy::~EarthArmy()
 {

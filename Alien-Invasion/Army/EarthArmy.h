@@ -28,14 +28,11 @@ public:
 	void AddUnit(Unit* newUnit);
 	Unit* removeUnit(UnitType type);
 
-	//getters for the output file
-	int getCount();
+	int GetEScount();
 
 	void Attack();
 	void Print();
-	void PrintFight(Unit* shooter);
 
-	void incHealedUnits();
 	~EarthArmy();
 
 };

@@ -22,7 +22,7 @@ public:
 	void Attack();
 
     //Getters for the output file
-	int getCount();
+	int GetAScount();
 	
 
 	void Print();

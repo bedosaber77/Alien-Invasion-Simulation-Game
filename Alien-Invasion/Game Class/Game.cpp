@@ -1,5 +1,6 @@
 #include "Game.h"
 #include<iostream>
+#include <iomanip>
 using namespace std;
 
 Game::Game()
@@ -126,9 +127,9 @@ void Game::AddtoOutFile(Unit* killedUnit)
 	if (OutputFile.is_open())
 	{
 		OutputFile << endl;
-		OutputFile << killedUnit->getTd() << "\t\t\t";   //Join Time
-		OutputFile << killedUnit->getID() << "\t\t\t";   //Unit's ID
-		OutputFile << killedUnit->getTj() << "\t\t\t";  //Destruction Time
+		OutputFile << killedUnit->getTd() << setw(12);   //Join Time
+		OutputFile << killedUnit->getID() << setw(12);   //Unit's ID
+		OutputFile << killedUnit->getTj() << setw(12);  //Destruction Time
 		
 		//Update DfTotal, DdTotal and DbTotal for earth army
 		if (killedUnit->getType() == earthSoldier || killedUnit->getType() == earthGunnery || killedUnit->getType() == earthTank)
@@ -145,10 +146,9 @@ void Game::AddtoOutFile(Unit* killedUnit)
 		}
 
 		//Print Df, Dd, Db of each unit
-		OutputFile << killedUnit->getTa() - killedUnit->getTj()  << "\t\t\t";     //First Attack Delay
-
-		OutputFile << killedUnit->getTd() - killedUnit->getTa() << "\t\t\t";      //Destruction Delay
-		OutputFile << killedUnit->getTd() - killedUnit->getTj() << "\t\t\t";      //Battle Time
+		OutputFile << killedUnit->getTa() - killedUnit->getTj()  << setw(12);     //First Attack Delay
+		OutputFile << killedUnit->getTd() - killedUnit->getTa() << setw(12);      //Destruction Delay
+		OutputFile << killedUnit->getTd() - killedUnit->getTj() << setw(12);      //Battle Time
 	}
 	OutputFile.close();
 }

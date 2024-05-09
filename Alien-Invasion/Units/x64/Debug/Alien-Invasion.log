@@ -1,0 +1,5 @@
+﻿  EarthArmy.cpp
+  HealUnit.cpp
+C:\Users\amira\OneDrive\Desktop\DS Project\Alien-Invasion\Units\HealUnit.cpp(23,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+  Alien-Invasion.vcxproj -> C:\Users\amira\OneDrive\Desktop\DS Project\x64\Debug\Alien-Invasion.exe

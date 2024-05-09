@@ -10,6 +10,7 @@ RandGen::RandGen(Game* GamePtr)
 {
 	srand(time(0));
 	pGame = GamePtr;
+
 }
 
 Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
@@ -42,8 +43,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 			else if (B <= EarthParameters.ESpercent + EarthParameters.ETpercent)	//generate ET
 			{
 				newUnit = new EarthTank(eHealth, ePower, eCapacity, ts, pGame);
-
-
+			
 			}
 			else if(B <= EarthParameters.ESpercent + EarthParameters.ETpercent+EarthParameters.EGpercent)      //generate EG
 			{

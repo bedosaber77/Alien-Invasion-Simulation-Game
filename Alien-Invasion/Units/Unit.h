@@ -19,14 +19,15 @@ protected:
 	//Time & Duration Parameters//
 	int Tj;		//Join Time
 	int Ta;		//First Attacked Time
-	int Td;		//Destruction Delay
+	int Td;		//Destruction Time
+
 	//Added For Phase 2
 	bool GotShot;	// checks if first attack happened or not
 	bool AddedToUML; // checks if it is added to UML or NOT
 	Game* pGame;
 	int InitalHealth; // Added For Healunit
 	int TH;
-	bool Healed;
+	bool IsHealed;
 public:
 	Unit(int H,int P,int AC,int tj,Game* Gameptr);
 	virtual void Attack(Unit* unit2 = nullptr) = 0;
@@ -40,7 +41,13 @@ public:
 	int getID() const;
 	UnitType getType() const;		
 	void setID(int id);
+
+	//Time and Delay getters
+	int getTj() const;
+	int getTa() const;
+	int getTd() const;
 	
+
 	//Functions to Increment/Decrement health
 	void decrementHealth(int damage);
 	void incrementHealth(int);		//to be revisited
@@ -54,7 +61,6 @@ public:
 	void ExitUML();
 	
 	//Print current fight function
-	virtual void PrintFight(LinkedQueue<int> EnemiesList)= 0;
 	~Unit();
 
 };

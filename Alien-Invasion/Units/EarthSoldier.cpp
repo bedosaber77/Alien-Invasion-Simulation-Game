@@ -12,9 +12,6 @@ void EarthSoldier::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
-	
-	//pGame->GetEnemiesList(Alien, alienSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
-	//PrintFight(EnemiesList);
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
@@ -32,21 +29,20 @@ void EarthSoldier::Attack(Unit* unit2)
 			unit2->decrementHealth(Damage);
 
 
-			if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())
+			if (unit2->getHealth() > 0)
 			{
 				TempList.enqueue(unit2);
 			}
-			else if (unit2->getHealth() > 0 && (unit2->getType() == earthSoldier || unit2->getType() == earthTank))
-				pGame->AddtoUML(unit2);
 			else
 			{
-				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
+				//unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
 
 				pGame->AddtoKilledList(unit2);
 			}
 		}
 	}
-	PrintFight(EnemiesList);
+
+	pGame->PrintFight(this, this->getType(), EnemiesList);
 
 	while (TempList.dequeue(unit2))
 	{
@@ -54,12 +50,6 @@ void EarthSoldier::Attack(Unit* unit2)
 	}
 }
 
-void EarthSoldier::PrintFight(LinkedQueue<int> EnemiesList)
-{
-	cout << "ES " << this->getID() << " shots [";
-	EnemiesList.print();
-	cout << "]" << endl;
-}
 
 EarthSoldier::~EarthSoldier()
 {

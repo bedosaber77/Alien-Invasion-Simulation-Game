@@ -14,6 +14,7 @@ class RandGen
 	Inputs EarthParameters,AlienParameters;
 	ArmyType Army_Type;
 	Game* pGame;
+
 public:
 	RandGen(Game*);
 

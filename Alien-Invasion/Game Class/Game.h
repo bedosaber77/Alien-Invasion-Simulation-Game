@@ -27,16 +27,33 @@ class Game
 
 	int TimeStep = 1;
 
+	//units counters
+	int EScount, EGcount, ETcount, AScount, ADcount, AMcount;
+	int ESDead, EGDead, ETDead, ASDead, ADDead, AMDead;
+	int Dfearth, Ddearth, Dbearth;
+	int Dfalien, Ddalien, Dbalien;
+
+	int HealedUnits;
+
 public:
 	Game();
 	void StartGame();
 
 	bool LoadParameters(string);
+
+	//Output File Needed functions
+	void SetOutFile();
+	void AddtoOutFile(Unit* killedUnit);
+	void GameStatistics();
+	ArmyType GameWinner();
+	void UpdateCounts(ArmyType armyType, Unit* unit);  //Update units count
+
 	void MainLoop();	               // Increment time step until game ends
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
 	void ClearKilledList();            // deallocate all units in the killed list
 
 	void AddtoUML(Unit* unit);
+	bool UMLisEmpty();
 	Unit* getUnitToHeal();
 	// We need to get RandGen and Armies Pointers    (As mentioned in Q&A File)
 
@@ -48,9 +65,9 @@ public:
 	Unit* GetEnemiesUnit(ArmyType Army_Type,UnitType Unit_Type,bool BackDrone=0);	//to be revisited
 
 	// Get Current Time              (To be discussed ,what do you think about consistency?)
-
-
 	int GetCurrentTime();
+
+	
 
 	/*
 	* Maybe phase 2 functions
@@ -60,11 +77,11 @@ public:
 
 	//printing functions for the output file 
 	void PrintKilledList() const;
+	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<int> fightingUnits);
+	void PrintAliveUnits() const;
 	void PrintUMLList() const;
-	void Print() const;
 	//void PrintFight(LinkedQueue <Unit*> EnemiesList) const;
 
-	void TestCode();
 	~Game();
 };
 

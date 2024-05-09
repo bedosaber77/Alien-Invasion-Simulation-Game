@@ -13,7 +13,7 @@ Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 	pGame = Gameptr;
 	
 	InitalHealth = H;
-	Healed = false;
+	IsHealed = false;
 }
 
 void Unit::setHealth(int h)
@@ -64,6 +64,20 @@ void Unit::setID(int id)
 	this->ID = id;
 }
 
+int Unit::getTj() const
+{
+	return Tj;
+}
+
+int Unit::getTa() const
+{
+	return Ta;
+}
+
+int Unit::getTd() const
+{
+	return Td;
+}
 
 
 void Unit::decrementHealth(int damage)
@@ -87,15 +101,18 @@ int Unit::getIntialHealth() const
 	return InitalHealth;
 }
 
-void  Unit::PrintFight(LinkedQueue<int> EnemiesList)
-{
-}
+
+/*
+    1- Sets time that the units is added to UML
+	2- Sets unit into the UML
+	3- Sets that this unit is healed-> to not consider it in incrementing health units
+*/
 
 void Unit::setTH(int th)
 {
 	TH = th;
 	AddedToUML = true;
-	Healed = true;
+	IsHealed = true;
 }
 
 int Unit::getTH() const
@@ -108,10 +125,10 @@ void Unit::ExitUML()
 	AddedToUML = false;
 }
 
-bool Unit::checkUML(bool&Healed) const
+bool Unit::checkUML(bool&ISHealed) const
 {
-	Healed = this->Healed;
-	return AddedToUML;
+	ISHealed = this->IsHealed; 
+	return AddedToUML;  // checks it is in uml or not, to set its time only once  
 }
 
 int Unit::getESPriorty() const

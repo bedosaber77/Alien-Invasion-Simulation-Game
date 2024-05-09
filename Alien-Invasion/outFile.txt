@@ -1,0 +1,54 @@
+Td			ID			Tj			Df			Dd			Db
+
+11          11           5           0           6           6
+12          27          12           0           0           0
+18        2001           2           0          16          16
+20          25          12           0           8           8
+22          32          13           0           9           9
+22          38          14           0           8           8
+24          47          17           0           7           7
+24          33          13           0          11          11
+25           1           1           1          23          24
+25           7           5           0          20          20
+25          57          25           0           0           0
+25          36          13           0          12          12
+25          45          17           0           8           8
+26          65          26           0           0           0
+26          42          14           0          12          12
+29        2010           3           9          17          26
+30        2002           2           0          28          28
+33          73          29           0           4           4
+34          79          30           0           4           4
+35         102          35           0           0           0
+35          86          31           0           4           4
+35          68          28           0           7           7
+37        2025           9           0          28          28
+37        2081          29           0           8           8
+37        2079          29           0           8           8
+38        2041          20           0          18          18
+38        2044          22           4          12          16
+38          76          29           0           9           9
+38          96          33           0           5           5
+For Earth army: 
+Total number of each unit: 
+ES: 37		 ET: 70		 EG: 15
+Percentage of destructed units relative to their total 
+ES: 0%		 ET: 7.14286%		 EG: 80%
+Percentage of destructed units relative to total units: 13.9344%
+Average of Df: 0.0588235
+Average of Dd: 9.23529
+Average of Db: 9.29412
+Df/Db: 0.632911%
+Dd/Db: 99.3671%
+
+For Alien army: 
+Total number of each unit: 
+AS: 24		 AM: 19		 AD: 71
+Percentage of destructed units relative to their total 
+AS: 16.6667%		 AM: 0%		 AD: 5.6338%
+Percentage of destructed units relative to total units: 7.01754%
+Average of Df: 1.625
+Average of Dd: 16.875
+Average of Db: 18.5
+Df/Db: 8.78378%
+Dd/Db: 91.2162%

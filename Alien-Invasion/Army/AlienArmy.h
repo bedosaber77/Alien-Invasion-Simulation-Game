@@ -21,11 +21,12 @@ public:
 
 	void Attack();
 
-	//Getters for Lists needed by Attack function
+    //Getters for the output file
+	int GetAScount();
 	
 
 	void Print();
-	void PrintFight(Unit* shooter);
+
 	~AlienArmy();
 
 };

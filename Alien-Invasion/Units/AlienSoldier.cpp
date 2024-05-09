@@ -10,8 +10,7 @@ void AlienSoldier:: Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
-	//pGame->GetEnemiesList(Earth, earthSoldier, this->Attack_Capacity, EnemiesList); //Discuss 
-	//PrintFight(EnemiesList);
+
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
@@ -33,30 +32,24 @@ void AlienSoldier:: Attack(Unit* unit2)
 			{
 				TempList.enqueue(unit2);
 			}
-			else if (unit2->getHealth() > 0 && (unit2->getType() == earthSoldier || unit2->getType() == earthTank))
+			else if (unit2->getHealth() > 0)
 				pGame->AddtoUML(unit2);
 			else
 			{
-				unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
+			//	unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
 
 				pGame->AddtoKilledList(unit2);
+	
 			}
 		}
 	}
 
-	PrintFight(EnemiesList);
+	pGame->PrintFight(this, this->getType(), EnemiesList);
 
 	while (TempList.dequeue(unit2))
 	{
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
-}
-
-void AlienSoldier::PrintFight(LinkedQueue<int> EnemiesList)
-{
-	cout << "AS " << this->getID() << " shots [";
-	EnemiesList.print();
-	cout << "]" << endl;
 }
 
 AlienSoldier::~AlienSoldier()

@@ -65,11 +65,21 @@ Unit* EarthArmy::removeUnit(UnitType type)
 		EarthGunneries.dequeue(unit, priorty); 
 	}
 		break;
-	
+	case healUnit:
+	{
+		if (HL.isEmpty())
+			return nullptr;
+		HL.pop(unit);
+	}
 	default:
 		break;
 	}
 	return unit;
+}
+
+int EarthArmy::GetEScount()
+{
+	return EarthSoldiers.getCount();
 }
 
 void EarthArmy::Attack()
@@ -79,18 +89,20 @@ void EarthArmy::Attack()
 	if (EarthSoldiers.peek(unit2))
 	{
 		unit2->Attack();
-		//unit2->PrintFight();
 	}
 	
 	//tank
 
+	if(EarthTanks.peek(unit2))
+	{
+		unit2->Attack();
+	}
 
-
+	//EG
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
 	{
 		unit2->Attack();
-		//unit2->PrintFight();
 	}
 
 	if (HL.peek(unit2))
@@ -116,11 +128,6 @@ void EarthArmy::Print()
 	cout << "]";
 }
 
-
-void EarthArmy::incHealedUnits()
-{
-	HealedUnits++;
-}
 
 EarthArmy::~EarthArmy()
 {

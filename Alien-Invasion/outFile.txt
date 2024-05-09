@@ -1,54 +1,78 @@
 Td			ID			Tj			Df			Dd			Db
 
-11          11           5           0           6           6
-12          27          12           0           0           0
-18        2001           2           0          16          16
-20          25          12           0           8           8
-22          32          13           0           9           9
-22          38          14           0           8           8
-24          47          17           0           7           7
-24          33          13           0          11          11
-25           1           1           1          23          24
-25           7           5           0          20          20
-25          57          25           0           0           0
-25          36          13           0          12          12
-25          45          17           0           8           8
-26          65          26           0           0           0
-26          42          14           0          12          12
-29        2010           3           9          17          26
-30        2002           2           0          28          28
-33          73          29           0           4           4
-34          79          30           0           4           4
-35         102          35           0           0           0
-35          86          31           0           4           4
-35          68          28           0           7           7
-37        2025           9           0          28          28
-37        2081          29           0           8           8
-37        2079          29           0           8           8
-38        2041          20           0          18          18
-38        2044          22           4          12          16
-38          76          29           0           9           9
-38          96          33           0           5           5
+12          21           6           0           6           6
+12          20           6           0           6           6
+14          19           6           0           8           8
+14          18           5           0           9           9
+14          16           5           0           9           9
+16        2001           1           4          11          15
+17        2002           1           4          12          16
+17        2000           1           4          12          16
+17           3           2           0          15          15
+17          47          17           0           0           0
+18        2011           3           2          13          15
+18        2012           7           0          11          11
+18        2010           3           2          13          15
+18          29          10           0           8           8
+19        2018           9           0          10          10
+19        2008           3           2          14          16
+19        2015           7           0          12          12
+19        2005           1           4          14          18
+20        2020           9           0          11          11
+20        2022           9           0          11          11
+21        2025          16           0           5           5
+21        2019           9           0          12          12
+21        2023           9           0          12          12
+22        2016           7           0          15          15
+23        2027          16           0           7           7
+23        2014           7           0          16          16
+24        2029          16           0           8           8
+25        2038          21           0           4           4
+25        2033          20           0           5           5
+26        2041          21           0           5           5
+26        2030          20           0           6           6
+26          32          15           0          11          11
+27        2031          20           0           7           7
+27          41          16           0          11          11
+28        2042          23           0           5           5
+28          59          22           0           6           6
+29        2046          23           0           6           6
+29        2043          23           0           6           6
+31        2053          26           0           5           5
+31          48          17           0          14          14
+32        2057          27           0           5           5
+32          46          17           0          15          15
+32          42          16           0          16          16
+33        2056          27           0           6           6
+33        2052          26           0           7           7
+33        2048          26           0           7           7
+34        2059          27           0           7           7
+34        2058          27           0           7           7
+34          62          24           0          10          10
+37        2055          27           0          10          10
+38        2060          32           0           6           6
+40          71          27           0          13          13
+40          70          27           0          13          13
 For Earth army: 
 Total number of each unit: 
-ES: 37		 ET: 70		 EG: 15
+ES: 42		ET: 31		EG : 18
 Percentage of destructed units relative to their total 
-ES: 0%		 ET: 7.14286%		 EG: 80%
-Percentage of destructed units relative to total units: 13.9344%
-Average of Df: 0.0588235
-Average of Dd: 9.23529
-Average of Db: 9.29412
-Df/Db: 0.632911%
-Dd/Db: 99.3671%
+ES: 0%		 ET: 6.45161%		 EG: 77.7778%
+Percentage of destructed units relative to total units: 17.5824%
+Average of Df: 0
+Average of Dd: 10.625
+Average of Db: 10.625
+Df/Db: 0%
+Dd/Db: 100%
 
 For Alien army: 
 Total number of each unit: 
-AS: 24		 AM: 19		 AD: 71
+AS: 19		 AM: 0		 AD: 47
 Percentage of destructed units relative to their total 
-AS: 16.6667%		 AM: 0%		 AD: 5.6338%
-Percentage of destructed units relative to total units: 7.01754%
-Average of Df: 1.625
-Average of Dd: 16.875
-Average of Db: 18.5
-Df/Db: 8.78378%
-Dd/Db: 91.2162%
+AS: 0%		 AM: -nan(ind)%		 AD: 76.5957%
+Percentage of destructed units relative to total units: 54.5455%
+Average of Df: 0.611111
+Average of Dd: 8.97222
+Average of Db: 9.58333
+Df/Db: 6.37681%
+Dd/Db: 93.6232%

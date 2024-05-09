@@ -29,6 +29,8 @@ public:
 	Unit* removeUnit(UnitType type);
 
 	int GetEScount();
+	int GetEGcount();
+	int GetETcount();
 
 	void Attack();
 	void Print();

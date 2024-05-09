@@ -122,6 +122,16 @@ int AlienArmy::GetAScount()
 	return AlienSoldiers.getCount();
 }
 
+int AlienArmy::GetAMcount()
+{
+	return AlienMonsters.getCount();
+}
+
+int AlienArmy::GetADcount()
+{
+	return AlienDrones.getCount();
+}
+
 void AlienArmy::Print()
 {
 	cout << AlienSoldiers.getCount() << " AS [";
@@ -134,7 +144,6 @@ void AlienArmy::Print()
 	AlienDrones.print();
 	cout << "]";
 }
-
 
 AlienArmy::~AlienArmy()
 {

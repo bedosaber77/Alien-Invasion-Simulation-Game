@@ -35,6 +35,8 @@ void HealUnit::Attack(Unit* unit2)
 			}
 		}
 	}
+
+	//if unit is not successfully healed return it to the UML
 	while (!TempList.isEmpty())
 	{
 		Unit* unit;

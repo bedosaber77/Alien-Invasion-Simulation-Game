@@ -28,12 +28,16 @@ class Game
 	int TimeStep = 1;
 
 	//units counters
-	int EScount, EGcount, ETcount, AScount, ADcount, AMcount;
+	//int EScount, EGcount, ETcount, AScount, ADcount, AMcount
 	int ESDead, EGDead, ETDead, ASDead, ADDead, AMDead;
 	int Dfearth, Ddearth, Dbearth;
 	int Dfalien, Ddalien, Dbalien;
 
 	int HealedUnits;
+	bool SilentMood;
+
+	GameResult FinalResult; 
+
 
 public:
 	Game();
@@ -45,8 +49,9 @@ public:
 	void SetOutFile();
 	void AddtoOutFile(Unit* killedUnit);
 	void GameStatistics();
-	ArmyType GameWinner();
-	void UpdateCounts(ArmyType armyType, Unit* unit);  //Update units count
+	void CheckResult();
+	int GetCount(UnitType Unit_Type);
+	void UpdateHealCount();
 
 	void MainLoop();	               // Increment time step until game ends
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
@@ -55,9 +60,8 @@ public:
 	void AddtoUML(Unit* unit);
 	bool UMLisEmpty();
 	Unit* getUnitToHeal();
+
 	// We need to get RandGen and Armies Pointers    (As mentioned in Q&A File)
-
-
 	AlienArmy* GetAlienArmyPtr();
 	EarthArmy* GetEarthArmyPtr();
 	RandGen* GetRandGenPtr();
@@ -80,7 +84,7 @@ public:
 	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<int> fightingUnits);
 	void PrintAliveUnits() const;
 	void PrintUMLList() const;
-	//void PrintFight(LinkedQueue <Unit*> EnemiesList) const;
+
 
 	~Game();
 };

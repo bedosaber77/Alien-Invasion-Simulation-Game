@@ -20,3 +20,8 @@ enum ArmyType
 {
 	Earth, Alien
 };
+
+enum GameResult
+{
+	win, loss, tie
+};

@@ -23,7 +23,8 @@ public:
 
     //Getters for the output file
 	int GetAScount();
-	
+	int GetAMcount();
+	int GetADcount();
 
 	void Print();
 

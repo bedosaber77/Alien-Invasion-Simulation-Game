@@ -82,6 +82,16 @@ int EarthArmy::GetEScount()
 	return EarthSoldiers.getCount();
 }
 
+int EarthArmy::GetEGcount()
+{
+	return EarthGunneries.getCount();
+}
+
+int EarthArmy::GetETcount()
+{
+	return EarthTanks.getCount();
+}
+
 void EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;

@@ -60,6 +60,7 @@ public:
 	bool checkUML(bool &Healed) const;
 	void ExitUML();
 	
+	
 	//Print current fight function
 	~Unit();
 

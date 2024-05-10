@@ -17,6 +17,7 @@ Game::Game()
 	Dfalien = Ddalien = Dbalien = 0;
 
 	HealedUnits = 0;
+	EndGame = false;
 	StartGame();
 }
 
@@ -174,6 +175,7 @@ void Game::GameStatistics()
 	if (OutputFile.is_open())
 	{
 		//////////////////////////Earth Army/////////////////////////////////
+		OutputFile << "\nBattle Result: " << FinalResult << endl;
 
 		OutputFile << endl << "For Earth army: " << endl;
 
@@ -258,19 +260,33 @@ void Game::GameStatistics()
 
 void Game::CheckResult()
 {
-	if (pEarthArmy->GetEScount() + pEarthArmy->GetEGcount() + pEarthArmy->GetETcount() == 0)
-	{
-		FinalResult = loss;
-	}
+		if (pEarthArmy->GetEScount() + pEarthArmy->GetEGcount() + pEarthArmy->GetETcount() == 0)
+		{
+			FinalResult = "loss";
+			EndGame = true;
+			return;
+		}
 
-	if (pAlienArmy->GetAScount() + pAlienArmy->GetAMcount() + pAlienArmy->GetADcount() == 0)
-	{
-		FinalResult = win;
-	}
+		else if ((pAlienArmy->GetAScount() + pAlienArmy->GetAMcount() + pAlienArmy->GetADcount()) == 0)
+		{
+			FinalResult = "win";
+			EndGame = true;
+			return;
+		}
 	
-	//if both attacked successfully, continue the game
-	if (pEarthArmy->Attack() && pAlienArmy->Attack())
-		TimeStep++;
+		//if both attacked successfully, continue the game
+		
+		else if ((pEarthArmy->GetEGcount() > 0 && pAlienArmy->GetAScount() > 0) 
+		|| (pAlienArmy->GetADcount()>0 && pEarthArmy->GetEScount()>0))
+		{
+			FinalResult = "tie";
+			EndGame = true;
+		}
+		/*else if (pEarthArmy->Attack() && !pAlienArmy->Attack() && pAlienArmy->GetAScount() + pAlienArmy->GetAMcount() + pAlienArmy->GetADcount() == 0)
+			FinalResult = win;
+		else if (!pEarthArmy->Attack() && pAlienArmy->Attack() &&
+			pEarthArmy->GetEScount() + pEarthArmy->GetEGcount() + pEarthArmy->GetETcount() == 0)
+			FinalResult = loss;*/
 }
 
 
@@ -302,7 +318,7 @@ void Game::UpdateHealCount()
 
 void Game::MainLoop()
 {
-	while (TimeStep <= 40) //will stop when it completes 50 time steps for now (phase 1)
+	while (!EndGame) //will stop when it completes 50 time steps for now (phase 1)
 	{
 		Unit* newUnit = nullptr;
 		int A = (rand() % 100) + 1;
@@ -351,7 +367,8 @@ void Game::MainLoop()
 			}
 			TimeStep++;
 		}
-	CheckResult();
+	if (TimeStep >= 40)
+		CheckResult();
 }
 	
 void Game::AddtoKilledList(Unit* army)

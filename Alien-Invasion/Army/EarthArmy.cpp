@@ -95,24 +95,25 @@ int EarthArmy::GetETcount()
 bool EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;
+	bool SuccusfulAttack = false;
 	//ES Attacks 
 	if (EarthSoldiers.peek(unit2))
 	{
-		unit2->Attack();
+		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack ;
 	}
 	
 	//tank
 
 	if(EarthTanks.peek(unit2))
 	{
-		unit2->Attack();
+		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack ;
 	}
 
 	//EG
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
 	{
-		unit2->Attack();
+		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack;
 	}
 
 	if (HL.peek(unit2))
@@ -120,7 +121,7 @@ bool EarthArmy::Attack()
 		unit2->Attack();
 	}
 
-	return true;
+	return SuccusfulAttack;
 
 }
 

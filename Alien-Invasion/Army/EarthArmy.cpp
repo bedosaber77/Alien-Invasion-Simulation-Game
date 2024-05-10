@@ -92,7 +92,7 @@ int EarthArmy::GetETcount()
 	return EarthTanks.getCount();
 }
 
-void EarthArmy::Attack()
+bool EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;
 	//ES Attacks 
@@ -119,6 +119,8 @@ void EarthArmy::Attack()
 	{
 		unit2->Attack();
 	}
+
+	return true;
 
 }
 

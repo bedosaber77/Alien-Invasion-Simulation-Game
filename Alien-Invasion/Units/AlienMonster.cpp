@@ -6,16 +6,36 @@ AlienMonster::AlienMonster(int H, int P, int AC, int tj,  Game* Gameptr) :Unit(H
 {
 	Type = alienMonster;
 }
-void AlienMonster::Attack(Unit* unit2)
+
+bool AlienMonster::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
+	bool SuccessfulAttack = false;
 
-	for (int i = 0; i < this->Attack_Capacity / 2; i++)
+	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
+		if (i % 2 == 0)
+		{
+			unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
+			if (!unit2)
+			{
+				unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+			}
+		}
+		else
+		{
+			unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+			if (!unit2)
+			{
+				unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
+			}
+		}
+
+	
 		if (unit2)
 		{
+			SuccessfulAttack = true;
 			EnemiesList.enqueue(unit2->getID());
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
@@ -44,40 +64,14 @@ void AlienMonster::Attack(Unit* unit2)
 		}
 	}
 
+	pGame->PrintFight(this, this->getType(), EnemiesList);
 
-	for (int i = 0; i < this->Attack_Capacity - (this->Attack_Capacity / 2); i++)
+	while (TempList.dequeue(unit2))
 	{
-		unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
-		if (unit2)
-		{
-			EnemiesList.enqueue(unit2->getID());
-			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
-
-
-			int Damage = (this->getHealth() * this->getPower() / 100) /
-				sqrt(unit2->getHealth());	//Damage Formula
-
-
-			unit2->decrementHealth(Damage);
-
-
-			if (unit2->getHealth() > 0)
-			{
-				TempList.enqueue(unit2);
-			}
-			else if (unit2->getHealth() > 0)
-			{
-				pGame->AddtoUML(unit2);
-			}
-			else
-			{
-				//unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
-
-				pGame->AddtoKilledList(unit2);
-
-			}
-		}
+		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
+
+	return SuccessfulAttack;
 }
 
 AlienMonster::~AlienMonster()

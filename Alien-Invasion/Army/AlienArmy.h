@@ -19,7 +19,7 @@ public:
 	void AddUnit(Unit* newUnit,bool IntoFront=false);
 	Unit* removeUnit(UnitType type,bool FromBack=false);
 
-	void Attack();
+	bool Attack();
 
     //Getters for the output file
 	int GetAScount();

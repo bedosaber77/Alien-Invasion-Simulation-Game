@@ -267,6 +267,10 @@ void Game::CheckResult()
 	{
 		FinalResult = win;
 	}
+	
+	//if both attacked successfully, continue the game
+	if (pEarthArmy->Attack() && pAlienArmy->Attack())
+		TimeStep++;
 }
 
 
@@ -321,12 +325,14 @@ void Game::MainLoop()
 			}
 		}
 		
+		
+
 			if (!SilentMood)
 			{
 				PrintAliveUnits();
 				cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
 				PrintKilledList();
-				cout << "============== Units fighting at current step ==============" << endl;
+				cout << "============== Attack Round ==============" << endl;
 			}
 
 			pEarthArmy->Attack();
@@ -345,6 +351,7 @@ void Game::MainLoop()
 			}
 			TimeStep++;
 		}
+	CheckResult();
 }
 	
 void Game::AddtoKilledList(Unit* army)

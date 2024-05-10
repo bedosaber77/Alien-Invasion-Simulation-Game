@@ -7,10 +7,14 @@ EarthTank::EarthTank(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC
 	Type = earthTank;
 	AttackBoth = false;
 }
-void EarthTank::Attack(Unit* unit2)
+
+bool EarthTank::Attack(Unit* unit2)
 {
+	
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
+
+	bool SuccessfulAttack = false;
 	
 	if (pGame->GetEarthArmyPtr()->GetEScount() < 0.3 * pGame->GetAlienArmyPtr()->GetAScount())
 			AttackBoth = true;
@@ -19,9 +23,32 @@ void EarthTank::Attack(Unit* unit2)
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		unit2 = pGame->GetEnemiesUnit(Alien, alienMonster);
+		if (i % 2 == 0)
+		{
+			unit2 = pGame->GetEnemiesUnit(Alien, alienMonster);
+			if (!unit2 && AttackBoth)
+			{
+				unit2 = pGame->GetEnemiesUnit(Alien, alienSoldier);
+			}
+		}
+		else 
+		{
+			if (AttackBoth)
+			{
+				unit2 = pGame->GetEnemiesUnit(Alien, alienSoldier);
+			}
+			else
+				unit2 = nullptr;
+
+			if (!unit2)
+			{
+				unit2 = pGame->GetEnemiesUnit(Alien, alienMonster);
+			}
+		}
+
 		if (unit2)
 		{
+			SuccessfulAttack = true;
 			EnemiesList.enqueue(unit2->getID());
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
@@ -44,36 +71,14 @@ void EarthTank::Attack(Unit* unit2)
 				pGame->AddtoKilledList(unit2);
 			}
 		}
-		if(AttackBoth && i < this->Attack_Capacity - 1) // we need to check on attack capacity here
-		{
-			unit2 = pGame->GetEnemiesUnit(Alien, alienSoldier);
-			if (unit2)
-			{
-				EnemiesList.enqueue(unit2->getID());
-				unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
-
-
-				int Damage = (this->getHealth() * this->getPower() / 100) /
-					sqrt(unit2->getHealth());	//Damage Formula
-
-
-				unit2->decrementHealth(Damage);
-
-
-				if (unit2->getHealth() > 0)
-				{
-					TempList.enqueue(unit2);
-				}
-				else
-				{
-					unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
-
-					pGame->AddtoKilledList(unit2);
-				}
-			}
-			i++;
-		}
 	}
+	pGame->PrintFight(this, this->getType(), EnemiesList);
+
+	while (TempList.dequeue(unit2))
+	{
+		pGame->GetAlienArmyPtr()->AddUnit(unit2);		//return to original list
+	}
+	return SuccessfulAttack;
 }
 EarthTank::~EarthTank()
 {

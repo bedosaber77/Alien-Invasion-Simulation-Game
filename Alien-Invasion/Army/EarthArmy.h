@@ -32,7 +32,7 @@ public:
 	int GetEGcount();
 	int GetETcount();
 
-	void Attack();
+	bool Attack();
 	void Print();
 
 	~EarthArmy();

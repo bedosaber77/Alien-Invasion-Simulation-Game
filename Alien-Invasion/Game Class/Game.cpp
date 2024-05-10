@@ -10,8 +10,6 @@ Game::Game()
     pEarthArmy = new EarthArmy;
 	pRand = new RandGen(this);
 
-	//EScount = EGcount = ETcount = AScount = ADcount = AMcount = 0;
-
 	ESDead = ETDead = EGDead = 0;
 	ASDead = ADDead = AMDead = 0;
 
@@ -35,7 +33,7 @@ void Game::StartGame()
 	}
 	//Ask for silent mood
 	char ans;
-	cout << "Please select the program mode, Do you want inertactive (I) or silent mode (S)? " << endl
+	cout << "Please select the program mode, Do you want interactive (I) or silent mode (S)? " << endl
 		<< "(I/S)? ";
 	cin >> ans;
 	if (ans == 'S')
@@ -258,21 +256,30 @@ void Game::GameStatistics()
 	OutputFile.close();
 }
 
-ArmyType Game::GameWinner()
+void Game::CheckResult()
 {
-	return Alien;
+	if (pEarthArmy->GetEScount() + pEarthArmy->GetEGcount() + pEarthArmy->GetETcount() == 0)
+	{
+		FinalResult = loss;
+	}
+
+	if (pAlienArmy->GetAScount() + pAlienArmy->GetAMcount() + pAlienArmy->GetADcount() == 0)
+	{
+		FinalResult = win;
+	}
 }
+
 
 int Game::GetCount(UnitType Unit_Type)
 {
 	switch (Unit_Type)
 	{
 	case earthSoldier:
-		return pEarthArmy->GetEScount() + ESDead;
+		return pEarthArmy->GetEScount() + ESDead + UMLsolider.getCount();
 	case earthGunnery:
 		return pEarthArmy->GetEGcount() + EGDead;
 	case earthTank:
-		return pEarthArmy->GetETcount() + ETDead;
+		return pEarthArmy->GetETcount() + ETDead+ UMLtanks.getCount();
 	case alienSoldier:
 		return pAlienArmy->GetAScount() + ASDead;
 	case alienMonster:
@@ -322,8 +329,8 @@ void Game::MainLoop()
 				cout << "============== Units fighting at current step ==============" << endl;
 			}
 
-				pEarthArmy->Attack();
-				pAlienArmy->Attack();
+			pEarthArmy->Attack();
+			pAlienArmy->Attack();
 
 			if (!SilentMood)
 			{
@@ -340,7 +347,6 @@ void Game::MainLoop()
 		}
 }
 	
-
 void Game::AddtoKilledList(Unit* army)
 {
 	army->setTd(TimeStep);
@@ -377,7 +383,6 @@ void Game::ClearKilledList()
 		KilledList.dequeue(KilledUnit);
 		delete KilledUnit;
 	}
-
 }
 
 void Game::AddtoUML(Unit* unit)
@@ -390,12 +395,7 @@ void Game::AddtoUML(Unit* unit)
 	bool Healedbefore;
 	if (!unit->checkUML(Healedbefore)) 
 	{
-		/*
-		if (!Healedbefore)
-		{
-			HealedUnits++;
-		}
-		*/
+
 		unit->setTH(TimeStep);
 	}
 }

@@ -44,7 +44,7 @@ void EarthTank::Attack(Unit* unit2)
 				pGame->AddtoKilledList(unit2);
 			}
 		}
-		if(AttackBoth)
+		if(AttackBoth && i < this->Attack_Capacity - 1) // we need to check on attack capacity here
 		{
 			unit2 = pGame->GetEnemiesUnit(Alien, alienSoldier);
 			if (unit2)

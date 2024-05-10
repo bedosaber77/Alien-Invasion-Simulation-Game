@@ -36,6 +36,8 @@ class Game
 	int HealedUnits;
 	bool SilentMood;
 
+	GameResult FinalResult; 
+
 
 public:
 	Game();
@@ -47,7 +49,7 @@ public:
 	void SetOutFile();
 	void AddtoOutFile(Unit* killedUnit);
 	void GameStatistics();
-	ArmyType GameWinner();
+	void CheckResult();
 	int GetCount(UnitType Unit_Type);
 	void UpdateHealCount();
 
@@ -58,9 +60,8 @@ public:
 	void AddtoUML(Unit* unit);
 	bool UMLisEmpty();
 	Unit* getUnitToHeal();
+
 	// We need to get RandGen and Armies Pointers    (As mentioned in Q&A File)
-
-
 	AlienArmy* GetAlienArmyPtr();
 	EarthArmy* GetEarthArmyPtr();
 	RandGen* GetRandGenPtr();
@@ -83,7 +84,7 @@ public:
 	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<int> fightingUnits);
 	void PrintAliveUnits() const;
 	void PrintUMLList() const;
-	//void PrintFight(LinkedQueue <Unit*> EnemiesList) const;
+
 
 	~Game();
 };

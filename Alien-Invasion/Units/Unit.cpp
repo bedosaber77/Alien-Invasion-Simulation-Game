@@ -112,7 +112,7 @@ void Unit::setTH(int th)
 {
 	TH = th;
 	AddedToUML = true;
-//	IsHealed = true;
+
 }
 
 int Unit::getTH() const

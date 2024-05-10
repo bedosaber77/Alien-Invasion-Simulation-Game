@@ -112,7 +112,7 @@ void Unit::setTH(int th)
 {
 	TH = th;
 	AddedToUML = true;
-	IsHealed = true;
+//	IsHealed = true;
 }
 
 int Unit::getTH() const
@@ -123,6 +123,9 @@ int Unit::getTH() const
 void Unit::ExitUML()
 {
 	AddedToUML = false;
+	if (!IsHealed)
+		pGame->UpdateHealCount();
+	IsHealed = true;    //the unit is successfully healed if it exits UML only
 }
 
 bool Unit::checkUML(bool&ISHealed) const

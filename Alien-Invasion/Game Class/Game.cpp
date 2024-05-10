@@ -34,7 +34,20 @@ void Game::StartGame()
 		ValidName = LoadParameters(Filename + ".txt");
 	}
 	//Ask for silent mood
+	char ans;
+	cout << "Please select the program mode, Do you want inertactive (I) or silent mode (S)? " << endl
+		<< "(I/S)? ";
+	cin >> ans;
+	if (ans == 'S')
+		SilentMood = true;
 
+
+	if (SilentMood)
+	{
+		cout << "Silent Mode\n" << "Simulation Starts..\n"
+			<< "Simulation ends, Output file is created\n";
+	}
+	
 	//Initialize output file
 	SetOutFile();
 	MainLoop();
@@ -237,6 +250,10 @@ void Game::GameStatistics()
 		OutputFile << "Dd/Db: ";
 		OutputFile << double(Ddalien) / Dbalien * 100 << "%" << endl;
 
+		//Percentage of units healed successfully relative to total earth units
+		OutputFile << "Healed units Percentage: ";
+		OutputFile << double(HealedUnits) / (GetCount(earthSoldier) + GetCount(earthTank) + GetCount(earthGunnery)) * 100 << "%";
+
 	}
 	OutputFile.close();
 }
@@ -245,7 +262,6 @@ ArmyType Game::GameWinner()
 {
 	return Alien;
 }
-
 
 int Game::GetCount(UnitType Unit_Type)
 {
@@ -297,22 +313,29 @@ void Game::MainLoop()
 				pAlienArmy->AddUnit(newUnit, i % 2);
 			}
 		}
-		    //cout << "============== Units fighting at current step ==============" << endl;
-			PrintAliveUnits();
-			//cout << "============== Units fighting at current step ==============" << endl;
-			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
-			PrintKilledList();
-			//cout << "============== Units fighting at current step ==============" << endl;
-			pEarthArmy->Attack();
-			pAlienArmy->Attack();
-			cout << "============== Units after attack round ==============" << endl;
-			PrintAliveUnits();
-			cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
-			PrintKilledList();
-			cout << "\u001b[35m============== UML ==============" << endl;
-			PrintUMLList();
-			cout << endl;
-			system("pause");
+		
+			if (!SilentMood)
+			{
+				PrintAliveUnits();
+				cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
+				PrintKilledList();
+				cout << "============== Units fighting at current step ==============" << endl;
+			}
+
+				pEarthArmy->Attack();
+				pAlienArmy->Attack();
+
+			if (!SilentMood)
+			{
+				cout << "============== Units after attack round ==============" << endl;
+				PrintAliveUnits();
+				cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
+				PrintKilledList();
+				cout << "\u001b[35m============== UML ==============" << endl;
+				PrintUMLList();
+				cout << endl;
+				system("pause");
+			}
 			TimeStep++;
 		}
 }
@@ -365,13 +388,14 @@ void Game::AddtoUML(Unit* unit)
 		UMLtanks.enqueue(unit);
 
 	bool Healedbefore;
-	if (!unit->checkUML(Healedbefore))
+	if (!unit->checkUML(Healedbefore)) 
 	{
+		/*
 		if (!Healedbefore)
 		{
 			HealedUnits++;
 		}
-		
+		*/
 		unit->setTH(TimeStep);
 	}
 }
@@ -435,9 +459,11 @@ int Game::GetCurrentTime()
 
 void Game::PrintKilledList() const
 {
+	
 	cout << KilledList.getCount() << " units [";
 	KilledList.print();
 	cout << " ] \n\033[0m";
+
 }
 
 void Game::PrintUMLList() const
@@ -448,35 +474,40 @@ void Game::PrintUMLList() const
 	cout << UMLtanks.getCount() << " UMLtanks [";
 	UMLtanks.print();
 	cout << " ] \n\033[0m";
+	
 }
 
 void Game::PrintFight(Unit* shooter, UnitType shooterType,LinkedQueue<int> fightingUnits)
 {
-	string type;
-	switch (shooterType)
+	if (!SilentMood)
 	{
-	case earthSoldier:
-		type = "ES";
-	   break;
-	case earthGunnery:
-		type = "EG";
-		break;
-	case earthTank:
-		type = "ET";
-		break;
-	case alienSoldier:
-		type = "AS";
-		break;
-	case alienMonster:
-		type = "AM";
-		break;
-	case alienDrone:
-		type = "AD";
-		break;
+		string type;
+		switch (shooterType)
+		{
+		case earthSoldier:
+			type = "ES";
+			break;
+		case earthGunnery:
+			type = "EG";
+			break;
+		case earthTank:
+			type = "ET";
+			break;
+		case alienSoldier:
+			type = "AS";
+			break;
+		case alienMonster:
+			type = "AM";
+			break;
+		case alienDrone:
+			type = "AD";
+			break;
+		}
+		cout << type << " " << shooter->getID() << " shots [";
+		fightingUnits.print();
+		cout << "]" << endl;
 	}
-	cout << type << " " << shooter->getID() << " shots [";
-	fightingUnits.print();
-	cout << "]" << endl;
+	
 }
 
 void Game::PrintAliveUnits() const

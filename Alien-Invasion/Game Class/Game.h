@@ -28,7 +28,7 @@ class Game
 	int TimeStep = 1;
 
 	//units counters
-	//int EScount, EGcount, ETcount, AScount, ADcount, AMcount;
+	//int EScount, EGcount, ETcount, AScount, ADcount, AMcount
 	int ESDead, EGDead, ETDead, ASDead, ADDead, AMDead;
 	int Dfearth, Ddearth, Dbearth;
 	int Dfalien, Ddalien, Dbalien;

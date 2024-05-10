@@ -5,7 +5,7 @@ private:
 //	LinkedQueue<Unit*> EnemiesList;
 public:
 	AlienDrone(int H, int P, int AC, int tj, Game* Gameptr);
-	virtual void Attack(Unit* unit2); 
+	virtual bool Attack(Unit* unit2); 
 	~AlienDrone();
 
 };

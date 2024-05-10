@@ -35,8 +35,9 @@ class Game
 
 	int HealedUnits;
 	bool SilentMood;
+	bool EndGame;
 
-	GameResult FinalResult; 
+	string FinalResult; 
 
 
 public:

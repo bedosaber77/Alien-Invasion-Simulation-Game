@@ -30,7 +30,7 @@ protected:
 	bool IsHealed;
 public:
 	Unit(int H,int P,int AC,int tj,Game* Gameptr);
-	virtual void Attack(Unit* unit2 = nullptr) = 0;
+	virtual bool Attack(Unit* unit2 = nullptr) = 0;
 	void setHealth(int h);
 	void setTd(int td);
 	void setTa(int ta);

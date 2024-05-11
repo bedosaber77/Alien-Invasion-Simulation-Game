@@ -32,6 +32,8 @@ public:
 	int GetEGcount();
 	int GetETcount();
 
+	int GetID();
+
 	bool Attack();
 	void Print();
 

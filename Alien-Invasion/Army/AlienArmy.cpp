@@ -135,6 +135,11 @@ int AlienArmy::GetADcount()
 	return AlienDrones.getCount();
 }
 
+int AlienArmy::GetID()
+{
+	return ID;
+}
+
 void AlienArmy::Print()
 {
 	cout << AlienSoldiers.getCount() << " AS [";

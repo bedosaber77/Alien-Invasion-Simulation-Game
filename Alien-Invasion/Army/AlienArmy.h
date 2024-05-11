@@ -26,6 +26,8 @@ public:
 	int GetAMcount();
 	int GetADcount();
 
+	int GetID();
+
 	void Print();
 
 	~AlienArmy();

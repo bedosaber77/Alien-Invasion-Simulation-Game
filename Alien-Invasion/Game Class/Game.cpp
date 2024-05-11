@@ -187,9 +187,9 @@ void Game::GameStatistics()
 
 		//percentage of destructed units relative to their total
 		OutputFile << "Percentage of destructed units relative to their total " << endl;
-		OutputFile << "ES: " << double(ESDead) / GetCount(earthSoldier) * 100 << "%";
-		OutputFile << "\t\t ET: " << double(ETDead) / GetCount(earthTank) * 100 << "%";
-		OutputFile << "\t\t EG: " << double(EGDead) / GetCount(earthGunnery) * 100 << "%" << endl;
+		OutputFile << "ES: " << (double(ESDead) / GetCount(earthSoldier)) * 100 << "%";
+		OutputFile << "\t\t ET: " << (double(ETDead) / GetCount(earthTank)) * 100 << "%";
+		OutputFile << "\t\t EG: " << (double(EGDead) / GetCount(earthGunnery)) * 100 << "%" << endl;
 
 		// Percentage of destructed units relative to total units
 		OutputFile << "Percentage of destructed units relative to total units: ";
@@ -260,14 +260,16 @@ void Game::GameStatistics()
 
 void Game::CheckResult()
 {
-		if (pEarthArmy->GetEScount() + pEarthArmy->GetEGcount() + pEarthArmy->GetETcount() == 0)
+	int E_total = pEarthArmy->GetEScount() + pEarthArmy->GetEGcount() + pEarthArmy->GetETcount();
+	int A_Total = pAlienArmy->GetAScount() + pAlienArmy->GetAMcount() + pAlienArmy->GetADcount();
+		if (E_total == 0 && A_Total > 0)
 		{
 			FinalResult = "loss";
-			EndGame = true;
+			EndGame = true;	
 			return;
 		}
 
-		else if ((pAlienArmy->GetAScount() + pAlienArmy->GetAMcount() + pAlienArmy->GetADcount()) == 0)
+		else if (E_total > 0 && A_Total ==0)
 		{
 			FinalResult = "win";
 			EndGame = true;
@@ -276,8 +278,7 @@ void Game::CheckResult()
 	
 		//if both attacked successfully, continue the game
 		
-		else if ((pEarthArmy->GetEGcount() > 0 && pAlienArmy->GetAScount() > 0) 
-		|| (pAlienArmy->GetADcount()>0 && pEarthArmy->GetEScount()>0))
+		else if ((E_total == GetCount(earthSoldier) && A_Total == GetCount(alienDrone)) || (E_total == GetCount(earthGunnery) && A_Total == GetCount(alienSoldier)) || (E_total == 0 && A_Total == 0))
 		{
 			FinalResult = "tie";
 			EndGame = true;
@@ -320,9 +321,25 @@ void Game::MainLoop()
 {
 	while (!EndGame) //will stop when it completes 50 time steps for now (phase 1)
 	{
+		if (TimeStep >= 40)
+			CheckResult();
+		if (EndGame)
+		{
+			Unit* dummy;
+			int dumm;
+			while (UMLsolider.dequeue(dummy, dumm))
+			{
+				AddtoKilledList(dummy);
+			}
+			while (UMLtanks.dequeue(dummy))
+			{
+				AddtoKilledList(dummy);
+			}
+			break;
+		}
 		Unit* newUnit = nullptr;
 		int A = (rand() % 100) + 1;
-		if (A <= pRand->GetProb())   //Generating Army condition
+		if (A <= pRand->GetProb() && pEarthArmy->GetID()<2000)   //Generating Army condition
 		{
 			// Generating Earth Army
 			for (int i = 0; i < pRand->GetN(); i++)
@@ -333,7 +350,7 @@ void Game::MainLoop()
 		}
 			// Generating Alien Army
 		    A = (rand() % 100) + 1;
-			if (A <= pRand->GetProb()){
+			if (A <= pRand->GetProb() && pAlienArmy->GetID()<4000){
 			for (int i = 0; i < pRand->GetN(); i++)
 			{
 				newUnit = pRand->GenerateUnits(TimeStep, Alien);
@@ -351,9 +368,13 @@ void Game::MainLoop()
 				cout << "============== Attack Round ==============" << endl;
 			}
 
-			pEarthArmy->Attack();
-			pAlienArmy->Attack();
-
+			bool EarthAT = pEarthArmy->Attack(); //Discuss if it is needed
+			bool AlienAT = pAlienArmy->Attack();
+			if (!EarthAT && !AlienAT && TimeStep >= 40)
+			{
+				FinalResult = "tie";
+				EndGame = true;
+			}
 			if (!SilentMood)
 			{
 				cout << "============== Units after attack round ==============" << endl;
@@ -367,8 +388,6 @@ void Game::MainLoop()
 			}
 			TimeStep++;
 		}
-	if (TimeStep >= 40)
-		CheckResult();
 }
 	
 void Game::AddtoKilledList(Unit* army)

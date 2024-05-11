@@ -92,6 +92,11 @@ int EarthArmy::GetETcount()
 	return EarthTanks.getCount();
 }
 
+int EarthArmy::GetID()
+{
+	return ID;
+}
+
 bool EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;

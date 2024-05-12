@@ -161,5 +161,6 @@
   <ItemGroup>
     <Text Include="TestCase.txt" />
     <Text Include="divZero.txt" />
+    <Text Include="test.txt" />
   </ItemGroup>
 </Project>

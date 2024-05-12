@@ -45,6 +45,7 @@ public:
 	void StartGame();
 
 	bool LoadParameters(string);
+	void GenerateArmy();
 
 	//Output File Needed functions
 	void SetOutFile();

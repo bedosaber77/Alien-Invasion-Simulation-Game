@@ -18,6 +18,7 @@ Game::Game()
 
 	HealedUnits = 0;
 	EndGame = false;
+	SilentMood = false;
 	StartGame();
 }
 
@@ -121,6 +122,38 @@ bool Game::LoadParameters(string Filename)
 		cout << "ERROR, Please enter a valid file name. " << endl;
 		return false;
 
+	}
+}
+
+void Game::GenerateArmy()
+{
+	Unit* newUnit = nullptr;
+	int A = (rand() % 100) + 1;
+	if (A <= pRand->GetProb() && pEarthArmy->GetID() < 2000)   //Generating Army condition
+	{
+		// Generating Earth Army
+		for (int i = 0; i < pRand->GetN(); i++)
+		{
+			newUnit = pRand->GenerateUnits(TimeStep, Earth);
+			pEarthArmy->AddUnit(newUnit);
+		}
+	}
+	// Generating Alien Army
+	A = (rand() % 100) + 1;
+
+	if (A <= pRand->GetProb() && pAlienArmy->GetID() < 4000) {
+		bool Intofront = true;
+		for (int i = 0; i < pRand->GetN(); i++)
+		{
+			newUnit = pRand->GenerateUnits(TimeStep, Alien);
+			if (newUnit->getType() == alienDrone)
+			{
+				pAlienArmy->AddUnit(newUnit, Intofront);  // Each time step we add drones to front ,then back and so on.
+				Intofront = !Intofront;
+			}
+			else
+				pAlienArmy->AddUnit(newUnit);
+		}
 	}
 }
 
@@ -336,11 +369,11 @@ void Game::UpdateHealCount()
 
 void Game::MainLoop()
 {
-	
-	while (!EndGame) //will stop when it completes 50 time steps for now (phase 1)
+	while (!EndGame) //will stop when the game ends
 	{
-		if (TimeStep >= 40)
+		if (TimeStep > 40)
 			CheckResult();
+
 		if (EndGame)
 		{
 			Unit* dummy;
@@ -358,63 +391,35 @@ void Game::MainLoop()
 
 			break;
 		}
-	
-		Unit* newUnit = nullptr;
-		int A = (rand() % 100) + 1;
-		if (A <= pRand->GetProb() && pEarthArmy->GetID()<2000)   //Generating Army condition
+		
+		GenerateArmy();
+
+		if (!SilentMood)
 		{
-			// Generating Earth Army
-			for (int i = 0; i < pRand->GetN(); i++)
-			{
-				newUnit = pRand->GenerateUnits(TimeStep, Earth);
-				pEarthArmy->AddUnit(newUnit);
-			}
+			PrintAliveUnits();
+			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
+			PrintKilledList();
+			cout << "\u001b[35m============== UML ==============" << endl;
+			PrintUMLList();
+			cout << "============== Attack Round ==============" << endl;
 		}
-			// Generating Alien Army
-		    A = (rand() % 100) + 1;
-			
-			if (A <= pRand->GetProb() && pAlienArmy->GetID()<4000){
-				bool Intofront = true;
-			for (int i = 0; i < pRand->GetN(); i++)
-			{
-				newUnit = pRand->GenerateUnits(TimeStep, Alien);
-				if (newUnit->getType() == alienDrone)
-				{
-					pAlienArmy->AddUnit(newUnit, Intofront);  // Each time step we add drones to front ,then back and so on.
-					Intofront = !Intofront;
-				}
-				else
-				pAlienArmy->AddUnit(newUnit);
-			}
-		}
-		
-		
 
-			if (!SilentMood)
-			{
-				PrintAliveUnits();
-				cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
-				PrintKilledList();
-				cout << "============== Attack Round ==============" << endl;
-			}
+		bool EarthAT = pEarthArmy->Attack(); //Discuss if it is needed
+		bool AlienAT = pAlienArmy->Attack();
 
-			bool EarthAT = pEarthArmy->Attack(); //Discuss if it is needed
-			bool AlienAT = pAlienArmy->Attack();
-		
-			if (!SilentMood)
-			{
-				cout << "============== Units after attack round ==============" << endl;
-				PrintAliveUnits();
-				cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
-				PrintKilledList();
-				cout << "\u001b[35m============== UML ==============" << endl;
-				PrintUMLList();
-				cout << endl;
-				system("pause");
-			}
-			TimeStep++;
-			
+		if (!SilentMood)
+		{
+			cout << "============== Units after attack round ==============" << endl;
+			PrintAliveUnits();
+			cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
+			PrintKilledList();
+			cout << "\u001b[35m============== UML ==============" << endl;
+			PrintUMLList();
+			cout << endl;
+			system("pause");
 		}
+		TimeStep++;
+	}
 }
 	
 void Game::AddtoKilledList(Unit* army)

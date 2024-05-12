@@ -9,6 +9,11 @@ AlienArmy::AlienArmy()
 	srand(time(0));
 }
 
+
+//==================================================================================//
+//								Add / Remove Functions	     						//
+//==================================================================================//
+
 void AlienArmy::AddUnit(Unit* newUnit,bool IntoFront)
 {
 	//Check if the unit is a new unit or it has returned from the war to set its ID correctly
@@ -21,6 +26,7 @@ void AlienArmy::AddUnit(Unit* newUnit,bool IntoFront)
 	//Add each unit to its list according to its type
 	if (newUnit->getType() == alienSoldier)
 		AlienSoldiers.enqueue(newUnit);
+
 	else if (newUnit->getType() == alienDrone)
 	{
 		if(IntoFront)
@@ -28,6 +34,7 @@ void AlienArmy::AddUnit(Unit* newUnit,bool IntoFront)
 		else
 		AlienDrones.enqueue(newUnit);
 	}
+
 	else
 	{
 		AlienMonsters.insert(newUnit);
@@ -76,50 +83,10 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 	return unit;
 }
 
-bool AlienArmy::Attack()
-{
-	Unit* unit2 = nullptr;
-	bool SuccusfulAttack = false;
-	//AS Attack
 
-	if (AlienSoldiers.peek(unit2))
-	{
-		SuccusfulAttack = unit2->Attack();
-	}
-
-
-	//AM Attack
-	if (AlienMonsters.getCount()) 
-	{
-		int randidx = rand() % AlienMonsters.getCount();
-		if (AlienMonsters.getItem(unit2, randidx))
-		{
-			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
-		}
-	}
-
-
-	//AD Attack in pairs
-
-
-	if (AlienDrones.getCount() > 1)
-	{
-		AlienDrones.peek(unit2);
-		if (unit2)
-		{
-			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
-		}
-
-		AlienDrones.peekBack(unit2);
-		if (unit2)
-		{
-			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
-		}
-
-	}
-	return SuccusfulAttack;
-}
-
+//==================================================================================//
+//							     Getters Functions	          						//
+//==================================================================================//
 int AlienArmy::GetAScount()
 {
 	return AlienSoldiers.getCount();
@@ -138,6 +105,54 @@ int AlienArmy::GetADcount()
 int AlienArmy::GetID()
 {
 	return ID;
+}
+
+//==================================================================================//
+//							      	Fighting Functions       						//
+//==================================================================================//
+
+
+bool AlienArmy::Attack()
+{
+	Unit* unit2 = nullptr;
+	bool SuccusfulAttack = false;
+
+
+	//AS Attacks
+
+	if (AlienSoldiers.peek(unit2))
+	{
+		SuccusfulAttack = unit2->Attack();
+	}
+
+
+	//AM Attacks
+	if (AlienMonsters.getCount())
+	{
+		int randidx = rand() % AlienMonsters.getCount();
+		if (AlienMonsters.getItem(unit2, randidx))
+		{
+			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
+		}
+	}
+
+	//AD Attack in pairs
+	if (AlienDrones.getCount() > 1)
+	{
+		AlienDrones.peek(unit2);
+		if (unit2)
+		{
+			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
+		}
+
+		AlienDrones.peekBack(unit2);
+		if (unit2)
+		{
+			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
+		}
+
+	}
+	return SuccusfulAttack;
 }
 
 void AlienArmy::Print()

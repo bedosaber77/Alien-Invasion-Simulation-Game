@@ -28,12 +28,14 @@ public:
 	void AddUnit(Unit* newUnit);
 	Unit* removeUnit(UnitType type);
 
+	// Count Alive Units for the output file
 	int GetEScount();
 	int GetEGcount();
 	int GetETcount();
 
 	int GetID();
 
+	//Fighting Functions
 	bool Attack();
 	void Print();
 

@@ -27,16 +27,19 @@ class Game
 
 	int TimeStep = 1;
 
-	//units counters
-	//int EScount, EGcount, ETcount, AScount, ADcount, AMcount
+	//Killed Units Counters
+	
 	int ESDead, EGDead, ETDead, ASDead, ADDead, AMDead;
+
+	// Duration Parameters
 	int Dfearth, Ddearth, Dbearth;
 	int Dfalien, Ddalien, Dbalien;
 
 	int HealedUnits;
+
+	// EndGame Parameters
 	bool SilentMood;
 	bool EndGame;
-
 	string FinalResult; 
 
 

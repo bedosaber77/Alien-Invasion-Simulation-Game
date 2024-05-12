@@ -6,12 +6,17 @@
 #include"../Units/EarthGunnery.h"
 #include"..\Units\Aliensoldier.h"
 #include"../Units/HealUnit.h"
+
+
 RandGen::RandGen(Game* GamePtr)
 {
 	srand(time(0));
 	pGame = GamePtr;
 
 }
+//==================================================================================//
+//							      	Generation Function       						//
+//==================================================================================//
 
 Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 {
@@ -43,14 +48,12 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 			else if (B <= EarthParameters.ESpercent + EarthParameters.ETpercent)	//generate ET
 			{
 				newUnit = new EarthTank(eHealth, ePower, eCapacity, ts, pGame);
-			
 			}
 			else if(B <= EarthParameters.ESpercent + EarthParameters.ETpercent+EarthParameters.EGpercent)      //generate EG
 			{
 				newUnit = new EarthGunnery(eHealth, ePower, eCapacity, ts, pGame);
-
 			}
-			else
+			else    //generate HU
 			{
 				newUnit = new HealUnit(eHealth, ePower, eCapacity, ts, pGame);
 			}
@@ -94,6 +97,11 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 	
 	return newUnit;
 }
+
+//==================================================================================//
+//							      	Setters /Getters Functions          			//
+//==================================================================================//
+
 
 void RandGen::SetN(int n)
 {

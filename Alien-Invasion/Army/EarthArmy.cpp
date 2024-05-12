@@ -7,6 +7,11 @@ EarthArmy::EarthArmy()
 	HealedUnits = 0;
 }
 
+//==================================================================================//
+//								Add / Remove Functions	     						//
+//==================================================================================//
+
+
 void EarthArmy::AddUnit(Unit* newUnit)
 {
 	//Check if the unit is a new unit or it has returned from the war to set its ID correctly
@@ -19,8 +24,10 @@ void EarthArmy::AddUnit(Unit* newUnit)
 	//Add each unit to its list according to its type 
 	if (newUnit->getType() == earthSoldier)
 		EarthSoldiers.enqueue(newUnit);
+
 	else if (newUnit->getType() == earthTank)
 		EarthTanks.push(newUnit);
+
 	else if(newUnit->getType() == earthGunnery)
 	{
 		EarthGunnery* earthgunnery = dynamic_cast<EarthGunnery*>(newUnit);
@@ -77,6 +84,9 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	return unit;
 }
 
+//==================================================================================//
+//							     Getters Functions	          						//
+//==================================================================================//
 int EarthArmy::GetEScount()
 {
 	return EarthSoldiers.getCount();
@@ -97,30 +107,38 @@ int EarthArmy::GetID()
 	return ID;
 }
 
+
+//==================================================================================//
+//							      	Fighting Functions       						//
+//==================================================================================//
+
+
 bool EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;
 	bool SuccusfulAttack = false;
+
 	//ES Attacks 
 	if (EarthSoldiers.peek(unit2))
 	{
 		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack ;
 	}
 	
-	//tank
-
+	//ET Attacks
 	if(EarthTanks.peek(unit2))
 	{
 		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack ;
 	}
 
-	//EG
+
+	//EG Attacks
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
 	{
 		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack;
 	}
 
+	// HU Heals
 	if (HL.peek(unit2))
 	{
 		unit2->Attack();

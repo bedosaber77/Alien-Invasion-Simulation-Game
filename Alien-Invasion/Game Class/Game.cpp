@@ -139,7 +139,7 @@ void Game::GenerateArmy()
 {
 	Unit* newUnit = nullptr;
 	int A = (rand() % 100) + 1;
-	if (A <= pRand->GetProb() && pEarthArmy->GetID() < 2000)   //Generating Army condition
+	if (A <= pRand->GetProb() && pEarthArmy->GetID() < 1000)   //Generating Army condition
 	{
 		// Generating Earth Army
 		for (int i = 0; i < pRand->GetN(); i++)
@@ -151,7 +151,7 @@ void Game::GenerateArmy()
 	// Generating Alien Army
 	A = (rand() % 100) + 1;
 
-	if (A <= pRand->GetProb() && pAlienArmy->GetID() < 4000) {
+	if (A <= pRand->GetProb() && pAlienArmy->GetID() < 3000) {
 		bool Intofront = true;
 		for (int i = 0; i < pRand->GetN(); i++)
 		{

@@ -7,10 +7,10 @@ HealUnit::HealUnit(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, 
 	Type = healUnit;
 }
 
-bool HealUnit::Attack(Unit* unit2)
+void HealUnit::Attack(Unit* unit2)
 {
 	if (pGame->UMLisEmpty())
-		return false;
+		return ;
 	LinkedQueue<Unit*> TempList;
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
@@ -48,7 +48,7 @@ bool HealUnit::Attack(Unit* unit2)
 	this->setTa(pGame->GetCurrentTime());
 	pGame->AddtoKilledList(this);
 
-	return true;
+	
 }
 
 

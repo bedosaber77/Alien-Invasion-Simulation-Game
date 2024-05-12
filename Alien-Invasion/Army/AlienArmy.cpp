@@ -112,17 +112,17 @@ int AlienArmy::GetID()
 //==================================================================================//
 
 
-bool AlienArmy::Attack()
+void AlienArmy::Attack()
 {
 	Unit* unit2 = nullptr;
-	bool SuccusfulAttack = false;
+	
 
 
 	//AS Attacks
 
 	if (AlienSoldiers.peek(unit2))
 	{
-		SuccusfulAttack = unit2->Attack();
+		unit2->Attack();
 	}
 
 
@@ -132,7 +132,7 @@ bool AlienArmy::Attack()
 		int randidx = rand() % AlienMonsters.getCount();
 		if (AlienMonsters.getItem(unit2, randidx))
 		{
-			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
+			 unit2->Attack() ;
 		}
 	}
 
@@ -142,17 +142,17 @@ bool AlienArmy::Attack()
 		AlienDrones.peek(unit2);
 		if (unit2)
 		{
-			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
+			 unit2->Attack();
 		}
 
 		AlienDrones.peekBack(unit2);
 		if (unit2)
 		{
-			SuccusfulAttack = unit2->Attack() || SuccusfulAttack;
+		 unit2->Attack() ;
 		}
 
 	}
-	return SuccusfulAttack;
+	return ;
 }
 
 void AlienArmy::Print()

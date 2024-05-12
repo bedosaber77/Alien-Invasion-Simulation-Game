@@ -37,7 +37,7 @@ public:
 	int GetID();
 
 	//Fighting Functions
-	bool Attack();
+	void Attack();
 	void Print();
 
 	~EarthArmy();

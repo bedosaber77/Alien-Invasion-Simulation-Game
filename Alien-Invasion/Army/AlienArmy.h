@@ -33,7 +33,7 @@ public:
 
 
 	//Fighting Functions
-	bool Attack();
+	void Attack();
 	void Print();
 
 	~AlienArmy();

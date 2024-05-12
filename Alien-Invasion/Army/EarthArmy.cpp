@@ -118,28 +118,28 @@ int EarthArmy::GetID()
 //==================================================================================//
 
 
-bool EarthArmy::Attack()
+void EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;
-	bool SuccusfulAttack = false;
+	
 
 	//ES Attacks 
 	if (EarthSoldiers.peek(unit2))
 	{
-		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack ;
+		unit2->Attack() ;
 	}
 	
 	//ET Attacks
 	if(EarthTanks.peek(unit2))
 	{
-		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack ;
+		 unit2->Attack() ;
 	}
 
 	//EG Attacks
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
 	{
-		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack;
+	    unit2->Attack();
 	}
 
 	//HU Heals
@@ -148,7 +148,7 @@ bool EarthArmy::Attack()
 		unit2->Attack();
 	}
 
-	return SuccusfulAttack;
+	return ;
 
 }
 

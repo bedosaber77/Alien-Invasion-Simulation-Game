@@ -6,19 +6,18 @@ AlienSoldier::AlienSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 	Type = alienSoldier;
 }
 
-bool AlienSoldier:: Attack(Unit* unit2)
+void AlienSoldier:: Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
-	bool SuccessfulAttack = false;
-
+	
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
 		unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
 		if (unit2)
 		{
-			SuccessfulAttack = true;
+		
 			EnemiesList.enqueue(unit2->getID());
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
@@ -56,7 +55,6 @@ bool AlienSoldier:: Attack(Unit* unit2)
 	{
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
-	return SuccessfulAttack;
 }
 
 AlienSoldier::~AlienSoldier()

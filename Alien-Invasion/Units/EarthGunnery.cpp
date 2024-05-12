@@ -6,12 +6,12 @@ EarthGunnery::EarthGunnery(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 	Type = earthGunnery;
 }
 
-bool EarthGunnery::Attack(Unit* unit2)
+void EarthGunnery::Attack(Unit* unit2)
 {
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
 	
-	bool SuccessfulAttack = false;
+	
 	bool IntoFront = false;
 
 
@@ -39,7 +39,6 @@ bool EarthGunnery::Attack(Unit* unit2)
 
 		if (unit2)
 		{
-			SuccessfulAttack = true;
 			EnemiesList.enqueue(unit2->getID());
 		
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
@@ -84,7 +83,6 @@ bool EarthGunnery::Attack(Unit* unit2)
 			pGame->GetAlienArmyPtr()->AddUnit(unit2);
 		}
 	}
-	return SuccessfulAttack;
 }
 
 //Function to return highest Health-Power combination

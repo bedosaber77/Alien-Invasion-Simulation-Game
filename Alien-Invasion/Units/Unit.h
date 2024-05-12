@@ -63,7 +63,7 @@ public:
 	void incrementHealth(int);		
 
 	//Fighting Function
-	virtual bool Attack(Unit* unit2 = nullptr) = 0;
+	virtual void Attack(Unit* unit2 = nullptr) = 0;
 
 	//Heal Unit Functions
 	int getIntialHealth() const;

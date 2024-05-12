@@ -8,7 +8,7 @@ private:
 public:
 
 	EarthTank(int H, int P, int AC, int tj, Game* Gameptr);
-	virtual bool Attack(Unit* unit2);
+	virtual void Attack(Unit* unit2);
 	~EarthTank();
 };
 

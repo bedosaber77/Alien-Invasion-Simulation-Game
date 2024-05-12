@@ -419,8 +419,8 @@ void Game::MainLoop()
 		}
 
 		///////////////Attack Round//////////////////
-		bool EarthAT = pEarthArmy->Attack(); //Discuss if it is needed
-		bool AlienAT = pAlienArmy->Attack();
+		 pEarthArmy->Attack(); //Discuss if it is needed
+		 pAlienArmy->Attack();
 		
 
 		if (!SilentMode)

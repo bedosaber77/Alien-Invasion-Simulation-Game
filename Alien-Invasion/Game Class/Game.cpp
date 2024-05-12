@@ -129,7 +129,7 @@ void Game::SetOutFile()
 	//Initialize output file
 	ofstream OutputFile;
 	OutputFile.open("outFile.txt", ios::out);
-	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb" << endl;
+	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb\t\t\tType" << endl;
 }
 
 //Function that adds killed unit to the output file
@@ -163,6 +163,9 @@ void Game::AddtoOutFile(Unit* killedUnit)
 		OutputFile << killedUnit->getTa() - killedUnit->getTj()  << setw(12);     //First Attack Delay
 		OutputFile << killedUnit->getTd() - killedUnit->getTa() << setw(12);      //Destruction Delay
 		OutputFile << killedUnit->getTd() - killedUnit->getTj() << setw(12);      //Battle Time
+
+
+		OutputFile << killedUnit->getType() << setw(12);
 	}
 	OutputFile.close();
 }
@@ -350,8 +353,12 @@ void Game::MainLoop()
 			{
 				AddtoKilledList(dummy);
 			}
+			PrintAliveUnits();
+			//PrintAliveUnits();
+
 			break;
 		}
+	
 		Unit* newUnit = nullptr;
 		int A = (rand() % 100) + 1;
 		if (A <= pRand->GetProb() && pEarthArmy->GetID()<2000)   //Generating Army condition
@@ -393,14 +400,7 @@ void Game::MainLoop()
 
 			bool EarthAT = pEarthArmy->Attack(); //Discuss if it is needed
 			bool AlienAT = pAlienArmy->Attack();
-			/*
-			if (!EarthAT && !AlienAT && TimeStep >= 40)
-			{
-				FinalResult = "tie";
-				EndGame = true;
-			}
-			*/
-
+		
 			if (!SilentMood)
 			{
 				cout << "============== Units after attack round ==============" << endl;
@@ -413,6 +413,7 @@ void Game::MainLoop()
 				system("pause");
 			}
 			TimeStep++;
+			
 		}
 }
 	

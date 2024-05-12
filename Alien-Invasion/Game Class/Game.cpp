@@ -319,6 +319,7 @@ void Game::UpdateHealCount()
 
 void Game::MainLoop()
 {
+	
 	while (!EndGame) //will stop when it completes 50 time steps for now (phase 1)
 	{
 		if (TimeStep >= 40)
@@ -350,11 +351,19 @@ void Game::MainLoop()
 		}
 			// Generating Alien Army
 		    A = (rand() % 100) + 1;
+			
 			if (A <= pRand->GetProb() && pAlienArmy->GetID()<4000){
+				bool Intofront = true;
 			for (int i = 0; i < pRand->GetN(); i++)
 			{
 				newUnit = pRand->GenerateUnits(TimeStep, Alien);
-				pAlienArmy->AddUnit(newUnit, i % 2);
+				if (newUnit->getType() == alienDrone)
+				{
+					pAlienArmy->AddUnit(newUnit, Intofront);  // Each time step we add drones to front ,then back and so on.
+					Intofront = !Intofront;
+				}
+				else
+				pAlienArmy->AddUnit(newUnit);
 			}
 		}
 		

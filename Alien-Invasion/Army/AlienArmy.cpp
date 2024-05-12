@@ -87,22 +87,22 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 //==================================================================================//
 //							     Getters Functions	          						//
 //==================================================================================//
-int AlienArmy::GetAScount()
+int AlienArmy::GetAScount() const
 {
 	return AlienSoldiers.getCount();
 }
 
-int AlienArmy::GetAMcount()
+int AlienArmy::GetAMcount() const
 {
 	return AlienMonsters.getCount();
 }
 
-int AlienArmy::GetADcount()
+int AlienArmy::GetADcount() const
 {
 	return AlienDrones.getCount();
 }
 
-int AlienArmy::GetID()
+int AlienArmy::GetID() const
 {
 	return ID;
 }
@@ -155,7 +155,7 @@ void AlienArmy::Attack()
 	return ;
 }
 
-void AlienArmy::Print()
+void AlienArmy::Print() const
 {
 	cout << AlienSoldiers.getCount() << " AS [";
 	AlienSoldiers.print();

@@ -87,27 +87,27 @@ Unit* EarthArmy::removeUnit(UnitType type)
 //==================================================================================//
 //							     Getters Functions	          						//
 //==================================================================================//
-int EarthArmy::GetEScount()
+int EarthArmy::GetEScount()const 
 {
 	return EarthSoldiers.getCount();
 }
 
-int EarthArmy::GetEGcount()
+int EarthArmy::GetEGcount() const
 {
 	return EarthGunneries.getCount();
 }
 
-int EarthArmy::GetETcount()
+int EarthArmy::GetETcount()const
 {
 	return EarthTanks.getCount();
 }
 
-int EarthArmy::GetHUcount()
+int EarthArmy::GetHUcount()const
 {
 	return HL.getCount();
 }
 
-int EarthArmy::GetID()
+int EarthArmy::GetID()const
 {
 	return ID;
 }
@@ -152,7 +152,7 @@ void EarthArmy::Attack()
 
 }
 
-void EarthArmy::Print()
+void EarthArmy::Print()const
 {
 	cout << EarthSoldiers.getCount()<<" ES  [";
 	EarthSoldiers.print();

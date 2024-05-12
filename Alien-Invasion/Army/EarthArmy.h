@@ -29,16 +29,16 @@ public:
 	Unit* removeUnit(UnitType type);
 
 	// Count Alive Units for the output file
-	int GetEScount();
-	int GetEGcount();
-	int GetETcount();
-	int GetHUcount();
+	int GetEScount() const;
+	int GetEGcount() const;
+	int GetETcount() const;
+	int GetHUcount() const;
 
-	int GetID();
+	int GetID() const;
 
 	//Fighting Functions
 	void Attack();
-	void Print();
+	void Print() const;
 
 	~EarthArmy();
 

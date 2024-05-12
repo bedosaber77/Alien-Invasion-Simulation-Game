@@ -25,16 +25,16 @@ public:
 	
 
 	// Count Alive Units for the output file
-	int GetAScount();
-	int GetAMcount();
-	int GetADcount();
+	int GetAScount() const;
+	int GetAMcount() const;
+	int GetADcount() const;
 
-	int GetID();
+	int GetID() const;
 
 
 	//Fighting Functions
 	void Attack();
-	void Print();
+	void Print() const;
 
 	~AlienArmy();
 

@@ -8,9 +8,9 @@ EarthTank::EarthTank(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC
 	AttackBoth = false;
 }
 
-void EarthTank::Attack(Unit* unit2)
+void EarthTank::Attack()
 {
-	
+	Unit* unit2 = nullptr;
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
 

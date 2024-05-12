@@ -8,8 +8,9 @@ EarthSoldier::EarthSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 	Type = earthSoldier;
 }
 
-void EarthSoldier::Attack(Unit* unit2)
+void EarthSoldier::Attack()
 {
+	Unit* unit2 = nullptr;
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
 

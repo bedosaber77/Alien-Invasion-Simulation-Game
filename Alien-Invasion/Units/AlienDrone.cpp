@@ -6,8 +6,10 @@ AlienDrone::AlienDrone(int H, int P, int AC, int tj, Game* Gameptr):Unit(H,P,AC,
 	Type = alienDrone;
 }
 
-void AlienDrone::Attack(Unit* unit2)
+void AlienDrone::Attack()
 {
+	Unit* unit2 = nullptr;
+
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
 

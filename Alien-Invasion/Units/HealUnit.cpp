@@ -7,8 +7,9 @@ HealUnit::HealUnit(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, 
 	Type = healUnit;
 }
 
-void HealUnit::Attack(Unit* unit2)
+void HealUnit::Attack()
 {
+	Unit* unit2 = nullptr;
 	if (pGame->UMLisEmpty())
 		return ;
 	LinkedQueue<Unit*> TempList;

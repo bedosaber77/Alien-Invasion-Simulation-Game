@@ -6,8 +6,9 @@ EarthGunnery::EarthGunnery(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 	Type = earthGunnery;
 }
 
-void EarthGunnery::Attack(Unit* unit2)
+void EarthGunnery::Attack()
 {
+	Unit* unit2 = nullptr;
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
 	

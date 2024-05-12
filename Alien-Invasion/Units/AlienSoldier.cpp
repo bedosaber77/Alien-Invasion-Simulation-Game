@@ -6,8 +6,9 @@ AlienSoldier::AlienSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H,
 	Type = alienSoldier;
 }
 
-void AlienSoldier:: Attack(Unit* unit2)
+void AlienSoldier:: Attack()
 {
+	Unit* unit2 = nullptr;
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<int> EnemiesList;
 	

@@ -27,66 +27,57 @@ class Game
 
 	int TimeStep = 1;
 
-	//units counters
-	//int EScount, EGcount, ETcount, AScount, ADcount, AMcount
-	int ESDead, EGDead, ETDead, ASDead, ADDead, AMDead;
-	int Dfearth, Ddearth, Dbearth;
-	int Dfalien, Ddalien, Dbalien;
+	//Units Counters
+	int ESDead, EGDead, ETDead, HUDead, ASDead, ADDead, AMDead; //Dead Units counters
+	int Dfearth, Ddearth, Dbearth;    //Df, Dd, Db for earth army counters
+	int Dfalien, Ddalien, Dbalien;    //Df, Dd, Db for alien army counters
+	int HealedUnits;  //No of units healed successfully
 
-	int HealedUnits;
-	bool SilentMood;
-	bool EndGame;
-
-	string FinalResult; 
-
-
+	bool SilentMode;   //checks the mode of the game (S/I)
+	bool EndGame;     //checks the end of the game  
+	string FinalResult;  //stores the final result (win/tie/loss)
 public:
 	Game();
-	void StartGame();
 
+	//Functions needed at the beginning of the game
+	void StartGame();
 	bool LoadParameters(string);
-	void GenerateArmy();
+
+	void GenerateArmy();  //generates number of units each time step
+
+	void MainLoop();   // Increment time step until game ends
+	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
 
 	//Output File Needed functions
-	void SetOutFile();
-	void AddtoOutFile(Unit* killedUnit);
-	void GameStatistics();
-	void CheckResult();
-	int GetCount(UnitType Unit_Type);
-	void UpdateHealCount();
+	void SetOutFile();  //Start the output file
+	void AddtoOutFile(Unit* killedUnit);  //Add info of each killed unit to the output file
+	void GameStatistics() const;  //Calculate game statistics at the end of the game
+	void CheckResult();  //check result each time step after 40
+	int GetCount(UnitType Unit_Type) const;  //return total count of each unit from the beginning of the game
 
-	void MainLoop();	               // Increment time step until game ends
-	void AddtoKilledList(Unit* army);  // Add killed units to the killed list
-	void ClearKilledList();            // deallocate all units in the killed list
 
-	void AddtoUML(Unit* unit);
-	bool UMLisEmpty();
-	Unit* getUnitToHeal();
+	//Heal functions
+	void AddtoUML(Unit* unit);  //Add earth units to UML
+	bool UMLisEmpty() const;  //check if the UML is empty or not
+	Unit* getUnitToHeal();  //returns damaged unit for the heal unit to heal
+	void UpdateHealCount();  //increment healed units when healed successfully
 
-	// We need to get RandGen and Armies Pointers    (As mentioned in Q&A File)
-	AlienArmy* GetAlienArmyPtr();
-	EarthArmy* GetEarthArmyPtr();
-	RandGen* GetRandGenPtr();
+	//Needed functions for attack
+	Unit* GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type, bool BackDrone = 0) const;  //return enemy for the unit to attack 
 
-	Unit* GetEnemiesUnit(ArmyType Army_Type,UnitType Unit_Type,bool BackDrone=0);	//to be revisited
+	//RandGen and Armies Pointers Getters
+	AlienArmy* GetAlienArmyPtr() const;
+	EarthArmy* GetEarthArmyPtr() const;
+	RandGen* GetRandGenPtr() const;
 
-	// Get Current Time              (To be discussed ,what do you think about consistency?)
-	int GetCurrentTime();
+	// Current Time Getter       
+	int GetCurrentTime() const;
 
-	
-
-	/*
-	* Maybe phase 2 functions
-	bool CheckWin();    // check win to end the game
-	bool CheckGameOver(); // to be revisited
-	*/
-
-	//printing functions for the output file 
+	//printing functions 
 	void PrintKilledList() const;
-	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<int> fightingUnits);
+	void PrintFight(Unit* shooter, UnitType shooterType, LinkedQueue<int> fightingUnits) const;
 	void PrintAliveUnits() const;
 	void PrintUMLList() const;
-
 
 	~Game();
 };

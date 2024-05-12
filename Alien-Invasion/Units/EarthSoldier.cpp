@@ -38,8 +38,6 @@ bool EarthSoldier::Attack(Unit* unit2)
 			}
 			else
 			{
-				//unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
-
 				pGame->AddtoKilledList(unit2);
 			}
 		}

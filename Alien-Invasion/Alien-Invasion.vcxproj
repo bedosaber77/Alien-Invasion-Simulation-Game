@@ -171,6 +171,7 @@
     <ResourceCompile Include="Alien-Invasion.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="outFile.txt" />
     <Text Include="test.txt" />
     <Text Include="TestCase.txt" />
     <Text Include="divZero.txt" />

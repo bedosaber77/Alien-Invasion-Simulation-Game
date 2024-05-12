@@ -31,6 +31,7 @@ public:
 	int GetEScount();
 	int GetEGcount();
 	int GetETcount();
+	int GetHUcount();
 
 	int GetID();
 

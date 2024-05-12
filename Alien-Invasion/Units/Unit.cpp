@@ -112,7 +112,6 @@ void Unit::setTH(int th)
 {
 	TH = th;
 	AddedToUML = true;
-
 }
 
 int Unit::getTH() const
@@ -128,9 +127,8 @@ void Unit::ExitUML()
 	IsHealed = true;    //the unit is successfully healed if it exits UML only
 }
 
-bool Unit::checkUML(bool&ISHealed) const
-{
-	ISHealed = this->IsHealed; 
+bool Unit::checkUML() const
+{ 
 	return AddedToUML;  // checks it is in uml or not, to set its time only once  
 }
 

@@ -10,7 +10,7 @@ Game::Game()
     pEarthArmy = new EarthArmy;
 	pRand = new RandGen(this);
 
-	ESDead = ETDead = EGDead = 0;
+	ESDead = ETDead = EGDead = HUDead = 0;
 	ASDead = ADDead = AMDead = 0;
 
 	Dfearth = Ddearth = Dbearth = 0;
@@ -18,12 +18,13 @@ Game::Game()
 
 	HealedUnits = 0;
 	EndGame = false;
-	SilentMood = false;
+	SilentMode = false;
 	StartGame();
 }
 
 void Game::StartGame()
 {
+	//Asks the user for the name of the file and check its validity
 	bool ValidName = false;
 	cout << "	ALIEN INVASION ! " << endl
 		<< "Please enter your File Parameters path" << endl;
@@ -33,16 +34,17 @@ void Game::StartGame()
 		cin >> Filename;
 		ValidName = LoadParameters(Filename + ".txt");
 	}
-	//Ask for silent mood
+
+	//Asks the user to choose between silent and iteractive modes
 	char ans;
 	cout << "Please select the program mode, Do you want interactive (I) or silent mode (S)? " << endl
 		<< "(I/S)? ";
 	cin >> ans;
 	if (ans == 'S')
-		SilentMood = true;
+		SilentMode = true;
 
 
-	if (SilentMood)
+	if (SilentMode)
 	{
 		cout << "Silent Mode\n" << "Simulation Starts..\n"
 			<< "Simulation ends, Output file is created\n";
@@ -50,7 +52,11 @@ void Game::StartGame()
 	
 	//Initialize output file
 	SetOutFile();
+
+	//Start the game
 	MainLoop();
+
+	//Print the game statistics in the output file
 	GameStatistics();
 }
 
@@ -165,7 +171,6 @@ void Game::SetOutFile()
 	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb" << endl;
 }
 
-//Function that adds killed unit to the output file
 void Game::AddtoOutFile(Unit* killedUnit)
 {
 	//string outFile;
@@ -176,45 +181,51 @@ void Game::AddtoOutFile(Unit* killedUnit)
 		OutputFile << endl;
 		OutputFile << killedUnit->getTd() << setw(12);   //Join Time
 		OutputFile << killedUnit->getID() << setw(12);   //Unit's ID
-		OutputFile << killedUnit->getTj() << setw(12);  //Destruction Time
+		OutputFile << killedUnit->getTj() << setw(12);   //Destruction Time
+
+		int Df = killedUnit->getTa() - killedUnit->getTj();
+		int Dd = killedUnit->getTd() - killedUnit->getTa();
+		int Db = killedUnit->getTd() - killedUnit->getTj();
 		
 		//Update DfTotal, DdTotal and DbTotal for earth army
 		if (killedUnit->getType() == earthSoldier || killedUnit->getType() == earthGunnery || killedUnit->getType() == earthTank)
 		{
-			Dfearth += killedUnit->getTa() - killedUnit->getTj();
-			Ddearth += killedUnit->getTd() - killedUnit->getTa();
-			Dbearth += killedUnit->getTd() - killedUnit->getTj();
+			Dfearth += Df;
+			Ddearth += Dd;
+			Dbearth += Db;
 		}
 		else if (killedUnit->getType() == alienSoldier || killedUnit->getType() == alienMonster || killedUnit->getType() == alienDrone)
 		{
-			Dfalien += killedUnit->getTa() - killedUnit->getTj();
-			Ddalien += killedUnit->getTd() - killedUnit->getTa();
-			Dbalien += killedUnit->getTd() - killedUnit->getTj();
+			Dfalien += Df;
+			Ddalien += Dd;
+			Dbalien += Db;
 		}
 
 		//Print Df, Dd, Db of each unit
-		OutputFile << killedUnit->getTa() - killedUnit->getTj()  << setw(12);     //First Attack Delay
-		OutputFile << killedUnit->getTd() - killedUnit->getTa() << setw(12);      //Destruction Delay
-		OutputFile << killedUnit->getTd() - killedUnit->getTj() << setw(12);      //Battle Time
+		OutputFile << Df << setw(12);     //First Attack Delay
+		OutputFile << Dd<< setw(12);      //Destruction Delay
+		OutputFile << Db << setw(12);     //Battle Time
 	}
 	OutputFile.close();
 }
 
-void Game::GameStatistics()
+void Game::GameStatistics() const
 {
 	ofstream OutputFile;
 	OutputFile.open("outFile.txt", ios::app);
 
-	int TotalEunits = GetCount(earthSoldier) + GetCount(earthTank) + GetCount(earthGunnery);
-	int TotalEdestructed = EGDead + ESDead + ETDead;
+	//calculate total earth alive and destructed units
+	int TotalEunits = GetCount(earthSoldier) + GetCount(earthTank) + GetCount(earthGunnery) + GetCount(healUnit);
+	int TotalEdestructed = EGDead + ESDead + ETDead + HUDead;
 
+	//calculate total alien alive and destructed units
 	int TotalAunits = GetCount(alienSoldier) + GetCount(alienMonster) + GetCount(alienDrone);
 	int TotalAdestructed = ADDead + ASDead + AMDead;
 
 	if (OutputFile.is_open())
 	{
 		//////////////////////////Earth Army/////////////////////////////////
-		OutputFile << "\nBattle Result: " << FinalResult << endl;
+		OutputFile << endl <<  "\nBattle Result: " << FinalResult << endl;
 
 		OutputFile << endl << "For Earth army: " << endl;
 
@@ -222,16 +233,20 @@ void Game::GameStatistics()
 		OutputFile << "Total number of each unit: " << endl;
 		OutputFile << "ES: " << GetCount(earthSoldier) << "\t\t" 
 			<< "ET: " << GetCount(earthTank) << "\t\t"
-			<< "EG : " << GetCount(earthGunnery) << endl;
+			<< "EG :" << GetCount(earthGunnery) << "\t\t" 
+			<< "HU: " << GetCount(healUnit) << endl;
 
 		//percentage of destructed units relative to their total
 		OutputFile << "Percentage of destructed units relative to their total " << endl;
 		OutputFile << "ES: ";
-		OutputFile << ((GetCount(earthSoldier) == 0) ? 0 : (double(ESDead) / GetCount(earthSoldier))* 100) << "%";  //if No earth soldiers generated print 0
+		OutputFile << ((GetCount(earthSoldier) == 0) ? 0 : (double(ESDead) / GetCount(earthSoldier))* 100) << "%"; 
 		OutputFile << "\t\t ET: ";
 		OutputFile << ((GetCount(earthTank) == 0) ? 0 : (double(ETDead) / GetCount(earthTank)) * 100) << "%";
 		OutputFile << "\t\t EG: ";
-		OutputFile << ((GetCount(earthGunnery) == 0) ? 0 : (double(EGDead) / GetCount(earthGunnery)) * 100) << "%" << endl;
+		OutputFile << ((GetCount(earthGunnery) == 0) ? 0 : (double(EGDead) / GetCount(earthGunnery)) * 100) << "%";
+		OutputFile << "\t\t HU: ";
+		OutputFile << ((GetCount(healUnit) == 0) ? 0 : (double(HUDead) / GetCount(healUnit)) * 100) << "%" << endl;
+
 
 		// Percentage of destructed units relative to total units
 		OutputFile << "Percentage of destructed units relative to total units: ";
@@ -264,7 +279,8 @@ void Game::GameStatistics()
 		//////////////////////////Alien Army/////////////////////////////////
 		OutputFile << endl << "For Alien army: " << endl;
 		OutputFile << "Total number of each unit: " << endl;
-		OutputFile << "AS: " << GetCount(alienSoldier) << "\t\t AM: " << GetCount(alienMonster) << "\t\t AD: " << GetCount(alienDrone) << endl;
+		OutputFile << "AS: " << GetCount(alienSoldier) << "\t\t AM: " <<
+			GetCount(alienMonster) << "\t\t AD: " << GetCount(alienDrone) << endl;
 
 		//percentage of destructed units relative to their total
 		OutputFile << "Percentage of destructed units relative to their total " << endl;
@@ -307,38 +323,35 @@ void Game::CheckResult()
 {
 	int E_total = pEarthArmy->GetEScount() + pEarthArmy->GetEGcount() + pEarthArmy->GetETcount();
 	int A_Total = pAlienArmy->GetAScount() + pAlienArmy->GetAMcount() + pAlienArmy->GetADcount();
-		if (E_total == 0 && A_Total > 0)
-		{
-			FinalResult = "loss";
-			EndGame = true;	
-			return;
-		}
 
-		else if (E_total > 0 && A_Total ==0)
-		{
-			FinalResult = "win";
-			EndGame = true;
-			return;
-		}
+	//if no earth units exist and alien has at least one unit, earth army loss the game
+	if (E_total == 0 && A_Total > 0)
+	{
+		FinalResult = "loss";
+		EndGame = true;	
+		return;
+	}
+
+	//if no alien units exist and earth has at least one unit, earth army win the game
+	else if (E_total > 0 && A_Total ==0)
+	{
+		FinalResult = "win";
+		EndGame = true;
+		return;
+	}
 	
-		//if both attacked successfully, continue the game
-		
-		else if ((E_total == pEarthArmy->GetEScount() && A_Total == pAlienArmy->GetADcount()) 
-			|| (E_total == pEarthArmy->GetEGcount() && A_Total == pAlienArmy->GetAScount())
-			|| (E_total == 0 && A_Total == 0))
-		{
-			FinalResult = "tie";
-			EndGame = true;
-		}
-		/*else if (pEarthArmy->Attack() && !pAlienArmy->Attack() && pAlienArmy->GetAScount() + pAlienArmy->GetAMcount() + pAlienArmy->GetADcount() == 0)
-			FinalResult = win;
-		else if (!pEarthArmy->Attack() && pAlienArmy->Attack() &&
-			pEarthArmy->GetEScount() + pEarthArmy->GetEGcount() + pEarthArmy->GetETcount() == 0)
-			FinalResult = loss;*/
+	// if only remain in the two armies two unit types that cannot attack each other, 
+	// or all units are dead in both armies consider it as a tie
+	else if ((E_total == pEarthArmy->GetEScount() && A_Total == pAlienArmy->GetADcount()) 
+		|| (E_total == pEarthArmy->GetEGcount() && A_Total == pAlienArmy->GetAScount())
+		|| (E_total == 0 && A_Total == 0))
+	{
+		FinalResult = "tie";
+		EndGame = true;
+	}
 }
 
-
-int Game::GetCount(UnitType Unit_Type)
+int Game::GetCount(UnitType Unit_Type) const
 {
 	switch (Unit_Type)
 	{
@@ -348,6 +361,8 @@ int Game::GetCount(UnitType Unit_Type)
 		return pEarthArmy->GetEGcount() + EGDead;
 	case earthTank:
 		return pEarthArmy->GetETcount() + ETDead + UMLtanks.getCount();
+	case healUnit:
+		return  pEarthArmy->GetHUcount() + HUDead;
 	case alienSoldier:
 		return pAlienArmy->GetAScount() + ASDead;
 	case alienMonster:
@@ -369,8 +384,9 @@ void Game::MainLoop()
 	while (!EndGame) //will stop when the game ends
 	{
 		if (TimeStep > 40)
-			CheckResult();
+			CheckResult();   //check the game result each time step when time steps exceeded 40
 
+		//at the end of the game add uml to killed list
 		if (EndGame)
 		{
 			Unit* dummy;
@@ -386,9 +402,10 @@ void Game::MainLoop()
 			break;
 		}
 		
-		GenerateArmy();
+		GenerateArmy();   //generate units for two armies each time step
 
-		if (!SilentMood)
+		//print to the console
+		if (!SilentMode)
 		{
 			PrintAliveUnits();
 			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
@@ -398,10 +415,12 @@ void Game::MainLoop()
 			cout << "============== Attack Round ==============" << endl;
 		}
 
+		///////////////Attack Round//////////////////
 		bool EarthAT = pEarthArmy->Attack(); //Discuss if it is needed
 		bool AlienAT = pAlienArmy->Attack();
+		
 
-		if (!SilentMood)
+		if (!SilentMode)
 		{
 			cout << "============== Units after attack round ==============" << endl;
 			PrintAliveUnits();
@@ -418,9 +437,12 @@ void Game::MainLoop()
 	
 void Game::AddtoKilledList(Unit* army)
 {
-	army->setTd(TimeStep);
-	KilledList.enqueue(army);
-	AddtoOutFile(army);
+	army->setTd(TimeStep);  //sets destruction time for the army 
+
+	if(KilledList.enqueue(army));
+	    AddtoOutFile(army);  //print killed unit's info in the output file
+
+	//increment total dead counts of each unit
 	switch (army->getType())
 	{
 	case earthSoldier:
@@ -431,6 +453,9 @@ void Game::AddtoKilledList(Unit* army)
 		break;
 	case earthTank:
 		ETDead++;
+		break;
+	case healUnit:
+		HUDead++;
 		break;
 	case alienSoldier:
 		ASDead++;
@@ -444,16 +469,6 @@ void Game::AddtoKilledList(Unit* army)
 	}
 }
 
-void Game::ClearKilledList()
-{
-	Unit* KilledUnit;
-	while (!KilledList.isEmpty())
-	{
-		KilledList.dequeue(KilledUnit);
-		delete KilledUnit;
-	}
-}
-
 void Game::AddtoUML(Unit* unit)
 {
 	if (unit->getType() == earthSoldier)
@@ -461,15 +476,13 @@ void Game::AddtoUML(Unit* unit)
 	else
 		UMLtanks.enqueue(unit);
 
-	bool Healedbefore;
-	if (!unit->checkUML(Healedbefore)) 
+	if (!unit->checkUML())  //checks if the unit is in uml or not, to set its time only once  
 	{
-
 		unit->setTH(TimeStep);
 	}
 }
 
-bool Game::UMLisEmpty()
+bool Game::UMLisEmpty() const
 {
 	return UMLsolider.isEmpty() && UMLtanks.isEmpty();
 }
@@ -485,23 +498,24 @@ Unit* Game::getUnitToHeal()
 	return unit;
 }
 
-AlienArmy* Game::GetAlienArmyPtr()
+AlienArmy* Game::GetAlienArmyPtr() const
 {
 	return pAlienArmy;
 }
 
-EarthArmy* Game::GetEarthArmyPtr()
+EarthArmy* Game::GetEarthArmyPtr() const
 {
 	return pEarthArmy;
 }
 
-RandGen* Game::GetRandGenPtr()
+RandGen* Game::GetRandGenPtr() const
 {
 	return pRand;
 }
 
-Unit* Game::GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type,bool BackDrone)
+Unit* Game::GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type,bool BackDrone) const
 {
+	//get unit from its list to be attacked 
 	Unit* unit2 = nullptr;
 	switch (Army_Type)
 	{
@@ -511,28 +525,24 @@ Unit* Game::GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type,bool BackDrone
 	}
 	break;
 	case Alien:
-		unit2 = pAlienArmy->removeUnit(Unit_Type, BackDrone );
-
+		unit2 = pAlienArmy->removeUnit(Unit_Type, BackDrone);
 		break;
 	default:
 		break;
 	}
 	return unit2;
-
 }
 
-int Game::GetCurrentTime()
+int Game::GetCurrentTime() const
 {
 	return TimeStep;
 }
 
 void Game::PrintKilledList() const
 {
-	
 	cout << KilledList.getCount() << " units [";
 	KilledList.print();
 	cout << " ] \n\033[0m";
-
 }
 
 void Game::PrintUMLList() const
@@ -543,12 +553,11 @@ void Game::PrintUMLList() const
 	cout << UMLtanks.getCount() << " UMLtanks [";
 	UMLtanks.print();
 	cout << " ] \n\033[0m";
-	
 }
 
-void Game::PrintFight(Unit* shooter, UnitType shooterType,LinkedQueue<int> fightingUnits)
+void Game::PrintFight(Unit* shooter, UnitType shooterType,LinkedQueue<int> fightingUnits) const
 {
-	if (!SilentMood)
+	if (!SilentMode)
 	{
 		string type;
 		switch (shooterType)
@@ -576,7 +585,6 @@ void Game::PrintFight(Unit* shooter, UnitType shooterType,LinkedQueue<int> fight
 		fightingUnits.print();
 		cout << "]" << endl;
 	}
-	
 }
 
 void Game::PrintAliveUnits() const
@@ -593,7 +601,13 @@ void Game::PrintAliveUnits() const
 
 Game::~Game()
 {
-	ClearKilledList();
+	Unit* KilledUnit;
+	while (!KilledList.isEmpty())
+	{
+		KilledList.dequeue(KilledUnit);
+		delete KilledUnit;
+	}
+
 	delete pEarthArmy;
 	delete pAlienArmy;
 	delete pRand;

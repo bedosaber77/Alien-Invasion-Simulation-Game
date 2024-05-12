@@ -57,7 +57,7 @@ public:
 	int getESPriorty() const;
 	void setTH(int th);
 	int getTH() const;
-	bool checkUML(bool &Healed) const;
+	bool checkUML() const;
 	void ExitUML();
 	
 	

@@ -92,6 +92,11 @@ int EarthArmy::GetETcount()
 	return EarthTanks.getCount();
 }
 
+int EarthArmy::GetHUcount()
+{
+	return HL.getCount();
+}
+
 int EarthArmy::GetID()
 {
 	return ID;
@@ -101,26 +106,27 @@ bool EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;
 	bool SuccusfulAttack = false;
+
 	//ES Attacks 
 	if (EarthSoldiers.peek(unit2))
 	{
 		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack ;
 	}
 	
-	//tank
-
+	//ET Attacks
 	if(EarthTanks.peek(unit2))
 	{
 		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack ;
 	}
 
-	//EG
+	//EG Attacks
 	int pri;
 	if (EarthGunneries.peek(unit2, pri))
 	{
 		SuccusfulAttack = unit2->Attack()|| SuccusfulAttack;
 	}
 
+	//HU Heals
 	if (HL.peek(unit2))
 	{
 		unit2->Attack();

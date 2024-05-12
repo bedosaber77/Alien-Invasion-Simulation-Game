@@ -138,13 +138,21 @@ void Game::GenerateArmy()
 			pEarthArmy->AddUnit(newUnit);
 		}
 	}
-	  // Generating Alien Army
+	// Generating Alien Army
 	A = (rand() % 100) + 1;
+
 	if (A <= pRand->GetProb() && pAlienArmy->GetID() < 4000) {
+		bool Intofront = true;
 		for (int i = 0; i < pRand->GetN(); i++)
 		{
 			newUnit = pRand->GenerateUnits(TimeStep, Alien);
-			pAlienArmy->AddUnit(newUnit, i % 2);
+			if (newUnit->getType() == alienDrone)
+			{
+				pAlienArmy->AddUnit(newUnit, Intofront);  // Each time step we add drones to front ,then back and so on.
+				Intofront = !Intofront;
+			}
+			else
+				pAlienArmy->AddUnit(newUnit);
 		}
 	}
 }

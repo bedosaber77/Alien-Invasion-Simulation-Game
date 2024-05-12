@@ -172,6 +172,12 @@ void Game::GameStatistics()
 	ofstream OutputFile;
 	OutputFile.open("outFile.txt", ios::app);
 
+	int TotalEunits = GetCount(earthSoldier) + GetCount(earthTank) + GetCount(earthGunnery);
+	int TotalEdestructed = EGDead + ESDead + ETDead;
+
+	int TotalAunits = GetCount(alienSoldier) + GetCount(alienMonster) + GetCount(alienDrone);
+	int TotalAdestructed = ADDead + ASDead + AMDead;
+
 	if (OutputFile.is_open())
 	{
 		//////////////////////////Earth Army/////////////////////////////////
@@ -187,33 +193,40 @@ void Game::GameStatistics()
 
 		//percentage of destructed units relative to their total
 		OutputFile << "Percentage of destructed units relative to their total " << endl;
-		OutputFile << "ES: " << (double(ESDead) / GetCount(earthSoldier)) * 100 << "%";
-		OutputFile << "\t\t ET: " << (double(ETDead) / GetCount(earthTank)) * 100 << "%";
-		OutputFile << "\t\t EG: " << (double(EGDead) / GetCount(earthGunnery)) * 100 << "%" << endl;
+		OutputFile << "ES: ";
+		OutputFile << ((GetCount(earthSoldier) == 0) ? 0 : (double(ESDead) / GetCount(earthSoldier))* 100) << "%";  //if No earth soldiers generated print 0
+		OutputFile << "\t\t ET: ";
+		OutputFile << ((GetCount(earthTank) == 0) ? 0 : (double(ETDead) / GetCount(earthTank)) * 100) << "%";
+		OutputFile << "\t\t EG: ";
+		OutputFile << ((GetCount(earthGunnery) == 0) ? 0 : (double(EGDead) / GetCount(earthGunnery)) * 100) << "%" << endl;
 
 		// Percentage of destructed units relative to total units
 		OutputFile << "Percentage of destructed units relative to total units: ";
-		OutputFile << double(ESDead + EGDead + ETDead) / (GetCount(earthSoldier) + GetCount(earthTank) + GetCount(earthGunnery)) * 100 << "%" << endl;
+		OutputFile << ((TotalEunits == 0) ? 0 : (double(TotalEdestructed) / TotalEunits) * 100) << "%" << endl;
 
 		//Average of Df
 		OutputFile << "Average of Df: ";
-		OutputFile << double(Dfearth) / (ESDead + EGDead + ETDead) << endl;
+		OutputFile << ((TotalEdestructed == 0) ? 0 : double(Dfearth) / TotalEdestructed) << endl;
 
 		//Average of Dd
 		OutputFile << "Average of Dd: ";
-		OutputFile << double(Ddearth) / (ESDead + EGDead + ETDead) << endl;
+		OutputFile << ((TotalEdestructed == 0) ? 0 : double(Ddearth) / TotalEdestructed) << endl;
 
 		//Average of Db
 		OutputFile << "Average of Db: ";
-		OutputFile << double(Dbearth) / (ESDead + EGDead + ETDead) << endl;
+		OutputFile << ((TotalEdestructed == 0) ? 0 : double(Dbearth) / TotalEdestructed) << endl;
 
 		//Df/Db%
 		OutputFile << "Df/Db: ";
-		OutputFile << double(Dfearth) / Dbearth * 100 << "%" << endl;
+		OutputFile << ((Dbearth == 0)? 0 : (double(Dfearth) / Dbearth) * 100) << "%" << endl;
 
 		//Dd%Db
 		OutputFile << "Dd/Db: ";
-		OutputFile << double(Ddearth) / Dbearth * 100 << "%" << endl;
+		OutputFile << ((Dbearth == 0) ? 0 : (double(Ddearth) / Dbearth) * 100) << "%" << endl;
+
+		//Percentage of units healed successfully relative to total earth units
+		OutputFile << "Healed units Percentage: ";
+		OutputFile << ((TotalEunits == 0) ? 0 : (double(HealedUnits) / TotalEunits) * 100) << "%";
 
 		//////////////////////////Alien Army/////////////////////////////////
 		OutputFile << endl << "For Alien army: " << endl;
@@ -222,37 +235,36 @@ void Game::GameStatistics()
 
 		//percentage of destructed units relative to their total
 		OutputFile << "Percentage of destructed units relative to their total " << endl;
-		OutputFile << "AS: " << double(ASDead) / GetCount(alienSoldier) * 100 << "%";
-		OutputFile << "\t\t AM: " << double(AMDead) / GetCount(alienMonster) * 100 << "%";
-		OutputFile << "\t\t AD: " << double(ADDead) / GetCount(alienDrone) * 100 << "%" << endl;
+		OutputFile << "AS: ";
+		OutputFile << ((GetCount(alienSoldier) == 0) ? 0 : (double(ASDead) / GetCount(alienSoldier)) * 100) << "%";
+		OutputFile << "\t\t AM: ";
+		OutputFile << ((GetCount(alienMonster) == 0) ? 0 : (double(AMDead) / GetCount(alienMonster)) * 100) << "%";
+		OutputFile << "\t\t AD: ";
+		OutputFile << ((GetCount(alienDrone) == 0) ? 0 : (double(ADDead) / GetCount(alienDrone)) * 100) << "%" << endl;
 
 		// Percentage of destructed units relative to total units
 		OutputFile << "Percentage of destructed units relative to total units: ";
-		OutputFile << double(ASDead + AMDead + ADDead) / (GetCount(alienSoldier) + GetCount(alienMonster) + GetCount(alienDrone)) * 100 << "%" << endl;
+		OutputFile << ((TotalAunits == 0) ? 0 : (double(TotalAdestructed) / TotalAunits) * 100) << "%" << endl;
 
 		//Average of Df
 		OutputFile << "Average of Df: ";
-		OutputFile << double(Dfalien) / (ASDead + AMDead + ADDead) << endl;
+		OutputFile << ((TotalAdestructed == 0) ? 0 : double(Dfalien) / TotalAdestructed) << endl;
 
 		//Average of Dd
 		OutputFile << "Average of Dd: ";
-		OutputFile << double(Ddalien) / (ASDead + AMDead + ADDead) << endl;
+		OutputFile << ((TotalAdestructed == 0) ? 0 : double(Ddalien) / TotalAdestructed) << endl;
 
 		//Average of Db
 		OutputFile << "Average of Db: ";
-		OutputFile << double(Dbalien) / (ASDead + AMDead + ADDead) << endl;
+		OutputFile << ((TotalAdestructed == 0) ? 0 : double(Dbalien) / TotalAdestructed) << endl;
 
 		//Df/Db%
 		OutputFile << "Df/Db: ";
-		OutputFile << double(Dfalien) / Dbalien * 100 << "%" << endl;
+		OutputFile << ((Dbalien == 0) ? 0 : (double(Dfalien) / Dbalien) * 100) << "%" << endl;
 
 		//Dd%Db
 		OutputFile << "Dd/Db: ";
-		OutputFile << double(Ddalien) / Dbalien * 100 << "%" << endl;
-
-		//Percentage of units healed successfully relative to total earth units
-		OutputFile << "Healed units Percentage: ";
-		OutputFile << double(HealedUnits) / (GetCount(earthSoldier) + GetCount(earthTank) + GetCount(earthGunnery)) * 100 << "%";
+		OutputFile << ((Dbalien == 0) ? 0 : (double(Ddalien) / Dbalien) * 100) << "%" << endl;
 
 	}
 	OutputFile.close();
@@ -278,7 +290,9 @@ void Game::CheckResult()
 	
 		//if both attacked successfully, continue the game
 		
-		else if ((E_total == GetCount(earthSoldier) && A_Total == GetCount(alienDrone)) || (E_total == GetCount(earthGunnery) && A_Total == GetCount(alienSoldier)) || (E_total == 0 && A_Total == 0))
+		else if ((E_total == pEarthArmy->GetEScount() && A_Total == pAlienArmy->GetADcount()) 
+			|| (E_total == pEarthArmy->GetEGcount() && A_Total == pAlienArmy->GetAScount())
+			|| (E_total == 0 && A_Total == 0))
 		{
 			FinalResult = "tie";
 			EndGame = true;
@@ -300,7 +314,7 @@ int Game::GetCount(UnitType Unit_Type)
 	case earthGunnery:
 		return pEarthArmy->GetEGcount() + EGDead;
 	case earthTank:
-		return pEarthArmy->GetETcount() + ETDead+ UMLtanks.getCount();
+		return pEarthArmy->GetETcount() + ETDead + UMLtanks.getCount();
 	case alienSoldier:
 		return pAlienArmy->GetAScount() + ASDead;
 	case alienMonster:
@@ -379,11 +393,14 @@ void Game::MainLoop()
 
 			bool EarthAT = pEarthArmy->Attack(); //Discuss if it is needed
 			bool AlienAT = pAlienArmy->Attack();
+			/*
 			if (!EarthAT && !AlienAT && TimeStep >= 40)
 			{
 				FinalResult = "tie";
 				EndGame = true;
 			}
+			*/
+
 			if (!SilentMood)
 			{
 				cout << "============== Units after attack round ==============" << endl;

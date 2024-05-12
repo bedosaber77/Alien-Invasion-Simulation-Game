@@ -1,3 +1,27 @@
 Td			ID			Tj			Df			Dd			Db
 
-24           2          18           0           6           6
+Battle Result: tie
+
+For Earth army: 
+Total number of each unit: 
+ES: 0		ET: 0		EG : 0
+Percentage of destructed units relative to their total 
+ES: 0%		 ET: 0%		 EG: 0%
+Percentage of destructed units relative to total units: 0%
+Average of Df: 0
+Average of Dd: 0
+Average of Db: 0
+Df/Db: 0%
+Dd/Db: 0%
+Healed units Percentage: 0%
+For Alien army: 
+Total number of each unit: 
+AS: 0		 AM: 0		 AD: 0
+Percentage of destructed units relative to their total 
+AS: 0%		 AM: 0%		 AD: 0%
+Percentage of destructed units relative to total units: 0%
+Average of Df: 0
+Average of Dd: 0
+Average of Db: 0
+Df/Db: 0%
+Dd/Db: 0%

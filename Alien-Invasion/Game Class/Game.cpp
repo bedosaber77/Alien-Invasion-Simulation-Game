@@ -558,12 +558,12 @@ void Game::PrintUMLList() const
 	cout << " ] \n\033[0m";
 }
 
-void Game::PrintFight(Unit* shooter, UnitType shooterType,LinkedQueue<int> fightingUnits) const
+void Game::PrintFight(Unit* shooter,LinkedQueue<int> fightingUnits) const
 {
 	if (!SilentMode)
 	{
 		string type;
-		switch (shooterType)
+		switch (shooter->getType())
 		{
 		case earthSoldier:
 			type = "ES";

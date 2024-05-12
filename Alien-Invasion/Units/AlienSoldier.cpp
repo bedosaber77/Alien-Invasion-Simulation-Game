@@ -50,7 +50,7 @@ void AlienSoldier:: Attack()
 		}
 	}
 
-	pGame->PrintFight(this, this->getType(), EnemiesList);
+	pGame->PrintFight(this,  EnemiesList);
 
 	while (TempList.dequeue(unit2))
 	{

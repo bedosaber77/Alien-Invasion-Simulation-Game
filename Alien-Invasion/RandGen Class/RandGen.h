@@ -11,7 +11,8 @@ class Game;
 class RandGen
 {
 	int N, Prob;
-	Inputs EarthParameters,AlienParameters;
+	Inputs EarthParameters,AlienParameters;   //structs for RandGen parameters
+
 	ArmyType Army_Type;
 	Game* pGame;
 

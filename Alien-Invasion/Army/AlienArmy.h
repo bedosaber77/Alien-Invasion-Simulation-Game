@@ -8,9 +8,12 @@
 class AlienArmy
 {
 private:
+
+	//Alien Army lists
 	LinkedQueue <Unit*> AlienSoldiers;
 	Deque <Unit*> AlienDrones;
 	ArrayADT <Unit*> AlienMonsters;
+
 	static int ID;
 public:
 	AlienArmy();
@@ -19,15 +22,18 @@ public:
 	void AddUnit(Unit* newUnit,bool IntoFront=false);
 	Unit* removeUnit(UnitType type,bool FromBack=false);
 
-	bool Attack();
+	
 
-    //Getters for the output file
+	// Count Alive Units for the output file
 	int GetAScount();
 	int GetAMcount();
 	int GetADcount();
 
 	int GetID();
 
+
+	//Fighting Functions
+	bool Attack();
 	void Print();
 
 	~AlienArmy();

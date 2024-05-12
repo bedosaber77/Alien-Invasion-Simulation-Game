@@ -3,9 +3,10 @@
 class EarthTank : public Unit
 {
 private:
-	//LinkedQueue<Unit*> EnemiesList;
+	// Handle if it attacks both AS& AM
 	bool AttackBoth;
 public:
+
 	EarthTank(int H, int P, int AC, int tj, Game* Gameptr);
 	virtual bool Attack(Unit* unit2);
 	~EarthTank();

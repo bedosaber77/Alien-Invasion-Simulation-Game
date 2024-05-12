@@ -10,12 +10,15 @@ class Unit
 {
 protected:
 	//Unit Main Parameters
-	
 	int ID; 
 	UnitType Type; 
 	int Health;
 	int Power;
 	int Attack_Capacity;
+
+	//Game pointer
+	Game* pGame;
+
 	//Time & Duration Parameters//
 	int Tj;		//Join Time
 	int Ta;		//First Attacked Time
@@ -23,26 +26,33 @@ protected:
 
 	//Added For Phase 2
 	bool GotShot;	// checks if first attack happened or not
+
+	//Heal Unit Parameters
 	bool AddedToUML; // checks if it is added to UML or NOT
-	Game* pGame;
 	int InitalHealth; // Added For Healunit
 	int TH;
 	bool IsHealed;
-public:
-	Unit(int H,int P,int AC,int tj,Game* Gameptr);
-	virtual bool Attack(Unit* unit2 = nullptr) = 0;
-	void setHealth(int h);
-	void setTd(int td);
-	void setTa(int ta);
-	void setTj(int tj);
 
+
+public:
+
+
+	Unit(int H,int P,int AC,int tj,Game* Gameptr);
+
+	//Unit Parameters setters/ getters
+	
 	int getHealth() const;
 	int getPower() const;
 	int getID() const;
 	UnitType getType() const;		
 	void setID(int id);
+	void setHealth(int h);
 
-	//Time and Delay getters
+	//Time and Delay setters /getters
+	void setTd(int td);
+	void setTa(int ta);
+	void setTj(int tj);
+
 	int getTj() const;
 	int getTa() const;
 	int getTd() const;
@@ -50,9 +60,12 @@ public:
 
 	//Functions to Increment/Decrement health
 	void decrementHealth(int damage);
-	void incrementHealth(int);		//to be revisited
-	//For Heal
+	void incrementHealth(int);		
 
+	//Fighting Function
+	virtual bool Attack(Unit* unit2 = nullptr) = 0;
+
+	//Heal Unit Functions
 	int getIntialHealth() const;
 	int getESPriorty() const;
 	void setTH(int th);
@@ -61,7 +74,7 @@ public:
 	void ExitUML();
 	
 	
-	//Print current fight function
+	
 	~Unit();
 
 };

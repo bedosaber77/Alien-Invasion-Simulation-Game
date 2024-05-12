@@ -168,7 +168,7 @@ void Game::SetOutFile()
 	//Initialize output file
 	ofstream OutputFile;
 	OutputFile.open("outFile.txt", ios::out);
-	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb" << endl;
+	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb\t\t\tType" << endl;
 }
 
 void Game::AddtoOutFile(Unit* killedUnit)
@@ -399,6 +399,9 @@ void Game::MainLoop()
 			{
 				AddtoKilledList(dummy);
 			}
+			PrintAliveUnits();
+			//PrintAliveUnits();
+
 			break;
 		}
 		

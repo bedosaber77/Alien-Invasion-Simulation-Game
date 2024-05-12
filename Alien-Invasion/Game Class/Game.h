@@ -27,11 +27,22 @@ class Game
 
 	int TimeStep = 1;
 
+	
+
+
+	// Duration Parameters
+	int Dfearth, Ddearth, Dbearth;
+	int Dfalien, Ddalien, Dbalien;
+
 	//Units Counters
 	int ESDead, EGDead, ETDead, HUDead, ASDead, ADDead, AMDead; //Dead Units counters
 	int Dfearth, Ddearth, Dbearth;    //Df, Dd, Db for earth army counters
 	int Dfalien, Ddalien, Dbalien;    //Df, Dd, Db for alien army counters
 	int HealedUnits;  //No of units healed successfully
+
+
+
+	// EndGame Parameters
 
 	bool SilentMode;   //checks the mode of the game (S/I)
 	bool EndGame;     //checks the end of the game  

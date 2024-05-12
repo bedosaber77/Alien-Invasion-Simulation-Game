@@ -15,7 +15,9 @@ Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 	InitalHealth = H;
 	IsHealed = false;
 }
-
+//==================================================================================//
+//							    Setters/ Getters Functions	         				//
+//==================================================================================//
 void Unit::setHealth(int h)
 {
 	this->Health = h;
@@ -92,10 +94,11 @@ void Unit::incrementHealth(int HealthImp)
 }
 
 
-Unit::~Unit()
-{
-}
 
+
+//==================================================================================//
+//							     Heal Unit Functions	       						//
+//==================================================================================//
 int Unit::getIntialHealth() const
 {
 	return InitalHealth;
@@ -138,6 +141,10 @@ int Unit::getESPriorty() const
 }
 
 
+Unit::~Unit()
+{
+}
+// insertion operator overloading
 std::ostream& operator<<(std::ostream& os, const Unit* obj)
 {
 	os << obj->getID();

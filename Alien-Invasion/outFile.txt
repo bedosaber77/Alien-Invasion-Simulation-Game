@@ -1,4 +1,4 @@
-Td			ID			Tj			Df			Dd			Db
+Td			ID			Tj			Df			Dd			Db			Type
 
 6        2000           1           3           2           5
 6        2001           1           3           2           5

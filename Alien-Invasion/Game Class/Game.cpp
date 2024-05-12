@@ -278,7 +278,9 @@ void Game::CheckResult()
 	
 		//if both attacked successfully, continue the game
 		
-		else if ((E_total == GetCount(earthSoldier) && A_Total == GetCount(alienDrone)) || (E_total == GetCount(earthGunnery) && A_Total == GetCount(alienSoldier)) || (E_total == 0 && A_Total == 0))
+		else if ((E_total == pEarthArmy->GetEScount() && A_Total == pAlienArmy->GetADcount()) 
+			|| (E_total == pEarthArmy->GetEGcount() && A_Total == pAlienArmy->GetAScount())
+			|| (E_total == 0 && A_Total == 0))
 		{
 			FinalResult = "tie";
 			EndGame = true;
@@ -370,11 +372,14 @@ void Game::MainLoop()
 
 			bool EarthAT = pEarthArmy->Attack(); //Discuss if it is needed
 			bool AlienAT = pAlienArmy->Attack();
+			/*
 			if (!EarthAT && !AlienAT && TimeStep >= 40)
 			{
 				FinalResult = "tie";
 				EndGame = true;
 			}
+			*/
+
 			if (!SilentMood)
 			{
 				cout << "============== Units after attack round ==============" << endl;

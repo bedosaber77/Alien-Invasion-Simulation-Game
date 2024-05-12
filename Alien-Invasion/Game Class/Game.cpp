@@ -46,8 +46,8 @@ void Game::StartGame()
 
 	if (SilentMode)
 	{
-		cout << "Silent Mode\n" << "Simulation Starts..\n"
-			<< "Simulation ends, Output file is created\n";
+		cout << "Silent Mode\n" << "Simulation Starts..\n";
+			
 	}
 	
 	//Initialize output file
@@ -58,6 +58,10 @@ void Game::StartGame()
 
 	//Print the game statistics in the output file
 	GameStatistics();
+	if (SilentMode)
+	{
+		cout << "Simulation ends, Output file is created\n";
+	}
 }
 
 bool Game::LoadParameters(string Filename)
@@ -224,6 +228,7 @@ void Game::GameStatistics() const
 
 	if (OutputFile.is_open())
 	{
+		
 		//////////////////////////Earth Army/////////////////////////////////
 		OutputFile << endl <<  "\nBattle Result: " << FinalResult << endl;
 

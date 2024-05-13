@@ -18,7 +18,8 @@ Game::Game()
 
 	HealedUnits = 0;
 	InfectionProb = 0;
-	InfectedUnits = 0;
+	TotalInfectedUnits = 0;
+	CurrentInfectedUnits = 0;
 	ImmunedUnits = 0;
 	EndGame = false;
 	SilentMode = false;
@@ -49,8 +50,7 @@ void Game::StartGame()
 
 	if (SilentMode)
 	{
-		cout << "Silent Mode\n" << "Simulation Starts..\n";
-			
+		cout << "Silent Mode\n" << "Simulation Starts..\n";	
 	}
 	
 	//Initialize output file
@@ -393,14 +393,16 @@ int Game::getInfectionProb() const
 	return InfectionProb;
 }
 
-void Game::UpdateInfectedCount()
+void Game::IncrementInfectedCount()
 {
-	InfectedUnits++;
+	CurrentInfectedUnits++;
+	TotalInfectedUnits++;
 }
 
-void Game::UpdateImmunedCount()
+void Game::DecrementInfectedCount()
 {
-	ImmunedUnits++;
+	if(CurrentInfectedUnits)
+		CurrentInfectedUnits--;
 }
 
 
@@ -425,7 +427,6 @@ void Game::MainLoop()
 				AddtoKilledList(dummy);
 			}
 			PrintAliveUnits();
-			//PrintAliveUnits();
 
 			break;
 		}
@@ -448,7 +449,7 @@ void Game::MainLoop()
 		 pAlienArmy->Attack();
 
 		 //spread infection of earth army
-		 for(int i = 0; i < InfectedUnits - ImmunedUnits; i++)
+		 for(int i = 0; i < CurrentInfectedUnits; i++)
 		     pEarthArmy->SpeardInfection();
 		
 
@@ -461,7 +462,7 @@ void Game::MainLoop()
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
 			cout << "\u001b[32m=================================" << endl;
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() == 0) ? 0 : double(InfectedUnits - ImmunedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
 			system("pause");
 		}
@@ -480,6 +481,7 @@ void Game::AddtoKilledList(Unit* army)
 	switch (army->getType())
 	{
 	case earthSoldier:
+		if(army->InfectedBefore()) CurrentInfectedUnits--;
 		ESDead++;
 		break;
 	case earthGunnery:

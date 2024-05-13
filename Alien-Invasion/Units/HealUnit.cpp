@@ -22,7 +22,6 @@ void HealUnit::Attack()
 			{
 				pGame->AddtoKilledList(unit2);
 			}
-			
 			else
 			{
 				int incHeal = this->Power * (this->Health / 100.0) / sqrt(unit2->getHealth());
@@ -37,10 +36,9 @@ void HealUnit::Attack()
 					if (unit2->InfectedBefore()) {
 						unit2->SetInfected(false); // is immuned successfully
 						unit2->SetImmuned(true); 
-						pGame->UpdateImmunedCount();
+						pGame->DecrementInfectedCount();
 					}
-				}
-				
+				}	
 				else
 					TempList.enqueue(unit2);
 			}
@@ -54,6 +52,7 @@ void HealUnit::Attack()
 		TempList.dequeue(unit);
 		pGame->AddtoUML(unit);
 	}
+
 	pGame->GetEarthArmyPtr()->removeUnit(healUnit);
 	this->setTd(pGame->GetCurrentTime());
 	this->setTa(pGame->GetCurrentTime());

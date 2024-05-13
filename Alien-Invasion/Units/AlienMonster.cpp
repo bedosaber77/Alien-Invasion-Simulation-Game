@@ -50,7 +50,7 @@ void AlienMonster::Attack()
 					if (!unit2->InfectedBefore() && !unit2->ImmunedBefore())  //check that the unit is not infected before
 					{
 						unit2->SetInfected(true);
-						pGame->UpdateInfectedCount();  //update infected units count in game
+						pGame->IncrementInfectedCount();  //update infected units count in game
 						InfectedRound = true;   //Monster doesn't kill the unit after infecting it
 					}
 				}

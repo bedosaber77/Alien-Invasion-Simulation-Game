@@ -42,8 +42,10 @@ class Game
 	string FinalResult;  //stores the final result (win/tie/loss)
 
 	int InfectionProb;  //the probability an alien monster infects earth soldiers
-	int InfectedUnits;  //No of infected units
+	int TotalInfectedUnits;  //No of units infected from the start of the game
+	int CurrentInfectedUnits;  //No of units currently infected
 	int ImmunedUnits;   //No of immuned units
+	
 public:
 	Game();
 
@@ -72,8 +74,8 @@ public:
 
 	//Infection functions
 	int getInfectionProb() const;
-	void UpdateInfectedCount();
-	void UpdateImmunedCount();
+	void IncrementInfectedCount();
+	void DecrementInfectedCount();
 
 
 	//Needed functions for attack

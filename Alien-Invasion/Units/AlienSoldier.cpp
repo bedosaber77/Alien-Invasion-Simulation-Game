@@ -38,10 +38,7 @@ void AlienSoldier:: Attack()
 				pGame->AddtoUML(unit2);
 			else
 			{
-			//	unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
-
 				pGame->AddtoKilledList(unit2);
-	
 			}
 		}
 		else

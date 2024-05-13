@@ -446,6 +446,7 @@ void Game::MainLoop()
 
 		///////////////Attack Round//////////////////
 		 pEarthArmy->Attack(); //Discuss if it is needed
+		 pEarthArmy->SpeardInfection();
 		 pAlienArmy->Attack();
 
 		 //spread infection of earth army

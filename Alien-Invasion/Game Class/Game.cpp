@@ -445,11 +445,11 @@ void Game::MainLoop()
 
 		///////////////Attack Round//////////////////
 		 pEarthArmy->Attack(); //Discuss if it is needed
+		 pEarthArmy->SpeardInfection();
 		 pAlienArmy->Attack();
 
 		 //spread infection of earth army
-		 for(int i = 0; i < InfectedUnits - ImmunedUnits; i++)
-		     pEarthArmy->SpeardInfection();
+		 //for(int i = 0; i < InfectedUnits - ImmunedUnits; i++) ////////Not NEEDED 
 		
 
 		if (!SilentMode)

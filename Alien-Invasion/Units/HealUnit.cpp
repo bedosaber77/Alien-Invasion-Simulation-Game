@@ -22,15 +22,25 @@ void HealUnit::Attack()
 			{
 				pGame->AddtoKilledList(unit2);
 			}
+			
 			else
 			{
 				int incHeal = this->Power * (this->Health / 100.0) / sqrt(unit2->getHealth());
+				if(unit2->InfectedBefore())
+					incHeal *= 0.5;
 				unit2->incrementHealth(incHeal);
+				
 				if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())
 				{
 					pGame->GetEarthArmyPtr()->AddUnit(unit2);
 					unit2->ExitUML();
+					if (unit2->InfectedBefore()) {
+						unit2->SetInfected(false); // is immuned successfully
+						unit2->SetImmuned(true); 
+						pGame->UpdateImmunedCount();
+					}
 				}
+				
 				else
 					TempList.enqueue(unit2);
 			}

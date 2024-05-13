@@ -33,6 +33,10 @@ protected:
 	int TH;
 	bool IsHealed;
 
+	//Infection Unit Parameters
+	bool IsInfected;
+	bool IsImmuned = false;
+
 
 public:
 
@@ -73,8 +77,12 @@ public:
 	bool checkUML() const;
 	void ExitUML();
 	
+	// Infection Unit setters/ getters
+	void SetInfected(bool );
+	bool InfectedBefore() const ;
 	
-	
+	void SetImmuned(bool );
+	bool ImmunedBefore() const;
 	~Unit();
 
 };

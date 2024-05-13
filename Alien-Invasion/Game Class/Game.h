@@ -41,6 +41,9 @@ class Game
 	bool EndGame;     //checks the end of the game  
 	string FinalResult;  //stores the final result (win/tie/loss)
 
+	int InfectionProb;  //the probability an alien monster infects earth soldiers
+	int InfectedUnits;  //No of infected units
+	int ImmunedUnits;   //No of immuned units
 public:
 	Game();
 
@@ -67,6 +70,12 @@ public:
 	Unit* getUnitToHeal();  //returns damaged unit for the heal unit to heal
 	void UpdateHealCount();  //increment healed units when healed successfully
 
+	//Infection functions
+	int getInfectionProb() const;
+	void UpdateInfectedCount();
+	void UpdateImmunedCount();
+
+
 	//Needed functions for attack
 	Unit* GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type, bool BackDrone = 0) const;  //return enemy for the unit to attack 
 
@@ -80,7 +89,7 @@ public:
 
 	//printing functions 
 	void PrintKilledList() const;
-	void PrintFight(Unit* shooter, LinkedQueue<int> fightingUnits) const;
+	void PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const;
 	void PrintAliveUnits() const;
 	void PrintUMLList() const;
 

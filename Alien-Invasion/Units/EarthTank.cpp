@@ -12,7 +12,7 @@ void EarthTank::Attack()
 {
 	Unit* unit2 = nullptr;
 	LinkedQueue<Unit*> TempList;
-	LinkedQueue<int> EnemiesList;
+	LinkedQueue<Unit*> EnemiesList;
 
 	
 	
@@ -49,7 +49,7 @@ void EarthTank::Attack()
 		if (unit2)
 		{
 			
-			EnemiesList.enqueue(unit2->getID());
+			EnemiesList.enqueue(unit2);
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 

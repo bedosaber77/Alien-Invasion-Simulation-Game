@@ -17,6 +17,9 @@ Game::Game()
 	Dfalien = Ddalien = Dbalien = 0;
 
 	HealedUnits = 0;
+	InfectionProb = 0;
+	InfectedUnits = 0;
+	ImmunedUnits = 0;
 	EndGame = false;
 	SilentMode = false;
 	StartGame();
@@ -118,7 +121,8 @@ bool Game::LoadParameters(string Filename)
 		Infile >> AlienParameters.lower_capacity;
 		Infile.ignore(1) >> AlienParameters.upper_capacity;
 
-
+		//Infection probability
+		Infile >> InfectionProb;
 
 		//set values for ranges and percentage
 		pRand->SetEarthParameters(EarthParameters);
@@ -172,7 +176,7 @@ void Game::SetOutFile()
 	//Initialize output file
 	ofstream OutputFile;
 	OutputFile.open("outFile.txt", ios::out);
-	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb\t\t\tType" << endl;
+	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb" << endl;
 }
 
 void Game::AddtoOutFile(Unit* killedUnit)
@@ -384,6 +388,22 @@ void Game::UpdateHealCount()
 	HealedUnits++;
 }
 
+int Game::getInfectionProb() const
+{
+	return InfectionProb;
+}
+
+void Game::UpdateInfectedCount()
+{
+	InfectedUnits++;
+}
+
+void Game::UpdateImmunedCount()
+{
+	ImmunedUnits++;
+}
+
+
 void Game::MainLoop()
 {
 	while (!EndGame) //will stop when the game ends
@@ -426,6 +446,10 @@ void Game::MainLoop()
 		///////////////Attack Round//////////////////
 		 pEarthArmy->Attack(); //Discuss if it is needed
 		 pAlienArmy->Attack();
+
+		 //spread infection of earth army
+		 for(int i = 0; i < InfectedUnits - ImmunedUnits; i++)
+		     pEarthArmy->SpeardInfection();
 		
 
 		if (!SilentMode)
@@ -436,6 +460,8 @@ void Game::MainLoop()
 			PrintKilledList();
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
+			cout << "\u001b[32m=================================" << endl;
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() == 0) ? 0 : double(InfectedUnits - ImmunedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
 			system("pause");
 		}
@@ -563,7 +589,7 @@ void Game::PrintUMLList() const
 	cout << " ] \n\033[0m";
 }
 
-void Game::PrintFight(Unit* shooter,LinkedQueue<int> fightingUnits) const
+void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 {
 	if (!SilentMode)
 	{

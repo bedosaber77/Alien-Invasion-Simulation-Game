@@ -121,12 +121,13 @@ int EarthArmy::GetID()const
 void EarthArmy::Attack()
 {
 	Unit* unit2=nullptr;
-	
+
 
 	//ES Attacks 
-	if (EarthSoldiers.peek(unit2))
+	if (EarthSoldiers.dequeue(unit2))
 	{
-		unit2->Attack() ;
+		unit2->Attack();
+		EarthSoldiers.enqueue(unit2);
 	}
 	
 	//ET Attacks
@@ -168,6 +169,28 @@ void EarthArmy::Print()const
 	cout << "]";
 }
 
+void EarthArmy::SpeardInfection()
+{
+	int A = rand() % 100 + 1;
+	if(A <= 2)
+	{
+		int B = (EarthSoldiers.getCount() == 0) ? 0 : rand() % EarthSoldiers.getCount();
+		LinkedQueue<Unit*> Temp;
+		Unit* unit=nullptr;
+		for(int i = 0; i < B;i++)
+		{
+			EarthSoldiers.dequeue(unit);
+			Temp.enqueue(unit);
+		}
+		EarthSoldiers.peek(unit);
+		if(unit) unit->SetInfected(true);
+		
+		while(Temp.dequeue(unit))
+			EarthSoldiers.enqueue(unit);
+	}
+
+}
+
 
 EarthArmy::~EarthArmy()
 {
@@ -194,5 +217,6 @@ EarthArmy::~EarthArmy()
 		DeletedUnit = nullptr;
 	}	
 }
+
 
 int EarthArmy::ID = 1;

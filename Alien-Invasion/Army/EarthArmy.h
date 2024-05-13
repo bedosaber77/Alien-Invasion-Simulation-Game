@@ -39,6 +39,7 @@ public:
 	//Fighting Functions
 	void Attack();
 	void Print() const;
+	void SpeardInfection();
 
 	~EarthArmy();
 

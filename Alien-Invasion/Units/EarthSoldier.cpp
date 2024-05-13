@@ -12,17 +12,16 @@ void EarthSoldier::Attack()
 {
 	Unit* unit2 = nullptr;
 	LinkedQueue<Unit*> TempList;
-	LinkedQueue<int> EnemiesList;
-
-	
+	LinkedQueue<Unit*> EnemiesList;
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		unit2 = pGame->GetEnemiesUnit(Alien, alienSoldier);
+		unit2 = (this->ImmunedBefore()) ? pGame->GetEnemiesUnit(Earth, earthSoldier) : pGame->GetEnemiesUnit(Alien, alienSoldier);
+
 		if (unit2)
 		{
 			
-			EnemiesList.enqueue(unit2->getID());
+			EnemiesList.enqueue(unit2);
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 
@@ -48,7 +47,7 @@ void EarthSoldier::Attack()
 
 	while (TempList.dequeue(unit2))
 	{
-		pGame->GetAlienArmyPtr()->AddUnit(unit2);		//return to original list
+		(this->ImmunedBefore()) ? pGame->GetEarthArmyPtr()->AddUnit(unit2) : pGame->GetAlienArmyPtr()->AddUnit(unit2);
 	}
 }
 

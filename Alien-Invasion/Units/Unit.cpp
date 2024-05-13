@@ -14,6 +14,7 @@ Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 	
 	InitalHealth = H;
 	IsHealed = false;
+	IsInfected = false;
 }
 //==================================================================================//
 //							    Setters/ Getters Functions	         				//
@@ -139,14 +140,34 @@ int Unit::getESPriorty() const
 {
 	return (InitalHealth - Health);
 }
+// Infection Setters/ Getters
+void   Unit:: SetInfected(bool infected)
+{
+	IsInfected = infected;
+}
+bool Unit::InfectedBefore() const
+{
+	return IsInfected;
+}
 
-
+void   Unit::SetImmuned(bool immuned)
+{
+	IsImmuned = immuned;
+}
+bool Unit::ImmunedBefore() const
+{
+	return IsImmuned;
+}
 Unit::~Unit()
 {
 }
 // insertion operator overloading
 std::ostream& operator<<(std::ostream& os, const Unit* obj)
 {
+	if(obj->InfectedBefore())
+	{
+		os << '*';
+	}
 	os << obj->getID();
 	return os;
 }

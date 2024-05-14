@@ -84,7 +84,7 @@ public:
 	void IncrementInfectedCount();
 	void DecrementInfectedCount();
 	void CheckAllyWithdraw();
-	void DestroyAlly();
+	
 
 	//Needed functions for attack
 	Unit* GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type, bool BackDrone = 0) const;  //return enemy for the unit to attack 

@@ -11,7 +11,7 @@ class Game;
 class RandGen
 {
 	int N, Prob;
-	Inputs EarthParameters,AlienParameters;   //structs for RandGen parameters
+	Inputs EarthParameters,AlienParameters,AllyParameters;   //structs for RandGen parameters
 
 	ArmyType Army_Type;
 	Game* pGame;
@@ -24,6 +24,7 @@ public:
 	void SetProb(int);
 	void SetEarthParameters(Inputs);
 	void SetAlienParameters(Inputs);
+	void SetAllyParameters(Inputs);
 
 
 	//getters for Input file

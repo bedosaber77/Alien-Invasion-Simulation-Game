@@ -92,15 +92,15 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 			break;
 			case Ally:
 			{
-                int ePower = rand() % (EarthParameters.upper_power - EarthParameters.lower_power + 1)
-                    + EarthParameters.lower_power;
-                int eHealth = rand() % (EarthParameters.upper_health - EarthParameters.lower_health + 1)
-                    + EarthParameters.lower_health;
-                int eCapacity = rand() % (EarthParameters.upper_capacity - EarthParameters.lower_capacity + 1)
-                    + EarthParameters.lower_capacity;
+                int ALPower = rand() % (AllyParameters.upper_power - AllyParameters.lower_power + 1)
+                    + AllyParameters.lower_power;
+                int ALHealth = rand() % (AllyParameters.upper_health - AllyParameters.lower_health + 1)
+                    + AllyParameters.lower_health;
+                int ALCapacity = rand() % (AllyParameters.upper_capacity - AllyParameters.lower_capacity + 1)
+                    + AllyParameters.lower_capacity;
 
-				if(B<=EarthParameters.SUpercent)
-				newUnit=new SaverUnit(eHealth, ePower, eCapacity, ts, pGame);  //New percentage for Ally or use the same as earth?->think about it
+				if(B<= AllyParameters.SUpercent)
+				newUnit=new SaverUnit(ALHealth, ALPower, ALCapacity, ts, pGame);  //New percentage for Ally or use the same as earth?->think about it
 			}
 		default:
 			break;
@@ -134,6 +134,11 @@ void RandGen::SetEarthParameters(Inputs Eparameters)
 void RandGen::SetAlienParameters(Inputs Aparameters)
 {
 	AlienParameters = Aparameters;
+}
+
+void RandGen::SetAllyParameters(Inputs Alparameters)
+{
+	AllyParameters = Alparameters;
 }
 
 int RandGen::GetN() const

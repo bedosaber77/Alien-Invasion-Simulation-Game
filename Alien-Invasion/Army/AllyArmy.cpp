@@ -9,6 +9,11 @@ AllyArmy::AllyArmy ()
 
 void AllyArmy::AddUnit(Unit* newUnit)
 {
+	if (newUnit&&newUnit->getID() == 0)
+	{
+		newUnit->setID(ID);
+		ID++;
+	}
 	if(newUnit)
 		SaverUnits.enqueue(newUnit);
 }
@@ -39,7 +44,7 @@ void AllyArmy::Attack()
 
 void AllyArmy::Print() const
 {
-	cout << SaverUnits.getCount() << "SU [";
+	cout << SaverUnits.getCount() << " SU [";
 	SaverUnits.print();
 	cout << "]\n";
 }

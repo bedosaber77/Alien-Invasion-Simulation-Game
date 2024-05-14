@@ -124,7 +124,7 @@ void EarthArmy::Attack()
 
 
 	//ES Attacks 
-	if (EarthSoldiers.dequeue(unit2))
+	if (EarthSoldiers.peek(unit2))
 	{
 		unit2->Attack();
 		EarthSoldiers.enqueue(unit2);

@@ -191,7 +191,7 @@ void Game::GenerateArmy()
 	if (!AllyWithdraw) 
 	{
 		int A = (rand() % 100) + 1;
-		if (A <= pRand->GetProb() && pAllyArmy->GetID() < 4500)   //Generating Army condition
+		if (A <= pRand->GetProb() && pAllyArmy->GetID() < 3500)   //Generating Army condition
 		{
 			// Generating Ally Army
 			for (int i = 0; i < pRand->GetN(); i++)

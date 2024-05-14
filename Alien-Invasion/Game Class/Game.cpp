@@ -78,7 +78,7 @@ bool Game::LoadParameters(string Filename)
 	{
 		Inputs EarthParameters; // instance of struct for Earth Units
 		Inputs AlienParameters;  // instance of struct for Army Units
-
+		Inputs AllyParameters;
 
 		//Number of units for each army
 		int N;
@@ -124,6 +124,17 @@ bool Game::LoadParameters(string Filename)
 
 		Infile >> AlienParameters.lower_capacity;
 		Infile.ignore(1) >> AlienParameters.upper_capacity;
+
+		//Ally Ranges
+		Infile >> AllyParameters.lower_power;
+		Infile.ignore(1) >> AllyParameters.upper_power;
+
+
+		Infile >> AllyParameters.lower_health;
+		Infile.ignore(1) >> AllyParameters.upper_health;
+
+		Infile >> AllyParameters.lower_capacity;
+		Infile.ignore(1) >> AllyParameters.upper_capacity;
 
 		//Infection probability
 		Infile >> InfectionProb;
@@ -443,6 +454,11 @@ void Game::CheckAllyWithdraw()
 
 }
 
+bool Game::GetCallAlly() const
+{
+	return CallAlly;
+}
+
 
 void Game::MainLoop()
 {
@@ -620,6 +636,8 @@ Unit* Game::GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type,bool BackDrone
 	case Alien:
 		unit2 = pAlienArmy->removeUnit(Unit_Type, BackDrone);
 		break;
+	case Ally:
+		unit2 = pAllyArmy->removeUnit();
 	default:
 		break;
 	}

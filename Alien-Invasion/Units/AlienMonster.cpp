@@ -16,6 +16,7 @@ void AlienMonster::Attack()
 
 
 	bool InfectedRound = false;    // not to kill if u will infect
+	bool saverAttack = false;
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
@@ -29,11 +30,19 @@ void AlienMonster::Attack()
 		}
 		else
 		{
-			unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
-			if (!unit2)
+			if (pGame->GetAllyArmyPtr()->GetSUcount() > 0 && pGame->GetCallAlly() && saverAttack)
 			{
-				unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
+				unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);
 			}
+			else
+			{
+				unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+				if (!unit2)
+				{
+					unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
+				}
+			}
+			saverAttack = !saverAttack;
 		}
 
 	

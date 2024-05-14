@@ -15,7 +15,7 @@ void AllyArmy::AddUnit(Unit* newUnit)
 
 Unit* AllyArmy::removeUnit()
 {
-	Unit* unit;
+	Unit* unit=nullptr;
 	SaverUnits.dequeue(unit);
 	return unit;
 }

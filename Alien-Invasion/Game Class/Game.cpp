@@ -430,7 +430,6 @@ void Game::CheckAllyWithdraw()
 {
 	if (CurrentInfectedUnits == 0)
 	{
-
 		//pAllyArmy->SuWithdraw();
 		Unit* destroyedUnit;
 		while(pAllyArmy->GetSUcount()>0)
@@ -488,8 +487,8 @@ void Game::MainLoop()
 
 		 if(!CallAlly && !AllyWithdraw)
 		 {
-			 if ((pEarthArmy->GetEScount() == 0) ? 0 : 
-				 (CurrentInfectedUnits / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) >= InfectionThreshold)
+			 if((pEarthArmy->GetEScount() + UMLsolider.getCount()))
+			 if ((CurrentInfectedUnits / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) >= InfectionThreshold)
 					CallAlly = true;
 		 }
 		 else if(CallAlly && !AllyWithdraw)
@@ -512,8 +511,8 @@ void Game::MainLoop()
 			PrintKilledList();
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
-			cout << "\u001b[33m============== Saver Units ==============" << endl;
-			pAllyArmy->Print();
+	//		cout << "\u001b[33m============== Saver Units ==============" << endl;
+	//		pAllyArmy->Print();
 			cout << "\u001b[32m=================================" << endl;
 			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
@@ -684,8 +683,15 @@ void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 		case alienDrone:
 			type = "AD";
 			break;
+		case healUnit:
+			type = "HU";
+			break;
 		}
-		cout << type << " " << shooter->getID() << " shots [";
+		cout << type << " " << shooter->getID();
+		if (type == "HU")
+			cout << " heals [";
+		else
+			cout << " shots [";
 		fightingUnits.print();
 		cout << "]" << endl;
 	}

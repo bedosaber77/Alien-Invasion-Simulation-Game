@@ -16,10 +16,11 @@ void AlienMonster::Attack()
 	LinkedQueue<Unit*> InfectedList;
 
 
-	bool InfectedRound = false;    // not to kill if u will infect
+	//bool InfectedRound = false;    // not to kill if u will infect
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
+		bool InfectedRound = false;
 		if (i % 2 == 0)
 		{
 			unit2 = pGame->GetEnemiesUnit(Earth, earthTank);

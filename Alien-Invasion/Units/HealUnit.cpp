@@ -13,6 +13,7 @@ void HealUnit::Attack()
 	if (pGame->UMLisEmpty())
 		return ;
 	LinkedQueue<Unit*> TempList;
+	LinkedQueue<Unit*> HealedList;
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
 		unit2 = pGame->getUnitToHeal();
@@ -24,6 +25,7 @@ void HealUnit::Attack()
 			}
 			else
 			{
+				HealedList.enqueue(unit2);
 				int incHeal = this->Power * (this->Health / 100.0) / sqrt(unit2->getHealth());
 				if(unit2->InfectedBefore())
 					incHeal *= 0.5;
@@ -52,7 +54,7 @@ void HealUnit::Attack()
 		TempList.dequeue(unit);
 		pGame->AddtoUML(unit);
 	}
-
+	pGame->PrintFight(this, HealedList);
 	pGame->GetEarthArmyPtr()->removeUnit(healUnit);
 	this->setTd(pGame->GetCurrentTime());
 	this->setTa(pGame->GetCurrentTime());

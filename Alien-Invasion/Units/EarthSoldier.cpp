@@ -16,7 +16,7 @@ void EarthSoldier::Attack()
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		unit2 = (this->ImmunedBefore()) ? pGame->GetEnemiesUnit(Earth, earthSoldier) : pGame->GetEnemiesUnit(Alien, alienSoldier);
+		unit2 = (this->InfectedBefore()) ? pGame->GetEnemiesUnit(Earth, earthSoldier) : pGame->GetEnemiesUnit(Alien, alienSoldier);
 
 		if (unit2)
 		{
@@ -47,7 +47,7 @@ void EarthSoldier::Attack()
 
 	while (TempList.dequeue(unit2))
 	{
-		(this->ImmunedBefore()) ? pGame->GetEarthArmyPtr()->AddUnit(unit2) : pGame->GetAlienArmyPtr()->AddUnit(unit2);
+		(this->InfectedBefore()) ? pGame->GetEarthArmyPtr()->AddUnit(unit2) : pGame->GetAlienArmyPtr()->AddUnit(unit2);
 	}
 }
 

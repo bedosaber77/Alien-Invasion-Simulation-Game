@@ -488,7 +488,8 @@ void Game::MainLoop()
 
 		 if(!CallAlly && !AllyWithdraw)
 		 {
-			 if ((CurrentInfectedUnits / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) >= InfectionThreshold)
+			 if ((pEarthArmy->GetEScount() == 0) ? 0 : 
+				 (CurrentInfectedUnits / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) >= InfectionThreshold)
 					CallAlly = true;
 		 }
 		 else if(CallAlly && !AllyWithdraw)
@@ -512,6 +513,7 @@ void Game::MainLoop()
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
 			cout << "\u001b[33m============== Saver Units ==============" << endl;
+			pAllyArmy->Print();
 			cout << "\u001b[32m=================================" << endl;
 			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
@@ -667,7 +669,17 @@ void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 			type = "AS";
 			break;
 		case alienMonster:
+		{
 			type = "AM";
+			Unit* unit;
+			if (fightingUnits.peek(unit) && unit->InfectedBefore())
+			{
+				cout << type << " " << shooter->getID() << " infects [";
+				fightingUnits.print();
+				cout << "]" << endl;
+				return;
+			}
+		}
 			break;
 		case alienDrone:
 			type = "AD";

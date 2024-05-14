@@ -124,10 +124,11 @@ void EarthArmy::Attack()
 
 
 	//ES Attacks 
-	if (EarthSoldiers.peek(unit2))
+	if (EarthSoldiers.dequeue(unit2))
 	{
+	//	if (unit2->InfectedBefore()) EarthSoldiers.dequeue(unit2);
 		unit2->Attack();
-		EarthSoldiers.enqueue(unit2);
+	    EarthSoldiers.enqueue(unit2);
 	}
 	
 	//ET Attacks

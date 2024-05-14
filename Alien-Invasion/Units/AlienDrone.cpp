@@ -68,7 +68,6 @@ void AlienDrone::Attack()
 		{
 			break;
 		}
-		// GET EG TO ATTACK
 		
 	}
 

@@ -53,8 +53,8 @@ void AlienMonster::Attack()
 			//infection process
 			if (unit2->getType() == earthSoldier)
 			{
-				int prob = pGame->getInfectionProb();
-				int random = rand() % (4 * prob);
+				int prob = pGame->getInfectionProb();  //get infection prob loaded from the input file
+				int random = rand() % (4 * prob);      //randomize a number and compare it with the prob
 
 				if (random <= prob)		// to be revisited
 				{

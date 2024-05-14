@@ -24,7 +24,3 @@ enum ArmyType
 	Earth, Alien,Ally
 };
 
-enum GameResult
-{
-	win, loss, tie
-};

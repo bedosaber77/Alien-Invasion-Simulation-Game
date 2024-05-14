@@ -528,10 +528,11 @@ void Game::MainLoop()
 			PrintKilledList();
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
-	//		cout << "\u001b[33m============== Saver Units ==============" << endl;
-	//		pAllyArmy->Print();
-			cout << "\u001b[32m=================================" << endl;
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount()+ UMLsolider.getCount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
+     		cout << "\u001b[33m============== Saver Units ==============" << endl;
+			pAllyArmy->Print();
+			cout << "\u001b[32m=========================================" << endl;
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0 
+				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
 			system("pause");
 		}
@@ -690,7 +691,7 @@ void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 		{
 			type = "AM";
 			Unit* unit;
-			if (fightingUnits.peek(unit) && unit->InfectedBefore())
+			if (fightingUnits.peek(unit) && unit->InfectedBefore() && !unit->ImmunedBefore())
 			{
 				cout << type << " " << shooter->getID() << " infects [";
 				fightingUnits.print();
@@ -709,7 +710,9 @@ void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 			type = "SU";
 			break;
 		}
-		cout << type << " " << shooter->getID();
+		cout << type << " ";
+		if (shooter->InfectedBefore())  cout << "*";
+		cout << shooter->getID();
 		if (type == "HU")
 			cout << " heals [";
 		else

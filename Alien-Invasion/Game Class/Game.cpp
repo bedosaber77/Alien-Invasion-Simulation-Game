@@ -528,7 +528,7 @@ void Game::MainLoop()
 			PrintUMLList();
 			cout << "\u001b[33m============== Saver Units ==============" << endl;
 			cout << "\u001b[32m=================================" << endl;
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount()+ UMLsolider.getCount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
 			system("pause");
 		}

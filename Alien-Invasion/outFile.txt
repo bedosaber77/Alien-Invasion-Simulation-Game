@@ -1,51 +1,18 @@
 Td			ID			Tj			Df			Dd			Db
 
-9           4           7           2           0           2
-9           5           7           0           2           2
-9           1           7           0           2           2
-12           7          10           0           2           2
-13           6          10           0           3           3
-13          10          10           0           3           3
-13           9          10           0           3           3
-29          12          27           0           2           2
-29          15          27           0           2           2
-29          13          27           0           2           2
-30          11          27           0           3           3
-34          20          34           0           0           0
-34        4000          23         -23          34          11
-34        4001          25         -25          34           9
-34        4002          25         -25          34           9
-34           2           7           0          27          27
-35          14          27           0           8           8
-37          18          34           0           3           3
-38          16          34           0           4           4
-38          19          34           0           4           4
-39          17          34           0           5           5
-41           3           7           0          34          34
-41           8          10           0          31          31
-
-Battle Result: loss
-
-For Earth army: 
-Total number of each unit: 
-ES: 2		ET: 2		EG :14		HU: 2
-Percentage of destructed units relative to their total 
-ES: 100%		 ET: 100%		 EG: 100%		 HU: 100%
-Percentage of destructed units relative to total units: 100%
-Average of Df: 0
-Average of Dd: 7
-Average of Db: 7
-Df/Db: 0%
-Dd/Db: 100%
-Healed units Percentage: 20%
-For Alien army: 
-Total number of each unit: 
-AS: 26		 AM: 7		 AD: 7
-Percentage of destructed units relative to their total 
-AS: 0%		 AM: 0%		 AD: 0%
-Percentage of destructed units relative to total units: 0%
-Average of Df: 0
-Average of Dd: 0
-Average of Db: 0
-Df/Db: 0%
-Dd/Db: 0%
+13           9          10           3           0           3
+15        2012           9           0           6           6
+15        2005           5           3           7          10
+22        2020          17           0           5           5
+23        2017          16           0           7           7
+24        2025          19           0           5           5
+26        2018          16           2           8          10
+27        2019          16           0          11          11
+27          38          27           0           0           0
+27          23          18           0           9           9
+28        2007           5           3          20          23
+29        2022          17           1          11          12
+29        2029          19           0          10          10
+30        2021          17           4           9          13
+30        2024          17           1          12          13
+31        2026          19           2          10          12

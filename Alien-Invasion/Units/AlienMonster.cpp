@@ -81,7 +81,7 @@ void AlienMonster::Attack()
 				{
 					TempList.enqueue(unit2);
 				}
-				else if (unit2->getHealth() > 0)
+				else if (unit2->getHealth() > 0 && unit2->getType()!= saverUnit)
 				{
 					pGame->AddtoUML(unit2);
 				}
@@ -103,7 +103,10 @@ void AlienMonster::Attack()
 	pGame->PrintFight(this,  EnemiesList);
 
 	while (TempList.dequeue(unit2))
-	{
+	{ 
+		if (unit2->getType() == saverUnit)
+			pGame->GetAllyArmyPtr()->AddUnit(unit2);
+		else
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
 

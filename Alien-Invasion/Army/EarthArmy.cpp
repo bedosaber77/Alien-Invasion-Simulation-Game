@@ -34,7 +34,7 @@ void EarthArmy::AddUnit(Unit* newUnit)
 		int priorty = earthgunnery->getCombination();
 		EarthGunneries.enqueue(newUnit, priorty);
 	}
-	else 
+	else if(newUnit->getType() == healUnit)
 	{
 		HL.push(newUnit);
 	}

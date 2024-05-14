@@ -6,6 +6,7 @@
 #include"../Army/AlienArmy.h"
 #include"../Army/EarthArmy.h"
 #include"../DEFS.h"
+#include "../Army/AllyArmy.h"
 
 using namespace std;
 class Game
@@ -14,7 +15,7 @@ class Game
 	to add and remove units from the list */
 	AlienArmy* pAlienArmy;
 	EarthArmy* pEarthArmy;
-
+	AllyArmy* pAllyArmy;
 	//pointer to RandomGen class
 	RandGen* pRand;
 
@@ -45,6 +46,12 @@ class Game
 	int TotalInfectedUnits;  //No of units infected from the start of the game
 	int CurrentInfectedUnits;  //No of units currently infected
 	int ImmunedUnits;   //No of immuned units
+
+	int InfectionThreshold;
+
+	//Saver Units Required Parameters
+	bool CallAlly;
+	bool AllyWithdraw;
 	
 public:
 	Game();
@@ -76,7 +83,8 @@ public:
 	int getInfectionProb() const;
 	void IncrementInfectedCount();
 	void DecrementInfectedCount();
-
+	void CheckAllyWithdraw();
+	void DestroyAlly();
 
 	//Needed functions for attack
 	Unit* GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type, bool BackDrone = 0) const;  //return enemy for the unit to attack 
@@ -84,6 +92,7 @@ public:
 	//RandGen and Armies Pointers Getters
 	AlienArmy* GetAlienArmyPtr() const;
 	EarthArmy* GetEarthArmyPtr() const;
+	AllyArmy* GetAllyArmyPtr() const;
 	RandGen* GetRandGenPtr() const;
 
 	// Current Time Getter       
@@ -94,6 +103,7 @@ public:
 	void PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const;
 	void PrintAliveUnits() const;
 	void PrintUMLList() const;
+
 
 	~Game();
 };

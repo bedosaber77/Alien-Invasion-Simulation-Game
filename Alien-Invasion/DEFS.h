@@ -9,16 +9,19 @@ struct Inputs
 	int ESpercent=0, ETpercent=0, EGpercent=0,HUpercent=0;
 
 	int ASpercent=0, AMpercent=0, ADpercent=0;
+
+	int SUpercent=0;
 };
 
 enum UnitType {
 	earthSoldier, earthTank, earthGunnery,
-	alienSoldier, alienMonster, alienDrone, healUnit
+	alienSoldier, alienMonster, alienDrone,
+	healUnit, saverUnit
 };
 
 enum ArmyType
 {
-	Earth, Alien
+	Earth, Alien,Ally
 };
 
 enum GameResult

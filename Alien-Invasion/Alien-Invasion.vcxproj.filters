@@ -111,6 +111,12 @@
     <ClInclude Include="Units\HealUnit.h">
       <Filter>Unit Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Army\AllyArmy.h">
+      <Filter>Lists Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Units\SaverUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Units\AlienDrone.cpp">
@@ -151,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="Units\HealUnit.cpp">
       <Filter>Unit Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Army\AllyArmy.cpp">
+      <Filter>Lists Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Units\SaverUnit.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

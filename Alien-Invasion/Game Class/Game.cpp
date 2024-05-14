@@ -1,6 +1,7 @@
 #include "Game.h"
 #include<iostream>
 #include <iomanip>
+
 using namespace std;
 
 Game::Game()
@@ -8,6 +9,7 @@ Game::Game()
 	srand(time(0));
     pAlienArmy = new AlienArmy;
     pEarthArmy = new EarthArmy;
+	pAllyArmy  = new AllyArmy;
 	pRand = new RandGen(this);
 
 	ESDead = ETDead = EGDead = HUDead = 0;
@@ -23,6 +25,8 @@ Game::Game()
 	ImmunedUnits = 0;
 	EndGame = false;
 	SilentMode = false;
+	CallAlly = false;
+	AllyWithdraw = false;
 	StartGame();
 }
 
@@ -124,6 +128,9 @@ bool Game::LoadParameters(string Filename)
 		//Infection probability
 		Infile >> InfectionProb;
 
+		Infile>>InfectionThreshold;        
+
+		Infile >> EarthParameters.SUpercent;    //To be revisited
 		//set values for ranges and percentage
 		pRand->SetEarthParameters(EarthParameters);
 		pRand->SetAlienParameters(AlienParameters);
@@ -169,6 +176,20 @@ void Game::GenerateArmy()
 				pAlienArmy->AddUnit(newUnit);
 		}
 	}
+	if (!AllyWithdraw) 
+	{
+		int A = (rand() % 100) + 1;
+		if (A <= pRand->GetProb() && pAllyArmy->GetID() < 4500)   //Generating Army condition
+		{
+			// Generating Ally Army
+			for (int i = 0; i < pRand->GetN(); i++)
+			{
+				newUnit = pRand->GenerateUnits(TimeStep, Ally);
+				pAllyArmy->AddUnit(newUnit);
+			}
+		}
+	}
+
 }
 
 void Game::SetOutFile()
@@ -405,6 +426,23 @@ void Game::DecrementInfectedCount()
 		CurrentInfectedUnits--;
 }
 
+void Game::CheckAllyWithdraw()
+{
+	if (CurrentInfectedUnits == 0)
+	{
+
+		//pAllyArmy->SuWithdraw();
+		Unit* destroyedUnit;
+		while(pAllyArmy->GetSUcount()>0)
+		{
+			destroyedUnit = pAllyArmy->removeUnit();
+			AddtoKilledList(destroyedUnit);
+		}
+		AllyWithdraw = true;
+	}
+
+}
+
 
 void Game::MainLoop()
 {
@@ -447,11 +485,22 @@ void Game::MainLoop()
 		///////////////Attack Round//////////////////
 		 pEarthArmy->Attack(); //Discuss if it is needed
 		 pEarthArmy->SpeardInfection();
+
+		 if(!CallAlly && !AllyWithdraw)
+		 {
+			 if ((CurrentInfectedUnits / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) >= InfectionThreshold)
+					CallAlly = true;
+		 }
+		 else if(CallAlly && !AllyWithdraw)
+		 {
+			 pAllyArmy->Attack();
+			 CheckAllyWithdraw();
+		 }
 		 pAlienArmy->Attack();
 
 		 //spread infection of earth army
-		 for(int i = 0; i < CurrentInfectedUnits; i++)
-		     pEarthArmy->SpeardInfection();
+		/* for(int i = 0; i < CurrentInfectedUnits; i++)
+		     pEarthArmy->SpeardInfection();*/
 		
 
 		if (!SilentMode)
@@ -462,6 +511,7 @@ void Game::MainLoop()
 			PrintKilledList();
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
+			cout << "\u001b[33m============== Saver Units ==============" << endl;
 			cout << "\u001b[32m=================================" << endl;
 			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
@@ -543,6 +593,11 @@ AlienArmy* Game::GetAlienArmyPtr() const
 EarthArmy* Game::GetEarthArmyPtr() const
 {
 	return pEarthArmy;
+}
+
+AllyArmy* Game::GetAllyArmyPtr() const
+{
+	return pAllyArmy;
 }
 
 RandGen* Game::GetRandGenPtr() const

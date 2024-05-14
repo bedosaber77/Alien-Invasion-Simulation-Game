@@ -6,6 +6,7 @@
 #include"../Units/EarthGunnery.h"
 #include"..\Units\Aliensoldier.h"
 #include"../Units/HealUnit.h"
+#include"../Units/SaverUnit.h"
 
 
 RandGen::RandGen(Game* GamePtr)
@@ -89,6 +90,18 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
 		}
 		}
 			break;
+			case Ally:
+			{
+                int ePower = rand() % (EarthParameters.upper_power - EarthParameters.lower_power + 1)
+                    + EarthParameters.lower_power;
+                int eHealth = rand() % (EarthParameters.upper_health - EarthParameters.lower_health + 1)
+                    + EarthParameters.lower_health;
+                int eCapacity = rand() % (EarthParameters.upper_capacity - EarthParameters.lower_capacity + 1)
+                    + EarthParameters.lower_capacity;
+
+				if(B<=EarthParameters.SUpercent)
+				newUnit=new SaverUnit(eHealth, ePower, eCapacity, ts, pGame);  //New percentage for Ally or use the same as earth?->think about it
+			}
 		default:
 			break;
 		}

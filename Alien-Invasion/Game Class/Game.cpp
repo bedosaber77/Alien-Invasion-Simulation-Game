@@ -77,8 +77,8 @@ bool Game::LoadParameters(string Filename)
 	if (Infile.is_open())
 	{
 		Inputs EarthParameters; // instance of struct for Earth Units
-		Inputs AlienParameters;  // instance of struct for Army Units
-
+		Inputs AlienParameters;  // instance of struct for Alien Units
+		Inputs AllyParameters; // instance of struct for Ally Units
 
 		//Number of units for each army
 		int N;
@@ -94,6 +94,7 @@ bool Game::LoadParameters(string Filename)
 		}
 		Infile >> AlienParameters.ASpercent >> AlienParameters.AMpercent >> AlienParameters.ADpercent;
 
+		Infile >> AllyParameters.SUpercent;    //To be revisited
 		// Probability
 		int Prob;
 		Infile >> Prob;
@@ -125,15 +126,26 @@ bool Game::LoadParameters(string Filename)
 		Infile >> AlienParameters.lower_capacity;
 		Infile.ignore(1) >> AlienParameters.upper_capacity;
 
+		//Ally Ranges
+		Infile >> AllyParameters.lower_power;
+		Infile.ignore(1) >> AllyParameters.upper_power;
+
+
+		Infile >> AllyParameters.lower_health;
+		Infile.ignore(1) >> AllyParameters.upper_health;
+
+		Infile >> AllyParameters.lower_capacity;
+		Infile.ignore(1) >> AllyParameters.upper_capacity;
+
 		//Infection probability
 		Infile >> InfectionProb;
 
 		Infile>>InfectionThreshold;        
 
-		Infile >> EarthParameters.SUpercent;    //To be revisited
 		//set values for ranges and percentage
 		pRand->SetEarthParameters(EarthParameters);
 		pRand->SetAlienParameters(AlienParameters);
+		pRand->SetAllyParameters(AllyParameters);
 
 		Infile.close();
 		return true;
@@ -442,6 +454,11 @@ void Game::CheckAllyWithdraw()
 
 }
 
+bool Game::GetCallAlly() const
+{
+	return CallAlly;
+}
+
 
 void Game::MainLoop()
 {
@@ -514,7 +531,7 @@ void Game::MainLoop()
 	//		cout << "\u001b[33m============== Saver Units ==============" << endl;
 	//		pAllyArmy->Print();
 			cout << "\u001b[32m=================================" << endl;
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount()+ UMLsolider.getCount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
 			system("pause");
 		}
@@ -620,6 +637,8 @@ Unit* Game::GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type,bool BackDrone
 	case Alien:
 		unit2 = pAlienArmy->removeUnit(Unit_Type, BackDrone);
 		break;
+	case Ally:
+		unit2 = pAllyArmy->removeUnit();
 	default:
 		break;
 	}
@@ -686,6 +705,9 @@ void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 		case healUnit:
 			type = "HU";
 			break;
+		case saverUnit:
+			type = "SU";
+			break;
 		}
 		cout << type << " " << shooter->getID();
 		if (type == "HU")
@@ -707,6 +729,9 @@ void Game::PrintAliveUnits() const
 	pAlienArmy->Print();
 	cout << endl;
 	cout << "\n\033[0m";
+	cout << "\033[1;36m============== Ally Army Alive Units ==============" << endl;
+	pAllyArmy->Print();
+	cout << endl;
 }
 
 Game::~Game()

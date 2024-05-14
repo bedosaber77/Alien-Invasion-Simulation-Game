@@ -15,7 +15,16 @@ void AlienSoldier:: Attack()
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+		if (i % 2 == 0) {
+			unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+			if(!unit2)
+				unit2= pGame->GetEnemiesUnit(Ally, saverUnit);
+		}
+		else {
+			unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);
+			if (!unit2)
+				unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+		}
 		if (unit2)
 		{
 		

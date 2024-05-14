@@ -15,8 +15,6 @@ void AlienMonster::Attack()
 	LinkedQueue<Unit*> EnemiesList;
 	LinkedQueue<Unit*> InfectedList;
 
-
-//	bool InfectedRound = false;    // not to kill if u will infect
 	bool saverAttack = false;
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
@@ -68,7 +66,6 @@ void AlienMonster::Attack()
 				}
 			}
 
-		//	EnemiesList.enqueue(unit2);
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 			if (!InfectedRound)
@@ -86,7 +83,7 @@ void AlienMonster::Attack()
 				{
 					TempList.enqueue(unit2);
 				}
-				else if (unit2->getHealth() > 0)
+				else if (unit2->getHealth() > 0 && unit2->getType()!= saverUnit)
 				{
 					pGame->AddtoUML(unit2);
 				}
@@ -97,19 +94,21 @@ void AlienMonster::Attack()
 					pGame->AddtoKilledList(unit2);
 				}
 			}
+			else
+			{
+				TempList.enqueue(unit2);
+			}
 		}
 	}
 
 	pGame->PrintFight(this, EnemiesList);
-	if(!InfectedList.isEmpty()) pGame->PrintFight(this, InfectedList);
+    pGame->PrintFight(this, InfectedList, true);
 
 	while (TempList.dequeue(unit2))
-	{
-		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
-	}
-
-	while (InfectedList.dequeue(unit2))
-	{
+	{ 
+		if (unit2->getType() == saverUnit)
+			pGame->GetAllyArmyPtr()->AddUnit(unit2);
+		else
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
 }

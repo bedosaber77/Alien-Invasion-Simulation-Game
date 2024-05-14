@@ -34,7 +34,7 @@ void EarthArmy::AddUnit(Unit* newUnit)
 		int priorty = earthgunnery->getCombination();
 		EarthGunneries.enqueue(newUnit, priorty);
 	}
-	else 
+	else if(newUnit->getType() == healUnit)
 	{
 		HL.push(newUnit);
 	}
@@ -126,7 +126,6 @@ void EarthArmy::Attack()
 	//ES Attacks 
 	if (EarthSoldiers.dequeue(unit2))
 	{
-	//	if (unit2->InfectedBefore()) EarthSoldiers.dequeue(unit2);
 		unit2->Attack();
 	    EarthSoldiers.enqueue(unit2);
 	}

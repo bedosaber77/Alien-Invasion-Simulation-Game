@@ -37,7 +37,7 @@ int AllyArmy::GetID() const
 
 void AllyArmy::Attack()
 {
-	Unit* unit;
+	Unit* unit=nullptr;
 	if (SaverUnits.peek(unit))
 		unit->Attack();
 }
@@ -51,7 +51,7 @@ void AllyArmy::Print() const
 
 void AllyArmy::SuWithdraw()
 {
-	Unit* unit;
+	Unit* unit=nullptr;
 	while (SaverUnits.dequeue(unit));
 }
 

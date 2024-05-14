@@ -17,12 +17,13 @@ void AlienSoldier:: Attack()
 	{
 		if (i % 2 == 0) {
 			unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
-			if(!unit2)
-				unit2= pGame->GetEnemiesUnit(Ally, saverUnit);
+			if(!unit2 && pGame->GetCallAlly() && pGame->GetAllyArmyPtr()->GetSUcount() > 0)
+				unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);
 		}
 		else {
-			unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);
-			if (!unit2)
+			if(pGame->GetCallAlly() && pGame->GetAllyArmyPtr()->GetSUcount() > 0)
+				unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);
+			else
 				unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
 		}
 		if (unit2)
@@ -43,7 +44,7 @@ void AlienSoldier:: Attack()
 			{
 				TempList.enqueue(unit2);
 			}
-			else if (unit2->getHealth() > 0)
+			else if (unit2->getHealth() > 0 && unit2->getType()!=saverUnit)
 				pGame->AddtoUML(unit2);
 			else
 			{
@@ -60,6 +61,9 @@ void AlienSoldier:: Attack()
 
 	while (TempList.dequeue(unit2))
 	{
+		if (unit2->getType() == saverUnit)
+			pGame->GetAllyArmyPtr()->AddUnit(unit2);
+		else
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
 }

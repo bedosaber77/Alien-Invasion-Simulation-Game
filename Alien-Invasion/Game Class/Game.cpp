@@ -140,7 +140,7 @@ bool Game::LoadParameters(string Filename)
 		//Infection probability
 		Infile >> InfectionProb;
 
-		Infile>>InfectionThreshold;        
+		Infile>>InfectionThreshold;         
 
 		//set values for ranges and percentage
 		pRand->SetEarthParameters(EarthParameters);
@@ -162,7 +162,7 @@ void Game::GenerateArmy()
 {
 	Unit* newUnit = nullptr;
 	int A = (rand() % 100) + 1;
-	if (A <= pRand->GetProb() && pEarthArmy->GetID() < 2000)   //Generating Army condition
+	if (A <= pRand->GetProb() && pEarthArmy->GetID() < 1000)   //Generating Army condition
 	{
 		// Generating Earth Army
 		for (int i = 0; i < pRand->GetN(); i++)
@@ -174,7 +174,7 @@ void Game::GenerateArmy()
 	// Generating Alien Army
 	A = (rand() % 100) + 1;
 
-	if (A <= pRand->GetProb() && pAlienArmy->GetID() < 4000) {
+	if (A <= pRand->GetProb() && pAlienArmy->GetID() < 3000) {
 		bool Intofront = true;
 		for (int i = 0; i < pRand->GetN(); i++)
 		{
@@ -188,7 +188,7 @@ void Game::GenerateArmy()
 				pAlienArmy->AddUnit(newUnit);
 		}
 	}
-	if (!AllyWithdraw) 
+	if (!AllyWithdraw && CallAlly) 
 	{
 		int A = (rand() % 100) + 1;
 		if (A <= pRand->GetProb() && pAllyArmy->GetID() < 4500)   //Generating Army condition
@@ -443,7 +443,7 @@ void Game::CheckAllyWithdraw()
 	if (CurrentInfectedUnits == 0)
 	{
 		//pAllyArmy->SuWithdraw();
-		Unit* destroyedUnit;
+		Unit* destroyedUnit = nullptr;
 		while(pAllyArmy->GetSUcount()>0)
 		{
 			destroyedUnit = pAllyArmy->removeUnit();
@@ -505,7 +505,7 @@ void Game::MainLoop()
 		 if(!CallAlly && !AllyWithdraw)
 		 {
 			 if((pEarthArmy->GetEScount() + UMLsolider.getCount()))
-			 if ((CurrentInfectedUnits / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) >= InfectionThreshold)
+				 if ((double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) >= InfectionThreshold)
 					CallAlly = true;
 		 }
 		 else if(CallAlly && !AllyWithdraw)
@@ -528,8 +528,6 @@ void Game::MainLoop()
 			PrintKilledList();
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
-     		cout << "\u001b[33m============== Saver Units ==============" << endl;
-			pAllyArmy->Print();
 			cout << "\u001b[32m=========================================" << endl;
 			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0 
 				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
@@ -571,6 +569,8 @@ void Game::AddtoKilledList(Unit* army)
 		break;
 	case alienDrone:
 		ADDead++;
+		break;
+	case saverUnit:
 		break;
 	}
 }
@@ -668,7 +668,7 @@ void Game::PrintUMLList() const
 	cout << " ] \n\033[0m";
 }
 
-void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
+void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits, bool InfectionList) const
 {
 	if (!SilentMode)
 	{
@@ -688,17 +688,7 @@ void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 			type = "AS";
 			break;
 		case alienMonster:
-		{
 			type = "AM";
-			Unit* unit;
-			if (fightingUnits.peek(unit) && unit->InfectedBefore() && !unit->ImmunedBefore())
-			{
-				cout << type << " " << shooter->getID() << " infects [";
-				fightingUnits.print();
-				cout << "]" << endl;
-				return;
-			}
-		}
 			break;
 		case alienDrone:
 			type = "AD";
@@ -713,7 +703,10 @@ void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 		cout << type << " ";
 		if (shooter->InfectedBefore())  cout << "*";
 		cout << shooter->getID();
-		if (type == "HU")
+
+		if (InfectionList)
+			cout << " infects [";
+		else if (type == "HU")
 			cout << " heals [";
 		else
 			cout << " shots [";
@@ -739,7 +732,7 @@ void Game::PrintAliveUnits() const
 
 Game::~Game()
 {
-	Unit* KilledUnit;
+	Unit* KilledUnit = nullptr;
 	while (!KilledList.isEmpty())
 	{
 		KilledList.dequeue(KilledUnit);
@@ -748,6 +741,7 @@ Game::~Game()
 
 	delete pEarthArmy;
 	delete pAlienArmy;
+	delete pAllyArmy;
 	delete pRand;
 }
 

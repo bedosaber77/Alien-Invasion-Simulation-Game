@@ -100,7 +100,7 @@ public:
 
 	//printing functions 
 	void PrintKilledList() const;
-	void PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const;
+	void PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits, bool InfectionList = false) const;
 	void PrintAliveUnits() const;
 	void PrintUMLList() const;
 

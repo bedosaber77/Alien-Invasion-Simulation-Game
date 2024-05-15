@@ -13,13 +13,13 @@ void AlienMonster::Attack()
 	Unit* unit2 = nullptr;
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
+	LinkedQueue<Unit*> InfectedList;
 
-
-	bool InfectedRound = false;    // not to kill if u will infect
 	bool saverAttack = false;
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
+		bool InfectedRound = false;
 		if (i % 2 == 0)
 		{
 			unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
@@ -51,8 +51,8 @@ void AlienMonster::Attack()
 			//infection process
 			if (unit2->getType() == earthSoldier)
 			{
-				int prob = pGame->getInfectionProb();
-				int random = rand() % (4 * prob);
+				int prob = pGame->getInfectionProb();  //get infection prob loaded from the input file
+				int random = rand() % (4 * prob);      //randomize a number and compare it with the prob
 
 				if (random <= prob)		// to be revisited
 				{
@@ -61,15 +61,17 @@ void AlienMonster::Attack()
 						unit2->SetInfected(true);
 						pGame->IncrementInfectedCount();  //update infected units count in game
 						InfectedRound = true;   //Monster doesn't kill the unit after infecting it
+						InfectedList.enqueue(unit2);
 					}
 				}
 			}
 
-			EnemiesList.enqueue(unit2);
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 			if (!InfectedRound)
 			{
+				EnemiesList.enqueue(unit2);
+
 				int Damage = (this->getHealth() * this->getPower() / 100) /
 					sqrt(unit2->getHealth());	//Damage Formula
 
@@ -92,15 +94,15 @@ void AlienMonster::Attack()
 					pGame->AddtoKilledList(unit2);
 				}
 			}
-			else   // infected units will be just stored in temp list
+			else
 			{
 				TempList.enqueue(unit2);
 			}
-	
 		}
 	}
 
-	pGame->PrintFight(this,  EnemiesList);
+	pGame->PrintFight(this, EnemiesList);
+    pGame->PrintFight(this, InfectedList, true);
 
 	while (TempList.dequeue(unit2))
 	{ 
@@ -109,7 +111,6 @@ void AlienMonster::Attack()
 		else
 		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
 	}
-
 }
 
 AlienMonster::~AlienMonster()

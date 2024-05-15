@@ -140,7 +140,7 @@ bool Game::LoadParameters(string Filename)
 		//Infection probability
 		Infile >> InfectionProb;
 
-		Infile>>InfectionThreshold;        
+		Infile>>InfectionThreshold;         
 
 		//set values for ranges and percentage
 		pRand->SetEarthParameters(EarthParameters);
@@ -188,7 +188,7 @@ void Game::GenerateArmy()
 				pAlienArmy->AddUnit(newUnit);
 		}
 	}
-	if (!AllyWithdraw) 
+	if (!AllyWithdraw && CallAlly) 
 	{
 		int A = (rand() % 100) + 1;
 		if (A <= pRand->GetProb() && pAllyArmy->GetID() < 3500)   //Generating Army condition
@@ -442,7 +442,6 @@ void Game::CheckAllyWithdraw()
 {
 	if (CurrentInfectedUnits == 0)
 	{
-
 		//pAllyArmy->SuWithdraw();
 		Unit* destroyedUnit = nullptr;
 		while(pAllyArmy->GetSUcount()>0)
@@ -529,9 +528,9 @@ void Game::MainLoop()
 			PrintKilledList();
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
-			cout << "\u001b[33m============== Saver Units ==============" << endl;
-			cout << "\u001b[32m=================================" << endl;
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount()+ UMLsolider.getCount() == 0) ? 0 : double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
+			cout << "\u001b[32m=========================================" << endl;
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0 
+				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 			cout << endl;
 			system("pause");
 		}
@@ -669,7 +668,7 @@ void Game::PrintUMLList() const
 	cout << " ] \n\033[0m";
 }
 
-void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
+void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits, bool InfectionList) const
 {
 	if (!SilentMode)
 	{
@@ -701,8 +700,13 @@ void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits) const
 			type = "SU";
 			break;
 		}
-		cout << type << " " << shooter->getID();
-		if (type == "HU")
+		cout << type << " ";
+		if (shooter->InfectedBefore())  cout << "*";
+		cout << shooter->getID();
+
+		if (InfectionList)
+			cout << " infects [";
+		else if (type == "HU")
 			cout << " heals [";
 		else
 			cout << " shots [";

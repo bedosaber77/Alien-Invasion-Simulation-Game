@@ -169,8 +169,9 @@ void EarthArmy::Print()const
 	cout << "]";
 }
 
-void EarthArmy::SpeardInfection()
+bool EarthArmy::SpeardInfection()
 {
+	bool infected = false;
 	int A = rand() % 100 + 1;
 	if(A <= 2)
 	{
@@ -183,12 +184,17 @@ void EarthArmy::SpeardInfection()
 			Temp.enqueue(unit);
 		}
 		EarthSoldiers.peek(unit);
-		if(unit) unit->SetInfected(true);
+		if (unit) {
+			if (!unit->InfectedBefore() && !unit->ImmunedBefore()) {
+				unit->SetInfected(true);
+				infected = true;
+			}
+		}
 		
 		while(Temp.dequeue(unit))
 			EarthSoldiers.enqueue(unit);
 	}
-
+	return infected;
 }
 
 

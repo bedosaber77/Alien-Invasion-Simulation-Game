@@ -60,7 +60,7 @@ public:
 	void StartGame();
 	bool LoadParameters(string);
 
-	void GenerateArmy();  //generates number of units each time step
+	void GenerateArmy(bool Ally=false);  //generates number of units each time step
 
 	void MainLoop();   // Increment time step until game ends
 	void AddtoKilledList(Unit* army);  // Add killed units to the killed list

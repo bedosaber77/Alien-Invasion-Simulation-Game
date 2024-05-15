@@ -99,7 +99,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
                 int ALCapacity = rand() % (AllyParameters.upper_capacity - AllyParameters.lower_capacity + 1)
                     + AllyParameters.lower_capacity;
 
-				if(B<= AllyParameters.SUpercent)
+				//if(B<= AllyParameters.SUpercent)
 				newUnit=new SaverUnit(ALHealth, ALPower, ALCapacity, ts, pGame);  //New percentage for Ally or use the same as earth?->think about it
 			}
 		default:

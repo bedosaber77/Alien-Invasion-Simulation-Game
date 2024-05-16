@@ -95,7 +95,7 @@ bool Game::LoadParameters(string Filename)
 		}
 		Infile >> AlienParameters.ASpercent >> AlienParameters.AMpercent >> AlienParameters.ADpercent;
 
-		Infile >> AllyParameters.SUpercent;    //To be revisited
+		
 		// Probability
 		int Prob;
 		Infile >> Prob;

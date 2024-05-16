@@ -1,0 +1,85 @@
+Td			ID			Ta			Tj			Df			Dd			Db
+
+6           3           6           6           0           0           0
+9           1           6           6           0           3           3
+10          10           9           9           0           1           1
+12           7           9           9           0           3           3
+12          12          11          11           0           1           1
+28          25          27          27           0           1           1
+31        4000           8           8           0          23          23
+31          21          27          27           0           4           4
+32        2000           6           1           5          26          31
+34          23          27          27           0           7           7
+40        4004           9           8           1          31          32
+41           2           6           6           0          35          35
+41          18          20          20           0          21          21
+41          13          11          11           0          30          30
+41          19          20          20           0          21          21
+41          17          20          20           0          21          21
+41           5           6           6           0          35          35
+41          14          11          11           0          30          30
+41          24          27          27           0          14          14
+41           8           9           9           0          32          32
+41          16          20          20           0          21          21
+41           9           9           9           0          32          32
+41           4           6           6           0          35          35
+41           6           9           9           0          32          32
+41          15          12          11           1          29          30
+41          20          20          20           0          21          21
+41          11          11          11           0          30          30
+41          22          27          27           0          14          14
+41        4029          36          30           6           5          11
+41        4016          21          18           3          20          23
+41        4017          21          18           3          20          23
+41        4018          21          18           3          20          23
+41        4019          21          18           3          20          23
+41        4020          31          26           5          10          15
+41        4021          31          26           5          10          15
+41        4022          32          26           6           9          15
+41        4023          32          26           6           9          15
+41        4024          32          26           6           9          15
+41        4010          18          15           3          23          26
+41        4011          18          15           3          23          26
+41        4012          18          15           3          23          26
+41        4013          18          15           3          23          26
+41        4014          18          15           3          23          26
+41        4001           8           8           0          33          33
+41        4002           8           8           0          33          33
+41        4005          15          14           1          26          27
+41        4006          16          14           2          25          27
+41        4007          16          14           2          25          27
+41        4008          16          14           2          25          27
+41        4009          17          14           3          24          27
+41        4003           8           8           0          33          33
+41        4015          20          18           2          21          23
+41        4025          35          30           5           6          11
+41        4026          35          30           5           6          11
+41        4027          35          30           5           6          11
+41        4028          36          30           6           5          11
+
+Battle Result: loss
+
+For Earth army: 
+Total number of each unit: 
+ES: 17		ET: 4		EG :4		HU: 0
+Percentage of destructed units relative to their total 
+ES: 100%		 ET: 100%		 EG: 100%		 HU: 0%
+Percentage of destructed units relative to total units: 100%
+Average of Df: 0.04
+Average of Dd: 18.92
+Average of Db: 18.96
+Df/Db: 0.21097%
+Dd/Db: 99.789%
+Healed units Percentage: 0%
+Infected units Percentage : 48%
+For Alien army: 
+Total number of each unit: 
+AS: 19		 AM: 4		 AD: 12
+Percentage of destructed units relative to their total 
+AS: 0%		 AM: 25%		 AD: 0%
+Percentage of destructed units relative to total units: 2.85714%
+Average of Df: 5
+Average of Dd: 26
+Average of Db: 31
+Df/Db: 16.129%
+Dd/Db: 83.871%

@@ -23,7 +23,7 @@ Game::Game()
 	TotalInfectedUnits = 0;
 	CurrentInfectedUnits = 0;
 	UMLInfectedUnits = 0;
-	ImmunedUnits = 0;
+	
 	EndGame = false;
 	SilentMode = false;
 	CallAlly = false;
@@ -95,8 +95,7 @@ bool Game::LoadParameters(string Filename)
 		}
 		Infile >> AlienParameters.ASpercent >> AlienParameters.AMpercent >> AlienParameters.ADpercent;
 
-		//Infile >> AllyParameters.SUpercent;    //To be revisited
-
+		
 		// Probability
 		int Prob;
 		Infile >> Prob;
@@ -208,7 +207,7 @@ void Game::GenerateArmy(bool AllyArmy)
 		int A = (rand() % 100) + 1;
 		if (A <= pRand->GetProb())   //Generating Army condition
 		{
-			if (pAllyArmy->GetID() < 3500) {
+			if (pAllyArmy->GetID() < 4500) {
 				// Generating Ally Army
 
 				for (int i = 0; i < pRand->GetN(); i++)

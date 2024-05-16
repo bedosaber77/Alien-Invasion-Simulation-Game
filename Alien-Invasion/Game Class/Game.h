@@ -45,8 +45,8 @@ class Game
 	int InfectionProb;  //the probability an alien monster infects earth soldiers
 	int TotalInfectedUnits;  //No of units infected from the start of the game
 	int CurrentInfectedUnits;  //No of units currently infected
-	int UMLInfectedUnits;   //No of currently infected units is uml
-	int ImmunedUnits;   //No of immuned units
+	int UMLInfectedUnits;
+	
 
 	int InfectionThreshold;  //infection threshold loaded from the input file
 
@@ -58,8 +58,8 @@ public:
 	Game();
 
 	//Functions needed at the beginning of the game
-	void StartGame();
-	bool LoadParameters(string);
+	void StartGame();  //setting up the game and calling the main required functions
+	bool LoadParameters(string);  //loading parameters from input file
 
 	void GenerateArmy(bool Ally=false);  //generates number of units each time step
 
@@ -79,14 +79,14 @@ public:
 	bool UMLisEmpty() const;  //check if the UML is empty or not
 	Unit* getUnitToHeal();  //returns damaged unit for the heal unit to heal
 	void UpdateHealCount();  //increment healed units when healed successfully
-	void DestroyUML();
+	void DestroyUML();  //destroy UML at the end of the game
 
 	//Infection functions
-	int getInfectionProb() const;
-	void IncrementInfectedCount();
-	void DecrementInfectedCount();
-	void CheckAllyWithdraw();
-	bool GetCallAlly() const;
+	int getInfectionProb() const;  //get infection prob loaded from input file
+	void IncrementInfectedCount();  //incrementing current and total infected units
+	void DecrementInfectedCount();  //incrementing current and UML infected units
+	void CheckAllyWithdraw();  //if no more infected units destroy ally army
+	bool GetCallAlly() const;  //get callAlly boolean
 
 	//Needed functions for attack
 	Unit* GetEnemiesUnit(ArmyType Army_Type, UnitType Unit_Type, bool BackDrone = 0) const;  //return enemy for the unit to attack 

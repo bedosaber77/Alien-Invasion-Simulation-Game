@@ -10,7 +10,7 @@ struct Inputs
 
 	int ASpercent=0, AMpercent=0, ADpercent=0;
 
-	int SUpercent=0;
+	
 };
 
 enum UnitType {

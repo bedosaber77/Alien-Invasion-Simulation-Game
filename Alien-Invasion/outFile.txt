@@ -1,53 +1,56 @@
 Td			ID			Ta			Tj			Df			Dd			Db
 
-19        2002           8           4           4          11          15
-21           3          15          15           0           6           6
-23           5          16          16           0           7           7
-27        2003           9           4           5          18          23
-28        2006          15          11           4          13          17
-29        2004          15           6           9          14          23
-29        2005          15           6           9          14          23
-30        2000          15           1          14          15          29
-30        2007          16          11           5          14          19
-34        2009          28          27           1           6           7
-37        2008          28          27           1           9          10
-40        2010          32          32           0           8           8
-41        2011          32          32           0           9           9
-42        2012          34          33           1           8           9
-45           7          33          26           7          12          19
-47        2016          43          42           1           4           5
-47        2017          43          42           1           4           5
-48        2014          35          34           1          13          14
-48        2015          36          34           2          12          14
-48           4          33          15          18          15          33
-51           1           8           8           0          43          43
-51           2           8           8           0          43          43
-51          10          27          27           0          24          24
-51          14          40          40           0          11          11
+40        2003          31          18          13           9          22
+40        2004          31          25           6           9          15
+51        2015          42          42           0           9           9
+52        2008          37          34           3          15          18
+54        2013          42          39           3          12          15
+54        2005          32          25           7          22          29
+57        2001          31          14          17          26          43
+57        2002          32          18          14          25          39
+58        2014          45          42           3          13          16
+58        2006          33          27           6          25          31
+59          15          59          59           0           0           0
+60        2007          33          27           6          27          33
+63        2000          31          14          17          32          49
+64        2016          47          43           4          17          21
+65        2012          41          39           2          24          26
+66        2020          60          60           0           6           6
+66        2018          51          47           4          15          19
+66        2017          47          43           4          19          23
+67        2009          37          34           3          30          33
+68        2010          40          38           2          28          30
+69        2011          40          38           2          29          31
+70        2021          62          60           2           8          10
+70        2019          51          47           4          19          23
+72        2022          68          67           1           4           5
+74        2023          68          67           1           6           7
+76        2024          72          72           0           4           4
+76        2025          72          72           0           4           4
 
-Battle Result: tie
+Battle Result: win
 
 For Earth army: 
 Total number of each unit: 
-ES: 12		ET: 2		EG :2		HU: 0
+ES: 17		ET: 3		EG :3		HU: 1
 Percentage of destructed units relative to their total 
-ES: 33.3333%		 ET: 100%		 EG: 100%		 HU: 0%
-Percentage of destructed units relative to total units: 50%
-Average of Df: 3.125
-Average of Dd: 20.125
-Average of Db: 23.25
-Df/Db: 13.4409%
-Dd/Db: 86.5591%
-Healed units Percentage: 0%
-Infected units Percentage : 56.25%
+ES: 0%		 ET: 0%		 EG: 0%		 HU: 100%
+Percentage of destructed units relative to total units: 4.16667%
+Average of Df: 0
+Average of Dd: 0
+Average of Db: 0
+Df/Db: 0%
+Dd/Db: 0%
+Healed units Percentage: 8.33333%
+Infected units Percentage : 16.6667%
 For Alien army: 
 Total number of each unit: 
-AS: 13		 AM: 3		 AD: 2
+AS: 21		 AM: 4		 AD: 1
 Percentage of destructed units relative to their total 
-AS: 100%		 AM: 100%		 AD: 0%
-Percentage of destructed units relative to total units: 88.8889%
-Average of Df: 3.625
-Average of Dd: 10.75
-Average of Db: 14.375
-Df/Db: 25.2174%
-Dd/Db: 74.7826%
+AS: 100%		 AM: 100%		 AD: 100%
+Percentage of destructed units relative to total units: 100%
+Average of Df: 4.76923
+Average of Dd: 16.8077
+Average of Db: 21.5769
+Df/Db: 22.1034%
+Dd/Db: 77.8966%

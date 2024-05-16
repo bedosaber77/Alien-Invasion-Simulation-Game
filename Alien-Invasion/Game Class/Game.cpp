@@ -22,6 +22,7 @@ Game::Game()
 	InfectionProb = 0;
 	TotalInfectedUnits = 0;
 	CurrentInfectedUnits = 0;
+	UMLInfectedUnits = 0;
 	ImmunedUnits = 0;
 	EndGame = false;
 	SilentMode = false;
@@ -230,7 +231,7 @@ void Game::SetOutFile()
 	//Initialize output file
 	ofstream OutputFile;
 	OutputFile.open("outFile.txt", ios::out);
-	OutputFile << "Td\t\t\tID\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb" << endl;
+	OutputFile << "Td\t\t\tID\t\t\tTa\t\t\tTj\t\t\tDf\t\t\tDd\t\t\tDb" << endl;
 }
 
 void Game::AddtoOutFile(Unit* killedUnit)
@@ -243,6 +244,7 @@ void Game::AddtoOutFile(Unit* killedUnit)
 		OutputFile << endl;
 		OutputFile << killedUnit->getTd() << setw(12);   //Join Time
 		OutputFile << killedUnit->getID() << setw(12);   //Unit's ID
+		OutputFile << killedUnit->getTa() << setw(12);   //Unit's ID
 		OutputFile << killedUnit->getTj() << setw(12);   //Destruction Time
 
 		int Df = killedUnit->getTa() - killedUnit->getTj();
@@ -250,13 +252,18 @@ void Game::AddtoOutFile(Unit* killedUnit)
 		int Db = killedUnit->getTd() - killedUnit->getTj();
 		
 		//Update DfTotal, DdTotal and DbTotal for earth army
-		if (killedUnit->getType() == earthSoldier || killedUnit->getType() == earthGunnery || killedUnit->getType() == earthTank)
+		if (killedUnit->getType() == earthSoldier ||
+			killedUnit->getType() == earthGunnery ||
+			killedUnit->getType() == earthTank || 
+			killedUnit->getType() == healUnit)
 		{
 			Dfearth += Df;
 			Ddearth += Dd;
 			Dbearth += Db;
 		}
-		else if (killedUnit->getType() == alienSoldier || killedUnit->getType() == alienMonster || killedUnit->getType() == alienDrone)
+		else if (killedUnit->getType() == alienSoldier ||
+			killedUnit->getType() == alienMonster ||
+			killedUnit->getType() == alienDrone)
 		{
 			Dfalien += Df;
 			Ddalien += Dd;
@@ -337,7 +344,11 @@ void Game::GameStatistics() const
 
 		//Percentage of units healed successfully relative to total earth units
 		OutputFile << "Healed units Percentage: ";
-		OutputFile << ((TotalEunits == 0) ? 0 : (double(HealedUnits) / TotalEunits) * 100) << "%";
+		OutputFile << ((TotalEunits == 0) ? 0 : (double(HealedUnits) / TotalEunits) * 100) << "%" << endl;
+
+		//Percentage of units that where infected relative to total earth units
+		OutputFile << "Infected units Percentage : ";
+		OutputFile << ((TotalEunits == 0) ? 0 : (double(TotalInfectedUnits) / TotalEunits) * 100) << "%";
 
 		//////////////////////////Alien Army/////////////////////////////////
 		OutputFile << endl << "For Alien army: " << endl;
@@ -377,6 +388,7 @@ void Game::GameStatistics() const
 		//Dd%Db
 		OutputFile << "Dd/Db: ";
 		OutputFile << ((Dbalien == 0) ? 0 : (double(Ddalien) / Dbalien) * 100) << "%" << endl;
+
 
 	}
 	OutputFile.close();
@@ -457,7 +469,10 @@ void Game::DecrementInfectedCount()
 {
 	if(CurrentInfectedUnits)
 		CurrentInfectedUnits--;
+	if (UMLInfectedUnits)
+		UMLInfectedUnits--;
 }
+
 
 void Game::CheckAllyWithdraw()
 {
@@ -468,6 +483,7 @@ void Game::CheckAllyWithdraw()
 		while(pAllyArmy->GetSUcount()>0)
 		{
 			destroyedUnit = pAllyArmy->removeUnit();
+			destroyedUnit->setTa(TimeStep);
 			AddtoKilledList(destroyedUnit);
 		}
 		AllyWithdraw = true;
@@ -534,10 +550,7 @@ void Game::MainLoop()
 
 		///////////////Attack Round//////////////////
 		 pEarthArmy->Attack(); //Discuss if it is needed
-		 if (pEarthArmy->SpeardInfection())
-		 {
-			 IncrementInfectedCount();
-		 }
+		 SpreadInfectedUnits();
 
 		 if(!CallAlly && !AllyWithdraw)
 		 {
@@ -554,10 +567,6 @@ void Game::MainLoop()
 			 CheckAllyWithdraw();
 		 }
 		 pAlienArmy->Attack();
-
-		 //spread infection of earth army
-		/* for(int i = 0; i < CurrentInfectedUnits; i++)
-		     pEarthArmy->SpeardInfection();*/
 		
 
 		if (!SilentMode)
@@ -622,7 +631,10 @@ void Game::AddtoKilledList(Unit* army)
 void Game::AddtoUML(Unit* unit)
 {
 	if (unit->getType() == earthSoldier)
+	{
 		UMLsolider.enqueue(unit, unit->getESPriorty());
+		UMLInfectedUnits++;
+	}
 	else
 		UMLtanks.enqueue(unit);
 
@@ -710,6 +722,31 @@ void Game::PrintUMLList() const
 	cout << UMLtanks.getCount() << " UMLtanks [";
 	UMLtanks.print();
 	cout << " ] \n\033[0m";
+}
+
+void Game::SpreadInfectedUnits()
+{
+	//spread infection of earth army
+	LinkedQueue <Unit*> InfectedUnitsFromES;
+	for (int i = 0; i < CurrentInfectedUnits - UMLInfectedUnits; i++)
+	{
+		Unit* infectedUnit;
+		if (pEarthArmy->SpeardInfection(infectedUnit))
+		{
+			IncrementInfectedCount();
+			InfectedUnitsFromES.enqueue(infectedUnit);
+		}
+	}
+
+	if (!SilentMode && !InfectedUnitsFromES.isEmpty())
+	{
+		cout << "ES Infected by infected ES [";
+		InfectedUnitsFromES.print();
+		cout << " ]" << endl;
+	}
+
+	Unit* infectedUnit;
+	while (InfectedUnitsFromES.dequeue(infectedUnit));
 }
 
 void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits, bool InfectionList) const

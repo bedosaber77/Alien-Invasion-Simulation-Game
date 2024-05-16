@@ -7,6 +7,7 @@
 #include "..\DEFS.h"
 
 
+
 class EarthArmy
 {
 private:
@@ -39,7 +40,7 @@ public:
 	//Fighting Functions
 	void Attack();
 	void Print() const;
-	bool SpeardInfection();
+	bool SpeardInfection(Unit* &infectedUnit);
 
 	~EarthArmy();
 

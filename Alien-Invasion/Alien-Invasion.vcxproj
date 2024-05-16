@@ -176,9 +176,15 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="outFile.txt" />
+    <Text Include="S-S.txt" />
+    <Text Include="S-W.txt" />
+    <Text Include="TC1.txt" />
+    <Text Include="TC2.txt" />
     <Text Include="test.txt" />
     <Text Include="TestCase.txt" />
     <Text Include="divZero.txt" />
+    <Text Include="W-S.txt" />
+    <Text Include="W-W.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

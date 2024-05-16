@@ -45,6 +45,7 @@ class Game
 	int InfectionProb;  //the probability an alien monster infects earth soldiers
 	int TotalInfectedUnits;  //No of units infected from the start of the game
 	int CurrentInfectedUnits;  //No of units currently infected
+	int UMLInfectedUnits;
 	int ImmunedUnits;   //No of immuned units
 
 	int InfectionThreshold;
@@ -103,6 +104,7 @@ public:
 	void PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits, bool InfectionList = false) const;
 	void PrintAliveUnits() const;
 	void PrintUMLList() const;
+	void SpreadInfectedUnits();
 
 
 	~Game();

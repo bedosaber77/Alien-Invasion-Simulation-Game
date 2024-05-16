@@ -2,7 +2,7 @@
 #include <cmath>
 #include"../Game class/Game.h"
 
-AlienMonster::AlienMonster(int H, int P, int AC, int tj,  Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
+AlienMonster::AlienMonster(double H, double P, int AC, int tj,  Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = alienMonster;
 	srand(time(0));
@@ -15,15 +15,16 @@ void AlienMonster::Attack()
 	LinkedQueue<Unit*> EnemiesList;
 	LinkedQueue<Unit*> InfectedList;
 
-	bool saverAttack = false;
+	bool saverAttack = false;  //to alternate between earth soldiers and saver units
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
-		bool InfectedRound = false;
-		if (i % 2 == 0)
+		bool InfectedRound = false; // set true when a unit is infected by the monster 
+
+		if (i % 2 == 0)  // alternate between the two units to attack
 		{
 			unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
-			if (!unit2)
+			if (!unit2)  // if no earth tank get an earth soldier
 			{
 				unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
 			}
@@ -33,11 +34,21 @@ void AlienMonster::Attack()
 			if (pGame->GetAllyArmyPtr()->GetSUcount() > 0 && pGame->GetCallAlly() && saverAttack)
 			{
 				unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);
+
+				if (!unit2)  //if no saver unit get an earth soldier
+				{
+					unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+				}
+
+				if (!unit2)  //if no earth soldier get an earth tank
+				{
+					unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
+				}
 			}
 			else
 			{
 				unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
-				if (!unit2)
+				if (!unit2)  // if no earth soldier get an earth tank
 				{
 					unit2 = pGame->GetEnemiesUnit(Earth, earthTank);
 				}
@@ -72,25 +83,23 @@ void AlienMonster::Attack()
 			{
 				EnemiesList.enqueue(unit2);
 
-				int Damage = (this->getHealth() * this->getPower() / 100) /
+				double Damage = (this->getHealth() * this->getPower() / 100) /
 					sqrt(unit2->getHealth());	//Damage Formula
 
 
-				unit2->decrementHealth(Damage);
+				unit2->decrementHealth(Damage);  //decrement health of the attacked unit by the damage
 
 
-				if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())
+				if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())  // Heal Check
 				{
 					TempList.enqueue(unit2);
 				}
-				else if (unit2->getHealth() > 0 && unit2->getType()!= saverUnit)
+				else if (unit2->getHealth() > 0 && unit2->getType()!= saverUnit)  //add the unit to uml
 				{
 					pGame->AddtoUML(unit2);
 				}
 				else
 				{
-					unit2->setTd(pGame->GetCurrentTime());		//Destruction Time
-
 					pGame->AddtoKilledList(unit2);
 				}
 			}
@@ -101,15 +110,15 @@ void AlienMonster::Attack()
 		}
 	}
 
-	pGame->PrintFight(this, EnemiesList);
-    pGame->PrintFight(this, InfectedList, true);
+	pGame->PrintFight(this, EnemiesList);  // printing the fight to the output screen
+    pGame->PrintFight(this, InfectedList, true);  // printing the units infected by the monster
 
-	while (TempList.dequeue(unit2))
+	while (TempList.dequeue(unit2))  // return to original list
 	{ 
 		if (unit2->getType() == saverUnit)
 			pGame->GetAllyArmyPtr()->AddUnit(unit2);
 		else
-		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
+		pGame->GetEarthArmyPtr()->AddUnit(unit2);		
 	}
 }
 

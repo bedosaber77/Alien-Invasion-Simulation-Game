@@ -2,7 +2,7 @@
 #include "../Game Class/Game.h"
 #include "../DEFS.h"
 #include <cmath>
-HealUnit::HealUnit(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
+HealUnit::HealUnit(double H, double P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = healUnit;
 }
@@ -26,7 +26,7 @@ void HealUnit::Attack()
 			else
 			{
 				HealedList.enqueue(unit2);
-				int incHeal = this->Power * (this->Health / 100.0) / sqrt(unit2->getHealth());
+				double incHeal = this->Power * (this->Health / 100.0) / sqrt(unit2->getHealth());
 				if(unit2->InfectedBefore())
 					incHeal *= 0.5;
 				unit2->incrementHealth(incHeal);
@@ -54,11 +54,16 @@ void HealUnit::Attack()
 		TempList.dequeue(unit);
 		pGame->AddtoUML(unit);
 	}
+
 	pGame->PrintFight(this, HealedList);
+
+	
+
 	pGame->GetEarthArmyPtr()->removeUnit(healUnit);
 	this->setTd(pGame->GetCurrentTime());
 	this->setTa(pGame->GetCurrentTime());
 	pGame->AddtoKilledList(this);
+
 
 	
 }

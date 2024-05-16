@@ -1,7 +1,7 @@
 #include "Unit.h"
 #include"../Game Class/Game.h"
 
-Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
+Unit::Unit(double H, double P, int AC, int tj, Game* Gameptr)
 {
 	Health = H;
 	Power = P;
@@ -19,7 +19,7 @@ Unit::Unit(int H, int P, int AC, int tj, Game* Gameptr)
 //==================================================================================//
 //							    Setters/ Getters Functions	         				//
 //==================================================================================//
-void Unit::setHealth(int h)
+void Unit::setHealth(double h)
 {
 	this->Health = h;
 }
@@ -43,12 +43,12 @@ void Unit::setTj(int tj)
 	Tj = tj;
 }
 
-int Unit::getHealth() const
+double Unit::getHealth() const
 {
 	return this->Health;
 }
 
-int Unit::getPower() const
+double Unit::getPower() const
 {
 	return this->Power;
 }
@@ -83,12 +83,12 @@ int Unit::getTd() const
 }
 
 
-void Unit::decrementHealth(int damage)
+void Unit::decrementHealth(double damage)
 {
 	this->Health -= damage;
 }
 
-void Unit::incrementHealth(int HealthImp)
+void Unit::incrementHealth(double HealthImp)
 {
 	//to be made
 	this->Health += HealthImp;
@@ -100,7 +100,7 @@ void Unit::incrementHealth(int HealthImp)
 //==================================================================================//
 //							     Heal Unit Functions	       						//
 //==================================================================================//
-int Unit::getIntialHealth() const
+double Unit::getIntialHealth() const
 {
 	return InitalHealth;
 }

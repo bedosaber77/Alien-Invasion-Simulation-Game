@@ -170,7 +170,7 @@ void EarthArmy::Print()const
 	cout << "]";
 }
 
-bool EarthArmy::SpeardInfection(Unit* &infectedUnit)
+bool EarthArmy::SpreadInfection(Unit* &infectedUnit)
 {
 	bool infected = false;
 	int A = rand() % 100 + 1;

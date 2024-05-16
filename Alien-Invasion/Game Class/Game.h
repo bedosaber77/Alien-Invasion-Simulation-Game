@@ -45,14 +45,14 @@ class Game
 	int InfectionProb;  //the probability an alien monster infects earth soldiers
 	int TotalInfectedUnits;  //No of units infected from the start of the game
 	int CurrentInfectedUnits;  //No of units currently infected
-	int UMLInfectedUnits;
+	int UMLInfectedUnits;   //No of currently infected units is uml
 	int ImmunedUnits;   //No of immuned units
 
-	int InfectionThreshold;
+	int InfectionThreshold;  //infection threshold loaded from the input file
 
 	//Saver Units Required Parameters
-	bool CallAlly;
-	bool AllyWithdraw;
+	bool CallAlly;   //when set to true earth army calls for help from the allied army
+	bool AllyWithdraw;  //when set to true allied army is destroyed and not generated anymore
 	
 public:
 	Game();
@@ -79,6 +79,7 @@ public:
 	bool UMLisEmpty() const;  //check if the UML is empty or not
 	Unit* getUnitToHeal();  //returns damaged unit for the heal unit to heal
 	void UpdateHealCount();  //increment healed units when healed successfully
+	void DestroyUML();
 
 	//Infection functions
 	int getInfectionProb() const;

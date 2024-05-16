@@ -1,7 +1,7 @@
 #include "Aliensoldier.h"
 #include"../Game class/Game.h"
 
-AlienSoldier::AlienSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
+AlienSoldier::AlienSoldier(double H, double P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = alienSoldier;
 }
@@ -16,15 +16,16 @@ void AlienSoldier:: Attack()
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
 		if (i % 2 == 0) {
-			unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
-			if(!unit2 && pGame->GetCallAlly() && pGame->GetAllyArmyPtr()->GetSUcount() > 0)
+			unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier); 
+
+			if(!unit2 && pGame->GetCallAlly() && pGame->GetAllyArmyPtr()->GetSUcount() > 0)  //if no earth soldier get a saver unit (if exists)
 				unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);
 		}
 		else {
 			if(pGame->GetCallAlly() && pGame->GetAllyArmyPtr()->GetSUcount() > 0)
-				unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);
+				unit2 = pGame->GetEnemiesUnit(Ally, saverUnit);  //if ally army is alive get a saver unit
 			else
-				unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);
+				unit2 = pGame->GetEnemiesUnit(Earth, earthSoldier);  //if no saver units get an earth soldier
 		}
 		if (unit2)
 		{
@@ -33,19 +34,21 @@ void AlienSoldier:: Attack()
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 
-			int Damage = (this->getHealth() * this->getPower() / 100) /
+			double Damage = (this->getHealth() * this->getPower() / 100) /
 				sqrt(unit2->getHealth());	//Damage Formula
 
 
-			unit2->decrementHealth(Damage);
+			unit2->decrementHealth(Damage);  //decrement health of the attacked unit by the damage
 
 
-			if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())
+			if (unit2->getHealth() > 0.2 * unit2->getIntialHealth())  // Heal Check
 			{
 				TempList.enqueue(unit2);
 			}
-			else if (unit2->getHealth() > 0 && unit2->getType()!=saverUnit)
+			else if (unit2->getHealth() > 0 && unit2->getType() != saverUnit)  //add the unit to uml
+			{
 				pGame->AddtoUML(unit2);
+			}
 			else
 			{
 				pGame->AddtoKilledList(unit2);
@@ -57,14 +60,14 @@ void AlienSoldier:: Attack()
 		}
 	}
 
-	pGame->PrintFight(this,  EnemiesList);
+	pGame->PrintFight(this,  EnemiesList);  // printing the fight to the output screen
 
-	while (TempList.dequeue(unit2))
+	while (TempList.dequeue(unit2))  // return to original list
 	{
 		if (unit2->getType() == saverUnit)
 			pGame->GetAllyArmyPtr()->AddUnit(unit2);
 		else
-		pGame->GetEarthArmyPtr()->AddUnit(unit2);		//return to original list
+		pGame->GetEarthArmyPtr()->AddUnit(unit2);	
 	}
 }
 

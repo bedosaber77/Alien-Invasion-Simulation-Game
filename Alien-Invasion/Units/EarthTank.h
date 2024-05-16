@@ -7,7 +7,7 @@ private:
 	bool AttackBoth;
 public:
 
-	EarthTank(int H, int P, int AC, int tj, Game* Gameptr);
+	EarthTank(double H, double P, int AC, int tj, Game* Gameptr);
 	virtual void Attack();
 	~EarthTank();
 };

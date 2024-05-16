@@ -40,7 +40,7 @@ public:
 	//Fighting Functions
 	void Attack();
 	void Print() const;
-	bool SpeardInfection(Unit* &infectedUnit);
+	bool SpreadInfection(Unit* &infectedUnit);
 
 	~EarthArmy();
 

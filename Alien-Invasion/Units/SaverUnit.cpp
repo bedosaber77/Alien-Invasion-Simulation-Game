@@ -1,7 +1,7 @@
 #include "SaverUnit.h"
 #include"../Game Class/Game.h"
 
-SaverUnit::SaverUnit(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
+SaverUnit::SaverUnit(double H, double P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
     Type = saverUnit;
 }
@@ -23,14 +23,14 @@ void SaverUnit::Attack()
             unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 
-            int Damage = (this->getHealth() * this->getPower() / 100) /
+            double Damage = (this->getHealth() * this->getPower() / 100) /
                 sqrt(unit2->getHealth());	//Damage Formula
 
 
-            unit2->decrementHealth(Damage);
+            unit2->decrementHealth(Damage);  //decrement health of the attacked unit by the damage
 
 
-            if (unit2->getHealth() > 0)
+            if (unit2->getHealth() > 0)   
             {
                 TempList.enqueue(unit2);
             }
@@ -41,9 +41,9 @@ void SaverUnit::Attack()
         }
     }
 
-    pGame->PrintFight(this, EnemiesList);
+    pGame->PrintFight(this, EnemiesList); // printing the fight to the output screen
 
-    while (TempList.dequeue(unit2))
+    while (TempList.dequeue(unit2))  // return to original list
     {
        pGame->GetAlienArmyPtr()->AddUnit(unit2);
     }

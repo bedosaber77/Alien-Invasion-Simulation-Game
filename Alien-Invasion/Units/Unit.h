@@ -12,8 +12,8 @@ protected:
 	//Unit Main Parameters
 	int ID; 
 	UnitType Type; 
-	int Health;
-	int Power;
+	double Health;
+	double Power;
 	int Attack_Capacity;
 
 	//Game pointer
@@ -29,7 +29,7 @@ protected:
 
 	//Heal Unit Parameters
 	bool AddedToUML; // checks if it is added to UML or NOT
-	int InitalHealth; // Added For Healunit
+	double InitalHealth; // Added For Healunit
 	int TH;
 	bool IsHealed;
 
@@ -41,16 +41,16 @@ protected:
 public:
 
 
-	Unit(int H,int P,int AC,int tj,Game* Gameptr);
+	Unit(double H, double P,int AC,int tj,Game* Gameptr);
 
 	//Unit Parameters setters/ getters
 	
-	int getHealth() const;
-	int getPower() const;
+	double getHealth() const;
+	double getPower() const;
 	int getID() const;
 	UnitType getType() const;		
 	void setID(int id);
-	void setHealth(int h);
+	void setHealth(double h);
 
 	//Time and Delay setters /getters
 	void setTd(int td);
@@ -63,14 +63,14 @@ public:
 	
 
 	//Functions to Increment/Decrement health
-	void decrementHealth(int damage);
-	void incrementHealth(int);		
+	void decrementHealth(double damage);
+	void incrementHealth(double);
 
 	//Fighting Function
 	virtual void Attack() = 0;
 
 	//Heal Unit Functions
-	int getIntialHealth() const;
+	double getIntialHealth() const;
 	int getESPriorty() const;
 	void setTH(int th);
 	int getTH() const;

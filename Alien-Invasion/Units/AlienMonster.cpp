@@ -2,7 +2,7 @@
 #include <cmath>
 #include"../Game class/Game.h"
 
-AlienMonster::AlienMonster(int H, int P, int AC, int tj,  Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
+AlienMonster::AlienMonster(double H, double P, int AC, int tj,  Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = alienMonster;
 	srand(time(0));
@@ -72,7 +72,7 @@ void AlienMonster::Attack()
 			{
 				EnemiesList.enqueue(unit2);
 
-				int Damage = (this->getHealth() * this->getPower() / 100) /
+				double Damage = (this->getHealth() * this->getPower() / 100) /
 					sqrt(unit2->getHealth());	//Damage Formula
 
 

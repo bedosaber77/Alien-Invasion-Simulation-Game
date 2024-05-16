@@ -3,7 +3,7 @@ class AlienDrone :public Unit
 {
 
 public:
-	AlienDrone(int H, int P, int AC, int tj, Game* Gameptr);
+	AlienDrone(double H, double P, int AC, int tj, Game* Gameptr);
 	virtual void Attack();
 	~AlienDrone();
 

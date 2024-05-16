@@ -1,7 +1,7 @@
 #include "Aliensoldier.h"
 #include"../Game class/Game.h"
 
-AlienSoldier::AlienSoldier(int H, int P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
+AlienSoldier::AlienSoldier(double H, double P, int AC, int tj, Game* Gameptr) :Unit(H, P, AC, tj, Gameptr)
 {
 	Type = alienSoldier;
 }
@@ -33,7 +33,7 @@ void AlienSoldier:: Attack()
 			unit2->setTa(pGame->GetCurrentTime()); //Set Ta (first attacked time)
 
 
-			int Damage = (this->getHealth() * this->getPower() / 100) /
+			double Damage = (this->getHealth() * this->getPower() / 100) /
 				sqrt(unit2->getHealth());	//Damage Formula
 
 

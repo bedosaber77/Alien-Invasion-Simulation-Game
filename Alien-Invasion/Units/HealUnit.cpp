@@ -35,7 +35,7 @@ void HealUnit::Attack()
 				{
 					pGame->GetEarthArmyPtr()->AddUnit(unit2);
 					unit2->ExitUML();
-					if (unit2->InfectedBefore()) {
+					if (unit2->InfectedBefore()&&!unit2->ImmunedBefore()) {
 						unit2->SetInfected(false); // is immuned successfully
 						unit2->SetImmuned(true); 
 						pGame->DecrementInfectedCount();

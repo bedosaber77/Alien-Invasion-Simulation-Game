@@ -9,6 +9,7 @@ HealUnit::HealUnit(double H, double P, int AC, int tj, Game* Gameptr) :Unit(H, P
 
 void HealUnit::Attack()
 {
+	bool killHU = false;
 	Unit* unit2 = nullptr;
 	if (pGame->UMLisEmpty())
 		return ;
@@ -19,6 +20,7 @@ void HealUnit::Attack()
 		unit2 = pGame->getUnitToHeal();
 		if (unit2) 
 		{
+			killHU = true;
 			if (pGame->GetCurrentTime() - unit2->getTH() == 10)
 			{
 				pGame->AddtoKilledList(unit2);
@@ -55,10 +57,13 @@ void HealUnit::Attack()
 		pGame->AddtoUML(unit);
 	}
 	pGame->PrintFight(this, HealedList);
-	pGame->GetEarthArmyPtr()->removeUnit(healUnit);
-	this->setTd(pGame->GetCurrentTime());
-	this->setTa(pGame->GetCurrentTime());
-	pGame->AddtoKilledList(this);
+	if (killHU)
+	{
+		pGame->GetEarthArmyPtr()->removeUnit(healUnit);
+		this->setTd(pGame->GetCurrentTime());
+		this->setTa(pGame->GetCurrentTime());
+		pGame->AddtoKilledList(this);
+	}
 
 	
 }

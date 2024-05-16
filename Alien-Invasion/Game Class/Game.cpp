@@ -23,7 +23,7 @@ Game::Game()
 	TotalInfectedUnits = 0;
 	CurrentInfectedUnits = 0;
 	UMLInfectedUnits = 0;
-	ImmunedUnits = 0;
+	
 	EndGame = false;
 	SilentMode = false;
 	CallAlly = false;

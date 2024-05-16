@@ -46,7 +46,7 @@ class Game
 	int TotalInfectedUnits;  //No of units infected from the start of the game
 	int CurrentInfectedUnits;  //No of units currently infected
 	int UMLInfectedUnits;
-	int ImmunedUnits;   //No of immuned units
+	
 
 	int InfectionThreshold;
 

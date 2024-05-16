@@ -163,43 +163,62 @@ void Game::GenerateArmy(bool AllyArmy)
 	Unit* newUnit = nullptr;
 	if (!AllyArmy) {
 		int A = (rand() % 100) + 1;
-		if (A <= pRand->GetProb() && pEarthArmy->GetID() < 1000)   //Generating Army condition
+		if (A <= pRand->GetProb())   //Generating Army condition
 		{
-			// Generating Earth Army
-			for (int i = 0; i < pRand->GetN(); i++)
+			if (pEarthArmy->GetID() < 1000) {
+				// Generating Earth Army
+				for (int i = 0; i < pRand->GetN(); i++)
+				{
+					newUnit = pRand->GenerateUnits(TimeStep, Earth);
+					pEarthArmy->AddUnit(newUnit);
+				}
+			}
+			else
 			{
-				newUnit = pRand->GenerateUnits(TimeStep, Earth);
-				pEarthArmy->AddUnit(newUnit);
+				cout << "\033[0m WARNING!!! CAN'T GENERATE MORE EARTH UNITS\n";
 			}
 		}
 		// Generating Alien Army
 		A = (rand() % 100) + 1;
 
-		if (A <= pRand->GetProb() && pAlienArmy->GetID() < 3000) {
+		if (A <= pRand->GetProb()) {
 			bool Intofront = true;
-			for (int i = 0; i < pRand->GetN(); i++)
-			{
-				newUnit = pRand->GenerateUnits(TimeStep, Alien);
-				if (newUnit->getType() == alienDrone)
+			if (pAlienArmy->GetID() < 3000) {
+				for (int i = 0; i < pRand->GetN(); i++)
 				{
-					pAlienArmy->AddUnit(newUnit, Intofront);  // Each time step we add drones to front ,then back and so on.
-					Intofront = !Intofront;
+					newUnit = pRand->GenerateUnits(TimeStep, Alien);
+					if (newUnit->getType() == alienDrone)
+					{
+						pAlienArmy->AddUnit(newUnit, Intofront);  // Each time step we add drones to front ,then back and so on.
+						Intofront = !Intofront;
+					}
+					else
+						pAlienArmy->AddUnit(newUnit);
 				}
-				else
-					pAlienArmy->AddUnit(newUnit);
+			}
+			else
+			{
+				cout << "\033[0m WARNING!!! CAN'T GENERATE MORE ALIEN UNITS\n";
 			}
 		}
 	}
 	else if (!AllyWithdraw && CallAlly) 
 	{
 		int A = (rand() % 100) + 1;
-		if (A <= pRand->GetProb() && pAllyArmy->GetID() < 3500)   //Generating Army condition
+		if (A <= pRand->GetProb())   //Generating Army condition
 		{
-			// Generating Ally Army
-			for (int i = 0; i < pRand->GetN(); i++)
+			if (pAllyArmy->GetID() < 3500) {
+				// Generating Ally Army
+
+				for (int i = 0; i < pRand->GetN(); i++)
+				{
+					newUnit = pRand->GenerateUnits(TimeStep, Ally);
+					pAllyArmy->AddUnit(newUnit);
+				}
+			}
+			else
 			{
-				newUnit = pRand->GenerateUnits(TimeStep, Ally);
-				pAllyArmy->AddUnit(newUnit);
+				cout << "\033[0m WARNING!!! CAN'T GENERATE MORE ALLY UNITS\n";
 			}
 		}
 	}
@@ -466,36 +485,40 @@ void Game::MainLoop()
 {
 	while (!EndGame) //will stop when the game ends
 	{
-		//if (TimeStep > 40)
-		//	CheckResult();   //check the game result each time step when time steps exceeded 40
+		if (TimeStep > 40)
+			CheckResult();   //check the game result each time step when time steps exceeded 40
 
-		////at the end of the game add uml to killed list
-		//if (EndGame)
-		//{
-		//	cout << CurrentInfectedUnits << endl;
-		//	PrintUMLList();
-		//	PrintAliveUnits();
-		//	cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
-		//		: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
+		//at the end of the game add uml to killed list
+		if (EndGame)
+		{
+			cout << CurrentInfectedUnits << endl;
+			PrintUMLList();
+			PrintAliveUnits();
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
+				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
+			if (FinalResult == "loss" || FinalResult == "tie") {
+				Unit* dummy;
+				int dumm;
+				while (UMLsolider.dequeue(dummy, dumm))
+				{
+					AddtoKilledList(dummy);
+				}
+				while (UMLtanks.dequeue(dummy))
+				{
+					AddtoKilledList(dummy);
+				}
+				if (CallAlly && !AllyWithdraw)
+				{
+					CheckAllyWithdraw();
+				}
+			}
+			PrintAliveUnits();
+			cout << CurrentInfectedUnits << endl;
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
+				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
 
-		//	Unit* dummy;
-		//	int dumm;
-		//	while (UMLsolider.dequeue(dummy, dumm))
-		//	{
-		//		AddtoKilledList(dummy);
-		//	}
-		//	while (UMLtanks.dequeue(dummy))
-		//	{
-		//		AddtoKilledList(dummy);
-		//	}
-		//	PrintAliveUnits();
-		//	cout << CurrentInfectedUnits << endl;
-		//	cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
-		//		: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
-
-		//	break;
-		//}
-		//
+			break;
+		}
 		GenerateArmy();   //generate units for two armies each time step
 
 		//print to the console
@@ -526,9 +549,7 @@ void Game::MainLoop()
 		 }
 		 else if(CallAlly && !AllyWithdraw)
 		 {
-					 GenerateArmy(true);
-					/* cout<< "\u001b[35m============== Call Ally ==============" << endl;
-					 PrintAliveUnits();*/
+             GenerateArmy(true);   // to generate SU ONLY
 			 pAllyArmy->Attack();
 			 CheckAllyWithdraw();
 		 }
@@ -554,39 +575,9 @@ void Game::MainLoop()
 			system("pause");
 		}
 		TimeStep++;
-		if (TimeStep > 40)
-			CheckResult();   //check the game result each time step when time steps exceeded 40
-
+		
 		//at the end of the game add uml to killed list
-		if (EndGame)
-		{
-			cout << CurrentInfectedUnits << endl;
-			PrintUMLList();
-			PrintAliveUnits();
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
-				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
-
-			Unit* dummy;
-			int dumm;
-			while (UMLsolider.dequeue(dummy, dumm))
-			{
-				AddtoKilledList(dummy);
-			}
-			while (UMLtanks.dequeue(dummy))
-			{
-				AddtoKilledList(dummy);
-			}
-			if (CallAlly && !AllyWithdraw)
-			{
-				CheckAllyWithdraw();
-			}
-			PrintAliveUnits();
-			cout << CurrentInfectedUnits << endl;
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
-				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
-
-			break;
-		}
+		
 
 	}
 }

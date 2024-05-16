@@ -173,7 +173,7 @@ void Game::GenerateArmy(bool AllyArmy)
 					pEarthArmy->AddUnit(newUnit);
 				}
 			}
-			else
+			else if(!SilentMode)
 			{
 				cout << "\033[0m WARNING!!! CAN'T GENERATE MORE EARTH UNITS\n";
 			}
@@ -196,7 +196,7 @@ void Game::GenerateArmy(bool AllyArmy)
 						pAlienArmy->AddUnit(newUnit);
 				}
 			}
-			else
+			else if (!SilentMode)
 			{
 				cout << "\033[0m WARNING!!! CAN'T GENERATE MORE ALIEN UNITS\n";
 			}
@@ -216,7 +216,7 @@ void Game::GenerateArmy(bool AllyArmy)
 					pAllyArmy->AddUnit(newUnit);
 				}
 			}
-			else
+			else if(!SilentMode)
 			{
 				cout << "\033[0m WARNING!!! CAN'T GENERATE MORE ALLY UNITS\n";
 			}

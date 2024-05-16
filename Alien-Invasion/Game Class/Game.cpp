@@ -22,6 +22,7 @@ Game::Game()
 	InfectionProb = 0;
 	TotalInfectedUnits = 0;
 	CurrentInfectedUnits = 0;
+	UMLInfectedUnits = 0;
 	ImmunedUnits = 0;
 	EndGame = false;
 	SilentMode = false;
@@ -171,11 +172,13 @@ void Game::GenerateArmy()
 			pEarthArmy->AddUnit(newUnit);
 		}
 	}
-	// Generating Alien Army
+
 	A = (rand() % 100) + 1;
 
 	if (A <= pRand->GetProb() && pAlienArmy->GetID() < 3000) {
 		bool Intofront = true;
+
+		// Generating Alien Army
 		for (int i = 0; i < pRand->GetN(); i++)
 		{
 			newUnit = pRand->GenerateUnits(TimeStep, Alien);
@@ -316,7 +319,11 @@ void Game::GameStatistics() const
 
 		//Percentage of units healed successfully relative to total earth units
 		OutputFile << "Healed units Percentage: ";
-		OutputFile << ((TotalEunits == 0) ? 0 : (double(HealedUnits) / TotalEunits) * 100) << "%";
+		OutputFile << ((TotalEunits == 0) ? 0 : (double(HealedUnits) / TotalEunits) * 100) << "%" << endl;
+
+		//Percentage of units that where infected relative to total earth units
+		OutputFile << "Infected units Percentage : ";
+		OutputFile << ((TotalEunits == 0) ? 0 : (double(TotalInfectedUnits) / TotalEunits) * 100) << "%";
 
 		//////////////////////////Alien Army/////////////////////////////////
 		OutputFile << endl << "For Alien army: " << endl;
@@ -356,6 +363,7 @@ void Game::GameStatistics() const
 		//Dd%Db
 		OutputFile << "Dd/Db: ";
 		OutputFile << ((Dbalien == 0) ? 0 : (double(Ddalien) / Dbalien) * 100) << "%" << endl;
+
 
 	}
 	OutputFile.close();
@@ -436,7 +444,10 @@ void Game::DecrementInfectedCount()
 {
 	if(CurrentInfectedUnits)
 		CurrentInfectedUnits--;
+	if (UMLInfectedUnits)
+		UMLInfectedUnits--;
 }
+
 
 void Game::CheckAllyWithdraw()
 {
@@ -470,6 +481,9 @@ void Game::MainLoop()
 		//at the end of the game add uml to killed list
 		if (EndGame)
 		{
+			UMLsolider.print();
+			cout << endl <<  CurrentInfectedUnits << endl;
+			
 			Unit* dummy;
 			int dumm;
 			while (UMLsolider.dequeue(dummy, dumm))
@@ -481,6 +495,10 @@ void Game::MainLoop()
 				AddtoKilledList(dummy);
 			}
 			PrintAliveUnits();
+			cout << CurrentInfectedUnits << endl;
+			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
+				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
+			cout << endl;
 
 			break;
 		}
@@ -500,7 +518,7 @@ void Game::MainLoop()
 
 		///////////////Attack Round//////////////////
 		 pEarthArmy->Attack(); //Discuss if it is needed
-		 pEarthArmy->SpeardInfection();
+		 SpreadInfectedUnits();
 
 		 if(!CallAlly && !AllyWithdraw)
 		 {
@@ -514,10 +532,6 @@ void Game::MainLoop()
 			 CheckAllyWithdraw();
 		 }
 		 pAlienArmy->Attack();
-
-		 //spread infection of earth army
-		/* for(int i = 0; i < CurrentInfectedUnits; i++)
-		     pEarthArmy->SpeardInfection();*/
 		
 
 		if (!SilentMode)
@@ -578,7 +592,10 @@ void Game::AddtoKilledList(Unit* army)
 void Game::AddtoUML(Unit* unit)
 {
 	if (unit->getType() == earthSoldier)
+	{
 		UMLsolider.enqueue(unit, unit->getESPriorty());
+		UMLInfectedUnits++;
+	}
 	else
 		UMLtanks.enqueue(unit);
 
@@ -666,6 +683,31 @@ void Game::PrintUMLList() const
 	cout << UMLtanks.getCount() << " UMLtanks [";
 	UMLtanks.print();
 	cout << " ] \n\033[0m";
+}
+
+void Game::SpreadInfectedUnits()
+{
+	//spread infection of earth army
+	LinkedQueue <Unit*> InfectedUnitsFromES;
+	for (int i = 0; i < CurrentInfectedUnits - UMLInfectedUnits; i++)
+	{
+		Unit* infectedUnit;
+		if (pEarthArmy->SpeardInfection(infectedUnit))
+		{
+			IncrementInfectedCount();
+			InfectedUnitsFromES.enqueue(infectedUnit);
+		}
+	}
+
+	if (!SilentMode && !InfectedUnitsFromES.isEmpty())
+	{
+		cout << "ES Infected by infected ES [";
+		InfectedUnitsFromES.print();
+		cout << " ]" << endl;
+	}
+
+	Unit* infectedUnit;
+	while (InfectedUnitsFromES.dequeue(infectedUnit));
 }
 
 void Game::PrintFight(Unit* shooter, LinkedQueue<Unit*> fightingUnits, bool InfectionList) const

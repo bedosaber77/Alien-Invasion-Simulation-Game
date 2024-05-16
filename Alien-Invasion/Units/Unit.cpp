@@ -150,7 +150,7 @@ bool Unit::InfectedBefore() const
 	return IsInfected;
 }
 
-void   Unit::SetImmuned(bool immuned)
+void Unit::SetImmuned(bool immuned)
 {
 	IsImmuned = immuned;
 }

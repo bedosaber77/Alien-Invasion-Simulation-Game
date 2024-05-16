@@ -124,10 +124,11 @@ void EarthArmy::Attack()
 
 
 	//ES Attacks 
-	if (EarthSoldiers.dequeue(unit2))
+	if (EarthSoldiers.peek(unit2))
 	{
+		if (unit2->InfectedBefore()) EarthSoldiers.dequeue(unit2);
 		unit2->Attack();
-	    EarthSoldiers.enqueue(unit2);
+		if (unit2->InfectedBefore()) EarthSoldiers.enqueue(unit2);
 	}
 	
 	//ET Attacks
@@ -169,26 +170,39 @@ void EarthArmy::Print()const
 	cout << "]";
 }
 
-void EarthArmy::SpeardInfection()
+bool EarthArmy::SpeardInfection(Unit* &infectedUnit)
 {
+	bool infected = false;
 	int A = rand() % 100 + 1;
 	if(A <= 2)
 	{
 		int B = (EarthSoldiers.getCount() == 0) ? 0 : rand() % EarthSoldiers.getCount();
 		LinkedQueue<Unit*> Temp;
-		Unit* unit=nullptr;
-		for(int i = 0; i < B;i++)
-		{
-			EarthSoldiers.dequeue(unit);
-			Temp.enqueue(unit);
-		}
-		EarthSoldiers.peek(unit);
-		if(unit) unit->SetInfected(true);
-		
-		while(Temp.dequeue(unit))
-			EarthSoldiers.enqueue(unit);
-	}
+		Unit* unit = nullptr;
+		Unit* tempUnit = nullptr;
 
+		//dequeue all earth soldiers in a temp queue and get a unit to infect 
+		int count = EarthSoldiers.getCount();
+		for(int i = 0; i < count; i++)
+		{
+			EarthSoldiers.dequeue(tempUnit);
+			Temp.enqueue(tempUnit);
+
+			if (i == B)  
+				unit = tempUnit;  //get a unit to infect
+		}
+
+		if (unit && !unit->InfectedBefore() && !unit->ImmunedBefore())  //check that the unit is not infected before
+		{
+			unit->SetInfected(true);
+			infected = true;
+			infectedUnit = unit;
+		}
+
+		while(Temp.dequeue(tempUnit))
+			EarthSoldiers.enqueue(tempUnit);
+	}
+	return infected;
 }
 
 

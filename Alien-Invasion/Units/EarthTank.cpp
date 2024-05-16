@@ -14,8 +14,6 @@ void EarthTank::Attack()
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> EnemiesList;
 
-	
-	
 	if (pGame->GetEarthArmyPtr()->GetEScount() < 0.3 * pGame->GetAlienArmyPtr()->GetAScount())
 			AttackBoth = true;
 	if (pGame->GetEarthArmyPtr()->GetEScount() >= 0.8 * pGame->GetAlienArmyPtr()->GetAScount())

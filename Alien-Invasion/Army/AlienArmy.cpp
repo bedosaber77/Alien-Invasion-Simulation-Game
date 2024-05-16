@@ -87,6 +87,7 @@ Unit* AlienArmy::removeUnit(UnitType type,bool fromBack)
 //==================================================================================//
 //							     Getters Functions	          						//
 //==================================================================================//
+
 int AlienArmy::GetAScount() const
 {
 	return AlienSoldiers.getCount();
@@ -170,7 +171,7 @@ void AlienArmy::Print() const
 
 AlienArmy::~AlienArmy()
 {
-	Unit* DeletedUnit;
+	Unit* DeletedUnit = nullptr;
 	while (!AlienSoldiers.isEmpty())
 	{
 		AlienSoldiers.dequeue(DeletedUnit);

@@ -27,10 +27,10 @@ void SaverUnit::Attack()
                 sqrt(unit2->getHealth());	//Damage Formula
 
 
-            unit2->decrementHealth(Damage);
+            unit2->decrementHealth(Damage);  //decrement health of the attacked unit by the damage
 
 
-            if (unit2->getHealth() > 0)
+            if (unit2->getHealth() > 0)   
             {
                 TempList.enqueue(unit2);
             }
@@ -41,9 +41,9 @@ void SaverUnit::Attack()
         }
     }
 
-    pGame->PrintFight(this, EnemiesList);
+    pGame->PrintFight(this, EnemiesList); // printing the fight to the output screen
 
-    while (TempList.dequeue(unit2))
+    while (TempList.dequeue(unit2))  // return to original list
     {
        pGame->GetAlienArmyPtr()->AddUnit(unit2);
     }

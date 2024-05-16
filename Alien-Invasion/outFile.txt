@@ -1,0 +1,56 @@
+Td			ID			Ta			Tj			Df			Dd			Db
+
+40        2003          31          18          13           9          22
+40        2004          31          25           6           9          15
+51        2015          42          42           0           9           9
+52        2008          37          34           3          15          18
+54        2013          42          39           3          12          15
+54        2005          32          25           7          22          29
+57        2001          31          14          17          26          43
+57        2002          32          18          14          25          39
+58        2014          45          42           3          13          16
+58        2006          33          27           6          25          31
+59          15          59          59           0           0           0
+60        2007          33          27           6          27          33
+63        2000          31          14          17          32          49
+64        2016          47          43           4          17          21
+65        2012          41          39           2          24          26
+66        2020          60          60           0           6           6
+66        2018          51          47           4          15          19
+66        2017          47          43           4          19          23
+67        2009          37          34           3          30          33
+68        2010          40          38           2          28          30
+69        2011          40          38           2          29          31
+70        2021          62          60           2           8          10
+70        2019          51          47           4          19          23
+72        2022          68          67           1           4           5
+74        2023          68          67           1           6           7
+76        2024          72          72           0           4           4
+76        2025          72          72           0           4           4
+
+Battle Result: win
+
+For Earth army: 
+Total number of each unit: 
+ES: 17		ET: 3		EG :3		HU: 1
+Percentage of destructed units relative to their total 
+ES: 0%		 ET: 0%		 EG: 0%		 HU: 100%
+Percentage of destructed units relative to total units: 4.16667%
+Average of Df: 0
+Average of Dd: 0
+Average of Db: 0
+Df/Db: 0%
+Dd/Db: 0%
+Healed units Percentage: 8.33333%
+Infected units Percentage : 16.6667%
+For Alien army: 
+Total number of each unit: 
+AS: 21		 AM: 4		 AD: 1
+Percentage of destructed units relative to their total 
+AS: 100%		 AM: 100%		 AD: 100%
+Percentage of destructed units relative to total units: 100%
+Average of Df: 4.76923
+Average of Dd: 16.8077
+Average of Db: 21.5769
+Df/Db: 22.1034%
+Dd/Db: 77.8966%

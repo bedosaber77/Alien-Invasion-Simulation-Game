@@ -7,6 +7,10 @@ AllyArmy::AllyArmy ()
 {
 }
 
+//==================================================================================//
+//								Add / Remove Functions	     						//
+//==================================================================================//
+
 void AllyArmy::AddUnit(Unit* newUnit)
 {
 	if (newUnit&&newUnit->getID() == 0)
@@ -18,6 +22,11 @@ void AllyArmy::AddUnit(Unit* newUnit)
 		SaverUnits.enqueue(newUnit);
 }
 
+/*
+ To remove a unit from its list
+  1- If the List is empty return nullptr
+  2- else remove a unit and return it
+*/
 Unit* AllyArmy::removeUnit()
 {
 	Unit* unit=nullptr;
@@ -25,6 +34,10 @@ Unit* AllyArmy::removeUnit()
 	return unit;
 }
 
+
+//==================================================================================//
+//							     Getters Functions	          						//
+//==================================================================================//
 int AllyArmy::GetSUcount() const
 {
 	return SaverUnits.getCount();
@@ -34,6 +47,10 @@ int AllyArmy::GetID() const
 {
 	return ID;
 }
+
+//==================================================================================//
+//							      	Fighting Functions       						//
+//==================================================================================//
 
 void AllyArmy::Attack()
 {
@@ -49,10 +66,15 @@ void AllyArmy::Print() const
 	cout << "]\n";
 }
 
-void AllyArmy::SuWithdraw()
+AllyArmy::~AllyArmy()
 {
-	Unit* unit=nullptr;
-	while (SaverUnits.dequeue(unit));
+	Unit* DeletedUnit = nullptr;
+	while (!SaverUnits.isEmpty())
+	{
+		SaverUnits.dequeue(DeletedUnit);
+		delete DeletedUnit;
+		DeletedUnit = nullptr;
+	}
 }
 
 

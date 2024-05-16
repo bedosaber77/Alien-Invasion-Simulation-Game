@@ -16,6 +16,7 @@ void EarthSoldier::Attack()
 
 	for (int i = 0; i < this->Attack_Capacity; i++)
 	{
+		// if this unit is infected it attack earth soldiers instead of alien soldiers
 		unit2 = (this->InfectedBefore()) ? pGame->GetEnemiesUnit(Earth, earthSoldier) : pGame->GetEnemiesUnit(Alien, alienSoldier);
 
 		if (unit2)
@@ -29,7 +30,7 @@ void EarthSoldier::Attack()
 				sqrt(unit2->getHealth());	//Damage Formula
 
 
-			unit2->decrementHealth(Damage);
+			unit2->decrementHealth(Damage);  //decrement health of the attacked unit by the damage
 
 
 			if (unit2->getHealth() > 0)
@@ -43,9 +44,9 @@ void EarthSoldier::Attack()
 		}
 	}
 
-	pGame->PrintFight(this,  EnemiesList);
+	pGame->PrintFight(this,  EnemiesList);  // printing the fight to the output screen
 
-	while (TempList.dequeue(unit2))
+	while (TempList.dequeue(unit2))  // return to original list
 	{
 		(this->InfectedBefore()) ? pGame->GetEarthArmyPtr()->AddUnit(unit2) : pGame->GetAlienArmyPtr()->AddUnit(unit2);
 	}

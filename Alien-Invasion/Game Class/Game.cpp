@@ -102,7 +102,6 @@ bool Game::LoadParameters(string Filename)
 		pRand->SetProb(Prob);
 
 
-
 		// Earth Ranges
 		Infile >> EarthParameters.lower_power;
 		Infile.ignore(1) >> EarthParameters.upper_power;
@@ -236,7 +235,6 @@ void Game::SetOutFile()
 
 void Game::AddtoOutFile(Unit* killedUnit)
 {
-	//string outFile;
 	ofstream OutputFile;
 	OutputFile.open("outFile.txt", ios::app);
 	if (OutputFile.is_open())
@@ -454,6 +452,26 @@ void Game::UpdateHealCount()
 	HealedUnits++;
 }
 
+void Game::DestroyUML()
+{
+	if (FinalResult == "loss" || FinalResult == "tie") {
+		Unit* dummy;
+		int dumm;
+		while (UMLsolider.dequeue(dummy, dumm))
+		{
+			AddtoKilledList(dummy);
+		}
+		while (UMLtanks.dequeue(dummy))
+		{
+			AddtoKilledList(dummy);
+		}
+		if (CallAlly && !AllyWithdraw)
+		{
+			CheckAllyWithdraw();
+		}
+	}
+}
+
 int Game::getInfectionProb() const
 {
 	return InfectionProb;
@@ -473,22 +491,19 @@ void Game::DecrementInfectedCount()
 		UMLInfectedUnits--;
 }
 
-
 void Game::CheckAllyWithdraw()
 {
 	if (CurrentInfectedUnits == 0)
 	{
-		//pAllyArmy->SuWithdraw();
 		Unit* destroyedUnit = nullptr;
-		while(pAllyArmy->GetSUcount()>0)
+		while(pAllyArmy->GetSUcount() > 0)  //destroy ally army and add them to killed list
 		{
 			destroyedUnit = pAllyArmy->removeUnit();
 			destroyedUnit->setTa(TimeStep);
 			AddtoKilledList(destroyedUnit);
 		}
-		AllyWithdraw = true;
+		AllyWithdraw = true;  //set it true so randgen won't generate ally army again
 	}
-
 }
 
 bool Game::GetCallAlly() const
@@ -496,77 +511,61 @@ bool Game::GetCallAlly() const
 	return CallAlly;
 }
 
-
 void Game::MainLoop()
 {
 	while (!EndGame) //will stop when the game ends
 	{
+		////////////////////Check end of the game///////////////////////
+
 		if (TimeStep > 40)
 			CheckResult();   //check the game result each time step when time steps exceeded 40
 
-		//at the end of the game add uml to killed list
+		//at the end of the game destroy the uml if loss/tie
 		if (EndGame)
 		{
-			cout << CurrentInfectedUnits << endl;
-			PrintUMLList();
-			PrintAliveUnits();
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
-				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
-			if (FinalResult == "loss" || FinalResult == "tie") {
-				Unit* dummy;
-				int dumm;
-				while (UMLsolider.dequeue(dummy, dumm))
-				{
-					AddtoKilledList(dummy);
-				}
-				while (UMLtanks.dequeue(dummy))
-				{
-					AddtoKilledList(dummy);
-				}
-				if (CallAlly && !AllyWithdraw)
-				{
-					CheckAllyWithdraw();
-				}
-			}
-			PrintAliveUnits();
-			cout << CurrentInfectedUnits << endl;
-			cout << "Infection percentage = " << ((pEarthArmy->GetEScount() + UMLsolider.getCount() == 0) ? 0
-				: double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) << "%";
-
+			DestroyUML();
 			break;
 		}
+
+		//////////////////////Army Generation//////////////////////////
+
 		GenerateArmy();   //generate units for two armies each time step
 
-		//print to the console
-		if (!SilentMode)
+		//////////////////////////Printing/////////////////////////////
+
+		if (!SilentMode)  //check that the game mode is not silent mode
 		{
 			PrintAliveUnits();
 			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
-			PrintKilledList();
+		    PrintKilledList();
 			cout << "\u001b[35m============== UML ==============" << endl;
 			PrintUMLList();
 			cout << "============== Attack Round ==============" << endl;
 		}
 
 		///////////////Attack Round//////////////////
-		 pEarthArmy->Attack(); //Discuss if it is needed
-		 SpreadInfectedUnits();
+		 pEarthArmy->Attack();    //Earth Army start attacking
+		 SpreadInfectedUnits();   //infected ES spread infection
 
-		 if(!CallAlly && !AllyWithdraw)
+		 if(!CallAlly && !AllyWithdraw) 
 		 {
-			 if((pEarthArmy->GetEScount() + UMLsolider.getCount()))
+			 if ((pEarthArmy->GetEScount() + UMLsolider.getCount()))
+			 {
+				 //check that infected percentage is greater than threshold
 				 if ((double(CurrentInfectedUnits) / (pEarthArmy->GetEScount() + UMLsolider.getCount()) * 100) >= InfectionThreshold)
 				 {
-					 CallAlly = true;
+					 CallAlly = true;   //flag to call ally army
 				 }
+			 }
 		 }
 		 else if(CallAlly && !AllyWithdraw)
 		 {
              GenerateArmy(true);   // to generate SU ONLY
-			 pAllyArmy->Attack();
-			 CheckAllyWithdraw();
+			 pAllyArmy->Attack();  // Ally Army start attacking
+			 CheckAllyWithdraw();  // check No of infected units each time step
 		 }
-		 pAlienArmy->Attack();
+
+		 pAlienArmy->Attack();  //Alien Army start attacking
 		
 
 		if (!SilentMode)
@@ -583,11 +582,7 @@ void Game::MainLoop()
 			cout << endl;
 			system("pause");
 		}
-		TimeStep++;
-		
-		//at the end of the game add uml to killed list
-		
-
+		TimeStep++;  //increment time step
 	}
 }
 	
@@ -633,7 +628,9 @@ void Game::AddtoUML(Unit* unit)
 	if (unit->getType() == earthSoldier)
 	{
 		UMLsolider.enqueue(unit, unit->getESPriorty());
-		UMLInfectedUnits++;
+
+		if(unit->InfectedBefore())  //if unit is infected increment uml infected units count
+			UMLInfectedUnits++;
 	}
 	else
 		UMLtanks.enqueue(unit);
@@ -731,14 +728,14 @@ void Game::SpreadInfectedUnits()
 	for (int i = 0; i < CurrentInfectedUnits - UMLInfectedUnits; i++)
 	{
 		Unit* infectedUnit;
-		if (pEarthArmy->SpeardInfection(infectedUnit))
+		if (pEarthArmy->SpreadInfection(infectedUnit))   //if there is an infected unit
 		{
-			IncrementInfectedCount();
-			InfectedUnitsFromES.enqueue(infectedUnit);
+			IncrementInfectedCount();   //incrementing the no of  infected units
+			InfectedUnitsFromES.enqueue(infectedUnit);  // storing infected units to print them
 		}
 	}
 
-	if (!SilentMode && !InfectedUnitsFromES.isEmpty())
+	if (!SilentMode && !InfectedUnitsFromES.isEmpty())  //printing infected units from ES
 	{
 		cout << "ES Infected by infected ES [";
 		InfectedUnitsFromES.print();

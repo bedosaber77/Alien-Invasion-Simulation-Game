@@ -100,7 +100,7 @@ Unit* RandGen::GenerateUnits(int ts,ArmyType Army_Type)
                     + AllyParameters.lower_capacity;
 
 				
-				newUnit=new SaverUnit(ALHealth, ALPower, ALCapacity, ts, pGame);  //New percentage for Ally or use the same as earth?->think about it
+				newUnit=new SaverUnit(ALHealth, ALPower, ALCapacity, ts, pGame);  
 			}
 		default:
 			break;

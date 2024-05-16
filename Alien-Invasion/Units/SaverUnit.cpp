@@ -9,7 +9,7 @@ SaverUnit::SaverUnit(double H, double P, int AC, int tj, Game* Gameptr) :Unit(H,
 void SaverUnit::Attack()
 {
     Unit* unit2 = nullptr;
-    LinkedQueue<Unit*> TempList;
+    LinkedQueue<Unit*> TempList;    
     LinkedQueue<Unit*> EnemiesList;
 
     for (int i = 0; i < this->Attack_Capacity; i++)

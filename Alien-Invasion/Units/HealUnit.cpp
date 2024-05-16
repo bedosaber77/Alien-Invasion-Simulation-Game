@@ -8,10 +8,9 @@ HealUnit::HealUnit(double H, double P, int AC, int tj, Game* Gameptr) :Unit(H, P
 }
 
 void HealUnit::Attack()
-{
-	bool killHU = false;
+{                          
 	Unit* unit2 = nullptr;
-	if (pGame->UMLisEmpty())
+	if (pGame->UMLisEmpty()) // if Empty UMl Return
 		return ;
 	LinkedQueue<Unit*> TempList;
 	LinkedQueue<Unit*> HealedList;
@@ -20,8 +19,7 @@ void HealUnit::Attack()
 		unit2 = pGame->getUnitToHeal();
 		if (unit2) 
 		{
-			killHU = true;
-			if (pGame->GetCurrentTime() - unit2->getTH() == 10)
+			if (pGame->GetCurrentTime() - unit2->getTH() == 10) // Check if unit Passed 10 timesteps in uml
 			{
 				pGame->AddtoKilledList(unit2);
 			}
@@ -29,7 +27,7 @@ void HealUnit::Attack()
 			{
 				HealedList.enqueue(unit2);
 				double incHeal = this->Power * (this->Health / 100.0) / sqrt(unit2->getHealth());
-				if(unit2->InfectedBefore())
+				if(unit2->InfectedBefore()) // Slowing operation on inficted units
 					incHeal *= 0.5;
 				unit2->incrementHealth(incHeal);
 				
@@ -57,15 +55,11 @@ void HealUnit::Attack()
 		pGame->AddtoUML(unit);
 	}
 	pGame->PrintFight(this, HealedList);
-	if (killHU)
-	{
-		pGame->GetEarthArmyPtr()->removeUnit(healUnit);
-		this->setTd(pGame->GetCurrentTime());
-		this->setTa(pGame->GetCurrentTime());
-		pGame->AddtoKilledList(this);
-	}
 
-	
+	pGame->GetEarthArmyPtr()->removeUnit(healUnit);
+	this->setTd(pGame->GetCurrentTime());
+	this->setTa(pGame->GetCurrentTime());
+	pGame->AddtoKilledList(this);
 }
 
 

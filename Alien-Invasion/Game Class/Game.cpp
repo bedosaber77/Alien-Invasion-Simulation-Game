@@ -536,10 +536,7 @@ void Game::MainLoop()
 		if (!SilentMode)  //check that the game mode is not silent mode
 		{
 			PrintAliveUnits();
-			cout << "\033[1;31m============== Killed/Destructed Units ==============" << endl;
-		    PrintKilledList();
-			cout << "\u001b[35m============== UML ==============" << endl;
-			PrintUMLList();
+			
 			cout << "============== Attack Round ==============" << endl;
 		}
 
@@ -570,8 +567,8 @@ void Game::MainLoop()
 
 		if (!SilentMode)
 		{
-			cout << "============== Units after attack round ==============" << endl;
-			PrintAliveUnits();
+			
+			
 			cout << "\n\033[1;31m============== Killed/Destructed Units ==============" << endl;
 			PrintKilledList();
 			cout << "\u001b[35m============== UML ==============" << endl;

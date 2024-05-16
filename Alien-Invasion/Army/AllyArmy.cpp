@@ -57,4 +57,4 @@ void AllyArmy::SuWithdraw()
 
 
 
-int AllyArmy::ID = 3000;
+int AllyArmy::ID = 4000;

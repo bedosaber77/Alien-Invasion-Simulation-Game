@@ -1,4 +1,0 @@
-Member Name	        ID	         Email
-Amira Khalid	        9230245	         amira.ahmed04@eng-st.cu.edu.eg
-Abdelrahman Medhat	9230512	         abdelrahman.ahmed031@eng-st.cu.edu.eg
-Tasneem Mohammed 	9230297	         Tasneem.Elbaqy04@eng-st.cu.edu.eg
